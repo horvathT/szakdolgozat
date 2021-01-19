@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_DBhJ8BncEeuL_ZEE_9zGzg">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_E5CsQBncEeuL_ZEE_9zGzg" featurename="menuContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_JRGRoBncEeuL_ZEE_9zGzg" elementId="papyrus.ui.menucontribution" parentId="org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_NxtWEBncEeuL_ZEE_9zGzg" elementId="papyrus.ui.menucontribution.generate.property" toBeRendered="false" visible="false" label="Property - It4all" enabled="false" command="_a_gNEBncEeuL_ZEE_9zGzg"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ZJUukBncEeuL_ZEE_9zGzg" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_a_gNEBncEeuL_ZEE_9zGzg" elementId="papyrus.ui.command.property" commandName="Property"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_iKfNEBncEeuL_ZEE_9zGzg" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_kcJGoBncEeuL_ZEE_9zGzg" elementId="papyrus.ui.handler.0" contributionURI="bundleclass://uml.papyrus.doc/uml.papyrus.doc.PropertyHandler" command="_a_gNEBncEeuL_ZEE_9zGzg"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_MHUj8Bn0EeuL_ZEE_9zGzg" featurename="toolBarContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:ToolBarContribution" xmi:id="_m8Ur8Bn-EeuL_ZEE_9zGzg" elementId="papyrus.ui.toolbarcontribution.0" parentId="uml.papyrus.doc.view.multilanguageview">
+      <children xsi:type="menu:HandledToolItem" xmi:id="_qMmw8Bn-EeuL_ZEE_9zGzg" elementId="papyrus.ui.handledtoolitem.externaldocumentation" label="Open" command="_WNxHIBoCEeuL_ZEE_9zGzg"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Ur8vEBoCEeuL_ZEE_9zGzg" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_WNxHIBoCEeuL_ZEE_9zGzg" elementId="papyrus.ui.command.open" commandName="Open"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_YswSEBoCEeuL_ZEE_9zGzg" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_ax4LgBoCEeuL_ZEE_9zGzg" elementId="papyrus.ui.handler.1" contributionURI="bundleclass://uml.papyrus.doc/uml.papyrus.doc.handlers.OpenExternalDocumentationHandler" command="_WNxHIBoCEeuL_ZEE_9zGzg"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_irNUsBoBEeuL_ZEE_9zGzg" featurename="toolBarContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:ToolBarContribution" xmi:id="_kTv_0BoBEeuL_ZEE_9zGzg" elementId="papyrus.ui.toolbarcontribution.1" parentId="uml.papyrus.doc.view.multilanguageview">
+      <children xsi:type="menu:HandledToolItem" xmi:id="_ljGH0BoBEeuL_ZEE_9zGzg" elementId="papyrus.ui.handledtoolitem.language" label="Language" command="_0bfNQB0TEeudWrkoUy_rjA">
+        <menu xmi:id="_NVebEB0TEeudWrkoUy_rjA" elementId="uml.papyrus.doc.menu.0">
+          <children xsi:type="menu:DynamicMenuContribution" xmi:id="_S9WC8CPsEeuSsP5XhBZWbw" elementId="uml.papyrus.doc.languageselection.dynamicmenu" contributionURI="bundleclass://uml.papyrus.doc/uml.papyrus.doc.LanguageSelectionDropdownDynamicMenu"/>
+        </menu>
+      </children>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_yXII0B0TEeudWrkoUy_rjA" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_0bfNQB0TEeudWrkoUy_rjA" elementId="uml.papyrus.doc.command.changedocumentationlanguage" commandName="Change Documentation Language"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_4_xQwB0TEeudWrkoUy_rjA" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_7Xwb0B0TEeudWrkoUy_rjA" elementId="uml.papyrus.doc.handler.0" contributionURI="bundleclass://uml.papyrus.doc/uml.papyrus.doc.handlers.DocumentationLanguageChangeHandler" command="_0bfNQB0TEeudWrkoUy_rjA"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_4orHsCA6Eeu8pdSiPw_hFQ" featurename="menuContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_63ER4CA6Eeu8pdSiPw_hFQ" elementId="uml.papyrus.doc.menucontribution.0" parentId="org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_9MuhsCA6Eeu8pdSiPw_hFQ" elementId="id.multilanguagedocumentationview" label="Show Multi Language Documentation View" iconURI="platform:/plugin/uml.papyrus.doc/resources/icon15x15.jpg" command="_JGSwsCA7Eeu8pdSiPw_hFQ"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_HR1JcCA7Eeu8pdSiPw_hFQ" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_JGSwsCA7Eeu8pdSiPw_hFQ" elementId="uml.papyrus.doc.command.openmultilanguagedocumentationview" commandName="Open Multi Language Documentation View"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_M-VZQCA7Eeu8pdSiPw_hFQ" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_O-zcMCA7Eeu8pdSiPw_hFQ" elementId="uml.papyrus.doc.handler.1" contributionURI="bundleclass://uml.papyrus.doc/uml.papyrus.doc.handlers.OpenMultiLanguageDocumentationViewHandler" command="_JGSwsCA7Eeu8pdSiPw_hFQ"/>
+  </fragments>
+</fragment:ModelFragments>

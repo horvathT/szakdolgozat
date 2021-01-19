@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_zcEtAC_-Eeu8fcpzFGygaQ">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2oaGIC_-Eeu8fcpzFGygaQ" featurename="menuContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_4HXXcC_-Eeu8fcpzFGygaQ" elementId="uml.papyrus.scriptgen.menucontribution.0" toBeRendered="false" visible="false" parentId="org.eclipse.papyrus.views.modelexplorer.modelexplorer.popup">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_6ErYsC_-Eeu8fcpzFGygaQ" elementId="id.generatescript" toBeRendered="false" visible="false" label="Generate Script " iconURI="platform:/plugin/uml.papyrus.scriptgen/resources/icon15x15.jpg"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_GVeb8C__Eeu8fcpzFGygaQ" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_ITeZsC__Eeu8fcpzFGygaQ" elementId="uml.papyrus.scriptgen.command.generatescript" commandName="Generate Script"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_KQ3TcC__Eeu8fcpzFGygaQ" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_NflSMC__Eeu8fcpzFGygaQ" elementId="uml.papyrus.scriptgen.handler.0" contributionURI="bundleclass://uml.papyrus.scriptgen/uml.papyrus.scriptgen.ScriptGenerationHandler" command="_ITeZsC__Eeu8fcpzFGygaQ"/>
+  </fragments>
+</fragment:ModelFragments>
