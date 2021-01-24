@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_n8p70F4_EeuSX4TEHt0rvQ" name="papyrus">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_oioWsF4_EeuSX4TEHt0rvQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_42wsgF4_EeuSX4TEHt0rvQ" name="Autó">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ZaLe8F5BEeuSX4TEHt0rvQ" name="gyártó" type="_VD7QYF5BEeuSX4TEHt0rvQ" association="_ZaBG4F5BEeuSX4TEHt0rvQ"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_3oMVsF5BEeuSX4TEHt0rvQ" name="forgalmazó" type="_Sy8FMF5BEeuSX4TEHt0rvQ" association="_3oIrUF5BEeuSX4TEHt0rvQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3oYi8F5BEeuSX4TEHt0rvQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3oZKAF5BEeuSX4TEHt0rvQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Sy8FMF5BEeuSX4TEHt0rvQ" name="Forgalmazó"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_VD7QYF5BEeuSX4TEHt0rvQ" name="Gyártó"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ZaBG4F5BEeuSX4TEHt0rvQ" visibility="public" memberEnd="_ZaLe8F5BEeuSX4TEHt0rvQ _ZaWeEF5BEeuSX4TEHt0rvQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ZaH0kF5BEeuSX4TEHt0rvQ" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ZaJCsF5BEeuSX4TEHt0rvQ" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ZaWeEF5BEeuSX4TEHt0rvQ" name="autó" type="_42wsgF4_EeuSX4TEHt0rvQ" association="_ZaBG4F5BEeuSX4TEHt0rvQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_3oIrUF5BEeuSX4TEHt0rvQ" memberEnd="_3oMVsF5BEeuSX4TEHt0rvQ _3oZxEF5BEeuSX4TEHt0rvQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3oJ5cF5BEeuSX4TEHt0rvQ" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3oLHkF5BEeuSX4TEHt0rvQ" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_3oZxEF5BEeuSX4TEHt0rvQ" name="autó" type="_42wsgF4_EeuSX4TEHt0rvQ" association="_3oIrUF5BEeuSX4TEHt0rvQ"/>
+  </packagedElement>
+</uml:Model>
