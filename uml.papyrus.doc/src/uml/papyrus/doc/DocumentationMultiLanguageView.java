@@ -21,7 +21,8 @@ import org.eclipse.uml2.uml.Comment;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Stereotype;
-import org.smartbit4all.tooling.emf.EclipseResourceUtil;
+
+import uml.papyrus.doc.util.EclipseResourceUtil;
 
 public class DocumentationMultiLanguageView extends DocumentationView {
 

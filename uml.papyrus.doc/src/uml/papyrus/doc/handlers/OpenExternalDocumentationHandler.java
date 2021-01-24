@@ -30,9 +30,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.uml2.uml.Comment;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Stereotype;
-import org.smartbit4all.tooling.emf.EclipseResourceUtil;
 import uml.papyrus.doc.DocumentationMultiLanguageView;
 import uml.papyrus.doc.SelectionUtil;
+import uml.papyrus.doc.util.EclipseResourceUtil;
 
 public class OpenExternalDocumentationHandler {
 
