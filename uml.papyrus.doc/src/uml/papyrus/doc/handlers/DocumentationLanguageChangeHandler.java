@@ -1,8 +1,10 @@
 package uml.papyrus.doc.handlers;
 
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -17,8 +19,9 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.papyrus.infra.ui.util.EditorHelper;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+
 import uml.papyrus.doc.DocumentationMultiLanguageView;
-import uml.papyrus.doc.SelectionUtil;
+import uml.papyrus.doc.util.SelectionUtil;
 
 public class DocumentationLanguageChangeHandler {
 

@@ -5,8 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -30,9 +32,10 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.uml2.uml.Comment;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Stereotype;
+
 import uml.papyrus.doc.DocumentationMultiLanguageView;
-import uml.papyrus.doc.SelectionUtil;
 import uml.papyrus.doc.util.EclipseResourceUtil;
+import uml.papyrus.doc.util.SelectionUtil;
 
 public class OpenExternalDocumentationHandler {
 

@@ -2,7 +2,9 @@
 package uml.papyrus.scriptgen;
 
 import java.util.Map;
+
 import javax.inject.Named;
+
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.services.IServiceConstants;

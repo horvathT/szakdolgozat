@@ -1,7 +1,8 @@
-package uml.papyrus.doc;
+package uml.papyrus.doc.util;
 
 import java.util.Collections;
 import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.notation.View;

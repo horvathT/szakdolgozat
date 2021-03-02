@@ -3,6 +3,7 @@ package uml.papyrus.doc.handlers;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.services.log.Logger;
@@ -13,6 +14,7 @@ import org.eclipse.papyrus.infra.ui.util.EditorHelper;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
+
 import uml.papyrus.doc.DocumentationMultiLanguageView;
 
 public class OpenMultiLanguageDocumentationViewHandler {

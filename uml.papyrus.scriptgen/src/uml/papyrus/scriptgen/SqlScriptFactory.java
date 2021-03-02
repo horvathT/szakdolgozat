@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.EList;

@@ -3,7 +3,9 @@ package uml.papyrus.scriptgen;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
 import javax.inject.Inject;
+
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
