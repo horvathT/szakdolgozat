@@ -9,7 +9,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import database.modeling.view.DatabaseModelingView;
 import database.modeling.view.ModelingViewPart;
 
 import javax.inject.Named;

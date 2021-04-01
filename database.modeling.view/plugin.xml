@@ -17,6 +17,11 @@
             name="Database Modeling View"
             restorable="true">
       </view>
+      <view
+            class="database.modeling.view.ModelingViewPart"
+            id="database.modeling.view.ModelingViewPart"
+            name="New ViewPart">
+      </view>
    </extension>
 
 </plugin>

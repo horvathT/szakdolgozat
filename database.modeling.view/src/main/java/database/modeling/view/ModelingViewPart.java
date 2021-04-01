@@ -1,88 +1,144 @@
 package database.modeling.view;
 
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolItem;
 
 public class ModelingViewPart extends ViewPart {
+
+	public static final String ID = "database.modeling.view.ModelingViewPart"; //$NON-NLS-1$
+	private Text text_1;
+	private Text text;
+	private Text text_2;
+	private Text text_3;
+
 	public ModelingViewPart() {
 	}
 
+	/**
+	 * Create contents of the view part.
+	 * @param parent
+	 */
 	@Override
 	public void createPartControl(Composite parent) {
-		parent.setLayout(new GridLayout(4, false));
+		Composite container = new Composite(parent, SWT.NONE);
+		container.setLayout(new GridLayout(4, false));
 		
-		Label lblSqlType = new Label(parent, SWT.NONE);
-		lblSqlType.setText("SQL Type");
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
+		ToolBar toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
+		toolBar.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
 		
-		Button btnPrimaryKey = new Button(parent, SWT.CHECK);
-		btnPrimaryKey.setText("Primary Key");
+		ToolItem tltmGenerateSql = new ToolItem(toolBar, SWT.NONE);
+		tltmGenerateSql.setText("Generate SQL...");
 		
-		Button btnCheckButton = new Button(parent, SWT.CHECK);
-		btnCheckButton.setText("Check Button");
+		ToolItem tltmLoad = new ToolItem(toolBar, SWT.NONE);
+		tltmLoad.setText("Load");
 		
-		Button btnCheckButton_1 = new Button(parent, SWT.CHECK);
-		btnCheckButton_1.setText("Check Button");
+		Label lblSqlType = new Label(container, SWT.NONE);
+		lblSqlType.setText("SQL type");
 		
-		Button btnCheckButton_2 = new Button(parent, SWT.CHECK);
-		btnCheckButton_2.setText("Check Button");
+		ComboViewer comboViewer_2 = new ComboViewer(container, SWT.NONE);
+		Combo combo_2 = comboViewer_2.getCombo();
+		combo_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		
-		Button btnCheckButton_3 = new Button(parent, SWT.CHECK);
-		btnCheckButton_3.setText("Check Button");
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
+		Label lblLength = new Label(container, SWT.NONE);
+		lblLength.setText("Length");
 		
-		Label lblNewLabel = new Label(parent, SWT.NONE);
-		lblNewLabel.setText("Referenced Entity");
+		text_1 = new Text(container, SWT.BORDER);
+		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		
-		ComboViewer comboViewer = new ComboViewer(parent, SWT.NONE);
-		Combo combo_1 = comboViewer.getCombo();
-		GridData gd_combo_1 = new GridData(SWT.LEFT, SWT.CENTER, true, false, 3, 1);
-		gd_combo_1.widthHint = 158;
-		combo_1.setLayoutData(gd_combo_1);
+		Label lblPrecision = new Label(container, SWT.NONE);
+		lblPrecision.setText("Precision");
 		
-		Label lblNewLabel_1 = new Label(parent, SWT.NONE);
-		lblNewLabel_1.setText("Referenced Attribute");
+		text = new Text(container, SWT.BORDER);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		
-		CCombo combo = new CCombo(parent, SWT.BORDER);
-		GridData gd_combo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_combo.widthHint = 93;
+		Label lblScale = new Label(container, SWT.NONE);
+		lblScale.setText("Scale");
+		
+		text_2 = new Text(container, SWT.BORDER);
+		text_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		
+		Label lblDefaultValue = new Label(container, SWT.NONE);
+		lblDefaultValue.setText("Default value");
+		
+		text_3 = new Text(container, SWT.BORDER);
+		text_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		
+		Button btnPrimarykey = new Button(container, SWT.CHECK);
+		btnPrimarykey.setText("PrimaryKey");
+		
+		Button btnNullable = new Button(container, SWT.CHECK);
+		btnNullable.setText("Nullable");
+		
+		Button btnUnique = new Button(container, SWT.CHECK);
+		btnUnique.setText("Unique");
+		
+		Button btnAutoIncrement = new Button(container, SWT.CHECK);
+		btnAutoIncrement.setText("Auto increment");
+		
+		Button btnForeignKey = new Button(container, SWT.CHECK);
+		btnForeignKey.setText("Foreign Key");
+		new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
+		
+		Label lblReferencedEntity = new Label(container, SWT.NONE);
+		lblReferencedEntity.setText("Referenced entity");
+		
+		ComboViewer comboViewer = new ComboViewer(container, SWT.NONE);
+		Combo combo = comboViewer.getCombo();
+		GridData gd_combo = new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1);
+		gd_combo.widthHint = 287;
 		combo.setLayoutData(gd_combo);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
-		new Label(parent, SWT.NONE);
 		
-		Combo combo_2 = new Combo(parent, SWT.NONE);
-		GridData gd_combo_2 = new GridData(SWT.LEFT, SWT.CENTER, true, false, 3, 1);
-		gd_combo_2.widthHint = 180;
-		combo_2.setLayoutData(gd_combo_2);
-		// TODO Auto-generated method stub
+		Label lblReferencedAttribute = new Label(container, SWT.NONE);
+		lblReferencedAttribute.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblReferencedAttribute.setText("Referenced Attribute");
+		
+		ComboViewer comboViewer_1 = new ComboViewer(container, SWT.NONE);
+		Combo combo_1 = comboViewer_1.getCombo();
+		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 
+		createActions();
+		// Uncomment if you wish to add code to initialize the toolbar
+		// initializeToolBar();
+		initializeMenu();
+	}
+
+	/**
+	 * Create the actions.
+	 */
+	private void createActions() {
+		// Create the actions
+	}
+
+	/**
+	 * Initialize the toolbar.
+	 */
+	private void initializeToolBar() {
+		IToolBarManager toolbarManager = getViewSite().getActionBars().getToolBarManager();
+	}
+
+	/**
+	 * Initialize the menu.
+	 */
+	private void initializeMenu() {
+		IMenuManager menuManager = getViewSite().getActionBars().getMenuManager();
 	}
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-
+		// Set the focus
 	}
-
 }
