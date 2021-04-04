@@ -4,6 +4,8 @@ package database.modeling.view.handler;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.papyrus.infra.ui.util.EditorUtils;
+import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -24,6 +26,8 @@ public class DatabaseModelingViewHandler {
 			IViewPart showView = page.showView("database.modeling.view.databasemodelingview", null, IWorkbenchPage.VIEW_VISIBLE);
 			ModelingViewPart dbmv = (ModelingViewPart) showView;
 			
+			ISelectionService service = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService();
+			//service.addPostSelectionListener(listener);
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

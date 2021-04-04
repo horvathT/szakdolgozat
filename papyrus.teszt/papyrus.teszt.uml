@@ -19,31 +19,29 @@
     <packagedElement xmi:type="uml:Package" xmi:id="_4HjZcG4fEeuhqb1noxZ3fg" name="DataTypes">
       <packagedElement xmi:type="uml:DataType" xmi:id="_63H-EG4fEeuhqb1noxZ3fg" name="customdt"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Package" xmi:id="_fmdHsHtQEeuzre4IolF9Fw" name="ContainingPackage">
-      <packagedElement xmi:type="uml:Class" xmi:id="_VD7QYF5BEeuSX4TEHt0rvQ" name="Gyártó">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_YFuf8GhyEeuMXq_E1efiCw">
-          <body>asd</body>
+    <packagedElement xmi:type="uml:Class" xmi:id="_VD7QYF5BEeuSX4TEHt0rvQ" name="Gyártó">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_YFuf8GhyEeuMXq_E1efiCw">
+        <body>asd</body>
+      </ownedComment>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Sy8FMF5BEeuSX4TEHt0rvQ" name="Forgalmazó" visibility="private">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_9a2OMGhwEeuMXq_E1efiCw" annotatedElement="_Sy8FMF5BEeuSX4TEHt0rvQ">
+        <body>Forgalmazo documentation</body>
+      </ownedComment>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_trHrkHtsEeuzre4IolF9Fw" name="ads"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_42wsgF4_EeuSX4TEHt0rvQ" name="Auto">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_iOvMwGhxEeuMXq_E1efiCw">
+        <body>AUTO english</body>
+      </ownedComment>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ZaLe8F5BEeuSX4TEHt0rvQ" name="gyártó" type="_VD7QYF5BEeuSX4TEHt0rvQ" association="_ZaBG4F5BEeuSX4TEHt0rvQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_3oMVsF5BEeuSX4TEHt0rvQ" name="forgalmazó" type="_Sy8FMF5BEeuSX4TEHt0rvQ" association="_3oIrUF5BEeuSX4TEHt0rvQ">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_0E1yEHs9EeuIgIJnnZvY9A">
+          <body>Forgalmazó komment</body>
         </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Sy8FMF5BEeuSX4TEHt0rvQ" name="Forgalmazó" visibility="private">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_9a2OMGhwEeuMXq_E1efiCw" annotatedElement="_Sy8FMF5BEeuSX4TEHt0rvQ">
-          <body>Forgalmazo documentation</body>
-        </ownedComment>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_trHrkHtsEeuzre4IolF9Fw" name="ads"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_42wsgF4_EeuSX4TEHt0rvQ" name="Auto">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_iOvMwGhxEeuMXq_E1efiCw">
-          <body>AUTO english</body>
-        </ownedComment>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_ZaLe8F5BEeuSX4TEHt0rvQ" name="gyártó" type="_VD7QYF5BEeuSX4TEHt0rvQ" association="_ZaBG4F5BEeuSX4TEHt0rvQ"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_3oMVsF5BEeuSX4TEHt0rvQ" name="forgalmazó" type="_Sy8FMF5BEeuSX4TEHt0rvQ" association="_3oIrUF5BEeuSX4TEHt0rvQ">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_0E1yEHs9EeuIgIJnnZvY9A">
-            <body>Forgalmazó komment</body>
-          </ownedComment>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3oYi8F5BEeuSX4TEHt0rvQ"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3oZKAF5BEeuSX4TEHt0rvQ" value="1"/>
-        </ownedAttribute>
-      </packagedElement>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3oYi8F5BEeuSX4TEHt0rvQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3oZKAF5BEeuSX4TEHt0rvQ" value="1"/>
+      </ownedAttribute>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_O98cEGhyEeuMXq_E1efiCw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_O-JQYGhyEeuMXq_E1efiCw" source="PapyrusVersion">
