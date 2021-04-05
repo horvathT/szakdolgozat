@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Profile xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_n8CoUITBEeuEgOVa5Jvuvg" name="database" metaclassReference="_vBxU4ITBEeuEgOVa5Jvuvg _yx27UITBEeuEgOVa5Jvuvg _1-7UQITBEeuEgOVa5Jvuvg _1-77UITBEeuEgOVa5Jvuvg">
   <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9XIbcITCEeuEgOVa5Jvuvg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_byVV0JYrEeuDw7BIHj04mQ" source="PapyrusVersion">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_byVV0ZYrEeuDw7BIHj04mQ" key="Version" value="0.0.0"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_byVV0pYrEeuDw7BIHj04mQ" key="Comment" value="&lt;undefined>"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_byVV05YrEeuDw7BIHj04mQ" key="Copyright" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_byVV1JYrEeuDw7BIHj04mQ" key="Date" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_byVV1ZYrEeuDw7BIHj04mQ" key="Author" value="&lt;undefined>"/>
+    </eAnnotations>
     <contents xmi:type="ecore:EPackage" xmi:id="_9XIbcYTCEeuEgOVa5Jvuvg" name="database" nsURI="http:///schemas/database/_9XHNUITCEeuEgOVa5Jvuvg/0" nsPrefix="database">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9XJpkITCEeuEgOVa5Jvuvg" source="PapyrusVersion">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9XJpkYTCEeuEgOVa5Jvuvg" key="Version" value="0.0.1"/>
@@ -80,9 +87,13 @@
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PL8WUYTCEeuEgOVa5Jvuvg"/>
     </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_bKbhkITCEeuEgOVa5Jvuvg" name="dataDefinitionLanguageName">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_bKbhkITCEeuEgOVa5Jvuvg" name="oracleDataType">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_o6VnIITCEeuEgOVa5Jvuvg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_6o7aEJYsEeuDw7BIHj04mQ" name="oracleDefaultValue">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9jDB0JYsEeuDw7BIHj04mQ"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_PL7vQITCEeuEgOVa5Jvuvg" name="E_Column_Property10" memberEnd="_PL7vQYTCEeuEgOVa5Jvuvg _PL8WUITCEeuEgOVa5Jvuvg">
@@ -109,5 +120,23 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_RyJjkITCEeuEgOVa5Jvuvg" name="E_Table_Class13" memberEnd="_RyJjkYTCEeuEgOVa5Jvuvg _RyJjkoTCEeuEgOVa5Jvuvg">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_RyJjkYTCEeuEgOVa5Jvuvg" name="extension_Table" type="_Pzih0ITCEeuEgOVa5Jvuvg" aggregation="composite" association="_RyJjkITCEeuEgOVa5Jvuvg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_byJIkJYrEeuDw7BIHj04mQ" name="PK">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_e922opYrEeuDw7BIHj04mQ" name="base_Property" association="_e922oJYrEeuDw7BIHj04mQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_e922o5YrEeuDw7BIHj04mQ"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_c9ZawJYrEeuDw7BIHj04mQ" name="FK">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_f2mcgpYrEeuDw7BIHj04mQ" name="base_Property" association="_f2mcgJYrEeuDw7BIHj04mQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_f2mcg5YrEeuDw7BIHj04mQ"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_e922oJYrEeuDw7BIHj04mQ" name="E_PK_Property17" memberEnd="_e922oZYrEeuDw7BIHj04mQ _e922opYrEeuDw7BIHj04mQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_e922oZYrEeuDw7BIHj04mQ" name="extension_PK" type="_byJIkJYrEeuDw7BIHj04mQ" aggregation="composite" association="_e922oJYrEeuDw7BIHj04mQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_f2mcgJYrEeuDw7BIHj04mQ" name="E_FK_Property18" memberEnd="_f2mcgZYrEeuDw7BIHj04mQ _f2mcgpYrEeuDw7BIHj04mQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_f2mcgZYrEeuDw7BIHj04mQ" name="extension_FK" type="_c9ZawJYrEeuDw7BIHj04mQ" aggregation="composite" association="_f2mcgJYrEeuDw7BIHj04mQ"/>
   </packagedElement>
 </uml:Profile>

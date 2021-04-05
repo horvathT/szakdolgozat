@@ -26,8 +26,6 @@ public class DatabaseModelingViewHandler {
 			IViewPart showView = page.showView("database.modeling.view.databasemodelingview", null, IWorkbenchPage.VIEW_VISIBLE);
 			ModelingViewPart dbmv = (ModelingViewPart) showView;
 			
-			ISelectionService service = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService();
-			//service.addPostSelectionListener(listener);
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

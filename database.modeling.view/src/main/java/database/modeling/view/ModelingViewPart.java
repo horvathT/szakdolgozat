@@ -24,6 +24,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolItem;
 
 public class ModelingViewPart extends ViewPart {
+	public ModelingViewPart() {
+	}
 
 	public static final String ID = "database.modeling.view.ModelingViewPart"; //$NON-NLS-1$
 	private Text length;
@@ -36,21 +38,23 @@ public class ModelingViewPart extends ViewPart {
 			//ignore our own selections
 			if (sourcepart != ModelingViewPart.this) {
 				if(SelectionUtil.isPropertyFromModelEditor(selection)) {
-					updateSelectionFromDiagramEditor(sourcepart, selection);
+					updateSelectionFromDiagramEditor(selection);
 				}else if(SelectionUtil.isProperty(selection)) {
-					updateSelectionFromModelExplorer(sourcepart, selection);
+					updateSelectionFromModelExplorer(selection);
 				}else {
 					setContentDescription("Incorrect element");
 				}
 			}
 		}
 	};
+	private Text primaryKeyConstraintName;
+	private Text foreignKeyConstraintName;
 	
-	protected void updateSelectionFromDiagramEditor(IWorkbenchPart sourcepart, ISelection selection) {
+	protected void updateSelectionFromDiagramEditor(ISelection selection) {
 		setContentDescription(SelectionUtil.getPropertyFromModelEditor(selection).getName());
 	}
 
-	protected void updateSelectionFromModelExplorer(IWorkbenchPart sourcepart, ISelection selection) {
+	protected void updateSelectionFromModelExplorer(ISelection selection) {
 		setContentDescription(SelectionUtil.getProperty(selection).getName());
 	}
 
@@ -62,15 +66,6 @@ public class ModelingViewPart extends ViewPart {
 	public void createPartControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(4, false));
-		
-		ToolBar toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
-		toolBar.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
-		
-		ToolItem tltmGenerateSql = new ToolItem(toolBar, SWT.NONE);
-		tltmGenerateSql.setText("Generate SQL...");
-		
-		ToolItem tltmLoad = new ToolItem(toolBar, SWT.NONE);
-		tltmLoad.setText("Load");
 		
 		Label lblSqlType = new Label(container, SWT.NONE);
 		lblSqlType.setText("SQL type");
@@ -84,31 +79,24 @@ public class ModelingViewPart extends ViewPart {
 		
 		length = new Text(container, SWT.BORDER);
 		length.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		length.setText("length");
 		
 		Label lblPrecision = new Label(container, SWT.NONE);
 		lblPrecision.setText("Precision");
 		
 		precision = new Text(container, SWT.BORDER);
 		precision.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		precision.setText("precision");
 		
 		Label lblScale = new Label(container, SWT.NONE);
 		lblScale.setText("Scale");
 		
 		scale = new Text(container, SWT.BORDER);
 		scale.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		scale.setText("scale");
 		
 		Label lblDefaultValue = new Label(container, SWT.NONE);
 		lblDefaultValue.setText("Default value");
 		
 		defaultValue = new Text(container, SWT.BORDER);
 		defaultValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		defaultValue.setText("default value");
-		
-		Button btnPrimarykey = new Button(container, SWT.CHECK);
-		btnPrimarykey.setText("PrimaryKey");
 		
 		Button btnNullable = new Button(container, SWT.CHECK);
 		btnNullable.setText("Nullable");
@@ -118,6 +106,21 @@ public class ModelingViewPart extends ViewPart {
 		
 		Button btnAutoIncrement = new Button(container, SWT.CHECK);
 		btnAutoIncrement.setText("Auto increment");
+		new Label(container, SWT.NONE);
+		
+		Button btnPrimarykey = new Button(container, SWT.CHECK);
+		btnPrimarykey.setText("Primary Key");
+		new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
+		
+		Label lblPrimaryKeyConstraint = new Label(container, SWT.NONE);
+		lblPrimaryKeyConstraint.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblPrimaryKeyConstraint.setText("Primary Key Constraint Name");
+		
+		primaryKeyConstraintName = new Text(container, SWT.BORDER);
+		primaryKeyConstraintName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		primaryKeyConstraintName.setEnabled(false);
 		
 		Button btnForeignKey = new Button(container, SWT.CHECK);
 		btnForeignKey.setText("Foreign Key");
@@ -127,13 +130,20 @@ public class ModelingViewPart extends ViewPart {
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
 		
+		Label lblForeignKeyConstraint = new Label(container, SWT.NONE);
+		lblForeignKeyConstraint.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblForeignKeyConstraint.setText("Foreign Key Constraint Name");
+		
+		foreignKeyConstraintName = new Text(container, SWT.BORDER);
+		foreignKeyConstraintName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		foreignKeyConstraintName.setEnabled(false);
+		
 		Label lblReferencedEntity = new Label(container, SWT.NONE);
 		lblReferencedEntity.setText("Referenced entity");
 		
 		ComboViewer comboViewer = new ComboViewer(container, SWT.NONE);
 		Combo referencedEntity = comboViewer.getCombo();
-		GridData gd_combo = new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1);
-		referencedEntity.setLayoutData(gd_combo);
+		referencedEntity.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedEntity.setEnabled(false);
 		
 		
@@ -146,7 +156,8 @@ public class ModelingViewPart extends ViewPart {
 		referencedProperty.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedProperty.setEnabled(false);
 		
-		enableForeignKeyCombos(btnForeignKey, referencedEntity, referencedProperty);
+		foreignKeyCheckBoxListener(btnForeignKey, referencedEntity, referencedProperty);
+		primaryKeyCannotBeNullable(btnPrimarykey, btnNullable);
 
 		getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(listener);
 		
@@ -157,18 +168,52 @@ public class ModelingViewPart extends ViewPart {
 		initializeMenu();
 	}
 
-	private void enableForeignKeyCombos(Button btnForeignKey, Combo referencedEntity, Combo referencedProperty) {
+	private void primaryKeyCannotBeNullable(Button btnPrimarykey, Button btnNullable) {
+		btnPrimarykey.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if(btnPrimarykey.getSelection()) {
+					btnNullable.setEnabled(false);
+					primaryKeyConstraintName.setEnabled(true);
+				}else {
+					btnNullable.setEnabled(true);
+					primaryKeyConstraintName.setEnabled(false);
+				}
+			}
+			
+		});
+		
+		btnNullable.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if(btnNullable.getSelection()) {
+					btnPrimarykey.setEnabled(false);
+					primaryKeyConstraintName.setEnabled(false);
+				}else {
+					btnPrimarykey.setEnabled(true);
+					primaryKeyConstraintName.setEnabled(true);
+				}
+			}
+			
+		});
+	}
+
+	private void foreignKeyCheckBoxListener(Button btnForeignKey, Combo referencedEntity, Combo referencedProperty) {
 		btnForeignKey.addSelectionListener(new SelectionAdapter()
 		{
 		    @Override
 		    public void widgetSelected(SelectionEvent e)
 		    {
 		        if (btnForeignKey.getSelection()) {
+		        	foreignKeyConstraintName.setEnabled(true);
 		        	referencedEntity.setEnabled(true);
 		        	referencedProperty.setEnabled(true);
 		        }else {
 		        	referencedEntity.setEnabled(false);
 		        	referencedProperty.setEnabled(false);
+		        	foreignKeyConstraintName.setEnabled(false);
 		        }
 		    }
 		});
