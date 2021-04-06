@@ -122,13 +122,22 @@ public interface DatabasePackage extends EPackage {
 	int COLUMN__BASE_PROPERTY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Data Definition Language Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Oracle Data Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN__DATA_DEFINITION_LANGUAGE_NAME = 1;
+	int COLUMN__ORACLE_DATA_TYPE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Oracle Default Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__ORACLE_DEFAULT_VALUE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Column</em>' class.
@@ -137,7 +146,7 @@ public interface DatabasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_FEATURE_COUNT = 2;
+	int COLUMN_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Column</em>' class.
@@ -214,6 +223,81 @@ public interface DatabasePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link database.impl.PKImpl <em>PK</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see database.impl.PKImpl
+	 * @see database.impl.DatabasePackageImpl#getPK()
+	 * @generated
+	 */
+	int PK = 3;
+
+	/**
+	 * The feature id for the '<em><b>Base Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PK__BASE_PROPERTY = 0;
+
+	/**
+	 * The number of structural features of the '<em>PK</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PK_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>PK</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PK_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link database.impl.FKImpl <em>FK</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see database.impl.FKImpl
+	 * @see database.impl.DatabasePackageImpl#getFK()
+	 * @generated
+	 */
+	int FK = 4;
+
+	/**
+	 * The feature id for the '<em><b>Base Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FK__BASE_PROPERTY = 0;
+
+	/**
+	 * The number of structural features of the '<em>FK</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FK_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>FK</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FK_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link database.Association <em>Association</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -267,15 +351,26 @@ public interface DatabasePackage extends EPackage {
 	EReference getColumn_Base_Property();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}'.
+	 * Returns the meta object for the attribute '{@link database.Column#getOracleDataType <em>Oracle Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Data Definition Language Name</em>'.
-	 * @see database.Column#getDataDefinitionLanguageName()
+	 * @return the meta object for the attribute '<em>Oracle Data Type</em>'.
+	 * @see database.Column#getOracleDataType()
 	 * @see #getColumn()
 	 * @generated
 	 */
-	EAttribute getColumn_DataDefinitionLanguageName();
+	EAttribute getColumn_OracleDataType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getOracleDefaultValue <em>Oracle Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Oracle Default Value</em>'.
+	 * @see database.Column#getOracleDefaultValue()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_OracleDefaultValue();
 
 	/**
 	 * Returns the meta object for class '{@link database.Table <em>Table</em>}'.
@@ -330,6 +425,48 @@ public interface DatabasePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTable_DataDefinitionLanguageName();
+
+	/**
+	 * Returns the meta object for class '{@link database.PK <em>PK</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>PK</em>'.
+	 * @see database.PK
+	 * @generated
+	 */
+	EClass getPK();
+
+	/**
+	 * Returns the meta object for the reference '{@link database.PK#getBase_Property <em>Base Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Base Property</em>'.
+	 * @see database.PK#getBase_Property()
+	 * @see #getPK()
+	 * @generated
+	 */
+	EReference getPK_Base_Property();
+
+	/**
+	 * Returns the meta object for class '{@link database.FK <em>FK</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>FK</em>'.
+	 * @see database.FK
+	 * @generated
+	 */
+	EClass getFK();
+
+	/**
+	 * Returns the meta object for the reference '{@link database.FK#getBase_Property <em>Base Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Base Property</em>'.
+	 * @see database.FK#getBase_Property()
+	 * @see #getFK()
+	 * @generated
+	 */
+	EReference getFK_Base_Property();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -399,12 +536,20 @@ public interface DatabasePackage extends EPackage {
 		EReference COLUMN__BASE_PROPERTY = eINSTANCE.getColumn_Base_Property();
 
 		/**
-		 * The meta object literal for the '<em><b>Data Definition Language Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Oracle Data Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLUMN__DATA_DEFINITION_LANGUAGE_NAME = eINSTANCE.getColumn_DataDefinitionLanguageName();
+		EAttribute COLUMN__ORACLE_DATA_TYPE = eINSTANCE.getColumn_OracleDataType();
+
+		/**
+		 * The meta object literal for the '<em><b>Oracle Default Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__ORACLE_DEFAULT_VALUE = eINSTANCE.getColumn_OracleDefaultValue();
 
 		/**
 		 * The meta object literal for the '{@link database.impl.TableImpl <em>Table</em>}' class.
@@ -447,6 +592,42 @@ public interface DatabasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TABLE__DATA_DEFINITION_LANGUAGE_NAME = eINSTANCE.getTable_DataDefinitionLanguageName();
+
+		/**
+		 * The meta object literal for the '{@link database.impl.PKImpl <em>PK</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see database.impl.PKImpl
+		 * @see database.impl.DatabasePackageImpl#getPK()
+		 * @generated
+		 */
+		EClass PK = eINSTANCE.getPK();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PK__BASE_PROPERTY = eINSTANCE.getPK_Base_Property();
+
+		/**
+		 * The meta object literal for the '{@link database.impl.FKImpl <em>FK</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see database.impl.FKImpl
+		 * @see database.impl.DatabasePackageImpl#getFK()
+		 * @generated
+		 */
+		EClass FK = eINSTANCE.getFK();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FK__BASE_PROPERTY = eINSTANCE.getFK_Base_Property();
 
 	}
 

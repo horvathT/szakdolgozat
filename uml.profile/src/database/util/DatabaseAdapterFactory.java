@@ -80,6 +80,14 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 				return createTableAdapter();
 			}
 			@Override
+			public Adapter casePK(PK object) {
+				return createPKAdapter();
+			}
+			@Override
+			public Adapter caseFK(FK object) {
+				return createFKAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -138,6 +146,34 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link database.PK <em>PK</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see database.PK
+	 * @generated
+	 */
+	public Adapter createPKAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link database.FK <em>FK</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see database.FK
+	 * @generated
+	 */
+	public Adapter createFKAdapter() {
 		return null;
 	}
 

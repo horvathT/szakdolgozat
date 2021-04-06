@@ -16,7 +16,8 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link database.Column#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link database.Column#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}</li>
+ *   <li>{@link database.Column#getOracleDataType <em>Oracle Data Type</em>}</li>
+ *   <li>{@link database.Column#getOracleDefaultValue <em>Oracle Default Value</em>}</li>
  * </ul>
  *
  * @see database.DatabasePackage#getColumn()
@@ -51,29 +52,55 @@ public interface Column extends EObject {
 	void setBase_Property(Property value);
 
 	/**
-	 * Returns the value of the '<em><b>Data Definition Language Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Oracle Data Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Data Definition Language Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Oracle Data Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Definition Language Name</em>' attribute.
-	 * @see #setDataDefinitionLanguageName(String)
-	 * @see database.DatabasePackage#getColumn_DataDefinitionLanguageName()
+	 * @return the value of the '<em>Oracle Data Type</em>' attribute.
+	 * @see #setOracleDataType(String)
+	 * @see database.DatabasePackage#getColumn_OracleDataType()
 	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
-	String getDataDefinitionLanguageName();
+	String getOracleDataType();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}' attribute.
+	 * Sets the value of the '{@link database.Column#getOracleDataType <em>Oracle Data Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Data Definition Language Name</em>' attribute.
-	 * @see #getDataDefinitionLanguageName()
+	 * @param value the new value of the '<em>Oracle Data Type</em>' attribute.
+	 * @see #getOracleDataType()
 	 * @generated
 	 */
-	void setDataDefinitionLanguageName(String value);
+	void setOracleDataType(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Oracle Default Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Oracle Default Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Oracle Default Value</em>' attribute.
+	 * @see #setOracleDefaultValue(String)
+	 * @see database.DatabasePackage#getColumn_OracleDefaultValue()
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @generated
+	 */
+	String getOracleDefaultValue();
+
+	/**
+	 * Sets the value of the '{@link database.Column#getOracleDefaultValue <em>Oracle Default Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Oracle Default Value</em>' attribute.
+	 * @see #getOracleDefaultValue()
+	 * @generated
+	 */
+	void setOracleDefaultValue(String value);
 
 } // Column

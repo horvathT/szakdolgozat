@@ -24,7 +24,8 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link database.impl.ColumnImpl#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link database.impl.ColumnImpl#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getOracleDataType <em>Oracle Data Type</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getOracleDefaultValue <em>Oracle Default Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -41,24 +42,44 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	protected Property base_Property;
 
 	/**
-	 * The default value of the '{@link #getDataDefinitionLanguageName() <em>Data Definition Language Name</em>}' attribute.
+	 * The default value of the '{@link #getOracleDataType() <em>Oracle Data Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDataDefinitionLanguageName()
+	 * @see #getOracleDataType()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DATA_DEFINITION_LANGUAGE_NAME_EDEFAULT = null;
+	protected static final String ORACLE_DATA_TYPE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDataDefinitionLanguageName() <em>Data Definition Language Name</em>}' attribute.
+	 * The cached value of the '{@link #getOracleDataType() <em>Oracle Data Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDataDefinitionLanguageName()
+	 * @see #getOracleDataType()
 	 * @generated
 	 * @ordered
 	 */
-	protected String dataDefinitionLanguageName = DATA_DEFINITION_LANGUAGE_NAME_EDEFAULT;
+	protected String oracleDataType = ORACLE_DATA_TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOracleDefaultValue() <em>Oracle Default Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOracleDefaultValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORACLE_DEFAULT_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOracleDefaultValue() <em>Oracle Default Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOracleDefaultValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String oracleDefaultValue = ORACLE_DEFAULT_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,8 +143,8 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDataDefinitionLanguageName() {
-		return dataDefinitionLanguageName;
+	public String getOracleDataType() {
+		return oracleDataType;
 	}
 
 	/**
@@ -131,11 +152,32 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDataDefinitionLanguageName(String newDataDefinitionLanguageName) {
-		String oldDataDefinitionLanguageName = dataDefinitionLanguageName;
-		dataDefinitionLanguageName = newDataDefinitionLanguageName;
+	public void setOracleDataType(String newOracleDataType) {
+		String oldOracleDataType = oracleDataType;
+		oracleDataType = newOracleDataType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__DATA_DEFINITION_LANGUAGE_NAME, oldDataDefinitionLanguageName, dataDefinitionLanguageName));
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__ORACLE_DATA_TYPE, oldOracleDataType, oracleDataType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOracleDefaultValue() {
+		return oracleDefaultValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOracleDefaultValue(String newOracleDefaultValue) {
+		String oldOracleDefaultValue = oracleDefaultValue;
+		oracleDefaultValue = newOracleDefaultValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE, oldOracleDefaultValue, oracleDefaultValue));
 	}
 
 	/**
@@ -149,8 +191,10 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 			case DatabasePackage.COLUMN__BASE_PROPERTY:
 				if (resolve) return getBase_Property();
 				return basicGetBase_Property();
-			case DatabasePackage.COLUMN__DATA_DEFINITION_LANGUAGE_NAME:
-				return getDataDefinitionLanguageName();
+			case DatabasePackage.COLUMN__ORACLE_DATA_TYPE:
+				return getOracleDataType();
+			case DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE:
+				return getOracleDefaultValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,8 +210,11 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 			case DatabasePackage.COLUMN__BASE_PROPERTY:
 				setBase_Property((Property)newValue);
 				return;
-			case DatabasePackage.COLUMN__DATA_DEFINITION_LANGUAGE_NAME:
-				setDataDefinitionLanguageName((String)newValue);
+			case DatabasePackage.COLUMN__ORACLE_DATA_TYPE:
+				setOracleDataType((String)newValue);
+				return;
+			case DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE:
+				setOracleDefaultValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,8 +231,11 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 			case DatabasePackage.COLUMN__BASE_PROPERTY:
 				setBase_Property((Property)null);
 				return;
-			case DatabasePackage.COLUMN__DATA_DEFINITION_LANGUAGE_NAME:
-				setDataDefinitionLanguageName(DATA_DEFINITION_LANGUAGE_NAME_EDEFAULT);
+			case DatabasePackage.COLUMN__ORACLE_DATA_TYPE:
+				setOracleDataType(ORACLE_DATA_TYPE_EDEFAULT);
+				return;
+			case DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE:
+				setOracleDefaultValue(ORACLE_DEFAULT_VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -201,8 +251,10 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 		switch (featureID) {
 			case DatabasePackage.COLUMN__BASE_PROPERTY:
 				return base_Property != null;
-			case DatabasePackage.COLUMN__DATA_DEFINITION_LANGUAGE_NAME:
-				return DATA_DEFINITION_LANGUAGE_NAME_EDEFAULT == null ? dataDefinitionLanguageName != null : !DATA_DEFINITION_LANGUAGE_NAME_EDEFAULT.equals(dataDefinitionLanguageName);
+			case DatabasePackage.COLUMN__ORACLE_DATA_TYPE:
+				return ORACLE_DATA_TYPE_EDEFAULT == null ? oracleDataType != null : !ORACLE_DATA_TYPE_EDEFAULT.equals(oracleDataType);
+			case DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE:
+				return ORACLE_DEFAULT_VALUE_EDEFAULT == null ? oracleDefaultValue != null : !ORACLE_DEFAULT_VALUE_EDEFAULT.equals(oracleDefaultValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -217,8 +269,10 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (dataDefinitionLanguageName: ");
-		result.append(dataDefinitionLanguageName);
+		result.append(" (oracleDataType: ");
+		result.append(oracleDataType);
+		result.append(", oracleDefaultValue: ");
+		result.append(oracleDefaultValue);
 		result.append(')');
 		return result.toString();
 	}

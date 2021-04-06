@@ -49,6 +49,20 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 	private EClass tableEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pkEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fkEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -164,8 +178,17 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getColumn_DataDefinitionLanguageName() {
+	public EAttribute getColumn_OracleDataType() {
 		return (EAttribute)columnEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_OracleDefaultValue() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -218,6 +241,42 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPK() {
+		return pkEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPK_Base_Property() {
+		return (EReference)pkEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFK() {
+		return fkEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFK_Base_Property() {
+		return (EReference)fkEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DatabaseFactory getDatabaseFactory() {
 		return (DatabaseFactory)getEFactoryInstance();
 	}
@@ -247,13 +306,20 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 
 		columnEClass = createEClass(COLUMN);
 		createEReference(columnEClass, COLUMN__BASE_PROPERTY);
-		createEAttribute(columnEClass, COLUMN__DATA_DEFINITION_LANGUAGE_NAME);
+		createEAttribute(columnEClass, COLUMN__ORACLE_DATA_TYPE);
+		createEAttribute(columnEClass, COLUMN__ORACLE_DEFAULT_VALUE);
 
 		tableEClass = createEClass(TABLE);
 		createEReference(tableEClass, TABLE__BASE_INTERFACE);
 		createEReference(tableEClass, TABLE__BASE_CLASS);
 		createEAttribute(tableEClass, TABLE__PRIMARY_KEY_CONSTRAINT_NAME);
 		createEAttribute(tableEClass, TABLE__DATA_DEFINITION_LANGUAGE_NAME);
+
+		pkEClass = createEClass(PK);
+		createEReference(pkEClass, PK__BASE_PROPERTY);
+
+		fkEClass = createEClass(FK);
+		createEReference(fkEClass, FK__BASE_PROPERTY);
 	}
 
 	/**
@@ -296,13 +362,20 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 
 		initEClass(columnEClass, Column.class, "Column", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getColumn_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getColumn_DataDefinitionLanguageName(), theTypesPackage.getString(), "dataDefinitionLanguageName", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_OracleDataType(), theTypesPackage.getString(), "oracleDataType", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_OracleDefaultValue(), theTypesPackage.getString(), "oracleDefaultValue", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(tableEClass, Table.class, "Table", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTable_Base_Interface(), theUMLPackage.getInterface(), null, "base_Interface", null, 0, 1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTable_Base_Class(), theUMLPackage.getClass_(), null, "base_Class", null, 0, 1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getTable_PrimaryKeyConstraintName(), theTypesPackage.getString(), "primaryKeyConstraintName", null, 1, 1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getTable_DataDefinitionLanguageName(), theTypesPackage.getString(), "dataDefinitionLanguageName", null, 1, 1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(pkEClass, database.PK.class, "PK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPK_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, database.PK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(fkEClass, database.FK.class, "FK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFK_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, database.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

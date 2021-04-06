@@ -59,6 +59,8 @@ public class DatabaseFactoryImpl extends EFactoryImpl implements DatabaseFactory
 			case DatabasePackage.ASSOCIATION: return createAssociation();
 			case DatabasePackage.COLUMN: return createColumn();
 			case DatabasePackage.TABLE: return createTable();
+			case DatabasePackage.PK: return createPK();
+			case DatabasePackage.FK: return createFK();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +94,26 @@ public class DatabaseFactoryImpl extends EFactoryImpl implements DatabaseFactory
 	public Table createTable() {
 		TableImpl table = new TableImpl();
 		return table;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PK createPK() {
+		PKImpl pk = new PKImpl();
+		return pk;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FK createFK() {
+		FKImpl fk = new FKImpl();
+		return fk;
 	}
 
 	/**

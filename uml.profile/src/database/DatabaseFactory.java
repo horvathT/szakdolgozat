@@ -49,6 +49,24 @@ public interface DatabaseFactory extends EFactory {
 	Table createTable();
 
 	/**
+	 * Returns a new object of class '<em>PK</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>PK</em>'.
+	 * @generated
+	 */
+	PK createPK();
+
+	/**
+	 * Returns a new object of class '<em>FK</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>FK</em>'.
+	 * @generated
+	 */
+	FK createFK();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
