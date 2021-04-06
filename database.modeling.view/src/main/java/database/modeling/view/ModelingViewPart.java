@@ -3,12 +3,15 @@ package database.modeling.view;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.uml2.uml.Property;
 
 import database.modeling.view.util.SelectionUtil;
 
@@ -22,40 +25,67 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.swt.custom.ScrolledComposite;
 
 public class ModelingViewPart extends ViewPart {
-	public ModelingViewPart() {
-	}
 
 	public static final String ID = "database.modeling.view.ModelingViewPart"; //$NON-NLS-1$
+	
 	private Text length;
 	private Text precision;
 	private Text scale;
 	private Text defaultValue;
+	private Text primaryKeyConstraintName;
+	private Text foreignKeyConstraintName;
+	
+	private Combo sqlTypeCombo;
+	private Combo referencedEntity;
+	private Combo referencedProperty;
+	
+	private Property latestValidSelection = null;
 
 	private ISelectionListener listener = new ISelectionListener() {
 		public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
 			//ignore our own selections
 			if (sourcepart != ModelingViewPart.this) {
+				save();
+				
 				if(SelectionUtil.isPropertyFromModelEditor(selection)) {
+					
+					updateLatestValidSelectionFromDiagramEditor(selection);
 					updateSelectionFromDiagramEditor(selection);
-				}else if(SelectionUtil.isProperty(selection)) {
+					
+				}else if(SelectionUtil.isPropertyFromModelExplorer(selection)) {
+					
 					updateSelectionFromModelExplorer(selection);
+					updateLatestValidSelectionFromModelExplorer(selection);
+					
 				}else {
 					setContentDescription("Incorrect element");
 				}
 			}
 		}
 	};
-	private Text primaryKeyConstraintName;
-	private Text foreignKeyConstraintName;
 	
 	protected void updateSelectionFromDiagramEditor(ISelection selection) {
 		setContentDescription(SelectionUtil.getPropertyFromModelEditor(selection).getName());
 	}
 
+	protected void save() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void updateLatestValidSelectionFromDiagramEditor(ISelection selection) {
+		latestValidSelection = SelectionUtil.getPropertyFromModelEditor(selection);
+	}
+
 	protected void updateSelectionFromModelExplorer(ISelection selection) {
-		setContentDescription(SelectionUtil.getProperty(selection).getName());
+		setContentDescription(SelectionUtil.getPropertyFromModelExplorer(selection).getName());
+	}
+	
+	protected void updateLatestValidSelectionFromModelExplorer(ISelection selection) {
+		latestValidSelection = SelectionUtil.getPropertyFromModelExplorer(selection);
 	}
 
 	/**
@@ -64,15 +94,20 @@ public class ModelingViewPart extends ViewPart {
 	 */
 	@Override
 	public void createPartControl(Composite parent) {
-		Composite container = new Composite(parent, SWT.NONE);
+		
+		ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		
+		Composite container = new Composite(scrolledComposite, SWT.NONE);
 		container.setLayout(new GridLayout(4, false));
 		
 		Label lblSqlType = new Label(container, SWT.NONE);
 		lblSqlType.setText("SQL type");
 		
-		ComboViewer comboViewer_2 = new ComboViewer(container, SWT.NONE);
-		Combo combo_2 = comboViewer_2.getCombo();
-		combo_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		ComboViewer sqlTypeComboViewer = new ComboViewer(container, SWT.NONE);
+		sqlTypeCombo = sqlTypeComboViewer.getCombo();
+		sqlTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		
 		Label lblLength = new Label(container, SWT.NONE);
 		lblLength.setText("Length");
@@ -141,8 +176,8 @@ public class ModelingViewPart extends ViewPart {
 		Label lblReferencedEntity = new Label(container, SWT.NONE);
 		lblReferencedEntity.setText("Referenced entity");
 		
-		ComboViewer comboViewer = new ComboViewer(container, SWT.NONE);
-		Combo referencedEntity = comboViewer.getCombo();
+		ComboViewer referencedEntityComboViewer = new ComboViewer(container, SWT.NONE);
+		referencedEntity = referencedEntityComboViewer.getCombo();
 		referencedEntity.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedEntity.setEnabled(false);
 		
@@ -151,13 +186,15 @@ public class ModelingViewPart extends ViewPart {
 		//lblReferencedAttribute.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblReferencedAttribute.setText("Referenced Attribute");
 		
-		ComboViewer comboViewer_1 = new ComboViewer(container, SWT.NONE);
-		Combo referencedProperty = comboViewer_1.getCombo();
+		ComboViewer referencedPropertyComboViewer = new ComboViewer(container, SWT.NONE);
+		referencedProperty = referencedPropertyComboViewer.getCombo();
 		referencedProperty.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedProperty.setEnabled(false);
 		
 		foreignKeyCheckBoxListener(btnForeignKey, referencedEntity, referencedProperty);
 		primaryKeyCannotBeNullable(btnPrimarykey, btnNullable);
+		scrolledComposite.setContent(container);
+		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
 		getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(listener);
 		
@@ -249,4 +286,86 @@ public class ModelingViewPart extends ViewPart {
 		getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(listener);
 		super.dispose();
 	}
+
+	public Text getLength() {
+		return length;
+	}
+
+	public void setLength(Text length) {
+		this.length = length;
+	}
+
+	public Text getPrecision() {
+		return precision;
+	}
+
+	public void setPrecision(Text precision) {
+		this.precision = precision;
+	}
+
+	public Text getScale() {
+		return scale;
+	}
+
+	public void setScale(Text scale) {
+		this.scale = scale;
+	}
+
+	public Text getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(Text defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+
+	public Text getPrimaryKeyConstraintName() {
+		return primaryKeyConstraintName;
+	}
+
+	public void setPrimaryKeyConstraintName(Text primaryKeyConstraintName) {
+		this.primaryKeyConstraintName = primaryKeyConstraintName;
+	}
+
+	public Text getForeignKeyConstraintName() {
+		return foreignKeyConstraintName;
+	}
+
+	public void setForeignKeyConstraintName(Text foreignKeyConstraintName) {
+		this.foreignKeyConstraintName = foreignKeyConstraintName;
+	}
+
+	public Combo getSqlTypeCombo() {
+		return sqlTypeCombo;
+	}
+
+	public void setSqlTypeCombo(Combo sqlTypeCombo) {
+		this.sqlTypeCombo = sqlTypeCombo;
+	}
+
+	public Combo getReferencedEntity() {
+		return referencedEntity;
+	}
+
+	public void setReferencedEntity(Combo referencedEntity) {
+		this.referencedEntity = referencedEntity;
+	}
+
+	public Combo getReferencedProperty() {
+		return referencedProperty;
+	}
+
+	public void setReferencedProperty(Combo referencedProperty) {
+		this.referencedProperty = referencedProperty;
+	}
+
+	public Property getLatestValidSelection() {
+		return latestValidSelection;
+	}
+
+	public void setLatestValidSelection(Property latestValidSelection) {
+		this.latestValidSelection = latestValidSelection;
+	}
+	
+	
 }

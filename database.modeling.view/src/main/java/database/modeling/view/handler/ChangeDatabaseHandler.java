@@ -2,6 +2,7 @@
 package database.modeling.view.handler;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -15,6 +16,7 @@ import org.eclipse.papyrus.infra.ui.util.EditorHelper;
 import org.eclipse.ui.IWorkbenchPart;
 
 import database.modeling.view.ModelingViewPart;
+import database.modeling.view.util.DatabaseTypesUtil;
 
 public class ChangeDatabaseHandler {
 	
@@ -28,6 +30,15 @@ public class ChangeDatabaseHandler {
 		if(activePart instanceof ModelingViewPart) {
 			MToolBar toolbar = partService.getActivePart().getToolbar();
 			String selectedDatabase = getSelectedDatabase(toolbar);
+			//TODO mitol fut 2x? 1.null 2. jo ertek
+			if(selectedDatabase != null) {
+				ModelingViewPart mvp = (ModelingViewPart) activePart;
+				DatabaseTypesUtil dtu = new DatabaseTypesUtil();
+				Map<String, String[]> databaseMap = dtu.getDatabaseMap();
+				
+				mvp.getSqlTypeCombo().setItems(databaseMap.get(selectedDatabase));
+			}
+			
 		}
 		
 		//Database changed save current data then refresh

@@ -56,6 +56,19 @@
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
     </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_bqI84JcMEeuIYpL0-Li95Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bqSt4JcMEeuIYpL0-Li95Q" source="PapyrusVersion">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bqSt4ZcMEeuIYpL0-Li95Q" key="Version" value="0.0.1"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bqSt4pcMEeuIYpL0-Li95Q" key="Comment" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bqSt45cMEeuIYpL0-Li95Q" key="Copyright" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bqSt5JcMEeuIYpL0-Li95Q" key="Date" value="2021-03-14"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bqSt5ZcMEeuIYpL0-Li95Q" key="Author" value=""/>
+      </eAnnotations>
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bqRfwJcMEeuIYpL0-Li95Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://database.modeling/database.modeling.profile.uml#_9XIbcYTCEeuEgOVa5Jvuvg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://database.modeling/database.modeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
+    </profileApplication>
   </uml:Model>
   <ActionLanguage:TextualRepresentation xmi:id="_YFvuEGhyEeuMXq_E1efiCw" base_Comment="_YFuf8GhyEeuMXq_E1efiCw" language="hu"/>
   <ActionLanguage:TextualRepresentation xmi:id="_1ZepwHs9EeuIgIJnnZvY9A" base_Comment="_0E1yEHs9EeuIgIJnnZvY9A" language="hu"/>

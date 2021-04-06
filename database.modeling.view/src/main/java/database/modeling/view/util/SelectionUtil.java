@@ -52,7 +52,7 @@ public class SelectionUtil {
 		return null;
 	}
 	
-	public static Property getProperty(ISelection selection) {
+	public static Property getPropertyFromModelExplorer(ISelection selection) {
 		return getProperty(getFirstSelected(selection));
 	}
 	
@@ -63,7 +63,7 @@ public class SelectionUtil {
 		return false;
 	}
 	
-	public static boolean isProperty(ISelection selection) {
+	public static boolean isPropertyFromModelExplorer(ISelection selection) {
 		return isProperty(getFirstSelected(selection));
 	}
 	
