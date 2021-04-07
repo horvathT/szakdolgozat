@@ -1,5 +1,14 @@
 package database.modeling.view;
 
+import java.io.File;
+
+import org.eclipse.core.resources.IResource;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
@@ -10,8 +19,11 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
+import org.eclipse.uml2.uml.UMLPackage;
 
 import database.modeling.view.util.SelectionUtil;
 
@@ -46,6 +58,7 @@ public class ModelingViewPart extends ViewPart {
 
 	private ISelectionListener listener = new ISelectionListener() {
 		public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
+			extracted();
 			//ignore our own selections
 			if (sourcepart != ModelingViewPart.this) {
 				save();
@@ -64,6 +77,20 @@ public class ModelingViewPart extends ViewPart {
 					setContentDescription("Incorrect element");
 				}
 			}
+		}
+
+		private void extracted() {
+			URI uri = URI.createURI("platform:/plugin/uml.profile/resources/database.modeling.profile.uml");
+			IResource resourceFromURI = org.eclipse.emf.compare.ide.utils.ResourceUtil.getResourceFromURI(uri);
+			System.out.println("asd");
+			
+			ResourceSet resourceSet = new ResourceSetImpl();
+			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put( Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+			URI fileURI = URI.createFileURI("platform:/plugin/uml.profile/resources/database.modeling.profile.uml");
+			Resource resource = resourceSet.getResource(uri, true);
+			
+			Profile profile = (Profile) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PROFILE);
+			System.out.println("");
 		}
 	};
 	
