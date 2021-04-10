@@ -140,13 +140,85 @@ public interface DatabasePackage extends EPackage {
 	int COLUMN__ORACLE_DEFAULT_VALUE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Oracle Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__ORACLE_LENGTH = 3;
+
+	/**
+	 * The feature id for the '<em><b>Oracle Precision</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__ORACLE_PRECISION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Oracle Scale</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__ORACLE_SCALE = 5;
+
+	/**
+	 * The feature id for the '<em><b>My Sql Data Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__MY_SQL_DATA_TYPE = 6;
+
+	/**
+	 * The feature id for the '<em><b>My Sql Default Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__MY_SQL_DEFAULT_VALUE = 7;
+
+	/**
+	 * The feature id for the '<em><b>My Sql Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__MY_SQL_LENGTH = 8;
+
+	/**
+	 * The feature id for the '<em><b>My Sql Precision</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__MY_SQL_PRECISION = 9;
+
+	/**
+	 * The feature id for the '<em><b>My Sql Scale</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__MY_SQL_SCALE = 10;
+
+	/**
 	 * The number of structural features of the '<em>Column</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_FEATURE_COUNT = 3;
+	int COLUMN_FEATURE_COUNT = 11;
 
 	/**
 	 * The number of operations of the '<em>Column</em>' class.
@@ -242,13 +314,31 @@ public interface DatabasePackage extends EPackage {
 	int PK__BASE_PROPERTY = 0;
 
 	/**
+	 * The feature id for the '<em><b>Oracle Primary Key Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PK__ORACLE_PRIMARY_KEY_CONSTRAINT = 1;
+
+	/**
+	 * The feature id for the '<em><b>My Sql Primary Key Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PK__MY_SQL_PRIMARY_KEY_CONSTRAINT = 2;
+
+	/**
 	 * The number of structural features of the '<em>PK</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PK_FEATURE_COUNT = 1;
+	int PK_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>PK</em>' class.
@@ -279,13 +369,31 @@ public interface DatabasePackage extends EPackage {
 	int FK__BASE_PROPERTY = 0;
 
 	/**
+	 * The feature id for the '<em><b>Oracle Foreing Key Constraint Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FK__ORACLE_FOREING_KEY_CONSTRAINT_NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>My Sql Foreign Key Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FK__MY_SQL_FOREIGN_KEY_CONSTRAINT = 2;
+
+	/**
 	 * The number of structural features of the '<em>FK</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FK_FEATURE_COUNT = 1;
+	int FK_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>FK</em>' class.
@@ -373,6 +481,94 @@ public interface DatabasePackage extends EPackage {
 	EAttribute getColumn_OracleDefaultValue();
 
 	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getOracleLength <em>Oracle Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Oracle Length</em>'.
+	 * @see database.Column#getOracleLength()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_OracleLength();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getOraclePrecision <em>Oracle Precision</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Oracle Precision</em>'.
+	 * @see database.Column#getOraclePrecision()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_OraclePrecision();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getOracleScale <em>Oracle Scale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Oracle Scale</em>'.
+	 * @see database.Column#getOracleScale()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_OracleScale();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getMySqlDataType <em>My Sql Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My Sql Data Type</em>'.
+	 * @see database.Column#getMySqlDataType()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_MySqlDataType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getMySqlDefaultValue <em>My Sql Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My Sql Default Value</em>'.
+	 * @see database.Column#getMySqlDefaultValue()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_MySqlDefaultValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getMySqlLength <em>My Sql Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My Sql Length</em>'.
+	 * @see database.Column#getMySqlLength()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_MySqlLength();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getMySqlPrecision <em>My Sql Precision</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My Sql Precision</em>'.
+	 * @see database.Column#getMySqlPrecision()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_MySqlPrecision();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.Column#getMySqlScale <em>My Sql Scale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My Sql Scale</em>'.
+	 * @see database.Column#getMySqlScale()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_MySqlScale();
+
+	/**
 	 * Returns the meta object for class '{@link database.Table <em>Table</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -448,6 +644,28 @@ public interface DatabasePackage extends EPackage {
 	EReference getPK_Base_Property();
 
 	/**
+	 * Returns the meta object for the attribute '{@link database.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Oracle Primary Key Constraint</em>'.
+	 * @see database.PK#getOraclePrimaryKeyConstraint()
+	 * @see #getPK()
+	 * @generated
+	 */
+	EAttribute getPK_OraclePrimaryKeyConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My Sql Primary Key Constraint</em>'.
+	 * @see database.PK#getMySqlPrimaryKeyConstraint()
+	 * @see #getPK()
+	 * @generated
+	 */
+	EAttribute getPK_MySqlPrimaryKeyConstraint();
+
+	/**
 	 * Returns the meta object for class '{@link database.FK <em>FK</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -467,6 +685,28 @@ public interface DatabasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFK_Base_Property();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.FK#getOracleForeingKeyConstraintName <em>Oracle Foreing Key Constraint Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Oracle Foreing Key Constraint Name</em>'.
+	 * @see database.FK#getOracleForeingKeyConstraintName()
+	 * @see #getFK()
+	 * @generated
+	 */
+	EAttribute getFK_OracleForeingKeyConstraintName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link database.FK#getMySqlForeignKeyConstraint <em>My Sql Foreign Key Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My Sql Foreign Key Constraint</em>'.
+	 * @see database.FK#getMySqlForeignKeyConstraint()
+	 * @see #getFK()
+	 * @generated
+	 */
+	EAttribute getFK_MySqlForeignKeyConstraint();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -552,6 +792,70 @@ public interface DatabasePackage extends EPackage {
 		EAttribute COLUMN__ORACLE_DEFAULT_VALUE = eINSTANCE.getColumn_OracleDefaultValue();
 
 		/**
+		 * The meta object literal for the '<em><b>Oracle Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__ORACLE_LENGTH = eINSTANCE.getColumn_OracleLength();
+
+		/**
+		 * The meta object literal for the '<em><b>Oracle Precision</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__ORACLE_PRECISION = eINSTANCE.getColumn_OraclePrecision();
+
+		/**
+		 * The meta object literal for the '<em><b>Oracle Scale</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__ORACLE_SCALE = eINSTANCE.getColumn_OracleScale();
+
+		/**
+		 * The meta object literal for the '<em><b>My Sql Data Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__MY_SQL_DATA_TYPE = eINSTANCE.getColumn_MySqlDataType();
+
+		/**
+		 * The meta object literal for the '<em><b>My Sql Default Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__MY_SQL_DEFAULT_VALUE = eINSTANCE.getColumn_MySqlDefaultValue();
+
+		/**
+		 * The meta object literal for the '<em><b>My Sql Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__MY_SQL_LENGTH = eINSTANCE.getColumn_MySqlLength();
+
+		/**
+		 * The meta object literal for the '<em><b>My Sql Precision</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__MY_SQL_PRECISION = eINSTANCE.getColumn_MySqlPrecision();
+
+		/**
+		 * The meta object literal for the '<em><b>My Sql Scale</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__MY_SQL_SCALE = eINSTANCE.getColumn_MySqlScale();
+
+		/**
 		 * The meta object literal for the '{@link database.impl.TableImpl <em>Table</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -612,6 +916,22 @@ public interface DatabasePackage extends EPackage {
 		EReference PK__BASE_PROPERTY = eINSTANCE.getPK_Base_Property();
 
 		/**
+		 * The meta object literal for the '<em><b>Oracle Primary Key Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PK__ORACLE_PRIMARY_KEY_CONSTRAINT = eINSTANCE.getPK_OraclePrimaryKeyConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>My Sql Primary Key Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PK__MY_SQL_PRIMARY_KEY_CONSTRAINT = eINSTANCE.getPK_MySqlPrimaryKeyConstraint();
+
+		/**
 		 * The meta object literal for the '{@link database.impl.FKImpl <em>FK</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -628,6 +948,22 @@ public interface DatabasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference FK__BASE_PROPERTY = eINSTANCE.getFK_Base_Property();
+
+		/**
+		 * The meta object literal for the '<em><b>Oracle Foreing Key Constraint Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FK__ORACLE_FOREING_KEY_CONSTRAINT_NAME = eINSTANCE.getFK_OracleForeingKeyConstraintName();
+
+		/**
+		 * The meta object literal for the '<em><b>My Sql Foreign Key Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FK__MY_SQL_FOREIGN_KEY_CONSTRAINT = eINSTANCE.getFK_MySqlForeignKeyConstraint();
 
 	}
 

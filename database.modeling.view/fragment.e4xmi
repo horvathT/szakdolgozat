@@ -15,7 +15,7 @@
     <elements xsi:type="menu:ToolBarContribution" xmi:id="_6vbhUJZFEeuDw7BIHj04mQ" elementId="database.modeling.view.toolbarcontribution.0" parentId="database.modeling.view.databasemodelingview">
       <children xsi:type="menu:HandledToolItem" xmi:id="_ZfRSwJZGEeuDw7BIHj04mQ" elementId="database.modeling.view.handledtoolitem.database" label="Database" command="_QXxtUJZHEeuDw7BIHj04mQ">
         <menu xmi:id="_xgy8oJZHEeuDw7BIHj04mQ" elementId="database.modeling.view.menu.0">
-          <children xsi:type="menu:HandledMenuItem" xmi:id="_AhBakJZIEeuDw7BIHj04mQ" elementId="database.modeling.view.handledmenuitem.mysql" label="MySQL" selected="true" type="Radio" command="_QXxtUJZHEeuDw7BIHj04mQ"/>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_AhBakJZIEeuDw7BIHj04mQ" elementId="database.modeling.view.handledmenuitem.mysql" label="MySQL" type="Radio" command="_QXxtUJZHEeuDw7BIHj04mQ"/>
           <children xsi:type="menu:HandledMenuItem" xmi:id="_CF_X0JZJEeuDw7BIHj04mQ" elementId="database.modeling.view.handledmenuitem.oracle" label="Oracle" type="Radio" command="_QXxtUJZHEeuDw7BIHj04mQ"/>
         </menu>
       </children>

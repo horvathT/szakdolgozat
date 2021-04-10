@@ -95,6 +95,32 @@
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9jDB0JYsEeuDw7BIHj04mQ"/>
     </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_8D7ZgJo_EeuPL-k41ngcPg" name="oracleLength">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_-nIWEJo_EeuPL-k41ngcPg" name="oraclePrecision">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_A7EHkJpAEeuPL-k41ngcPg" name="oracleScale">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WQJOwJpAEeuPL-k41ngcPg" name="mySqlDataType">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WQJOwZpAEeuPL-k41ngcPg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WQP8cJpAEeuPL-k41ngcPg" name="mySqlDefaultValue">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WQP8cZpAEeuPL-k41ngcPg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WQP8cppAEeuPL-k41ngcPg" name="mySqlLength">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WQWDEJpAEeuPL-k41ngcPg" name="mySqlPrecision">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WQbioJpAEeuPL-k41ngcPg" name="mySqlScale">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_PL7vQITCEeuEgOVa5Jvuvg" name="E_Column_Property10" memberEnd="_PL7vQYTCEeuEgOVa5Jvuvg _PL8WUITCEeuEgOVa5Jvuvg">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_PL7vQYTCEeuEgOVa5Jvuvg" name="extension_Column" type="_NvcjIITCEeuEgOVa5Jvuvg" aggregation="composite" association="_PL7vQITCEeuEgOVa5Jvuvg"/>
@@ -126,11 +152,26 @@
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_e922o5YrEeuDw7BIHj04mQ"/>
     </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_FQFKkJpBEeuPL-k41ngcPg" name="oraclePrimaryKeyConstraint">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JkBsAJpBEeuPL-k41ngcPg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_IzFXQJpBEeuPL-k41ngcPg" name="mySqlPrimaryKeyConstraint">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_c9ZawJYrEeuDw7BIHj04mQ" name="FK">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_f2mcgpYrEeuDw7BIHj04mQ" name="base_Property" association="_f2mcgJYrEeuDw7BIHj04mQ">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_f2mcg5YrEeuDw7BIHj04mQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_nHveAJpAEeuPL-k41ngcPg" name="oracleForeingKeyConstraintName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qH_i8JpAEeuPL-k41ngcPg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_wQbg0JpAEeuPL-k41ngcPg" name="mySqlForeignKeyConstraint">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3GLQoJpAEeuPL-k41ngcPg"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_e922oJYrEeuDw7BIHj04mQ" name="E_PK_Property17" memberEnd="_e922oZYrEeuDw7BIHj04mQ _e922opYrEeuDw7BIHj04mQ">

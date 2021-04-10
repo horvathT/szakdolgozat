@@ -196,6 +196,78 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getColumn_OracleLength() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_OraclePrecision() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_OracleScale() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_MySqlDataType() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_MySqlDefaultValue() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_MySqlLength() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_MySqlPrecision() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_MySqlScale() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTable() {
 		return tableEClass;
 	}
@@ -259,6 +331,24 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPK_OraclePrimaryKeyConstraint() {
+		return (EAttribute)pkEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPK_MySqlPrimaryKeyConstraint() {
+		return (EAttribute)pkEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFK() {
 		return fkEClass;
 	}
@@ -270,6 +360,24 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 	 */
 	public EReference getFK_Base_Property() {
 		return (EReference)fkEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFK_OracleForeingKeyConstraintName() {
+		return (EAttribute)fkEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFK_MySqlForeignKeyConstraint() {
+		return (EAttribute)fkEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -308,6 +416,14 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 		createEReference(columnEClass, COLUMN__BASE_PROPERTY);
 		createEAttribute(columnEClass, COLUMN__ORACLE_DATA_TYPE);
 		createEAttribute(columnEClass, COLUMN__ORACLE_DEFAULT_VALUE);
+		createEAttribute(columnEClass, COLUMN__ORACLE_LENGTH);
+		createEAttribute(columnEClass, COLUMN__ORACLE_PRECISION);
+		createEAttribute(columnEClass, COLUMN__ORACLE_SCALE);
+		createEAttribute(columnEClass, COLUMN__MY_SQL_DATA_TYPE);
+		createEAttribute(columnEClass, COLUMN__MY_SQL_DEFAULT_VALUE);
+		createEAttribute(columnEClass, COLUMN__MY_SQL_LENGTH);
+		createEAttribute(columnEClass, COLUMN__MY_SQL_PRECISION);
+		createEAttribute(columnEClass, COLUMN__MY_SQL_SCALE);
 
 		tableEClass = createEClass(TABLE);
 		createEReference(tableEClass, TABLE__BASE_INTERFACE);
@@ -317,9 +433,13 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 
 		pkEClass = createEClass(PK);
 		createEReference(pkEClass, PK__BASE_PROPERTY);
+		createEAttribute(pkEClass, PK__ORACLE_PRIMARY_KEY_CONSTRAINT);
+		createEAttribute(pkEClass, PK__MY_SQL_PRIMARY_KEY_CONSTRAINT);
 
 		fkEClass = createEClass(FK);
 		createEReference(fkEClass, FK__BASE_PROPERTY);
+		createEAttribute(fkEClass, FK__ORACLE_FOREING_KEY_CONSTRAINT_NAME);
+		createEAttribute(fkEClass, FK__MY_SQL_FOREIGN_KEY_CONSTRAINT);
 	}
 
 	/**
@@ -364,6 +484,14 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 		initEReference(getColumn_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getColumn_OracleDataType(), theTypesPackage.getString(), "oracleDataType", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getColumn_OracleDefaultValue(), theTypesPackage.getString(), "oracleDefaultValue", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_OracleLength(), theTypesPackage.getInteger(), "oracleLength", null, 1, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_OraclePrecision(), theTypesPackage.getInteger(), "oraclePrecision", null, 1, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_OracleScale(), theTypesPackage.getInteger(), "oracleScale", null, 1, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_MySqlDataType(), theTypesPackage.getString(), "mySqlDataType", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_MySqlDefaultValue(), theTypesPackage.getString(), "mySqlDefaultValue", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_MySqlLength(), theTypesPackage.getInteger(), "mySqlLength", null, 1, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_MySqlPrecision(), theTypesPackage.getInteger(), "mySqlPrecision", null, 1, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_MySqlScale(), theTypesPackage.getInteger(), "mySqlScale", null, 1, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(tableEClass, Table.class, "Table", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTable_Base_Interface(), theUMLPackage.getInterface(), null, "base_Interface", null, 0, 1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -373,9 +501,13 @@ public class DatabasePackageImpl extends EPackageImpl implements DatabasePackage
 
 		initEClass(pkEClass, database.PK.class, "PK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPK_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, database.PK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getPK_OraclePrimaryKeyConstraint(), theTypesPackage.getString(), "oraclePrimaryKeyConstraint", null, 0, 1, database.PK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getPK_MySqlPrimaryKeyConstraint(), theTypesPackage.getString(), "mySqlPrimaryKeyConstraint", null, 1, 1, database.PK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(fkEClass, database.FK.class, "FK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFK_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, database.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getFK_OracleForeingKeyConstraintName(), theTypesPackage.getString(), "oracleForeingKeyConstraintName", null, 0, 1, database.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getFK_MySqlForeignKeyConstraint(), theTypesPackage.getString(), "mySqlForeignKeyConstraint", null, 0, 1, database.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

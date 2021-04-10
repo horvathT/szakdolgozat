@@ -24,6 +24,8 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link database.impl.PKImpl#getBase_Property <em>Base Property</em>}</li>
+ *   <li>{@link database.impl.PKImpl#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}</li>
+ *   <li>{@link database.impl.PKImpl#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}</li>
  * </ul>
  *
  * @generated
@@ -38,6 +40,43 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 	 * @ordered
 	 */
 	protected Property base_Property;
+
+	/**
+	 * The default value of the '{@link #getOraclePrimaryKeyConstraint() <em>Oracle Primary Key Constraint</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOraclePrimaryKeyConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORACLE_PRIMARY_KEY_CONSTRAINT_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getOraclePrimaryKeyConstraint() <em>Oracle Primary Key Constraint</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOraclePrimaryKeyConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected String oraclePrimaryKeyConstraint = ORACLE_PRIMARY_KEY_CONSTRAINT_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getMySqlPrimaryKeyConstraint() <em>My Sql Primary Key Constraint</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlPrimaryKeyConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MY_SQL_PRIMARY_KEY_CONSTRAINT_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getMySqlPrimaryKeyConstraint() <em>My Sql Primary Key Constraint</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlPrimaryKeyConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected String mySqlPrimaryKeyConstraint = MY_SQL_PRIMARY_KEY_CONSTRAINT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,12 +140,58 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getOraclePrimaryKeyConstraint() {
+		return oraclePrimaryKeyConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOraclePrimaryKeyConstraint(String newOraclePrimaryKeyConstraint) {
+		String oldOraclePrimaryKeyConstraint = oraclePrimaryKeyConstraint;
+		oraclePrimaryKeyConstraint = newOraclePrimaryKeyConstraint;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.PK__ORACLE_PRIMARY_KEY_CONSTRAINT, oldOraclePrimaryKeyConstraint, oraclePrimaryKeyConstraint));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMySqlPrimaryKeyConstraint() {
+		return mySqlPrimaryKeyConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMySqlPrimaryKeyConstraint(String newMySqlPrimaryKeyConstraint) {
+		String oldMySqlPrimaryKeyConstraint = mySqlPrimaryKeyConstraint;
+		mySqlPrimaryKeyConstraint = newMySqlPrimaryKeyConstraint;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.PK__MY_SQL_PRIMARY_KEY_CONSTRAINT, oldMySqlPrimaryKeyConstraint, mySqlPrimaryKeyConstraint));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DatabasePackage.PK__BASE_PROPERTY:
 				if (resolve) return getBase_Property();
 				return basicGetBase_Property();
+			case DatabasePackage.PK__ORACLE_PRIMARY_KEY_CONSTRAINT:
+				return getOraclePrimaryKeyConstraint();
+			case DatabasePackage.PK__MY_SQL_PRIMARY_KEY_CONSTRAINT:
+				return getMySqlPrimaryKeyConstraint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -121,6 +206,12 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 		switch (featureID) {
 			case DatabasePackage.PK__BASE_PROPERTY:
 				setBase_Property((Property)newValue);
+				return;
+			case DatabasePackage.PK__ORACLE_PRIMARY_KEY_CONSTRAINT:
+				setOraclePrimaryKeyConstraint((String)newValue);
+				return;
+			case DatabasePackage.PK__MY_SQL_PRIMARY_KEY_CONSTRAINT:
+				setMySqlPrimaryKeyConstraint((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,6 +228,12 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 			case DatabasePackage.PK__BASE_PROPERTY:
 				setBase_Property((Property)null);
 				return;
+			case DatabasePackage.PK__ORACLE_PRIMARY_KEY_CONSTRAINT:
+				setOraclePrimaryKeyConstraint(ORACLE_PRIMARY_KEY_CONSTRAINT_EDEFAULT);
+				return;
+			case DatabasePackage.PK__MY_SQL_PRIMARY_KEY_CONSTRAINT:
+				setMySqlPrimaryKeyConstraint(MY_SQL_PRIMARY_KEY_CONSTRAINT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -151,8 +248,30 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 		switch (featureID) {
 			case DatabasePackage.PK__BASE_PROPERTY:
 				return base_Property != null;
+			case DatabasePackage.PK__ORACLE_PRIMARY_KEY_CONSTRAINT:
+				return ORACLE_PRIMARY_KEY_CONSTRAINT_EDEFAULT == null ? oraclePrimaryKeyConstraint != null : !ORACLE_PRIMARY_KEY_CONSTRAINT_EDEFAULT.equals(oraclePrimaryKeyConstraint);
+			case DatabasePackage.PK__MY_SQL_PRIMARY_KEY_CONSTRAINT:
+				return MY_SQL_PRIMARY_KEY_CONSTRAINT_EDEFAULT == null ? mySqlPrimaryKeyConstraint != null : !MY_SQL_PRIMARY_KEY_CONSTRAINT_EDEFAULT.equals(mySqlPrimaryKeyConstraint);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (oraclePrimaryKeyConstraint: ");
+		result.append(oraclePrimaryKeyConstraint);
+		result.append(", mySqlPrimaryKeyConstraint: ");
+		result.append(mySqlPrimaryKeyConstraint);
+		result.append(')');
+		return result.toString();
 	}
 
 } //PKImpl

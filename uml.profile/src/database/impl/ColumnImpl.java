@@ -26,6 +26,14 @@ import org.eclipse.uml2.uml.Property;
  *   <li>{@link database.impl.ColumnImpl#getBase_Property <em>Base Property</em>}</li>
  *   <li>{@link database.impl.ColumnImpl#getOracleDataType <em>Oracle Data Type</em>}</li>
  *   <li>{@link database.impl.ColumnImpl#getOracleDefaultValue <em>Oracle Default Value</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getOracleLength <em>Oracle Length</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getOraclePrecision <em>Oracle Precision</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getOracleScale <em>Oracle Scale</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getMySqlDataType <em>My Sql Data Type</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getMySqlDefaultValue <em>My Sql Default Value</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getMySqlLength <em>My Sql Length</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getMySqlPrecision <em>My Sql Precision</em>}</li>
+ *   <li>{@link database.impl.ColumnImpl#getMySqlScale <em>My Sql Scale</em>}</li>
  * </ul>
  *
  * @generated
@@ -80,6 +88,166 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @ordered
 	 */
 	protected String oracleDefaultValue = ORACLE_DEFAULT_VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOracleLength() <em>Oracle Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOracleLength()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int ORACLE_LENGTH_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getOracleLength() <em>Oracle Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOracleLength()
+	 * @generated
+	 * @ordered
+	 */
+	protected int oracleLength = ORACLE_LENGTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOraclePrecision() <em>Oracle Precision</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOraclePrecision()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int ORACLE_PRECISION_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getOraclePrecision() <em>Oracle Precision</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOraclePrecision()
+	 * @generated
+	 * @ordered
+	 */
+	protected int oraclePrecision = ORACLE_PRECISION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOracleScale() <em>Oracle Scale</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOracleScale()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int ORACLE_SCALE_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getOracleScale() <em>Oracle Scale</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOracleScale()
+	 * @generated
+	 * @ordered
+	 */
+	protected int oracleScale = ORACLE_SCALE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMySqlDataType() <em>My Sql Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlDataType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MY_SQL_DATA_TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMySqlDataType() <em>My Sql Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlDataType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String mySqlDataType = MY_SQL_DATA_TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMySqlDefaultValue() <em>My Sql Default Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlDefaultValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MY_SQL_DEFAULT_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMySqlDefaultValue() <em>My Sql Default Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlDefaultValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String mySqlDefaultValue = MY_SQL_DEFAULT_VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMySqlLength() <em>My Sql Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlLength()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int MY_SQL_LENGTH_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMySqlLength() <em>My Sql Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlLength()
+	 * @generated
+	 * @ordered
+	 */
+	protected int mySqlLength = MY_SQL_LENGTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMySqlPrecision() <em>My Sql Precision</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlPrecision()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int MY_SQL_PRECISION_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMySqlPrecision() <em>My Sql Precision</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlPrecision()
+	 * @generated
+	 * @ordered
+	 */
+	protected int mySqlPrecision = MY_SQL_PRECISION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMySqlScale() <em>My Sql Scale</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlScale()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int MY_SQL_SCALE_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMySqlScale() <em>My Sql Scale</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMySqlScale()
+	 * @generated
+	 * @ordered
+	 */
+	protected int mySqlScale = MY_SQL_SCALE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -185,6 +353,174 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getOracleLength() {
+		return oracleLength;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOracleLength(int newOracleLength) {
+		int oldOracleLength = oracleLength;
+		oracleLength = newOracleLength;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__ORACLE_LENGTH, oldOracleLength, oracleLength));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getOraclePrecision() {
+		return oraclePrecision;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOraclePrecision(int newOraclePrecision) {
+		int oldOraclePrecision = oraclePrecision;
+		oraclePrecision = newOraclePrecision;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__ORACLE_PRECISION, oldOraclePrecision, oraclePrecision));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getOracleScale() {
+		return oracleScale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOracleScale(int newOracleScale) {
+		int oldOracleScale = oracleScale;
+		oracleScale = newOracleScale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__ORACLE_SCALE, oldOracleScale, oracleScale));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMySqlDataType() {
+		return mySqlDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMySqlDataType(String newMySqlDataType) {
+		String oldMySqlDataType = mySqlDataType;
+		mySqlDataType = newMySqlDataType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__MY_SQL_DATA_TYPE, oldMySqlDataType, mySqlDataType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMySqlDefaultValue() {
+		return mySqlDefaultValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMySqlDefaultValue(String newMySqlDefaultValue) {
+		String oldMySqlDefaultValue = mySqlDefaultValue;
+		mySqlDefaultValue = newMySqlDefaultValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__MY_SQL_DEFAULT_VALUE, oldMySqlDefaultValue, mySqlDefaultValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getMySqlLength() {
+		return mySqlLength;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMySqlLength(int newMySqlLength) {
+		int oldMySqlLength = mySqlLength;
+		mySqlLength = newMySqlLength;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__MY_SQL_LENGTH, oldMySqlLength, mySqlLength));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getMySqlPrecision() {
+		return mySqlPrecision;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMySqlPrecision(int newMySqlPrecision) {
+		int oldMySqlPrecision = mySqlPrecision;
+		mySqlPrecision = newMySqlPrecision;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__MY_SQL_PRECISION, oldMySqlPrecision, mySqlPrecision));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getMySqlScale() {
+		return mySqlScale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMySqlScale(int newMySqlScale) {
+		int oldMySqlScale = mySqlScale;
+		mySqlScale = newMySqlScale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.COLUMN__MY_SQL_SCALE, oldMySqlScale, mySqlScale));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -195,6 +531,22 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 				return getOracleDataType();
 			case DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE:
 				return getOracleDefaultValue();
+			case DatabasePackage.COLUMN__ORACLE_LENGTH:
+				return getOracleLength();
+			case DatabasePackage.COLUMN__ORACLE_PRECISION:
+				return getOraclePrecision();
+			case DatabasePackage.COLUMN__ORACLE_SCALE:
+				return getOracleScale();
+			case DatabasePackage.COLUMN__MY_SQL_DATA_TYPE:
+				return getMySqlDataType();
+			case DatabasePackage.COLUMN__MY_SQL_DEFAULT_VALUE:
+				return getMySqlDefaultValue();
+			case DatabasePackage.COLUMN__MY_SQL_LENGTH:
+				return getMySqlLength();
+			case DatabasePackage.COLUMN__MY_SQL_PRECISION:
+				return getMySqlPrecision();
+			case DatabasePackage.COLUMN__MY_SQL_SCALE:
+				return getMySqlScale();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,6 +567,30 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 				return;
 			case DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE:
 				setOracleDefaultValue((String)newValue);
+				return;
+			case DatabasePackage.COLUMN__ORACLE_LENGTH:
+				setOracleLength((Integer)newValue);
+				return;
+			case DatabasePackage.COLUMN__ORACLE_PRECISION:
+				setOraclePrecision((Integer)newValue);
+				return;
+			case DatabasePackage.COLUMN__ORACLE_SCALE:
+				setOracleScale((Integer)newValue);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_DATA_TYPE:
+				setMySqlDataType((String)newValue);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_DEFAULT_VALUE:
+				setMySqlDefaultValue((String)newValue);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_LENGTH:
+				setMySqlLength((Integer)newValue);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_PRECISION:
+				setMySqlPrecision((Integer)newValue);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_SCALE:
+				setMySqlScale((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -237,6 +613,30 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 			case DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE:
 				setOracleDefaultValue(ORACLE_DEFAULT_VALUE_EDEFAULT);
 				return;
+			case DatabasePackage.COLUMN__ORACLE_LENGTH:
+				setOracleLength(ORACLE_LENGTH_EDEFAULT);
+				return;
+			case DatabasePackage.COLUMN__ORACLE_PRECISION:
+				setOraclePrecision(ORACLE_PRECISION_EDEFAULT);
+				return;
+			case DatabasePackage.COLUMN__ORACLE_SCALE:
+				setOracleScale(ORACLE_SCALE_EDEFAULT);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_DATA_TYPE:
+				setMySqlDataType(MY_SQL_DATA_TYPE_EDEFAULT);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_DEFAULT_VALUE:
+				setMySqlDefaultValue(MY_SQL_DEFAULT_VALUE_EDEFAULT);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_LENGTH:
+				setMySqlLength(MY_SQL_LENGTH_EDEFAULT);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_PRECISION:
+				setMySqlPrecision(MY_SQL_PRECISION_EDEFAULT);
+				return;
+			case DatabasePackage.COLUMN__MY_SQL_SCALE:
+				setMySqlScale(MY_SQL_SCALE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -255,6 +655,22 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 				return ORACLE_DATA_TYPE_EDEFAULT == null ? oracleDataType != null : !ORACLE_DATA_TYPE_EDEFAULT.equals(oracleDataType);
 			case DatabasePackage.COLUMN__ORACLE_DEFAULT_VALUE:
 				return ORACLE_DEFAULT_VALUE_EDEFAULT == null ? oracleDefaultValue != null : !ORACLE_DEFAULT_VALUE_EDEFAULT.equals(oracleDefaultValue);
+			case DatabasePackage.COLUMN__ORACLE_LENGTH:
+				return oracleLength != ORACLE_LENGTH_EDEFAULT;
+			case DatabasePackage.COLUMN__ORACLE_PRECISION:
+				return oraclePrecision != ORACLE_PRECISION_EDEFAULT;
+			case DatabasePackage.COLUMN__ORACLE_SCALE:
+				return oracleScale != ORACLE_SCALE_EDEFAULT;
+			case DatabasePackage.COLUMN__MY_SQL_DATA_TYPE:
+				return MY_SQL_DATA_TYPE_EDEFAULT == null ? mySqlDataType != null : !MY_SQL_DATA_TYPE_EDEFAULT.equals(mySqlDataType);
+			case DatabasePackage.COLUMN__MY_SQL_DEFAULT_VALUE:
+				return MY_SQL_DEFAULT_VALUE_EDEFAULT == null ? mySqlDefaultValue != null : !MY_SQL_DEFAULT_VALUE_EDEFAULT.equals(mySqlDefaultValue);
+			case DatabasePackage.COLUMN__MY_SQL_LENGTH:
+				return mySqlLength != MY_SQL_LENGTH_EDEFAULT;
+			case DatabasePackage.COLUMN__MY_SQL_PRECISION:
+				return mySqlPrecision != MY_SQL_PRECISION_EDEFAULT;
+			case DatabasePackage.COLUMN__MY_SQL_SCALE:
+				return mySqlScale != MY_SQL_SCALE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -273,6 +689,22 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 		result.append(oracleDataType);
 		result.append(", oracleDefaultValue: ");
 		result.append(oracleDefaultValue);
+		result.append(", oracleLength: ");
+		result.append(oracleLength);
+		result.append(", oraclePrecision: ");
+		result.append(oraclePrecision);
+		result.append(", oracleScale: ");
+		result.append(oracleScale);
+		result.append(", mySqlDataType: ");
+		result.append(mySqlDataType);
+		result.append(", mySqlDefaultValue: ");
+		result.append(mySqlDefaultValue);
+		result.append(", mySqlLength: ");
+		result.append(mySqlLength);
+		result.append(", mySqlPrecision: ");
+		result.append(mySqlPrecision);
+		result.append(", mySqlScale: ");
+		result.append(mySqlScale);
 		result.append(')');
 		return result.toString();
 	}

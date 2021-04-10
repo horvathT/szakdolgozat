@@ -42,6 +42,14 @@
           propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//Column/base_Property"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oracleDataType"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oracleDefaultValue"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oracleLength"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oraclePrecision"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oracleScale"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlDataType"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlDefaultValue"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlLength"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlPrecision"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlScale"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="database.ecore#//Table">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
@@ -54,10 +62,14 @@
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="database.ecore#//PK">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
           propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//PK/base_Property"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//PK/oraclePrimaryKeyConstraint"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//PK/mySqlPrimaryKeyConstraint"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="database.ecore#//FK">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
           propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//FK/base_Property"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//FK/oracleForeingKeyConstraintName"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//FK/mySqlForeignKeyConstraint"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -1,34 +1,18 @@
 package database.modeling.view;
 
-import java.io.File;
-
-import org.eclipse.core.resources.IResource;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.part.ViewPart;
-import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
-import org.eclipse.uml2.uml.UMLPackage;
-
 import database.modeling.view.util.SelectionUtil;
 
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -36,7 +20,6 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.custom.ScrolledComposite;
 
 public class ModelingViewPart extends ViewPart {
@@ -58,7 +41,6 @@ public class ModelingViewPart extends ViewPart {
 
 	private ISelectionListener listener = new ISelectionListener() {
 		public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-			extracted();
 			//ignore our own selections
 			if (sourcepart != ModelingViewPart.this) {
 				save();
@@ -74,25 +56,19 @@ public class ModelingViewPart extends ViewPart {
 					updateLatestValidSelectionFromModelExplorer(selection);
 					
 				}else {
-					setContentDescription("Incorrect element");
+					setContentDescription("Nothing to show");
 				}
 			}
 		}
-
-		private void extracted() {
-			URI uri = URI.createURI("platform:/plugin/uml.profile/resources/database.modeling.profile.uml");
-			IResource resourceFromURI = org.eclipse.emf.compare.ide.utils.ResourceUtil.getResourceFromURI(uri);
-			System.out.println("asd");
-			
-			ResourceSet resourceSet = new ResourceSetImpl();
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put( Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-			URI fileURI = URI.createFileURI("platform:/plugin/uml.profile/resources/database.modeling.profile.uml");
-			Resource resource = resourceSet.getResource(uri, true);
-			
-			Profile profile = (Profile) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PROFILE);
-			System.out.println("");
-		}
 	};
+
+	private Button nullableCheck;
+
+	private Button uniqueCheck;
+
+	private Button autoIncrementCheck;
+
+	private Button primaryKeyCheck;
 	
 	protected void updateSelectionFromDiagramEditor(ISelection selection) {
 		setContentDescription(SelectionUtil.getPropertyFromModelEditor(selection).getName());
@@ -132,7 +108,7 @@ public class ModelingViewPart extends ViewPart {
 		Label lblSqlType = new Label(container, SWT.NONE);
 		lblSqlType.setText("SQL type");
 		
-		ComboViewer sqlTypeComboViewer = new ComboViewer(container, SWT.NONE);
+		ComboViewer sqlTypeComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		sqlTypeCombo = sqlTypeComboViewer.getCombo();
 		sqlTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		
@@ -160,18 +136,18 @@ public class ModelingViewPart extends ViewPart {
 		defaultValue = new Text(container, SWT.BORDER);
 		defaultValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		
-		Button btnNullable = new Button(container, SWT.CHECK);
-		btnNullable.setText("Nullable");
+		nullableCheck = new Button(container, SWT.CHECK);
+		nullableCheck.setText("Nullable");
 		
-		Button btnUnique = new Button(container, SWT.CHECK);
-		btnUnique.setText("Unique");
+		uniqueCheck = new Button(container, SWT.CHECK);
+		uniqueCheck.setText("Unique");
 		
-		Button btnAutoIncrement = new Button(container, SWT.CHECK);
-		btnAutoIncrement.setText("Auto increment");
+		autoIncrementCheck = new Button(container, SWT.CHECK);
+		autoIncrementCheck.setText("Auto increment");
 		new Label(container, SWT.NONE);
 		
-		Button btnPrimarykey = new Button(container, SWT.CHECK);
-		btnPrimarykey.setText("Primary Key");
+		primaryKeyCheck = new Button(container, SWT.CHECK);
+		primaryKeyCheck.setText("Primary Key");
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
@@ -203,7 +179,7 @@ public class ModelingViewPart extends ViewPart {
 		Label lblReferencedEntity = new Label(container, SWT.NONE);
 		lblReferencedEntity.setText("Referenced entity");
 		
-		ComboViewer referencedEntityComboViewer = new ComboViewer(container, SWT.NONE);
+		ComboViewer referencedEntityComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		referencedEntity = referencedEntityComboViewer.getCombo();
 		referencedEntity.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedEntity.setEnabled(false);
@@ -213,13 +189,13 @@ public class ModelingViewPart extends ViewPart {
 		//lblReferencedAttribute.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblReferencedAttribute.setText("Referenced Attribute");
 		
-		ComboViewer referencedPropertyComboViewer = new ComboViewer(container, SWT.NONE);
+		ComboViewer referencedPropertyComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		referencedProperty = referencedPropertyComboViewer.getCombo();
 		referencedProperty.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedProperty.setEnabled(false);
 		
 		foreignKeyCheckBoxListener(btnForeignKey, referencedEntity, referencedProperty);
-		primaryKeyCannotBeNullable(btnPrimarykey, btnNullable);
+		primaryKeyCannotBeNullable(primaryKeyCheck, nullableCheck);
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 

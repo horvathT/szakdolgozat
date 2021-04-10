@@ -16,6 +16,8 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link database.FK#getBase_Property <em>Base Property</em>}</li>
+ *   <li>{@link database.FK#getOracleForeingKeyConstraintName <em>Oracle Foreing Key Constraint Name</em>}</li>
+ *   <li>{@link database.FK#getMySqlForeignKeyConstraint <em>My Sql Foreign Key Constraint</em>}</li>
  * </ul>
  *
  * @see database.DatabasePackage#getFK()
@@ -48,5 +50,57 @@ public interface FK extends EObject {
 	 * @generated
 	 */
 	void setBase_Property(Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Oracle Foreing Key Constraint Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Oracle Foreing Key Constraint Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Oracle Foreing Key Constraint Name</em>' attribute.
+	 * @see #setOracleForeingKeyConstraintName(String)
+	 * @see database.DatabasePackage#getFK_OracleForeingKeyConstraintName()
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @generated
+	 */
+	String getOracleForeingKeyConstraintName();
+
+	/**
+	 * Sets the value of the '{@link database.FK#getOracleForeingKeyConstraintName <em>Oracle Foreing Key Constraint Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Oracle Foreing Key Constraint Name</em>' attribute.
+	 * @see #getOracleForeingKeyConstraintName()
+	 * @generated
+	 */
+	void setOracleForeingKeyConstraintName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>My Sql Foreign Key Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>My Sql Foreign Key Constraint</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>My Sql Foreign Key Constraint</em>' attribute.
+	 * @see #setMySqlForeignKeyConstraint(String)
+	 * @see database.DatabasePackage#getFK_MySqlForeignKeyConstraint()
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @generated
+	 */
+	String getMySqlForeignKeyConstraint();
+
+	/**
+	 * Sets the value of the '{@link database.FK#getMySqlForeignKeyConstraint <em>My Sql Foreign Key Constraint</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>My Sql Foreign Key Constraint</em>' attribute.
+	 * @see #getMySqlForeignKeyConstraint()
+	 * @generated
+	 */
+	void setMySqlForeignKeyConstraint(String value);
 
 } // FK
