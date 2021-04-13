@@ -10,6 +10,8 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.uml2.uml.Property;
+
+import database.modeling.model.SqlDataModel;
 import database.modeling.view.util.SelectionUtil;
 
 import org.eclipse.swt.layout.GridLayout;
@@ -149,13 +151,32 @@ public class DatabaseModelingView extends ViewPart {
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
-		getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(listener);
-		
 // AUTO-GEN STUFF
 		createActions();
 		// Uncomment if you wish to add code to initialize the toolbar
 		//initializeToolBar();
 		initializeMenu();
+	}
+	
+	public void update(SqlDataModel model) {
+		getNullableCheck().setSelection(model.isNullable());
+		getUniqueCheck().setSelection(model.isUnique());
+		getAutoIncrementCheck().setSelection(model.isAutoIncrement());
+		getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
+		getForeignKeyCheck().setSelection(model.isForeignKey());
+		
+		//check if enabled
+		getLength().setText(model.getLength());
+		getPrecision().setText(model.getPrecision());
+		getScale().setText(model.getScale());
+		getDefaultValue().setText(model.getDefaultValue());
+		getPrimaryKeyConstraintName().setText(model.getPrimaryKeyConstraintName());
+		getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
+		
+		getSqlTypeCombo().setText(model.getSqlType());
+		//check if enabled
+		getReferencedEntity().setText(model.getReferencedEntity());
+		getReferencedProperty().setText(model.getReferencedProperty());
 	}
 
 	private void primaryKeyCannotBeNullable(Button btnPrimarykey, Button btnNullable) {
@@ -236,7 +257,6 @@ public class DatabaseModelingView extends ViewPart {
 	}
 	
 	public void dispose() {
-		getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(listener);
 		super.dispose();
 	}
 

@@ -13,8 +13,8 @@ public class SqlDataModel {
 	private String foreignKeyConstraintName;
 	private String sqlType;
 	
-	private Interface referencedEntity;
-	private Property referencedProperty;
+	private String referencedEntity;
+	private String referencedProperty;
 	
 	private boolean nullable;
 	private boolean unique;
@@ -63,16 +63,16 @@ public class SqlDataModel {
 	public void setSqlType(String sqlType) {
 		this.sqlType = sqlType;
 	}
-	public Interface getReferencedEntity() {
+	public String getReferencedEntity() {
 		return referencedEntity;
 	}
-	public void setReferencedEntity(Interface referencedEntity) {
+	public void setReferencedEntity(String referencedEntity) {
 		this.referencedEntity = referencedEntity;
 	}
-	public Property getReferencedProperty() {
+	public String getReferencedProperty() {
 		return referencedProperty;
 	}
-	public void setReferencedProperty(Property referencedProperty) {
+	public void setReferencedProperty(String referencedProperty) {
 		this.referencedProperty = referencedProperty;
 	}
 	public boolean isNullable() {

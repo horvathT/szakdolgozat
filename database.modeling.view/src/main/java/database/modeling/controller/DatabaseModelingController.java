@@ -1,51 +1,87 @@
 package database.modeling.controller;
 
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
 
 import database.modeling.model.SqlDataModel;
 import database.modeling.view.DatabaseModelingView;
+import database.modeling.view.util.ColumnUtil;
+import database.modeling.view.util.ProfileUtil;
 import database.modeling.view.util.SelectionUtil;
 
-public class DatabaseModelingController {
+public class DatabaseModelingController implements AutoCloseable{
 	private Property currentSelection = null;
-	
+
 	private DatabaseModelingView view;
 	private SqlDataModel model;
 	private ISelectionListener listener;
-	
+
 	public DatabaseModelingController(DatabaseModelingView view, SqlDataModel model) {
 		this.view = view;
 		this.model = model;
 		this.listener = view.getListener();
 	}
-	
+
 	public void init() {
 		listener = new ISelectionListener() {
 			public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-				if(SelectionUtil.isPropertyFromModelEditor(selection)) {
-					
+
+				//save();
+
+				if (SelectionUtil.isPropertyFromModelEditor(selection)) {
+
 					updateLatestValidSelectionFromDiagramEditor(selection);
 					updateSelectionFromDiagramEditor(selection);
-					
-				}else if(SelectionUtil.isPropertyFromModelExplorer(selection)) {
-					
+
+				} else if (SelectionUtil.isPropertyFromModelExplorer(selection)) {
+
 					updateSelectionFromModelExplorer(selection);
 					updateLatestValidSelectionFromModelExplorer(selection);
-					
-				}else {
-					//setContentDescription("Nothing to show");
+
+				} else {
+					// setContentDescription("Nothing to show");
 				}
 			}
 		};
+		view.getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(listener);
 	}
 
-	
-	
+	protected void save() {
+		if (currentSelection == null) {
+			return;
+		}
+
+		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(currentSelection);
+		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
+			@Override
+			protected void doExecute() {
+				applyProfile();
+				ColumnUtil.applyStereotype(currentSelection);
+				ColumnUtil.setOracleDataType(currentSelection, view.getSqlTypeCombo().getText());
+				ColumnUtil.setOracleDefaultValue(currentSelection, view.getDefaultValue().getText());
+			}
+		};
+		editingDomain.getCommandStack().execute(recordingCommand);
+
+	}
+
+	private void applyProfile() {
+		Profile profile = ProfileUtil.retrieveProfile();
+		Model umlModel = currentSelection.getModel();
+		if (!umlModel.isProfileApplied(profile)) {
+			umlModel.applyProfile(profile);
+		}
+	}
+
 	protected void updateSelectionFromDiagramEditor(ISelection selection) {
-		//setContentDescription(SelectionUtil.getPropertyFromModelEditor(selection).getName());
+		// setContentDescription(SelectionUtil.getPropertyFromModelEditor(selection).getName());
 	}
 
 	protected void updateLatestValidSelectionFromDiagramEditor(ISelection selection) {
@@ -53,11 +89,16 @@ public class DatabaseModelingController {
 	}
 
 	protected void updateSelectionFromModelExplorer(ISelection selection) {
-		//setContentDescription(SelectionUtil.getPropertyFromModelExplorer(selection).getName());
+		// setContentDescription(SelectionUtil.getPropertyFromModelExplorer(selection).getName());
 	}
-	
+
 	protected void updateLatestValidSelectionFromModelExplorer(ISelection selection) {
 		currentSelection = SelectionUtil.getPropertyFromModelExplorer(selection);
+	}
+
+	@Override
+	public void close() throws Exception {
+		view.getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(listener);
 	}
 
 }
