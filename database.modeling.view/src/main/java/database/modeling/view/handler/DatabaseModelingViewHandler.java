@@ -11,7 +11,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import database.modeling.view.ModelingViewPart;
+import database.modeling.view.DatabaseModelingView;
 
 import javax.inject.Named;
 
@@ -24,7 +24,8 @@ public class DatabaseModelingViewHandler {
 		try {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			IViewPart showView = page.showView("database.modeling.view.databasemodelingview", null, IWorkbenchPage.VIEW_VISIBLE);
-			ModelingViewPart dbmv = (ModelingViewPart) showView;
+			DatabaseModelingView dbmv = (DatabaseModelingView) showView;
+			
 			
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block

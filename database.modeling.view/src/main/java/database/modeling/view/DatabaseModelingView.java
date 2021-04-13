@@ -22,7 +22,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.custom.ScrolledComposite;
 
-public class ModelingViewPart extends ViewPart {
+public class DatabaseModelingView extends ViewPart {
 
 	public static final String ID = "database.modeling.view.ModelingViewPart"; //$NON-NLS-1$
 	
@@ -37,64 +37,14 @@ public class ModelingViewPart extends ViewPart {
 	private Combo referencedEntity;
 	private Combo referencedProperty;
 	
-	private Property latestValidSelection = null;
-
-	private ISelectionListener listener = new ISelectionListener() {
-		public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-			//ignore our own selections
-			if (sourcepart != ModelingViewPart.this) {
-				save();
-				
-				if(SelectionUtil.isPropertyFromModelEditor(selection)) {
-					
-					updateLatestValidSelectionFromDiagramEditor(selection);
-					updateSelectionFromDiagramEditor(selection);
-					
-				}else if(SelectionUtil.isPropertyFromModelExplorer(selection)) {
-					
-					updateSelectionFromModelExplorer(selection);
-					updateLatestValidSelectionFromModelExplorer(selection);
-					
-				}else {
-					setContentDescription("Nothing to show");
-				}
-			}
-		}
-	};
-
 	private Button nullableCheck;
-
 	private Button uniqueCheck;
-
 	private Button autoIncrementCheck;
-
 	private Button primaryKeyCheck;
+	private Button foreignKeyCheck;
 	
-	protected void updateSelectionFromDiagramEditor(ISelection selection) {
-		setContentDescription(SelectionUtil.getPropertyFromModelEditor(selection).getName());
-	}
-
-	protected void save() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	protected void updateLatestValidSelectionFromDiagramEditor(ISelection selection) {
-		latestValidSelection = SelectionUtil.getPropertyFromModelEditor(selection);
-	}
-
-	protected void updateSelectionFromModelExplorer(ISelection selection) {
-		setContentDescription(SelectionUtil.getPropertyFromModelExplorer(selection).getName());
-	}
+	private ISelectionListener listener;
 	
-	protected void updateLatestValidSelectionFromModelExplorer(ISelection selection) {
-		latestValidSelection = SelectionUtil.getPropertyFromModelExplorer(selection);
-	}
-
-	/**
-	 * Create contents of the view part.
-	 * @param parent
-	 */
 	@Override
 	public void createPartControl(Composite parent) {
 		
@@ -160,8 +110,8 @@ public class ModelingViewPart extends ViewPart {
 		primaryKeyConstraintName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		primaryKeyConstraintName.setEnabled(false);
 		
-		Button btnForeignKey = new Button(container, SWT.CHECK);
-		btnForeignKey.setText("Foreign Key");
+		foreignKeyCheck = new Button(container, SWT.CHECK);
+		foreignKeyCheck.setText("Foreign Key");
 		
 		// set btnForeignKey to take up 4 cells horizontally
 		new Label(container, SWT.NONE);
@@ -194,7 +144,7 @@ public class ModelingViewPart extends ViewPart {
 		referencedProperty.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedProperty.setEnabled(false);
 		
-		foreignKeyCheckBoxListener(btnForeignKey, referencedEntity, referencedProperty);
+		foreignKeyCheckBoxListener(foreignKeyCheck, referencedEntity, referencedProperty);
 		primaryKeyCannotBeNullable(primaryKeyCheck, nullableCheck);
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
@@ -362,13 +312,54 @@ public class ModelingViewPart extends ViewPart {
 		this.referencedProperty = referencedProperty;
 	}
 
-	public Property getLatestValidSelection() {
-		return latestValidSelection;
+	public Button getNullableCheck() {
+		return nullableCheck;
 	}
 
-	public void setLatestValidSelection(Property latestValidSelection) {
-		this.latestValidSelection = latestValidSelection;
+	public void setNullableCheck(Button nullableCheck) {
+		this.nullableCheck = nullableCheck;
+	}
+
+	public Button getUniqueCheck() {
+		return uniqueCheck;
+	}
+
+	public void setUniqueCheck(Button uniqueCheck) {
+		this.uniqueCheck = uniqueCheck;
+	}
+
+	public Button getAutoIncrementCheck() {
+		return autoIncrementCheck;
+	}
+
+	public void setAutoIncrementCheck(Button autoIncrementCheck) {
+		this.autoIncrementCheck = autoIncrementCheck;
+	}
+
+	public Button getPrimaryKeyCheck() {
+		return primaryKeyCheck;
+	}
+
+	public void setPrimaryKeyCheck(Button primaryKeyCheck) {
+		this.primaryKeyCheck = primaryKeyCheck;
+	}
+
+	public Button getForeignKeyCheck() {
+		return foreignKeyCheck;
+	}
+
+	public void setForeignKeyCheck(Button foreignKeyCheck) {
+		this.foreignKeyCheck = foreignKeyCheck;
+	}
+
+	public ISelectionListener getListener() {
+		return listener;
+	}
+
+	public void setListener(ISelectionListener listener) {
+		this.listener = listener;
 	}
 	
 	
+
 }

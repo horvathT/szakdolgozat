@@ -12,13 +12,13 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="database.modeling.view.ModelingViewPart"
+            class="database.modeling.view.DatabaseModelingView"
             id="database.modeling.view.databasemodelingview"
             name="Database Modeling View"
             restorable="true">
       </view>
       <view
-            class="database.modeling.view.ModelingViewPart"
+            class="database.modeling.view.DatabaseModelingView"
             id="database.modeling.view.ModelingViewPart"
             name="New ViewPart">
       </view>

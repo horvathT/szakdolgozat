@@ -15,7 +15,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.papyrus.infra.ui.util.EditorHelper;
 import org.eclipse.ui.IWorkbenchPart;
 
-import database.modeling.view.ModelingViewPart;
+import database.modeling.view.DatabaseModelingView;
 import database.modeling.view.util.DatabaseTypesUtil;
 
 public class ChangeDatabaseHandler {
@@ -27,12 +27,12 @@ public class ChangeDatabaseHandler {
 	public void execute() {
 		
 		IWorkbenchPart activePart = EditorHelper.getActiveWindow().getActivePage().getActivePart();
-		if(activePart instanceof ModelingViewPart) {
+		if(activePart instanceof DatabaseModelingView) {
 			MToolBar toolbar = partService.getActivePart().getToolbar();
 			String selectedDatabase = getSelectedDatabase(toolbar);
 			//TODO mitol fut 2x? 1.null 2. jo ertek
 			if(selectedDatabase != null) {
-				ModelingViewPart mvp = (ModelingViewPart) activePart;
+				DatabaseModelingView mvp = (DatabaseModelingView) activePart;
 				DatabaseTypesUtil dtu = new DatabaseTypesUtil();
 				Map<String, String[]> databaseMap = dtu.getDatabaseMap();
 				
