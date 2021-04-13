@@ -11,6 +11,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import database.modeling.controller.DatabaseModelingController;
+import database.modeling.model.SqlDataModel;
 import database.modeling.view.DatabaseModelingView;
 
 import javax.inject.Named;
@@ -25,7 +27,8 @@ public class DatabaseModelingViewHandler {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			IViewPart showView = page.showView("database.modeling.view.databasemodelingview", null, IWorkbenchPage.VIEW_VISIBLE);
 			DatabaseModelingView dbmv = (DatabaseModelingView) showView;
-			
+			DatabaseModelingController dbmc = new DatabaseModelingController(dbmv, new SqlDataModel());
+			dbmc.init();
 			
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block

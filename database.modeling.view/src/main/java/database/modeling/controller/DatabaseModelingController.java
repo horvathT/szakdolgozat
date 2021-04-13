@@ -23,21 +23,21 @@ public class DatabaseModelingController {
 	}
 	
 	public void init() {
-		ISelectionListener listener = new ISelectionListener() {
+		listener = new ISelectionListener() {
 			public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-//				if(SelectionUtil.isPropertyFromModelEditor(selection)) {
-//					
-//					updateLatestValidSelectionFromDiagramEditor(selection);
-//					updateSelectionFromDiagramEditor(selection);
-//					
-//				}else if(SelectionUtil.isPropertyFromModelExplorer(selection)) {
-//					
-//					updateSelectionFromModelExplorer(selection);
-//					updateLatestValidSelectionFromModelExplorer(selection);
-//					
-//				}else {
-//					setContentDescription("Nothing to show");
-//				}
+				if(SelectionUtil.isPropertyFromModelEditor(selection)) {
+					
+					updateLatestValidSelectionFromDiagramEditor(selection);
+					updateSelectionFromDiagramEditor(selection);
+					
+				}else if(SelectionUtil.isPropertyFromModelExplorer(selection)) {
+					
+					updateSelectionFromModelExplorer(selection);
+					updateLatestValidSelectionFromModelExplorer(selection);
+					
+				}else {
+					//setContentDescription("Nothing to show");
+				}
 			}
 		};
 	}
