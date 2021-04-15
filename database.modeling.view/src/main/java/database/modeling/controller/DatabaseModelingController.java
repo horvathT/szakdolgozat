@@ -16,23 +16,19 @@ import database.modeling.view.util.ColumnUtil;
 import database.modeling.view.util.ProfileUtil;
 import database.modeling.view.util.SelectionUtil;
 
-public class DatabaseModelingController implements AutoCloseable{
+public class DatabaseModelingController {
 	private Property currentSelection = null;
 
 	private DatabaseModelingView view;
-	private SqlDataModel model;
-	private ISelectionListener listener;
 
-	public DatabaseModelingController(DatabaseModelingView view, SqlDataModel model) {
+	public DatabaseModelingController(DatabaseModelingView view) {
 		this.view = view;
-		this.model = model;
-		this.listener = view.getListener();
 	}
 
 	public void init() {
-		listener = new ISelectionListener() {
+		view.listener = new ISelectionListener() {
 			public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-
+				//save button vagy valami szar kell mert kurvára idegesítő 
 				//save();
 
 				if (SelectionUtil.isPropertyFromModelEditor(selection)) {
@@ -50,7 +46,7 @@ public class DatabaseModelingController implements AutoCloseable{
 				}
 			}
 		};
-		view.getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(listener);
+		view.getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(view.listener);
 	}
 
 	protected void save() {
@@ -94,11 +90,6 @@ public class DatabaseModelingController implements AutoCloseable{
 
 	protected void updateLatestValidSelectionFromModelExplorer(ISelection selection) {
 		currentSelection = SelectionUtil.getPropertyFromModelExplorer(selection);
-	}
-
-	@Override
-	public void close() throws Exception {
-		view.getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(listener);
 	}
 
 }

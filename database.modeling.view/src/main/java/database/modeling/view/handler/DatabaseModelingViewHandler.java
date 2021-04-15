@@ -27,7 +27,7 @@ public class DatabaseModelingViewHandler {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			IViewPart showView = page.showView("database.modeling.view.databasemodelingview", null, IWorkbenchPage.VIEW_VISIBLE);
 			DatabaseModelingView dbmv = (DatabaseModelingView) showView;
-			DatabaseModelingController dbmc = new DatabaseModelingController(dbmv, new SqlDataModel());
+			DatabaseModelingController dbmc = new DatabaseModelingController(dbmv);
 			dbmc.init();
 			
 		} catch (PartInitException e) {

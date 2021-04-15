@@ -45,7 +45,7 @@ public class DatabaseModelingView extends ViewPart {
 	private Button primaryKeyCheck;
 	private Button foreignKeyCheck;
 	
-	private ISelectionListener listener;
+	public ISelectionListener listener;
 	
 	@Override
 	public void createPartControl(Composite parent) {
@@ -150,7 +150,7 @@ public class DatabaseModelingView extends ViewPart {
 		primaryKeyCannotBeNullable(primaryKeyCheck, nullableCheck);
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-
+		
 // AUTO-GEN STUFF
 		createActions();
 		// Uncomment if you wish to add code to initialize the toolbar
