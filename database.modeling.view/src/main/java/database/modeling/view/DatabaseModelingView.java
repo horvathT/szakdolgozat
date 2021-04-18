@@ -25,6 +25,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.custom.ScrolledComposite;
 
 public class DatabaseModelingView extends ViewPart {
+	public DatabaseModelingView() {
+	}
 
 	public static final String ID = "database.modeling.view.ModelingViewPart"; //$NON-NLS-1$
 	
@@ -46,6 +48,7 @@ public class DatabaseModelingView extends ViewPart {
 	private Button foreignKeyCheck;
 	
 	public ISelectionListener listener;
+	private Button btnSave;
 	
 	@Override
 	public void createPartControl(Composite parent) {
@@ -100,9 +103,7 @@ public class DatabaseModelingView extends ViewPart {
 		
 		primaryKeyCheck = new Button(container, SWT.CHECK);
 		primaryKeyCheck.setText("Primary Key");
-		new Label(container, SWT.NONE);
-		new Label(container, SWT.NONE);
-		new Label(container, SWT.NONE);
+		primaryKeyCheck.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
 		
 		Label lblPrimaryKeyConstraint = new Label(container, SWT.NONE);
 		lblPrimaryKeyConstraint.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -114,11 +115,7 @@ public class DatabaseModelingView extends ViewPart {
 		
 		foreignKeyCheck = new Button(container, SWT.CHECK);
 		foreignKeyCheck.setText("Foreign Key");
-		
-		// set btnForeignKey to take up 4 cells horizontally
-		new Label(container, SWT.NONE);
-		new Label(container, SWT.NONE);
-		new Label(container, SWT.NONE);
+		foreignKeyCheck.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
 		
 		Label lblForeignKeyConstraint = new Label(container, SWT.NONE);
 		lblForeignKeyConstraint.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -148,6 +145,13 @@ public class DatabaseModelingView extends ViewPart {
 		
 		foreignKeyCheckBoxListener(foreignKeyCheck, referencedEntity, referencedProperty);
 		primaryKeyCannotBeNullable(primaryKeyCheck, nullableCheck);
+		
+		btnSave = new Button(container, SWT.NONE);
+		GridData gd_btnSave = new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1);
+		gd_btnSave.widthHint = 104;
+		btnSave.setLayoutData(gd_btnSave);
+		btnSave.setText("Save as Datatype");
+		
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		

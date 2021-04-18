@@ -17,7 +17,7 @@ import database.modeling.view.util.ProfileUtil;
 import database.modeling.view.util.SelectionUtil;
 
 public class DatabaseModelingController {
-	private Property currentSelection = null;
+	private Property currentPropertySelection = null;
 
 	private DatabaseModelingView view;
 
@@ -28,9 +28,8 @@ public class DatabaseModelingController {
 	public void init() {
 		view.listener = new ISelectionListener() {
 			public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-				//save button vagy valami szar kell mert kurvára idegesítő 
-				//save();
-
+				//TODO implement usable save function
+				
 				if (SelectionUtil.isPropertyFromModelEditor(selection)) {
 
 					updateLatestValidSelectionFromDiagramEditor(selection);
@@ -50,18 +49,18 @@ public class DatabaseModelingController {
 	}
 
 	protected void save() {
-		if (currentSelection == null) {
+		if (currentPropertySelection == null) {
 			return;
 		}
 
-		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(currentSelection);
+		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(currentPropertySelection);
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
 				applyProfile();
-				ColumnUtil.applyStereotype(currentSelection);
-				ColumnUtil.setOracleDataType(currentSelection, view.getSqlTypeCombo().getText());
-				ColumnUtil.setOracleDefaultValue(currentSelection, view.getDefaultValue().getText());
+				ColumnUtil.applyStereotype(currentPropertySelection);
+				ColumnUtil.setOracleDataType(currentPropertySelection, view.getSqlTypeCombo().getText());
+				ColumnUtil.setOracleDefaultValue(currentPropertySelection, view.getDefaultValue().getText());
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);
@@ -70,7 +69,7 @@ public class DatabaseModelingController {
 
 	private void applyProfile() {
 		Profile profile = ProfileUtil.retrieveProfile();
-		Model umlModel = currentSelection.getModel();
+		Model umlModel = currentPropertySelection.getModel();
 		if (!umlModel.isProfileApplied(profile)) {
 			umlModel.applyProfile(profile);
 		}
@@ -81,7 +80,7 @@ public class DatabaseModelingController {
 	}
 
 	protected void updateLatestValidSelectionFromDiagramEditor(ISelection selection) {
-		currentSelection = SelectionUtil.getPropertyFromModelEditor(selection);
+		currentPropertySelection = SelectionUtil.getPropertyFromModelEditor(selection);
 	}
 
 	protected void updateSelectionFromModelExplorer(ISelection selection) {
@@ -89,7 +88,7 @@ public class DatabaseModelingController {
 	}
 
 	protected void updateLatestValidSelectionFromModelExplorer(ISelection selection) {
-		currentSelection = SelectionUtil.getPropertyFromModelExplorer(selection);
+		currentPropertySelection = SelectionUtil.getPropertyFromModelExplorer(selection);
 	}
 
 }
