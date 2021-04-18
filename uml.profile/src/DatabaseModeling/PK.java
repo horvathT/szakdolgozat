@@ -1,6 +1,6 @@
 /**
  */
-package database;
+package DatabaseModeling;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -15,12 +15,12 @@ import org.eclipse.uml2.uml.Property;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link database.PK#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link database.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}</li>
- *   <li>{@link database.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}</li>
+ *   <li>{@link DatabaseModeling.PK#getBase_Property <em>Base Property</em>}</li>
+ *   <li>{@link DatabaseModeling.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}</li>
+ *   <li>{@link DatabaseModeling.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}</li>
  * </ul>
  *
- * @see database.DatabasePackage#getPK()
+ * @see DatabaseModeling.DatabaseModelingPackage#getPK()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface PK extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Base Property</em>' reference.
 	 * @see #setBase_Property(Property)
-	 * @see database.DatabasePackage#getPK_Base_Property()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getPK_Base_Property()
 	 * @model ordered="false"
 	 * @generated
 	 */
 	Property getBase_Property();
 
 	/**
-	 * Sets the value of the '{@link database.PK#getBase_Property <em>Base Property</em>}' reference.
+	 * Sets the value of the '{@link DatabaseModeling.PK#getBase_Property <em>Base Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Base Property</em>' reference.
@@ -61,14 +61,14 @@ public interface PK extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Oracle Primary Key Constraint</em>' attribute.
 	 * @see #setOraclePrimaryKeyConstraint(String)
-	 * @see database.DatabasePackage#getPK_OraclePrimaryKeyConstraint()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getPK_OraclePrimaryKeyConstraint()
 	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getOraclePrimaryKeyConstraint();
 
 	/**
-	 * Sets the value of the '{@link database.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Oracle Primary Key Constraint</em>' attribute.
@@ -87,14 +87,14 @@ public interface PK extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>My Sql Primary Key Constraint</em>' attribute.
 	 * @see #setMySqlPrimaryKeyConstraint(String)
-	 * @see database.DatabasePackage#getPK_MySqlPrimaryKeyConstraint()
-	 * @model dataType="org.eclipse.uml2.types.String" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getPK_MySqlPrimaryKeyConstraint()
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getMySqlPrimaryKeyConstraint();
 
 	/**
-	 * Sets the value of the '{@link database.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>My Sql Primary Key Constraint</em>' attribute.

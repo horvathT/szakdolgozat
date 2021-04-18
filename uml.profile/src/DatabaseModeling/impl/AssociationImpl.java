@@ -1,9 +1,9 @@
 /**
  */
-package database.impl;
+package DatabaseModeling.impl;
 
-import database.Association;
-import database.DatabasePackage;
+import DatabaseModeling.Association;
+import DatabaseModeling.DatabaseModelingPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link database.impl.AssociationImpl#getForeignConstraintName <em>Foreign Constraint Name</em>}</li>
- *   <li>{@link database.impl.AssociationImpl#getBase_Association <em>Base Association</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.AssociationImpl#getForeignConstraintName <em>Foreign Constraint Name</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.AssociationImpl#getBase_Association <em>Base Association</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,7 +74,7 @@ public class AssociationImpl extends MinimalEObjectImpl.Container implements Ass
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DatabasePackage.Literals.ASSOCIATION;
+		return DatabaseModelingPackage.Literals.ASSOCIATION;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class AssociationImpl extends MinimalEObjectImpl.Container implements Ass
 		String oldForeignConstraintName = foreignConstraintName;
 		foreignConstraintName = newForeignConstraintName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME, oldForeignConstraintName, foreignConstraintName));
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME, oldForeignConstraintName, foreignConstraintName));
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class AssociationImpl extends MinimalEObjectImpl.Container implements Ass
 			base_Association = (org.eclipse.uml2.uml.Association)eResolveProxy(oldBase_Association);
 			if (base_Association != oldBase_Association) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DatabasePackage.ASSOCIATION__BASE_ASSOCIATION, oldBase_Association, base_Association));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DatabaseModelingPackage.ASSOCIATION__BASE_ASSOCIATION, oldBase_Association, base_Association));
 			}
 		}
 		return base_Association;
@@ -133,7 +133,7 @@ public class AssociationImpl extends MinimalEObjectImpl.Container implements Ass
 		org.eclipse.uml2.uml.Association oldBase_Association = base_Association;
 		base_Association = newBase_Association;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.ASSOCIATION__BASE_ASSOCIATION, oldBase_Association, base_Association));
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.ASSOCIATION__BASE_ASSOCIATION, oldBase_Association, base_Association));
 	}
 
 	/**
@@ -144,9 +144,9 @@ public class AssociationImpl extends MinimalEObjectImpl.Container implements Ass
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DatabasePackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME:
+			case DatabaseModelingPackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME:
 				return getForeignConstraintName();
-			case DatabasePackage.ASSOCIATION__BASE_ASSOCIATION:
+			case DatabaseModelingPackage.ASSOCIATION__BASE_ASSOCIATION:
 				if (resolve) return getBase_Association();
 				return basicGetBase_Association();
 		}
@@ -161,10 +161,10 @@ public class AssociationImpl extends MinimalEObjectImpl.Container implements Ass
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DatabasePackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME:
+			case DatabaseModelingPackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME:
 				setForeignConstraintName((String)newValue);
 				return;
-			case DatabasePackage.ASSOCIATION__BASE_ASSOCIATION:
+			case DatabaseModelingPackage.ASSOCIATION__BASE_ASSOCIATION:
 				setBase_Association((org.eclipse.uml2.uml.Association)newValue);
 				return;
 		}
@@ -179,10 +179,10 @@ public class AssociationImpl extends MinimalEObjectImpl.Container implements Ass
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DatabasePackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME:
+			case DatabaseModelingPackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME:
 				setForeignConstraintName(FOREIGN_CONSTRAINT_NAME_EDEFAULT);
 				return;
-			case DatabasePackage.ASSOCIATION__BASE_ASSOCIATION:
+			case DatabaseModelingPackage.ASSOCIATION__BASE_ASSOCIATION:
 				setBase_Association((org.eclipse.uml2.uml.Association)null);
 				return;
 		}
@@ -197,9 +197,9 @@ public class AssociationImpl extends MinimalEObjectImpl.Container implements Ass
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DatabasePackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME:
+			case DatabaseModelingPackage.ASSOCIATION__FOREIGN_CONSTRAINT_NAME:
 				return FOREIGN_CONSTRAINT_NAME_EDEFAULT == null ? foreignConstraintName != null : !FOREIGN_CONSTRAINT_NAME_EDEFAULT.equals(foreignConstraintName);
-			case DatabasePackage.ASSOCIATION__BASE_ASSOCIATION:
+			case DatabaseModelingPackage.ASSOCIATION__BASE_ASSOCIATION:
 				return base_Association != null;
 		}
 		return super.eIsSet(featureID);

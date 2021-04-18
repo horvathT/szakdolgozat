@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
+   
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated databaseModeling -->
+      <!-- @generated DatabaseModeling -->
       <package
-            uri="http:///database.ecore"
-            class="database.DatabasePackage"
-            genModel="resources/databaseModeling.genmodel"/>
+            uri="http:///DatabaseModeling.ecore"
+            class="DatabaseModeling.DatabaseModelingPackage"
+            genModel="resources/DatabaseModeling.genmodel"/>
    </extension>
    
    <extension point="org.eclipse.emf.ecore.uri_mapping">
 	<mapping
-		source="pathmap://database.modeling/"
+		source="pathmap://DatabaseModeling/"
 		target="platform:/plugin/uml.profile/resources/"/>
 	</extension>
 
@@ -20,7 +20,7 @@
 		<profile
 			description="Database modeling profile"
 			name="Database modeling profile"
-			path="pathmap://database.modeling/database.modeling.profile.uml"
+			path="pathmap://DatabaseModeling/DatabaseModeling.profile.uml"
 			provider="Horváth Tibor"/>
 	</extension>
 

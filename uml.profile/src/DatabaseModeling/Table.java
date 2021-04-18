@@ -1,6 +1,6 @@
 /**
  */
-package database;
+package DatabaseModeling;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -15,13 +15,13 @@ import org.eclipse.uml2.uml.Interface;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link database.Table#getBase_Interface <em>Base Interface</em>}</li>
- *   <li>{@link database.Table#getBase_Class <em>Base Class</em>}</li>
- *   <li>{@link database.Table#getPrimaryKeyConstraintName <em>Primary Key Constraint Name</em>}</li>
- *   <li>{@link database.Table#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}</li>
+ *   <li>{@link DatabaseModeling.Table#getBase_Interface <em>Base Interface</em>}</li>
+ *   <li>{@link DatabaseModeling.Table#getBase_Class <em>Base Class</em>}</li>
+ *   <li>{@link DatabaseModeling.Table#getPrimaryKeyConstraintName <em>Primary Key Constraint Name</em>}</li>
+ *   <li>{@link DatabaseModeling.Table#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}</li>
  * </ul>
  *
- * @see database.DatabasePackage#getTable()
+ * @see DatabaseModeling.DatabaseModelingPackage#getTable()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface Table extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Base Interface</em>' reference.
 	 * @see #setBase_Interface(Interface)
-	 * @see database.DatabasePackage#getTable_Base_Interface()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getTable_Base_Interface()
 	 * @model ordered="false"
 	 * @generated
 	 */
 	Interface getBase_Interface();
 
 	/**
-	 * Sets the value of the '{@link database.Table#getBase_Interface <em>Base Interface</em>}' reference.
+	 * Sets the value of the '{@link DatabaseModeling.Table#getBase_Interface <em>Base Interface</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Base Interface</em>' reference.
@@ -62,14 +62,14 @@ public interface Table extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Base Class</em>' reference.
 	 * @see #setBase_Class(org.eclipse.uml2.uml.Class)
-	 * @see database.DatabasePackage#getTable_Base_Class()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getTable_Base_Class()
 	 * @model ordered="false"
 	 * @generated
 	 */
 	org.eclipse.uml2.uml.Class getBase_Class();
 
 	/**
-	 * Sets the value of the '{@link database.Table#getBase_Class <em>Base Class</em>}' reference.
+	 * Sets the value of the '{@link DatabaseModeling.Table#getBase_Class <em>Base Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Base Class</em>' reference.
@@ -88,14 +88,14 @@ public interface Table extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Primary Key Constraint Name</em>' attribute.
 	 * @see #setPrimaryKeyConstraintName(String)
-	 * @see database.DatabasePackage#getTable_PrimaryKeyConstraintName()
-	 * @model dataType="org.eclipse.uml2.types.String" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getTable_PrimaryKeyConstraintName()
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getPrimaryKeyConstraintName();
 
 	/**
-	 * Sets the value of the '{@link database.Table#getPrimaryKeyConstraintName <em>Primary Key Constraint Name</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Table#getPrimaryKeyConstraintName <em>Primary Key Constraint Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Primary Key Constraint Name</em>' attribute.
@@ -114,14 +114,14 @@ public interface Table extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data Definition Language Name</em>' attribute.
 	 * @see #setDataDefinitionLanguageName(String)
-	 * @see database.DatabasePackage#getTable_DataDefinitionLanguageName()
-	 * @model dataType="org.eclipse.uml2.types.String" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getTable_DataDefinitionLanguageName()
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getDataDefinitionLanguageName();
 
 	/**
-	 * Sets the value of the '{@link database.Table#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Table#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Data Definition Language Name</em>' attribute.

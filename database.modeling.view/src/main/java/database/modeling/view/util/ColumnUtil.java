@@ -1,7 +1,6 @@
 package database.modeling.view.util;
 
-import database.Column;
-
+import DatabaseModeling.Column;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;

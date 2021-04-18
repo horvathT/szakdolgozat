@@ -1,6 +1,6 @@
 /**
  */
-package database;
+package DatabaseModeling;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -15,20 +15,20 @@ import org.eclipse.uml2.uml.Property;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link database.Column#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link database.Column#getOracleDataType <em>Oracle Data Type</em>}</li>
- *   <li>{@link database.Column#getOracleDefaultValue <em>Oracle Default Value</em>}</li>
- *   <li>{@link database.Column#getOracleLength <em>Oracle Length</em>}</li>
- *   <li>{@link database.Column#getOraclePrecision <em>Oracle Precision</em>}</li>
- *   <li>{@link database.Column#getOracleScale <em>Oracle Scale</em>}</li>
- *   <li>{@link database.Column#getMySqlDataType <em>My Sql Data Type</em>}</li>
- *   <li>{@link database.Column#getMySqlDefaultValue <em>My Sql Default Value</em>}</li>
- *   <li>{@link database.Column#getMySqlLength <em>My Sql Length</em>}</li>
- *   <li>{@link database.Column#getMySqlPrecision <em>My Sql Precision</em>}</li>
- *   <li>{@link database.Column#getMySqlScale <em>My Sql Scale</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getBase_Property <em>Base Property</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getOracleDataType <em>Oracle Data Type</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getOracleDefaultValue <em>Oracle Default Value</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getOracleLength <em>Oracle Length</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getOraclePrecision <em>Oracle Precision</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getOracleScale <em>Oracle Scale</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getMySqlDataType <em>My Sql Data Type</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getMySqlDefaultValue <em>My Sql Default Value</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getMySqlLength <em>My Sql Length</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getMySqlPrecision <em>My Sql Precision</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#getMySqlScale <em>My Sql Scale</em>}</li>
  * </ul>
  *
- * @see database.DatabasePackage#getColumn()
+ * @see DatabaseModeling.DatabaseModelingPackage#getColumn()
  * @model
  * @generated
  */
@@ -43,14 +43,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Base Property</em>' reference.
 	 * @see #setBase_Property(Property)
-	 * @see database.DatabasePackage#getColumn_Base_Property()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Base_Property()
 	 * @model ordered="false"
 	 * @generated
 	 */
 	Property getBase_Property();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getBase_Property <em>Base Property</em>}' reference.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getBase_Property <em>Base Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Base Property</em>' reference.
@@ -69,14 +69,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Oracle Data Type</em>' attribute.
 	 * @see #setOracleDataType(String)
-	 * @see database.DatabasePackage#getColumn_OracleDataType()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_OracleDataType()
 	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getOracleDataType();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getOracleDataType <em>Oracle Data Type</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getOracleDataType <em>Oracle Data Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Oracle Data Type</em>' attribute.
@@ -95,14 +95,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Oracle Default Value</em>' attribute.
 	 * @see #setOracleDefaultValue(String)
-	 * @see database.DatabasePackage#getColumn_OracleDefaultValue()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_OracleDefaultValue()
 	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getOracleDefaultValue();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getOracleDefaultValue <em>Oracle Default Value</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getOracleDefaultValue <em>Oracle Default Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Oracle Default Value</em>' attribute.
@@ -121,14 +121,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Oracle Length</em>' attribute.
 	 * @see #setOracleLength(int)
-	 * @see database.DatabasePackage#getColumn_OracleLength()
-	 * @model dataType="org.eclipse.uml2.types.Integer" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_OracleLength()
+	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
 	 * @generated
 	 */
 	int getOracleLength();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getOracleLength <em>Oracle Length</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getOracleLength <em>Oracle Length</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Oracle Length</em>' attribute.
@@ -147,14 +147,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Oracle Precision</em>' attribute.
 	 * @see #setOraclePrecision(int)
-	 * @see database.DatabasePackage#getColumn_OraclePrecision()
-	 * @model dataType="org.eclipse.uml2.types.Integer" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_OraclePrecision()
+	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
 	 * @generated
 	 */
 	int getOraclePrecision();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getOraclePrecision <em>Oracle Precision</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getOraclePrecision <em>Oracle Precision</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Oracle Precision</em>' attribute.
@@ -173,14 +173,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Oracle Scale</em>' attribute.
 	 * @see #setOracleScale(int)
-	 * @see database.DatabasePackage#getColumn_OracleScale()
-	 * @model dataType="org.eclipse.uml2.types.Integer" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_OracleScale()
+	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
 	 * @generated
 	 */
 	int getOracleScale();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getOracleScale <em>Oracle Scale</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getOracleScale <em>Oracle Scale</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Oracle Scale</em>' attribute.
@@ -199,14 +199,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>My Sql Data Type</em>' attribute.
 	 * @see #setMySqlDataType(String)
-	 * @see database.DatabasePackage#getColumn_MySqlDataType()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_MySqlDataType()
 	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getMySqlDataType();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getMySqlDataType <em>My Sql Data Type</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getMySqlDataType <em>My Sql Data Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>My Sql Data Type</em>' attribute.
@@ -225,14 +225,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>My Sql Default Value</em>' attribute.
 	 * @see #setMySqlDefaultValue(String)
-	 * @see database.DatabasePackage#getColumn_MySqlDefaultValue()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_MySqlDefaultValue()
 	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getMySqlDefaultValue();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getMySqlDefaultValue <em>My Sql Default Value</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getMySqlDefaultValue <em>My Sql Default Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>My Sql Default Value</em>' attribute.
@@ -251,14 +251,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>My Sql Length</em>' attribute.
 	 * @see #setMySqlLength(int)
-	 * @see database.DatabasePackage#getColumn_MySqlLength()
-	 * @model dataType="org.eclipse.uml2.types.Integer" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_MySqlLength()
+	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
 	 * @generated
 	 */
 	int getMySqlLength();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getMySqlLength <em>My Sql Length</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getMySqlLength <em>My Sql Length</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>My Sql Length</em>' attribute.
@@ -277,14 +277,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>My Sql Precision</em>' attribute.
 	 * @see #setMySqlPrecision(int)
-	 * @see database.DatabasePackage#getColumn_MySqlPrecision()
-	 * @model dataType="org.eclipse.uml2.types.Integer" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_MySqlPrecision()
+	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
 	 * @generated
 	 */
 	int getMySqlPrecision();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getMySqlPrecision <em>My Sql Precision</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getMySqlPrecision <em>My Sql Precision</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>My Sql Precision</em>' attribute.
@@ -303,14 +303,14 @@ public interface Column extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>My Sql Scale</em>' attribute.
 	 * @see #setMySqlScale(int)
-	 * @see database.DatabasePackage#getColumn_MySqlScale()
-	 * @model dataType="org.eclipse.uml2.types.Integer" required="true" ordered="false"
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_MySqlScale()
+	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
 	 * @generated
 	 */
 	int getMySqlScale();
 
 	/**
-	 * Sets the value of the '{@link database.Column#getMySqlScale <em>My Sql Scale</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Column#getMySqlScale <em>My Sql Scale</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>My Sql Scale</em>' attribute.

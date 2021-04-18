@@ -1,9 +1,9 @@
 /**
  */
-package database.impl;
+package DatabaseModeling.impl;
 
-import database.DatabasePackage;
-import database.Table;
+import DatabaseModeling.DatabaseModelingPackage;
+import DatabaseModeling.Table;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -23,10 +23,10 @@ import org.eclipse.uml2.uml.Interface;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link database.impl.TableImpl#getBase_Interface <em>Base Interface</em>}</li>
- *   <li>{@link database.impl.TableImpl#getBase_Class <em>Base Class</em>}</li>
- *   <li>{@link database.impl.TableImpl#getPrimaryKeyConstraintName <em>Primary Key Constraint Name</em>}</li>
- *   <li>{@link database.impl.TableImpl#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.TableImpl#getBase_Interface <em>Base Interface</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.TableImpl#getBase_Class <em>Base Class</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.TableImpl#getPrimaryKeyConstraintName <em>Primary Key Constraint Name</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.TableImpl#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -108,7 +108,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DatabasePackage.Literals.TABLE;
+		return DatabaseModelingPackage.Literals.TABLE;
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 			base_Interface = (Interface)eResolveProxy(oldBase_Interface);
 			if (base_Interface != oldBase_Interface) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DatabasePackage.TABLE__BASE_INTERFACE, oldBase_Interface, base_Interface));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DatabaseModelingPackage.TABLE__BASE_INTERFACE, oldBase_Interface, base_Interface));
 			}
 		}
 		return base_Interface;
@@ -146,7 +146,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 		Interface oldBase_Interface = base_Interface;
 		base_Interface = newBase_Interface;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.TABLE__BASE_INTERFACE, oldBase_Interface, base_Interface));
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.TABLE__BASE_INTERFACE, oldBase_Interface, base_Interface));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 			base_Class = (org.eclipse.uml2.uml.Class)eResolveProxy(oldBase_Class);
 			if (base_Class != oldBase_Class) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DatabasePackage.TABLE__BASE_CLASS, oldBase_Class, base_Class));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DatabaseModelingPackage.TABLE__BASE_CLASS, oldBase_Class, base_Class));
 			}
 		}
 		return base_Class;
@@ -184,7 +184,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 		org.eclipse.uml2.uml.Class oldBase_Class = base_Class;
 		base_Class = newBase_Class;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.TABLE__BASE_CLASS, oldBase_Class, base_Class));
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.TABLE__BASE_CLASS, oldBase_Class, base_Class));
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 		String oldPrimaryKeyConstraintName = primaryKeyConstraintName;
 		primaryKeyConstraintName = newPrimaryKeyConstraintName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME, oldPrimaryKeyConstraintName, primaryKeyConstraintName));
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME, oldPrimaryKeyConstraintName, primaryKeyConstraintName));
 	}
 
 	/**
@@ -226,7 +226,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 		String oldDataDefinitionLanguageName = dataDefinitionLanguageName;
 		dataDefinitionLanguageName = newDataDefinitionLanguageName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabasePackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME, oldDataDefinitionLanguageName, dataDefinitionLanguageName));
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME, oldDataDefinitionLanguageName, dataDefinitionLanguageName));
 	}
 
 	/**
@@ -237,15 +237,15 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DatabasePackage.TABLE__BASE_INTERFACE:
+			case DatabaseModelingPackage.TABLE__BASE_INTERFACE:
 				if (resolve) return getBase_Interface();
 				return basicGetBase_Interface();
-			case DatabasePackage.TABLE__BASE_CLASS:
+			case DatabaseModelingPackage.TABLE__BASE_CLASS:
 				if (resolve) return getBase_Class();
 				return basicGetBase_Class();
-			case DatabasePackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME:
+			case DatabaseModelingPackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME:
 				return getPrimaryKeyConstraintName();
-			case DatabasePackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME:
+			case DatabaseModelingPackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME:
 				return getDataDefinitionLanguageName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -259,16 +259,16 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DatabasePackage.TABLE__BASE_INTERFACE:
+			case DatabaseModelingPackage.TABLE__BASE_INTERFACE:
 				setBase_Interface((Interface)newValue);
 				return;
-			case DatabasePackage.TABLE__BASE_CLASS:
+			case DatabaseModelingPackage.TABLE__BASE_CLASS:
 				setBase_Class((org.eclipse.uml2.uml.Class)newValue);
 				return;
-			case DatabasePackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME:
+			case DatabaseModelingPackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME:
 				setPrimaryKeyConstraintName((String)newValue);
 				return;
-			case DatabasePackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME:
+			case DatabaseModelingPackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME:
 				setDataDefinitionLanguageName((String)newValue);
 				return;
 		}
@@ -283,16 +283,16 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DatabasePackage.TABLE__BASE_INTERFACE:
+			case DatabaseModelingPackage.TABLE__BASE_INTERFACE:
 				setBase_Interface((Interface)null);
 				return;
-			case DatabasePackage.TABLE__BASE_CLASS:
+			case DatabaseModelingPackage.TABLE__BASE_CLASS:
 				setBase_Class((org.eclipse.uml2.uml.Class)null);
 				return;
-			case DatabasePackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME:
+			case DatabaseModelingPackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME:
 				setPrimaryKeyConstraintName(PRIMARY_KEY_CONSTRAINT_NAME_EDEFAULT);
 				return;
-			case DatabasePackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME:
+			case DatabaseModelingPackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME:
 				setDataDefinitionLanguageName(DATA_DEFINITION_LANGUAGE_NAME_EDEFAULT);
 				return;
 		}
@@ -307,13 +307,13 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DatabasePackage.TABLE__BASE_INTERFACE:
+			case DatabaseModelingPackage.TABLE__BASE_INTERFACE:
 				return base_Interface != null;
-			case DatabasePackage.TABLE__BASE_CLASS:
+			case DatabaseModelingPackage.TABLE__BASE_CLASS:
 				return base_Class != null;
-			case DatabasePackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME:
+			case DatabaseModelingPackage.TABLE__PRIMARY_KEY_CONSTRAINT_NAME:
 				return PRIMARY_KEY_CONSTRAINT_NAME_EDEFAULT == null ? primaryKeyConstraintName != null : !PRIMARY_KEY_CONSTRAINT_NAME_EDEFAULT.equals(primaryKeyConstraintName);
-			case DatabasePackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME:
+			case DatabaseModelingPackage.TABLE__DATA_DEFINITION_LANGUAGE_NAME:
 				return DATA_DEFINITION_LANGUAGE_NAME_EDEFAULT == null ? dataDefinitionLanguageName != null : !DATA_DEFINITION_LANGUAGE_NAME_EDEFAULT.equals(dataDefinitionLanguageName);
 		}
 		return super.eIsSet(featureID);

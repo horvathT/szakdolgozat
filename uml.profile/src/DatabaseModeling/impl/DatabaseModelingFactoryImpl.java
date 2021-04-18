@@ -1,8 +1,8 @@
 /**
  */
-package database.impl;
+package DatabaseModeling.impl;
 
-import database.*;
+import DatabaseModeling.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -18,24 +18,24 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class DatabaseFactoryImpl extends EFactoryImpl implements DatabaseFactory {
+public class DatabaseModelingFactoryImpl extends EFactoryImpl implements DatabaseModelingFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static DatabaseFactory init() {
+	public static DatabaseModelingFactory init() {
 		try {
-			DatabaseFactory theDatabaseFactory = (DatabaseFactory)EPackage.Registry.INSTANCE.getEFactory(DatabasePackage.eNS_URI);
-			if (theDatabaseFactory != null) {
-				return theDatabaseFactory;
+			DatabaseModelingFactory theDatabaseModelingFactory = (DatabaseModelingFactory)EPackage.Registry.INSTANCE.getEFactory(DatabaseModelingPackage.eNS_URI);
+			if (theDatabaseModelingFactory != null) {
+				return theDatabaseModelingFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new DatabaseFactoryImpl();
+		return new DatabaseModelingFactoryImpl();
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class DatabaseFactoryImpl extends EFactoryImpl implements DatabaseFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DatabaseFactoryImpl() {
+	public DatabaseModelingFactoryImpl() {
 		super();
 	}
 
@@ -56,11 +56,11 @@ public class DatabaseFactoryImpl extends EFactoryImpl implements DatabaseFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DatabasePackage.ASSOCIATION: return createAssociation();
-			case DatabasePackage.COLUMN: return createColumn();
-			case DatabasePackage.TABLE: return createTable();
-			case DatabasePackage.PK: return createPK();
-			case DatabasePackage.FK: return createFK();
+			case DatabaseModelingPackage.ASSOCIATION: return createAssociation();
+			case DatabaseModelingPackage.COLUMN: return createColumn();
+			case DatabaseModelingPackage.TABLE: return createTable();
+			case DatabaseModelingPackage.PK: return createPK();
+			case DatabaseModelingPackage.FK: return createFK();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -121,8 +121,8 @@ public class DatabaseFactoryImpl extends EFactoryImpl implements DatabaseFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DatabasePackage getDatabasePackage() {
-		return (DatabasePackage)getEPackage();
+	public DatabaseModelingPackage getDatabaseModelingPackage() {
+		return (DatabaseModelingPackage)getEPackage();
 	}
 
 	/**
@@ -132,8 +132,8 @@ public class DatabaseFactoryImpl extends EFactoryImpl implements DatabaseFactory
 	 * @generated
 	 */
 	@Deprecated
-	public static DatabasePackage getPackage() {
-		return DatabasePackage.eINSTANCE;
+	public static DatabaseModelingPackage getPackage() {
+		return DatabaseModelingPackage.eINSTANCE;
 	}
 
-} //DatabaseFactoryImpl
+} //DatabaseModelingFactoryImpl

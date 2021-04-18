@@ -1,8 +1,8 @@
 /**
  */
-package database.util;
+package DatabaseModeling.util;
 
-import database.*;
+import DatabaseModeling.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -19,17 +19,17 @@ import org.eclipse.emf.ecore.util.Switch;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see database.DatabasePackage
+ * @see DatabaseModeling.DatabaseModelingPackage
  * @generated
  */
-public class DatabaseSwitch<T> extends Switch<T> {
+public class DatabaseModelingSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static DatabasePackage modelPackage;
+	protected static DatabaseModelingPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -37,9 +37,9 @@ public class DatabaseSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DatabaseSwitch() {
+	public DatabaseModelingSwitch() {
 		if (modelPackage == null) {
-			modelPackage = DatabasePackage.eINSTANCE;
+			modelPackage = DatabaseModelingPackage.eINSTANCE;
 		}
 	}
 
@@ -66,31 +66,31 @@ public class DatabaseSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case DatabasePackage.ASSOCIATION: {
+			case DatabaseModelingPackage.ASSOCIATION: {
 				Association association = (Association)theEObject;
 				T result = caseAssociation(association);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DatabasePackage.COLUMN: {
+			case DatabaseModelingPackage.COLUMN: {
 				Column column = (Column)theEObject;
 				T result = caseColumn(column);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DatabasePackage.TABLE: {
+			case DatabaseModelingPackage.TABLE: {
 				Table table = (Table)theEObject;
 				T result = caseTable(table);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DatabasePackage.PK: {
+			case DatabaseModelingPackage.PK: {
 				PK pk = (PK)theEObject;
 				T result = casePK(pk);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DatabasePackage.FK: {
+			case DatabaseModelingPackage.FK: {
 				FK fk = (FK)theEObject;
 				T result = caseFK(fk);
 				if (result == null) result = defaultCase(theEObject);
@@ -191,4 +191,4 @@ public class DatabaseSwitch<T> extends Switch<T> {
 		return null;
 	}
 
-} //DatabaseSwitch
+} //DatabaseModelingSwitch

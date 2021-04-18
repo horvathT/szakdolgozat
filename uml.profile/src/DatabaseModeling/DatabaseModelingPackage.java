@@ -1,6 +1,6 @@
 /**
  */
-package database;
+package DatabaseModeling;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -19,18 +19,18 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see database.DatabaseFactory
+ * @see DatabaseModeling.DatabaseModelingFactory
  * @model kind="package"
  * @generated
  */
-public interface DatabasePackage extends EPackage {
+public interface DatabaseModelingPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "database";
+	String eNAME = "DatabaseModeling";
 
 	/**
 	 * The package namespace URI.
@@ -38,7 +38,7 @@ public interface DatabasePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http:///database.ecore";
+	String eNS_URI = "http:///DatabaseModeling.ecore";
 
 	/**
 	 * The package namespace name.
@@ -46,7 +46,7 @@ public interface DatabasePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "database";
+	String eNS_PREFIX = "DatabaseModeling";
 
 	/**
 	 * The singleton instance of the package.
@@ -54,14 +54,14 @@ public interface DatabasePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	DatabasePackage eINSTANCE = database.impl.DatabasePackageImpl.init();
+	DatabaseModelingPackage eINSTANCE = DatabaseModeling.impl.DatabaseModelingPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link database.impl.AssociationImpl <em>Association</em>}' class.
+	 * The meta object id for the '{@link DatabaseModeling.impl.AssociationImpl <em>Association</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see database.impl.AssociationImpl
-	 * @see database.impl.DatabasePackageImpl#getAssociation()
+	 * @see DatabaseModeling.impl.AssociationImpl
+	 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getAssociation()
 	 * @generated
 	 */
 	int ASSOCIATION = 0;
@@ -103,11 +103,11 @@ public interface DatabasePackage extends EPackage {
 	int ASSOCIATION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link database.impl.ColumnImpl <em>Column</em>}' class.
+	 * The meta object id for the '{@link DatabaseModeling.impl.ColumnImpl <em>Column</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see database.impl.ColumnImpl
-	 * @see database.impl.DatabasePackageImpl#getColumn()
+	 * @see DatabaseModeling.impl.ColumnImpl
+	 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getColumn()
 	 * @generated
 	 */
 	int COLUMN = 1;
@@ -230,11 +230,11 @@ public interface DatabasePackage extends EPackage {
 	int COLUMN_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link database.impl.TableImpl <em>Table</em>}' class.
+	 * The meta object id for the '{@link DatabaseModeling.impl.TableImpl <em>Table</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see database.impl.TableImpl
-	 * @see database.impl.DatabasePackageImpl#getTable()
+	 * @see DatabaseModeling.impl.TableImpl
+	 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getTable()
 	 * @generated
 	 */
 	int TABLE = 2;
@@ -293,13 +293,12 @@ public interface DatabasePackage extends EPackage {
 	 */
 	int TABLE_OPERATION_COUNT = 0;
 
-
 	/**
-	 * The meta object id for the '{@link database.impl.PKImpl <em>PK</em>}' class.
+	 * The meta object id for the '{@link DatabaseModeling.impl.PKImpl <em>PK</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see database.impl.PKImpl
-	 * @see database.impl.DatabasePackageImpl#getPK()
+	 * @see DatabaseModeling.impl.PKImpl
+	 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getPK()
 	 * @generated
 	 */
 	int PK = 3;
@@ -350,11 +349,11 @@ public interface DatabasePackage extends EPackage {
 	int PK_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link database.impl.FKImpl <em>FK</em>}' class.
+	 * The meta object id for the '{@link DatabaseModeling.impl.FKImpl <em>FK</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see database.impl.FKImpl
-	 * @see database.impl.DatabasePackageImpl#getFK()
+	 * @see DatabaseModeling.impl.FKImpl
+	 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getFK()
 	 * @generated
 	 */
 	int FK = 4;
@@ -406,303 +405,303 @@ public interface DatabasePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link database.Association <em>Association</em>}'.
+	 * Returns the meta object for class '{@link DatabaseModeling.Association <em>Association</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Association</em>'.
-	 * @see database.Association
+	 * @see DatabaseModeling.Association
 	 * @generated
 	 */
 	EClass getAssociation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Association#getForeignConstraintName <em>Foreign Constraint Name</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Association#getForeignConstraintName <em>Foreign Constraint Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Foreign Constraint Name</em>'.
-	 * @see database.Association#getForeignConstraintName()
+	 * @see DatabaseModeling.Association#getForeignConstraintName()
 	 * @see #getAssociation()
 	 * @generated
 	 */
 	EAttribute getAssociation_ForeignConstraintName();
 
 	/**
-	 * Returns the meta object for the reference '{@link database.Association#getBase_Association <em>Base Association</em>}'.
+	 * Returns the meta object for the reference '{@link DatabaseModeling.Association#getBase_Association <em>Base Association</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Base Association</em>'.
-	 * @see database.Association#getBase_Association()
+	 * @see DatabaseModeling.Association#getBase_Association()
 	 * @see #getAssociation()
 	 * @generated
 	 */
 	EReference getAssociation_Base_Association();
 
 	/**
-	 * Returns the meta object for class '{@link database.Column <em>Column</em>}'.
+	 * Returns the meta object for class '{@link DatabaseModeling.Column <em>Column</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Column</em>'.
-	 * @see database.Column
+	 * @see DatabaseModeling.Column
 	 * @generated
 	 */
 	EClass getColumn();
 
 	/**
-	 * Returns the meta object for the reference '{@link database.Column#getBase_Property <em>Base Property</em>}'.
+	 * Returns the meta object for the reference '{@link DatabaseModeling.Column#getBase_Property <em>Base Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Base Property</em>'.
-	 * @see database.Column#getBase_Property()
+	 * @see DatabaseModeling.Column#getBase_Property()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EReference getColumn_Base_Property();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getOracleDataType <em>Oracle Data Type</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getOracleDataType <em>Oracle Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Oracle Data Type</em>'.
-	 * @see database.Column#getOracleDataType()
+	 * @see DatabaseModeling.Column#getOracleDataType()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_OracleDataType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getOracleDefaultValue <em>Oracle Default Value</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getOracleDefaultValue <em>Oracle Default Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Oracle Default Value</em>'.
-	 * @see database.Column#getOracleDefaultValue()
+	 * @see DatabaseModeling.Column#getOracleDefaultValue()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_OracleDefaultValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getOracleLength <em>Oracle Length</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getOracleLength <em>Oracle Length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Oracle Length</em>'.
-	 * @see database.Column#getOracleLength()
+	 * @see DatabaseModeling.Column#getOracleLength()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_OracleLength();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getOraclePrecision <em>Oracle Precision</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getOraclePrecision <em>Oracle Precision</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Oracle Precision</em>'.
-	 * @see database.Column#getOraclePrecision()
+	 * @see DatabaseModeling.Column#getOraclePrecision()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_OraclePrecision();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getOracleScale <em>Oracle Scale</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getOracleScale <em>Oracle Scale</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Oracle Scale</em>'.
-	 * @see database.Column#getOracleScale()
+	 * @see DatabaseModeling.Column#getOracleScale()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_OracleScale();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getMySqlDataType <em>My Sql Data Type</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getMySqlDataType <em>My Sql Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>My Sql Data Type</em>'.
-	 * @see database.Column#getMySqlDataType()
+	 * @see DatabaseModeling.Column#getMySqlDataType()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_MySqlDataType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getMySqlDefaultValue <em>My Sql Default Value</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getMySqlDefaultValue <em>My Sql Default Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>My Sql Default Value</em>'.
-	 * @see database.Column#getMySqlDefaultValue()
+	 * @see DatabaseModeling.Column#getMySqlDefaultValue()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_MySqlDefaultValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getMySqlLength <em>My Sql Length</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getMySqlLength <em>My Sql Length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>My Sql Length</em>'.
-	 * @see database.Column#getMySqlLength()
+	 * @see DatabaseModeling.Column#getMySqlLength()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_MySqlLength();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getMySqlPrecision <em>My Sql Precision</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getMySqlPrecision <em>My Sql Precision</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>My Sql Precision</em>'.
-	 * @see database.Column#getMySqlPrecision()
+	 * @see DatabaseModeling.Column#getMySqlPrecision()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_MySqlPrecision();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Column#getMySqlScale <em>My Sql Scale</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#getMySqlScale <em>My Sql Scale</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>My Sql Scale</em>'.
-	 * @see database.Column#getMySqlScale()
+	 * @see DatabaseModeling.Column#getMySqlScale()
 	 * @see #getColumn()
 	 * @generated
 	 */
 	EAttribute getColumn_MySqlScale();
 
 	/**
-	 * Returns the meta object for class '{@link database.Table <em>Table</em>}'.
+	 * Returns the meta object for class '{@link DatabaseModeling.Table <em>Table</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Table</em>'.
-	 * @see database.Table
+	 * @see DatabaseModeling.Table
 	 * @generated
 	 */
 	EClass getTable();
 
 	/**
-	 * Returns the meta object for the reference '{@link database.Table#getBase_Interface <em>Base Interface</em>}'.
+	 * Returns the meta object for the reference '{@link DatabaseModeling.Table#getBase_Interface <em>Base Interface</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Base Interface</em>'.
-	 * @see database.Table#getBase_Interface()
+	 * @see DatabaseModeling.Table#getBase_Interface()
 	 * @see #getTable()
 	 * @generated
 	 */
 	EReference getTable_Base_Interface();
 
 	/**
-	 * Returns the meta object for the reference '{@link database.Table#getBase_Class <em>Base Class</em>}'.
+	 * Returns the meta object for the reference '{@link DatabaseModeling.Table#getBase_Class <em>Base Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Base Class</em>'.
-	 * @see database.Table#getBase_Class()
+	 * @see DatabaseModeling.Table#getBase_Class()
 	 * @see #getTable()
 	 * @generated
 	 */
 	EReference getTable_Base_Class();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Table#getPrimaryKeyConstraintName <em>Primary Key Constraint Name</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Table#getPrimaryKeyConstraintName <em>Primary Key Constraint Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Primary Key Constraint Name</em>'.
-	 * @see database.Table#getPrimaryKeyConstraintName()
+	 * @see DatabaseModeling.Table#getPrimaryKeyConstraintName()
 	 * @see #getTable()
 	 * @generated
 	 */
 	EAttribute getTable_PrimaryKeyConstraintName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.Table#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Table#getDataDefinitionLanguageName <em>Data Definition Language Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Data Definition Language Name</em>'.
-	 * @see database.Table#getDataDefinitionLanguageName()
+	 * @see DatabaseModeling.Table#getDataDefinitionLanguageName()
 	 * @see #getTable()
 	 * @generated
 	 */
 	EAttribute getTable_DataDefinitionLanguageName();
 
 	/**
-	 * Returns the meta object for class '{@link database.PK <em>PK</em>}'.
+	 * Returns the meta object for class '{@link DatabaseModeling.PK <em>PK</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>PK</em>'.
-	 * @see database.PK
+	 * @see DatabaseModeling.PK
 	 * @generated
 	 */
 	EClass getPK();
 
 	/**
-	 * Returns the meta object for the reference '{@link database.PK#getBase_Property <em>Base Property</em>}'.
+	 * Returns the meta object for the reference '{@link DatabaseModeling.PK#getBase_Property <em>Base Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Base Property</em>'.
-	 * @see database.PK#getBase_Property()
+	 * @see DatabaseModeling.PK#getBase_Property()
 	 * @see #getPK()
 	 * @generated
 	 */
 	EReference getPK_Base_Property();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Oracle Primary Key Constraint</em>'.
-	 * @see database.PK#getOraclePrimaryKeyConstraint()
+	 * @see DatabaseModeling.PK#getOraclePrimaryKeyConstraint()
 	 * @see #getPK()
 	 * @generated
 	 */
 	EAttribute getPK_OraclePrimaryKeyConstraint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>My Sql Primary Key Constraint</em>'.
-	 * @see database.PK#getMySqlPrimaryKeyConstraint()
+	 * @see DatabaseModeling.PK#getMySqlPrimaryKeyConstraint()
 	 * @see #getPK()
 	 * @generated
 	 */
 	EAttribute getPK_MySqlPrimaryKeyConstraint();
 
 	/**
-	 * Returns the meta object for class '{@link database.FK <em>FK</em>}'.
+	 * Returns the meta object for class '{@link DatabaseModeling.FK <em>FK</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>FK</em>'.
-	 * @see database.FK
+	 * @see DatabaseModeling.FK
 	 * @generated
 	 */
 	EClass getFK();
 
 	/**
-	 * Returns the meta object for the reference '{@link database.FK#getBase_Property <em>Base Property</em>}'.
+	 * Returns the meta object for the reference '{@link DatabaseModeling.FK#getBase_Property <em>Base Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Base Property</em>'.
-	 * @see database.FK#getBase_Property()
+	 * @see DatabaseModeling.FK#getBase_Property()
 	 * @see #getFK()
 	 * @generated
 	 */
 	EReference getFK_Base_Property();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.FK#getOracleForeingKeyConstraintName <em>Oracle Foreing Key Constraint Name</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.FK#getOracleForeingKeyConstraintName <em>Oracle Foreing Key Constraint Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Oracle Foreing Key Constraint Name</em>'.
-	 * @see database.FK#getOracleForeingKeyConstraintName()
+	 * @see DatabaseModeling.FK#getOracleForeingKeyConstraintName()
 	 * @see #getFK()
 	 * @generated
 	 */
 	EAttribute getFK_OracleForeingKeyConstraintName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link database.FK#getMySqlForeignKeyConstraint <em>My Sql Foreign Key Constraint</em>}'.
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.FK#getMySqlForeignKeyConstraint <em>My Sql Foreign Key Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>My Sql Foreign Key Constraint</em>'.
-	 * @see database.FK#getMySqlForeignKeyConstraint()
+	 * @see DatabaseModeling.FK#getMySqlForeignKeyConstraint()
 	 * @see #getFK()
 	 * @generated
 	 */
@@ -715,7 +714,7 @@ public interface DatabasePackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	DatabaseFactory getDatabaseFactory();
+	DatabaseModelingFactory getDatabaseModelingFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -732,11 +731,11 @@ public interface DatabasePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link database.impl.AssociationImpl <em>Association</em>}' class.
+		 * The meta object literal for the '{@link DatabaseModeling.impl.AssociationImpl <em>Association</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see database.impl.AssociationImpl
-		 * @see database.impl.DatabasePackageImpl#getAssociation()
+		 * @see DatabaseModeling.impl.AssociationImpl
+		 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getAssociation()
 		 * @generated
 		 */
 		EClass ASSOCIATION = eINSTANCE.getAssociation();
@@ -758,11 +757,11 @@ public interface DatabasePackage extends EPackage {
 		EReference ASSOCIATION__BASE_ASSOCIATION = eINSTANCE.getAssociation_Base_Association();
 
 		/**
-		 * The meta object literal for the '{@link database.impl.ColumnImpl <em>Column</em>}' class.
+		 * The meta object literal for the '{@link DatabaseModeling.impl.ColumnImpl <em>Column</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see database.impl.ColumnImpl
-		 * @see database.impl.DatabasePackageImpl#getColumn()
+		 * @see DatabaseModeling.impl.ColumnImpl
+		 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getColumn()
 		 * @generated
 		 */
 		EClass COLUMN = eINSTANCE.getColumn();
@@ -856,11 +855,11 @@ public interface DatabasePackage extends EPackage {
 		EAttribute COLUMN__MY_SQL_SCALE = eINSTANCE.getColumn_MySqlScale();
 
 		/**
-		 * The meta object literal for the '{@link database.impl.TableImpl <em>Table</em>}' class.
+		 * The meta object literal for the '{@link DatabaseModeling.impl.TableImpl <em>Table</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see database.impl.TableImpl
-		 * @see database.impl.DatabasePackageImpl#getTable()
+		 * @see DatabaseModeling.impl.TableImpl
+		 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getTable()
 		 * @generated
 		 */
 		EClass TABLE = eINSTANCE.getTable();
@@ -898,11 +897,11 @@ public interface DatabasePackage extends EPackage {
 		EAttribute TABLE__DATA_DEFINITION_LANGUAGE_NAME = eINSTANCE.getTable_DataDefinitionLanguageName();
 
 		/**
-		 * The meta object literal for the '{@link database.impl.PKImpl <em>PK</em>}' class.
+		 * The meta object literal for the '{@link DatabaseModeling.impl.PKImpl <em>PK</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see database.impl.PKImpl
-		 * @see database.impl.DatabasePackageImpl#getPK()
+		 * @see DatabaseModeling.impl.PKImpl
+		 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getPK()
 		 * @generated
 		 */
 		EClass PK = eINSTANCE.getPK();
@@ -932,11 +931,11 @@ public interface DatabasePackage extends EPackage {
 		EAttribute PK__MY_SQL_PRIMARY_KEY_CONSTRAINT = eINSTANCE.getPK_MySqlPrimaryKeyConstraint();
 
 		/**
-		 * The meta object literal for the '{@link database.impl.FKImpl <em>FK</em>}' class.
+		 * The meta object literal for the '{@link DatabaseModeling.impl.FKImpl <em>FK</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see database.impl.FKImpl
-		 * @see database.impl.DatabasePackageImpl#getFK()
+		 * @see DatabaseModeling.impl.FKImpl
+		 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getFK()
 		 * @generated
 		 */
 		EClass FK = eINSTANCE.getFK();
@@ -967,4 +966,4 @@ public interface DatabasePackage extends EPackage {
 
 	}
 
-} //DatabasePackage
+} //DatabaseModelingPackage

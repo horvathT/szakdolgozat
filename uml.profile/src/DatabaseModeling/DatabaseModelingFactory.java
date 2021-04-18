@@ -1,6 +1,6 @@
 /**
  */
-package database;
+package DatabaseModeling;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -9,17 +9,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see database.DatabasePackage
+ * @see DatabaseModeling.DatabaseModelingPackage
  * @generated
  */
-public interface DatabaseFactory extends EFactory {
+public interface DatabaseModelingFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	DatabaseFactory eINSTANCE = database.impl.DatabaseFactoryImpl.init();
+	DatabaseModelingFactory eINSTANCE = DatabaseModeling.impl.DatabaseModelingFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Association</em>'.
@@ -73,6 +73,6 @@ public interface DatabaseFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	DatabasePackage getDatabasePackage();
+	DatabaseModelingPackage getDatabaseModelingPackage();
 
-} //DatabaseFactory
+} //DatabaseModelingFactory

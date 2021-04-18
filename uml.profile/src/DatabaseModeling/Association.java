@@ -1,6 +1,6 @@
 /**
  */
-package database;
+package DatabaseModeling;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link database.Association#getForeignConstraintName <em>Foreign Constraint Name</em>}</li>
- *   <li>{@link database.Association#getBase_Association <em>Base Association</em>}</li>
+ *   <li>{@link DatabaseModeling.Association#getForeignConstraintName <em>Foreign Constraint Name</em>}</li>
+ *   <li>{@link DatabaseModeling.Association#getBase_Association <em>Base Association</em>}</li>
  * </ul>
  *
- * @see database.DatabasePackage#getAssociation()
+ * @see DatabaseModeling.DatabaseModelingPackage#getAssociation()
  * @model
  * @generated
  */
@@ -32,14 +32,14 @@ public interface Association extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Foreign Constraint Name</em>' attribute.
 	 * @see #setForeignConstraintName(String)
-	 * @see database.DatabasePackage#getAssociation_ForeignConstraintName()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getAssociation_ForeignConstraintName()
 	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getForeignConstraintName();
 
 	/**
-	 * Sets the value of the '{@link database.Association#getForeignConstraintName <em>Foreign Constraint Name</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.Association#getForeignConstraintName <em>Foreign Constraint Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Foreign Constraint Name</em>' attribute.
@@ -58,14 +58,14 @@ public interface Association extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Base Association</em>' reference.
 	 * @see #setBase_Association(org.eclipse.uml2.uml.Association)
-	 * @see database.DatabasePackage#getAssociation_Base_Association()
+	 * @see DatabaseModeling.DatabaseModelingPackage#getAssociation_Base_Association()
 	 * @model ordered="false"
 	 * @generated
 	 */
 	org.eclipse.uml2.uml.Association getBase_Association();
 
 	/**
-	 * Sets the value of the '{@link database.Association#getBase_Association <em>Base Association</em>}' reference.
+	 * Sets the value of the '{@link DatabaseModeling.Association#getBase_Association <em>Base Association</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Base Association</em>' reference.

@@ -29,47 +29,47 @@
     <details key="INVOCATION_DELEGATES" value="IGNORE"/>
     <details key="VALIDATION_DELEGATES" value="IGNORE"/>
   </genAnnotations>
-  <foreignModel>database.modeling.profile.uml</foreignModel>
-  <genPackages xsi:type="genmodel:GenPackage" prefix="Database" disposableProviderFactory="true"
-      ecorePackage="database.ecore#/">
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="database.ecore#//Association">
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Association/foreignConstraintName"/>
+  <foreignModel>DatabaseModeling.profile.uml</foreignModel>
+  <genPackages xsi:type="genmodel:GenPackage" prefix="DatabaseModeling" disposableProviderFactory="true"
+      ecorePackage="DatabaseModeling.ecore#/">
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="DatabaseModeling.ecore#//Association">
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Association/foreignConstraintName"/>
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//Association/base_Association"/>
+          propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//Association/base_Association"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="database.ecore#//Column">
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="DatabaseModeling.ecore#//Column">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//Column/base_Property"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oracleDataType"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oracleDefaultValue"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oracleLength"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oraclePrecision"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/oracleScale"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlDataType"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlDefaultValue"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlLength"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlPrecision"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Column/mySqlScale"/>
+          propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//Column/base_Property"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/oracleDataType"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/oracleDefaultValue"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/oracleLength"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/oraclePrecision"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/oracleScale"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/mySqlDataType"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/mySqlDefaultValue"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/mySqlLength"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/mySqlPrecision"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/mySqlScale"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="database.ecore#//Table">
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="DatabaseModeling.ecore#//Table">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//Table/base_Interface"/>
+          propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//Table/base_Interface"/>
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//Table/base_Class"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Table/primaryKeyConstraintName"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//Table/dataDefinitionLanguageName"/>
+          propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//Table/base_Class"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Table/primaryKeyConstraintName"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Table/dataDefinitionLanguageName"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="database.ecore#//PK">
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="DatabaseModeling.ecore#//PK">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//PK/base_Property"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//PK/oraclePrimaryKeyConstraint"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//PK/mySqlPrimaryKeyConstraint"/>
+          propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//PK/base_Property"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//PK/oraclePrimaryKeyConstraint"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//PK/mySqlPrimaryKeyConstraint"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="database.ecore#//FK">
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="DatabaseModeling.ecore#//FK">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true" ecoreFeature="ecore:EReference database.ecore#//FK/base_Property"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//FK/oracleForeingKeyConstraintName"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute database.ecore#//FK/mySqlForeignKeyConstraint"/>
+          propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//FK/base_Property"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//FK/oracleForeingKeyConstraintName"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//FK/mySqlForeignKeyConstraint"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

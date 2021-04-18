@@ -1,8 +1,8 @@
 /**
  */
-package database.util;
+package DatabaseModeling.util;
 
-import database.*;
+import DatabaseModeling.*;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -16,17 +16,17 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see database.DatabasePackage
+ * @see DatabaseModeling.DatabaseModelingPackage
  * @generated
  */
-public class DatabaseAdapterFactory extends AdapterFactoryImpl {
+public class DatabaseModelingAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static DatabasePackage modelPackage;
+	protected static DatabaseModelingPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -34,9 +34,9 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DatabaseAdapterFactory() {
+	public DatabaseModelingAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = DatabasePackage.eINSTANCE;
+			modelPackage = DatabaseModelingPackage.eINSTANCE;
 		}
 	}
 
@@ -65,8 +65,8 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DatabaseSwitch<Adapter> modelSwitch =
-		new DatabaseSwitch<Adapter>() {
+	protected DatabaseModelingSwitch<Adapter> modelSwitch =
+		new DatabaseModelingSwitch<Adapter>() {
 			@Override
 			public Adapter caseAssociation(Association object) {
 				return createAssociationAdapter();
@@ -108,13 +108,13 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link database.Association <em>Association</em>}'.
+	 * Creates a new adapter for an object of class '{@link DatabaseModeling.Association <em>Association</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see database.Association
+	 * @see DatabaseModeling.Association
 	 * @generated
 	 */
 	public Adapter createAssociationAdapter() {
@@ -122,13 +122,13 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link database.Column <em>Column</em>}'.
+	 * Creates a new adapter for an object of class '{@link DatabaseModeling.Column <em>Column</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see database.Column
+	 * @see DatabaseModeling.Column
 	 * @generated
 	 */
 	public Adapter createColumnAdapter() {
@@ -136,13 +136,13 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link database.Table <em>Table</em>}'.
+	 * Creates a new adapter for an object of class '{@link DatabaseModeling.Table <em>Table</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see database.Table
+	 * @see DatabaseModeling.Table
 	 * @generated
 	 */
 	public Adapter createTableAdapter() {
@@ -150,13 +150,13 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link database.PK <em>PK</em>}'.
+	 * Creates a new adapter for an object of class '{@link DatabaseModeling.PK <em>PK</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see database.PK
+	 * @see DatabaseModeling.PK
 	 * @generated
 	 */
 	public Adapter createPKAdapter() {
@@ -164,13 +164,13 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link database.FK <em>FK</em>}'.
+	 * Creates a new adapter for an object of class '{@link DatabaseModeling.FK <em>FK</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see database.FK
+	 * @see DatabaseModeling.FK
 	 * @generated
 	 */
 	public Adapter createFKAdapter() {
@@ -189,4 +189,4 @@ public class DatabaseAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //DatabaseAdapterFactory
+} //DatabaseModelingAdapterFactory
