@@ -49,11 +49,13 @@ public class DatabaseModelingView extends ViewPart {
 	
 	public ISelectionListener listener;
 	private Button btnSave;
+
+	public ScrolledComposite scrolledComposite;
 	
 	@Override
 	public void createPartControl(Composite parent) {
 		
-		ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		

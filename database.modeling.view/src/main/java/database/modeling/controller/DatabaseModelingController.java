@@ -4,13 +4,13 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
 
-import database.modeling.model.SqlDataModel;
 import database.modeling.view.DatabaseModelingView;
 import database.modeling.view.util.ColumnUtil;
 import database.modeling.view.util.ProfileUtil;
@@ -46,6 +46,39 @@ public class DatabaseModelingController {
 			}
 		};
 		view.getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(view.listener);
+		
+		view.getSite().getPage().addPartListener(new IPartListener() {
+			
+			@Override
+			public void partOpened(IWorkbenchPart part) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void partDeactivated(IWorkbenchPart part) {
+				if(part.equals(view)) {
+					save();
+				}
+				if (part instanceof DatabaseModelingView) {
+					save();
+				}
+			}
+			
+			@Override
+			public void partClosed(IWorkbenchPart part) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void partBroughtToTop(IWorkbenchPart part) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void partActivated(IWorkbenchPart part) {
+				// TODO Auto-generated method stub
+			}
+		});
 	}
 
 	protected void save() {
@@ -57,14 +90,12 @@ public class DatabaseModelingController {
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				applyProfile();
-				ColumnUtil.applyStereotype(currentPropertySelection);
+				//applyProfile();
 				ColumnUtil.setOracleDataType(currentPropertySelection, view.getSqlTypeCombo().getText());
 				ColumnUtil.setOracleDefaultValue(currentPropertySelection, view.getDefaultValue().getText());
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);
-
 	}
 
 	private void applyProfile() {
