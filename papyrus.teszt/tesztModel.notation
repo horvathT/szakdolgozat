@@ -14,6 +14,10 @@
         <element xmi:type="uml:Property" href="tesztModel.uml#_wgZu0KCIEeu15e1X3ZLfsg"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_wgnKMaCIEeu15e1X3ZLfsg"/>
       </children>
+      <children xmi:type="notation:Shape" xmi:id="_SltnMKFNEeuYm6l98KrnRQ" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="tesztModel.uml#_Si48sKFNEeuYm6l98KrnRQ"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_SltnMaFNEeuYm6l98KrnRQ"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_utSLY6CIEeu15e1X3ZLfsg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_utSLZKCIEeu15e1X3ZLfsg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_utSLZaCIEeu15e1X3ZLfsg"/>

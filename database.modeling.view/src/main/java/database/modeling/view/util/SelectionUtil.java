@@ -98,7 +98,16 @@ public class SelectionUtil {
 		}
 		return null;
 	}
-	
+
+	public static Property getProperty(ISelection selection) {
+		if (isPropertyFromModelEditor(selection)) {
+			return getPropertyFromModelEditor(selection);
+		} else if (isPropertyFromModelExplorer(selection)) {
+			return getPropertyFromModelExplorer(selection);
+		}
+		return null;
+	}
+
 	public static List<Object> getSelection(ISelection selection) {
 	    if (selection instanceof IStructuredSelection) {
 	      IStructuredSelection structuredSelection = (IStructuredSelection) selection;

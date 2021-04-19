@@ -12,6 +12,7 @@ import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
 
+import database.modeling.model.SqlDataModel;
 import database.modeling.view.DatabaseModelingView;
 import database.modeling.view.util.ColumnUtil;
 import database.modeling.view.util.ProfileUtil;
@@ -29,21 +30,11 @@ public class DatabaseModelingController {
 	public void init() {
 		view.listener = new ISelectionListener() {
 			public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-				//TODO implement usable save function
-				
-				if (SelectionUtil.isPropertyFromModelEditor(selection)) {
-
-					updateLatestValidSelectionFromDiagramEditor(selection);
-					updateSelectionFromDiagramEditor(selection);
-
-				} else if (SelectionUtil.isPropertyFromModelExplorer(selection)) {
-
-					updateSelectionFromModelExplorer(selection);
-					updateLatestValidSelectionFromModelExplorer(selection);
-
-				} else {
-					// setContentDescription("Nothing to show");
+				Property property = SelectionUtil.getProperty(selection);
+				if(property != null) {
+					updateSelection(property);
 				}
+				
 			}
 		};
 		view.getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(view.listener);
@@ -86,6 +77,9 @@ public class DatabaseModelingController {
 		if (currentPropertySelection == null) {
 			return;
 		}
+		if(view.isEmpty()) {
+			return;
+		}
 
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(currentPropertySelection);
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
@@ -93,26 +87,15 @@ public class DatabaseModelingController {
 			protected void doExecute() {
 				ProfileUtil.applyPofile(currentPropertySelection);
 				ColumnUtil.setOracleDataType(currentPropertySelection, view.getSqlTypeCombo().getText());
+				SqlDataModel data = view.getData();
 				ColumnUtil.setOracleDefaultValue(currentPropertySelection, view.getDefaultValue().getText());
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);
 	}
 
-	protected void updateSelectionFromDiagramEditor(ISelection selection) {
-		// setContentDescription(SelectionUtil.getPropertyFromModelEditor(selection).getName());
-	}
-
-	protected void updateLatestValidSelectionFromDiagramEditor(ISelection selection) {
-		currentPropertySelection = SelectionUtil.getPropertyFromModelEditor(selection);
-	}
-
-	protected void updateSelectionFromModelExplorer(ISelection selection) {
-		// setContentDescription(SelectionUtil.getPropertyFromModelExplorer(selection).getName());
-	}
-
-	protected void updateLatestValidSelectionFromModelExplorer(ISelection selection) {
-		currentPropertySelection = SelectionUtil.getPropertyFromModelExplorer(selection);
+	protected void updateSelection(Property property) {
+		currentPropertySelection = property;
 	}
 
 }

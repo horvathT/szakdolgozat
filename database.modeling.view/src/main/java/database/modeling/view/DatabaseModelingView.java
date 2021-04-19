@@ -184,7 +184,52 @@ public class DatabaseModelingView extends ViewPart {
 		getReferencedEntity().setText(model.getReferencedEntity());
 		getReferencedProperty().setText(model.getReferencedProperty());
 	}
+	
+	public SqlDataModel getData() {
+		SqlDataModel model = new SqlDataModel();
+		model.setNullable(nullableCheck.getSelection());
+		model.setUnique(uniqueCheck.getSelection());
+		model.setAutoIncrement(autoIncrementCheck.getSelection());
+		model.setPrimaryKey(primaryKeyCheck.getSelection());
+		model.setForeignKey(foreignKeyCheck.getSelection());
+		
+		model.setLength(length.getText());
+		model.setPrecision(precision.getText());
+		model.setScale(scale.getText());
+		model.setDefaultValue(defaultValue.getText());
+		model.setPrimaryKeyConstraintName(primaryKeyConstraintName.getText());
+		model.setForeignKeyConstraintName(foreignKeyConstraintName.getText());
+		
+		model.setSqlType(sqlTypeCombo.getText());
+		model.setReferencedEntity(referencedEntity.getText());
+		model.setReferencedProperty(referencedProperty.getText());
+		return model;
+	}
 
+	public boolean isEmpty() {
+		if (nullableCheck.getSelection() || uniqueCheck.getSelection() || autoIncrementCheck.getSelection()
+				|| primaryKeyCheck.getSelection() || foreignKeyCheck.getSelection()) {
+			return false;
+		}
+		if(!isEmpty(length) || !isEmpty(precision) || !isEmpty(scale) || !isEmpty(defaultValue) ||
+				!isEmpty(primaryKeyConstraintName) || !isEmpty(foreignKeyConstraintName)) {
+			return false;
+		}
+		if(!isEmpty(sqlTypeCombo) || !isEmpty(referencedEntity) || !isEmpty(referencedProperty)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean isEmpty(Text text) {
+		return text.getText().isEmpty();
+	}
+	
+	public boolean isEmpty(Combo combo) {
+		return combo.getText().isEmpty();
+	}
+	
 	private void primaryKeyCannotBeNullable(Button btnPrimarykey, Button btnNullable) {
 		btnPrimarykey.addSelectionListener(new SelectionAdapter() {
 
