@@ -6,7 +6,7 @@ import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
 public class ColumnUtil {
-	private final static String STEREOTYPE_QUALIFIED_NAME = "database::Column";
+	private final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::Column";
 
 	public static boolean hasStereotype(Property property) {
 		if (property == null) {

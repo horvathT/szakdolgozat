@@ -1,5 +1,6 @@
 package database.modeling.controller;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -59,9 +60,9 @@ public class DatabaseModelingController {
 				if(part.equals(view)) {
 					save();
 				}
-				if (part instanceof DatabaseModelingView) {
-					save();
-				}
+//				if (part instanceof DatabaseModelingView) {
+//					save();
+//				}
 			}
 			
 			@Override
@@ -90,20 +91,12 @@ public class DatabaseModelingController {
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				//applyProfile();
+				ProfileUtil.applyPofile(currentPropertySelection);
 				ColumnUtil.setOracleDataType(currentPropertySelection, view.getSqlTypeCombo().getText());
 				ColumnUtil.setOracleDefaultValue(currentPropertySelection, view.getDefaultValue().getText());
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);
-	}
-
-	private void applyProfile() {
-		Profile profile = ProfileUtil.retrieveProfile();
-		Model umlModel = currentPropertySelection.getModel();
-		if (!umlModel.isProfileApplied(profile)) {
-			umlModel.applyProfile(profile);
-		}
 	}
 
 	protected void updateSelectionFromDiagramEditor(ISelection selection) {
