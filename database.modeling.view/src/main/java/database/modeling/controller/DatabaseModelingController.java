@@ -96,6 +96,7 @@ public class DatabaseModelingController {
 
 	protected void updateSelection(Property property) {
 		currentPropertySelection = property;
+		view.getLblNewLabel().setText(currentPropertySelection.getName());
 	}
 
 }

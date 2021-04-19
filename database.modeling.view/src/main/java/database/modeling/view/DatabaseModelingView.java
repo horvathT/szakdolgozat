@@ -23,6 +23,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 
 public class DatabaseModelingView extends ViewPart {
 	public DatabaseModelingView() {
@@ -52,6 +54,10 @@ public class DatabaseModelingView extends ViewPart {
 
 	public ScrolledComposite scrolledComposite;
 	
+	private Label lblNewLabel;
+	private ToolBar toolBar;
+	private ToolItem tltmDropdownItem;
+	
 	@Override
 	public void createPartControl(Composite parent) {
 		
@@ -61,6 +67,20 @@ public class DatabaseModelingView extends ViewPart {
 		
 		Composite container = new Composite(scrolledComposite, SWT.NONE);
 		container.setLayout(new GridLayout(4, false));
+		
+		lblNewLabel = new Label(container, SWT.NONE);
+		GridData gd_lblNewLabel = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+		gd_lblNewLabel.widthHint = 152;
+		lblNewLabel.setLayoutData(gd_lblNewLabel);
+		lblNewLabel.setText("Not a valid selection");
+		new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
+		
+		toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
+		toolBar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		
+		tltmDropdownItem = new ToolItem(toolBar, SWT.DROP_DOWN);
+		tltmDropdownItem.setText("DropDown Item");
 		
 		Label lblSqlType = new Label(container, SWT.NONE);
 		lblSqlType.setText("SQL type");
@@ -429,6 +449,46 @@ public class DatabaseModelingView extends ViewPart {
 
 	public void setListener(ISelectionListener listener) {
 		this.listener = listener;
+	}
+
+	public Button getBtnSave() {
+		return btnSave;
+	}
+
+	public void setBtnSave(Button btnSave) {
+		this.btnSave = btnSave;
+	}
+
+	public ScrolledComposite getScrolledComposite() {
+		return scrolledComposite;
+	}
+
+	public void setScrolledComposite(ScrolledComposite scrolledComposite) {
+		this.scrolledComposite = scrolledComposite;
+	}
+
+	public Label getLblNewLabel() {
+		return lblNewLabel;
+	}
+
+	public void setLblNewLabel(Label lblNewLabel) {
+		this.lblNewLabel = lblNewLabel;
+	}
+
+	public ToolBar getToolBar() {
+		return toolBar;
+	}
+
+	public void setToolBar(ToolBar toolBar) {
+		this.toolBar = toolBar;
+	}
+
+	public ToolItem getTltmDropdownItem() {
+		return tltmDropdownItem;
+	}
+
+	public void setTltmDropdownItem(ToolItem tltmDropdownItem) {
+		this.tltmDropdownItem = tltmDropdownItem;
 	}
 	
 	
