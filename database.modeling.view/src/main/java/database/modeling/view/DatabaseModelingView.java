@@ -82,7 +82,6 @@ public class DatabaseModelingView extends ViewPart {
 		databaseChanger = new ToolItem(toolBar, SWT.DROP_DOWN);
 		databaseChanger.setText("Database");
 		
-		
 		Label lblSqlType = new Label(container, SWT.NONE);
 		lblSqlType.setText("SQL type");
 		

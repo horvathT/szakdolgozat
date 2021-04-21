@@ -4,6 +4,7 @@ package database.modeling.view.handler;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.papyrus.infra.ui.util.EditorHelper;
 import org.eclipse.papyrus.infra.ui.util.EditorUtils;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IViewPart;
@@ -21,11 +22,13 @@ import org.eclipse.e4.core.di.annotations.CanExecute;
 
 public class DatabaseModelingViewHandler {
 	
+	private static final String DATABASE_MODELING_VIEW_ID = "database.modeling.view.databasemodelingview";
+
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
+	public void execute() {
 		try {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			IViewPart showView = page.showView("database.modeling.view.databasemodelingview", null, IWorkbenchPage.VIEW_VISIBLE);
+			IViewPart showView = page.showView(DATABASE_MODELING_VIEW_ID, null, IWorkbenchPage.VIEW_VISIBLE);
 			DatabaseModelingView dbmv = (DatabaseModelingView) showView;
 			DatabaseModelingController dbmc = new DatabaseModelingController(dbmv);
 			dbmc.init();
@@ -41,7 +44,11 @@ public class DatabaseModelingViewHandler {
 
 	@CanExecute
 	public boolean canExecute() {
-		// TODO work only on uml elements WORK ONLY ON PROPERTIES
+		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IViewPart view = activePage.findView(DATABASE_MODELING_VIEW_ID);
+		if(view != null) {
+			return false;
+		}
 		return true;
 	}
 

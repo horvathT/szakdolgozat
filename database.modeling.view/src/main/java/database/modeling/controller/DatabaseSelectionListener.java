@@ -61,5 +61,8 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 	public void init() {
 		List<String> databases = dbUtil.getDatabases();
 		add(databases);
+		String deafultDb = databases.get(0);
+		dropdown.setText(deafultDb);
+		combo.setItems(dbUtil.getDatabaseTypeMap().get(deafultDb));
 	}
 }
