@@ -1,15 +1,14 @@
 package database.modeling.controller;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.uml2.uml.Model;
-import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
 
 import database.modeling.model.SqlDataModel;
@@ -28,17 +27,20 @@ public class DatabaseModelingController {
 	}
 
 	public void init() {
-		view.listener = new ISelectionListener() {
-			public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-				Property property = SelectionUtil.getProperty(selection);
-				if(property != null) {
-					updateSelection(property);
-				}
-				
-			}
-		};
-		view.getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(view.listener);
-		
+		initSelectionChangeListener();
+		initPartListener();
+		initDatabaseChangeListener();
+	}
+
+	private void initDatabaseChangeListener() {
+		ToolItem databaseChanger = view.getDatabaseChanger();
+		Combo sqlTypeCombo = view.getSqlTypeCombo();
+		DatabaseSelectionListener dbsl = new DatabaseSelectionListener(databaseChanger, sqlTypeCombo);
+		dbsl.init();
+		databaseChanger.addSelectionListener(dbsl);
+	}
+
+	private void initPartListener() {
 		view.getSite().getPage().addPartListener(new IPartListener() {
 			
 			@Override
@@ -71,6 +73,26 @@ public class DatabaseModelingController {
 				// TODO Auto-generated method stub
 			}
 		});
+	}
+
+	private void initSelectionChangeListener() {
+		ISelectionListener listener = view.getListener();
+		listener = new ISelectionListener() {
+			public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
+				Property property = SelectionUtil.getProperty(selection);
+				if(property != null) {
+					updateSelection(property);
+					updateDataInView(property);
+				}
+				
+			}
+		};
+		view.getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(listener);
+	}
+
+	protected void updateDataInView(Property property) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	protected void save() {

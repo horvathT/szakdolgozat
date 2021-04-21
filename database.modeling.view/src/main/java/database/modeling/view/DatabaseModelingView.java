@@ -49,14 +49,14 @@ public class DatabaseModelingView extends ViewPart {
 	private Button primaryKeyCheck;
 	private Button foreignKeyCheck;
 	
-	public ISelectionListener listener;
+	private ISelectionListener listener;
 	private Button btnSave;
 
-	public ScrolledComposite scrolledComposite;
+	private ScrolledComposite scrolledComposite;
 	
 	private Label lblNewLabel;
 	private ToolBar toolBar;
-	private ToolItem tltmDropdownItem;
+	private ToolItem databaseChanger;
 	
 	@Override
 	public void createPartControl(Composite parent) {
@@ -79,8 +79,9 @@ public class DatabaseModelingView extends ViewPart {
 		toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
 		toolBar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		
-		tltmDropdownItem = new ToolItem(toolBar, SWT.DROP_DOWN);
-		tltmDropdownItem.setText("DropDown Item");
+		databaseChanger = new ToolItem(toolBar, SWT.DROP_DOWN);
+		databaseChanger.setText("Database");
+		
 		
 		Label lblSqlType = new Label(container, SWT.NONE);
 		lblSqlType.setText("SQL type");
@@ -112,6 +113,15 @@ public class DatabaseModelingView extends ViewPart {
 		
 		defaultValue = new Text(container, SWT.BORDER);
 		defaultValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		
+		btnSave = new Button(container, SWT.NONE);
+		GridData gd_btnSave = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_btnSave.widthHint = 104;
+		btnSave.setLayoutData(gd_btnSave);
+		btnSave.setText("Save as Datatype");
+		new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
 		
 		nullableCheck = new Button(container, SWT.CHECK);
 		nullableCheck.setText("Nullable");
@@ -167,12 +177,6 @@ public class DatabaseModelingView extends ViewPart {
 		
 		foreignKeyCheckBoxListener(foreignKeyCheck, referencedEntity, referencedProperty);
 		primaryKeyCannotBeNullable(primaryKeyCheck, nullableCheck);
-		
-		btnSave = new Button(container, SWT.NONE);
-		GridData gd_btnSave = new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1);
-		gd_btnSave.widthHint = 104;
-		btnSave.setLayoutData(gd_btnSave);
-		btnSave.setText("Save as Datatype");
 		
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
@@ -484,11 +488,19 @@ public class DatabaseModelingView extends ViewPart {
 	}
 
 	public ToolItem getTltmDropdownItem() {
-		return tltmDropdownItem;
+		return databaseChanger;
 	}
 
 	public void setTltmDropdownItem(ToolItem tltmDropdownItem) {
-		this.tltmDropdownItem = tltmDropdownItem;
+		this.databaseChanger = tltmDropdownItem;
+	}
+
+	public ToolItem getDatabaseChanger() {
+		return databaseChanger;
+	}
+
+	public void setDatabaseChanger(ToolItem databaseChanger) {
+		this.databaseChanger = databaseChanger;
 	}
 	
 	

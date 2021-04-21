@@ -1,19 +1,19 @@
 package database.modeling.view.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DatabaseTypesUtil {
 	
-	private Map<String, String[]> databaseMap = new HashMap<>();
+	private Map<String, String[]> databaseTypeMap = new HashMap<>();
+	private List<String> databases = new ArrayList<String>(Arrays.asList("Oracle", "MySQL"));
 	
-	public Map<String, String[]> getDatabaseMap() {
-		return databaseMap;
-	}
-
 	public DatabaseTypesUtil(){
-		databaseMap.put("Oracle", oracleTypes);
-		databaseMap.put("MySQL", mySqlTypes);
+		databaseTypeMap.put("Oracle", oracleTypes);
+		databaseTypeMap.put("MySQL", mySqlTypes);
 	}
 	
 	private final String[] oracleTypes = new String[] {
@@ -76,4 +76,12 @@ public class DatabaseTypesUtil {
 			"ENUM"
 			};
 	
+	public Map<String, String[]> getDatabaseTypeMap() {
+		return databaseTypeMap;
+	}
+
+	public List<String> getDatabases() {
+		return databases;
+	}
+
 }
