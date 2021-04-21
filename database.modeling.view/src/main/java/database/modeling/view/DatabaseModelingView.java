@@ -54,7 +54,7 @@ public class DatabaseModelingView extends ViewPart {
 
 	private ScrolledComposite scrolledComposite;
 	
-	private Label lblNewLabel;
+	private Label currentSelectionLabel;
 	private ToolBar toolBar;
 	private ToolItem databaseChanger;
 	
@@ -68,11 +68,11 @@ public class DatabaseModelingView extends ViewPart {
 		Composite container = new Composite(scrolledComposite, SWT.NONE);
 		container.setLayout(new GridLayout(4, false));
 		
-		lblNewLabel = new Label(container, SWT.NONE);
+		currentSelectionLabel = new Label(container, SWT.NONE);
 		GridData gd_lblNewLabel = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
 		gd_lblNewLabel.widthHint = 152;
-		lblNewLabel.setLayoutData(gd_lblNewLabel);
-		lblNewLabel.setText("Not a valid selection");
+		currentSelectionLabel.setLayoutData(gd_lblNewLabel);
+		currentSelectionLabel.setText("Not a valid selection");
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
 		
@@ -471,11 +471,11 @@ public class DatabaseModelingView extends ViewPart {
 	}
 
 	public Label getLblNewLabel() {
-		return lblNewLabel;
+		return currentSelectionLabel;
 	}
 
 	public void setLblNewLabel(Label lblNewLabel) {
-		this.lblNewLabel = lblNewLabel;
+		this.currentSelectionLabel = lblNewLabel;
 	}
 
 	public ToolBar getToolBar() {

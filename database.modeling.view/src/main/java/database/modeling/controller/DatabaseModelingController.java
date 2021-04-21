@@ -11,6 +11,7 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.uml2.uml.Property;
 
+import database.modeling.model.DataTransformer;
 import database.modeling.model.SqlDataModel;
 import database.modeling.view.DatabaseModelingView;
 import database.modeling.view.util.ColumnUtil;
@@ -21,9 +22,13 @@ public class DatabaseModelingController {
 	private Property currentPropertySelection = null;
 
 	private DatabaseModelingView view;
+	private DataTransformer dataTransf = new DataTransformer();
+
+	private ToolItem databaseChanger;
 
 	public DatabaseModelingController(DatabaseModelingView view) {
 		this.view = view;
+		
 	}
 
 	public void init() {
@@ -33,7 +38,7 @@ public class DatabaseModelingController {
 	}
 
 	private void initDatabaseChangeListener() {
-		ToolItem databaseChanger = view.getDatabaseChanger();
+		databaseChanger = view.getDatabaseChanger();
 		Combo sqlTypeCombo = view.getSqlTypeCombo();
 		DatabaseSelectionListener dbsl = new DatabaseSelectionListener(databaseChanger, sqlTypeCombo);
 		dbsl.init();
@@ -91,8 +96,8 @@ public class DatabaseModelingController {
 	}
 
 	protected void updateDataInView(Property property) {
-		// TODO Auto-generated method stub
-		
+		SqlDataModel dataModel = dataTransf.propertyToSqlDataModel(property, databaseChanger.getText()); 
+		view.update(dataModel);
 	}
 
 	protected void save() {
@@ -108,6 +113,7 @@ public class DatabaseModelingController {
 			@Override
 			protected void doExecute() {
 				ProfileUtil.applyPofile(currentPropertySelection);
+				
 				ColumnUtil.setOracleDataType(currentPropertySelection, view.getSqlTypeCombo().getText());
 				SqlDataModel data = view.getData();
 				ColumnUtil.setOracleDefaultValue(currentPropertySelection, view.getDefaultValue().getText());

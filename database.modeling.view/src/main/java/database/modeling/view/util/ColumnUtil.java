@@ -6,6 +6,8 @@ import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
 public class ColumnUtil {
+	private static final String DATA_TYPE = "dataType";
+	private static final String DEFAULT_VALUE = "defaultValue";
 	private final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::Column";
 
 	public static boolean hasStereotype(Property property) {
@@ -51,11 +53,11 @@ public class ColumnUtil {
 			Stereotype applicableStereotype =
 			          property.getApplicableStereotype(STEREOTYPE_QUALIFIED_NAME);
 			if(hasStereotype(property)) {
-				property.setValue(applicableStereotype, "oracleDataType", data);
+				property.setValue(applicableStereotype, DATA_TYPE, data);
 			}else {
 				if(applicableStereotype != null) {
 					applyStereotype(property);
-					property.setValue(applicableStereotype, "oracleDataType", data);
+					property.setValue(applicableStereotype, DATA_TYPE, data);
 				}
 			}
 		}
@@ -79,11 +81,11 @@ public class ColumnUtil {
 			Stereotype applicableStereotype =
 			          property.getApplicableStereotype(STEREOTYPE_QUALIFIED_NAME);
 			if(hasStereotype(property)) {
-				property.setValue(applicableStereotype, "oracleDefaultValue", data);
+				property.setValue(applicableStereotype, DEFAULT_VALUE, data);
 			}else {
 				if(applicableStereotype != null) {
 					applyStereotype(property);
-					property.setValue(applicableStereotype, "oracleDefaultValue", data);
+					property.setValue(applicableStereotype, DEFAULT_VALUE, data);
 				}
 			}
 		}
