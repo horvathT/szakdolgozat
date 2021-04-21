@@ -2,21 +2,13 @@
 package database.modeling.view.handler;
 
 import org.eclipse.e4.core.di.annotations.Execute;
-import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.papyrus.infra.ui.util.EditorHelper;
-import org.eclipse.papyrus.infra.ui.util.EditorUtils;
-import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import database.modeling.controller.DatabaseModelingController;
-import database.modeling.model.SqlDataModel;
 import database.modeling.view.DatabaseModelingView;
-
-import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.CanExecute;
 
