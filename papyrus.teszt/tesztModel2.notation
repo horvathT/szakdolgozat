@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/gmfdiag/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_CqW5YKOgEeuxKoQeR7RIYA" type="PapyrusUMLClassDiagram" name="NewClassDiagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_DfyskKOgEeuxKoQeR7RIYA" type="Class_Shape">
+    <children xmi:type="notation:DecorationNode" xmi:id="_Df2-AKOgEeuxKoQeR7RIYA" type="Class_NameLabel"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_Df2-AaOgEeuxKoQeR7RIYA" type="Class_FloatingNameLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Df2-AqOgEeuxKoQeR7RIYA" y="15"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_Df2-A6OgEeuxKoQeR7RIYA" type="Class_AttributeCompartment">
+      <children xmi:type="notation:Shape" xmi:id="_EEwa0KOgEeuxKoQeR7RIYA" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="tesztModel2.uml#_EDOw0KOgEeuxKoQeR7RIYA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EEwa0aOgEeuxKoQeR7RIYA"/>
+      </children>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_Df2-BKOgEeuxKoQeR7RIYA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Df2-BaOgEeuxKoQeR7RIYA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Df2-BqOgEeuxKoQeR7RIYA"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Df2-B6OgEeuxKoQeR7RIYA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_Df2-CKOgEeuxKoQeR7RIYA" type="Class_OperationCompartment">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_Df2-CaOgEeuxKoQeR7RIYA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Df2-CqOgEeuxKoQeR7RIYA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Df2-C6OgEeuxKoQeR7RIYA"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Df2-DKOgEeuxKoQeR7RIYA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_Df2-DaOgEeuxKoQeR7RIYA" type="Class_NestedClassifierCompartment">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_Df2-DqOgEeuxKoQeR7RIYA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Df2-D6OgEeuxKoQeR7RIYA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Df2-EKOgEeuxKoQeR7RIYA"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Df2-EaOgEeuxKoQeR7RIYA"/>
+    </children>
+    <element xmi:type="uml:Class" href="tesztModel2.uml#_DfntcKOgEeuxKoQeR7RIYA"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DfyskaOgEeuxKoQeR7RIYA" x="200" y="100"/>
+  </children>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_CqW5YaOgEeuxKoQeR7RIYA" name="diagram_compatibility_version" stringValue="1.4.0"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_CqW5YqOgEeuxKoQeR7RIYA"/>
+  <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_CqW5Y6OgEeuxKoQeR7RIYA" diagramKindId="org.eclipse.papyrus.uml.diagram.class">
+    <owner xmi:type="uml:Model" href="tesztModel2.uml#_AoMNUKOgEeuxKoQeR7RIYA"/>
+  </styles>
+  <element xmi:type="uml:Model" href="tesztModel2.uml#_AoMNUKOgEeuxKoQeR7RIYA"/>
+</notation:Diagram>

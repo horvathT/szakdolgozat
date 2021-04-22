@@ -7,6 +7,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.uml2.uml.Property;
@@ -331,6 +332,11 @@ public class DatabaseModelingView extends ViewPart {
 	}
 	
 	public void dispose() {
+		if(listener != null) {
+			ISelectionService selectionService = getSite().getWorkbenchWindow().getSelectionService();
+			selectionService.removeSelectionListener(listener);
+			listener = null;
+		}
 		super.dispose();
 	}
 

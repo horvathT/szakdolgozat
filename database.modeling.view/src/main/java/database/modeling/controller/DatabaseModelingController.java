@@ -28,7 +28,6 @@ public class DatabaseModelingController {
 
 	public DatabaseModelingController(DatabaseModelingView view) {
 		this.view = view;
-		
 	}
 
 	public void init() {
@@ -83,9 +82,10 @@ public class DatabaseModelingController {
 	}
 
 	private void initSelectionChangeListener() {
-		ISelectionListener listener = view.getListener();
-		listener = new ISelectionListener() {
+		ISelectionListener listener = new ISelectionListener() {
 			public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
+				if(view == null) {
+				}
 				Property property = SelectionUtil.getProperty(selection);
 				if(property != null) {
 					updateSelection(property);
@@ -94,6 +94,7 @@ public class DatabaseModelingController {
 				
 			}
 		};
+		view.setListener(listener);
 		view.getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(listener);
 	}
 
@@ -111,6 +112,9 @@ public class DatabaseModelingController {
 		}
 
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(currentPropertySelection);
+		if(editingDomain == null) {
+			return;
+		}
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {

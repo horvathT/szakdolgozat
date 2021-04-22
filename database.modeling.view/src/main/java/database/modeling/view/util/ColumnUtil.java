@@ -39,7 +39,7 @@ public class ColumnUtil {
 	    for (EObject edt : property.getStereotypeApplications()) {
 	      if (edt instanceof Column) {
 	        Column prop = (Column) edt;
-	        String dDlName = prop.getOracleDataType();
+	        String dDlName = prop.getDataType();
 	        if (dDlName != null && !dDlName.isEmpty()) {
 	          return dDlName;
 	        }
@@ -67,7 +67,7 @@ public class ColumnUtil {
 	    for (EObject edt : property.getStereotypeApplications()) {
 	      if (edt instanceof Column) {
 	        Column prop = (Column) edt;
-	        String dDlName = prop.getOracleDefaultValue();
+	        String dDlName = prop.getDefaultValue();
 	        if (dDlName != null && !dDlName.isEmpty()) {
 	          return dDlName;
 	        }
