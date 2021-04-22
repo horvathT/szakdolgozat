@@ -66,21 +66,9 @@ public class DatabaseModelingSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case DatabaseModelingPackage.ASSOCIATION: {
-				Association association = (Association)theEObject;
-				T result = caseAssociation(association);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case DatabaseModelingPackage.COLUMN: {
 				Column column = (Column)theEObject;
 				T result = caseColumn(column);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DatabaseModelingPackage.TABLE: {
-				Table table = (Table)theEObject;
-				T result = caseTable(table);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -101,21 +89,6 @@ public class DatabaseModelingSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssociation(Association object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Column</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -127,21 +100,6 @@ public class DatabaseModelingSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseColumn(Column object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Table</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Table</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTable(Table object) {
 		return null;
 	}
 

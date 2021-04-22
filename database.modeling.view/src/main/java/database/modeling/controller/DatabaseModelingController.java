@@ -65,7 +65,9 @@ public class DatabaseModelingController {
 			
 			@Override
 			public void partClosed(IWorkbenchPart part) {
-				// TODO Auto-generated method stub
+				if(part.equals(view)) {
+					save();
+				}
 			}
 			
 			@Override
@@ -96,8 +98,8 @@ public class DatabaseModelingController {
 	}
 
 	protected void updateDataInView(Property property) {
-		SqlDataModel dataModel = dataTransf.propertyToSqlDataModel(property, databaseChanger.getText()); 
-		view.update(dataModel);
+		//SqlDataModel dataModel = dataTransf.propertyToSqlDataModel(property, databaseChanger.getText()); 
+		//view.update(dataModel);
 	}
 
 	protected void save() {

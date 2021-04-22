@@ -56,9 +56,7 @@ public class DatabaseModelingFactoryImpl extends EFactoryImpl implements Databas
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DatabaseModelingPackage.ASSOCIATION: return createAssociation();
 			case DatabaseModelingPackage.COLUMN: return createColumn();
-			case DatabaseModelingPackage.TABLE: return createTable();
 			case DatabaseModelingPackage.PK: return createPK();
 			case DatabaseModelingPackage.FK: return createFK();
 			default:
@@ -71,29 +69,9 @@ public class DatabaseModelingFactoryImpl extends EFactoryImpl implements Databas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Association createAssociation() {
-		AssociationImpl association = new AssociationImpl();
-		return association;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Column createColumn() {
 		ColumnImpl column = new ColumnImpl();
 		return column;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Table createTable() {
-		TableImpl table = new TableImpl();
-		return table;
 	}
 
 	/**

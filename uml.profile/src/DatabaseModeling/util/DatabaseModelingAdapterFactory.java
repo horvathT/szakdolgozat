@@ -68,16 +68,8 @@ public class DatabaseModelingAdapterFactory extends AdapterFactoryImpl {
 	protected DatabaseModelingSwitch<Adapter> modelSwitch =
 		new DatabaseModelingSwitch<Adapter>() {
 			@Override
-			public Adapter caseAssociation(Association object) {
-				return createAssociationAdapter();
-			}
-			@Override
 			public Adapter caseColumn(Column object) {
 				return createColumnAdapter();
-			}
-			@Override
-			public Adapter caseTable(Table object) {
-				return createTableAdapter();
 			}
 			@Override
 			public Adapter casePK(PK object) {
@@ -108,20 +100,6 @@ public class DatabaseModelingAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link DatabaseModeling.Association <em>Association</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see DatabaseModeling.Association
-	 * @generated
-	 */
-	public Adapter createAssociationAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link DatabaseModeling.Column <em>Column</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -132,20 +110,6 @@ public class DatabaseModelingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createColumnAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link DatabaseModeling.Table <em>Table</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see DatabaseModeling.Table
-	 * @generated
-	 */
-	public Adapter createTableAdapter() {
 		return null;
 	}
 

@@ -24,8 +24,7 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link DatabaseModeling.impl.FKImpl#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link DatabaseModeling.impl.FKImpl#getOracleForeingKeyConstraintName <em>Oracle Foreing Key Constraint Name</em>}</li>
- *   <li>{@link DatabaseModeling.impl.FKImpl#getMySqlForeignKeyConstraint <em>My Sql Foreign Key Constraint</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.FKImpl#getForeignKeyConstraint <em>Foreign Key Constraint</em>}</li>
  * </ul>
  *
  * @generated
@@ -42,44 +41,24 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	protected Property base_Property;
 
 	/**
-	 * The default value of the '{@link #getOracleForeingKeyConstraintName() <em>Oracle Foreing Key Constraint Name</em>}' attribute.
+	 * The default value of the '{@link #getForeignKeyConstraint() <em>Foreign Key Constraint</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOracleForeingKeyConstraintName()
+	 * @see #getForeignKeyConstraint()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ORACLE_FOREING_KEY_CONSTRAINT_NAME_EDEFAULT = null;
+	protected static final String FOREIGN_KEY_CONSTRAINT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOracleForeingKeyConstraintName() <em>Oracle Foreing Key Constraint Name</em>}' attribute.
+	 * The cached value of the '{@link #getForeignKeyConstraint() <em>Foreign Key Constraint</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOracleForeingKeyConstraintName()
+	 * @see #getForeignKeyConstraint()
 	 * @generated
 	 * @ordered
 	 */
-	protected String oracleForeingKeyConstraintName = ORACLE_FOREING_KEY_CONSTRAINT_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getMySqlForeignKeyConstraint() <em>My Sql Foreign Key Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMySqlForeignKeyConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String MY_SQL_FOREIGN_KEY_CONSTRAINT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getMySqlForeignKeyConstraint() <em>My Sql Foreign Key Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMySqlForeignKeyConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected String mySqlForeignKeyConstraint = MY_SQL_FOREIGN_KEY_CONSTRAINT_EDEFAULT;
+	protected String foreignKeyConstraint = FOREIGN_KEY_CONSTRAINT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -143,8 +122,8 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getOracleForeingKeyConstraintName() {
-		return oracleForeingKeyConstraintName;
+	public String getForeignKeyConstraint() {
+		return foreignKeyConstraint;
 	}
 
 	/**
@@ -152,32 +131,11 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOracleForeingKeyConstraintName(String newOracleForeingKeyConstraintName) {
-		String oldOracleForeingKeyConstraintName = oracleForeingKeyConstraintName;
-		oracleForeingKeyConstraintName = newOracleForeingKeyConstraintName;
+	public void setForeignKeyConstraint(String newForeignKeyConstraint) {
+		String oldForeignKeyConstraint = foreignKeyConstraint;
+		foreignKeyConstraint = newForeignKeyConstraint;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.FK__ORACLE_FOREING_KEY_CONSTRAINT_NAME, oldOracleForeingKeyConstraintName, oracleForeingKeyConstraintName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getMySqlForeignKeyConstraint() {
-		return mySqlForeignKeyConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMySqlForeignKeyConstraint(String newMySqlForeignKeyConstraint) {
-		String oldMySqlForeignKeyConstraint = mySqlForeignKeyConstraint;
-		mySqlForeignKeyConstraint = newMySqlForeignKeyConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.FK__MY_SQL_FOREIGN_KEY_CONSTRAINT, oldMySqlForeignKeyConstraint, mySqlForeignKeyConstraint));
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT, oldForeignKeyConstraint, foreignKeyConstraint));
 	}
 
 	/**
@@ -191,10 +149,8 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 			case DatabaseModelingPackage.FK__BASE_PROPERTY:
 				if (resolve) return getBase_Property();
 				return basicGetBase_Property();
-			case DatabaseModelingPackage.FK__ORACLE_FOREING_KEY_CONSTRAINT_NAME:
-				return getOracleForeingKeyConstraintName();
-			case DatabaseModelingPackage.FK__MY_SQL_FOREIGN_KEY_CONSTRAINT:
-				return getMySqlForeignKeyConstraint();
+			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
+				return getForeignKeyConstraint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,11 +166,8 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 			case DatabaseModelingPackage.FK__BASE_PROPERTY:
 				setBase_Property((Property)newValue);
 				return;
-			case DatabaseModelingPackage.FK__ORACLE_FOREING_KEY_CONSTRAINT_NAME:
-				setOracleForeingKeyConstraintName((String)newValue);
-				return;
-			case DatabaseModelingPackage.FK__MY_SQL_FOREIGN_KEY_CONSTRAINT:
-				setMySqlForeignKeyConstraint((String)newValue);
+			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
+				setForeignKeyConstraint((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -231,11 +184,8 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 			case DatabaseModelingPackage.FK__BASE_PROPERTY:
 				setBase_Property((Property)null);
 				return;
-			case DatabaseModelingPackage.FK__ORACLE_FOREING_KEY_CONSTRAINT_NAME:
-				setOracleForeingKeyConstraintName(ORACLE_FOREING_KEY_CONSTRAINT_NAME_EDEFAULT);
-				return;
-			case DatabaseModelingPackage.FK__MY_SQL_FOREIGN_KEY_CONSTRAINT:
-				setMySqlForeignKeyConstraint(MY_SQL_FOREIGN_KEY_CONSTRAINT_EDEFAULT);
+			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
+				setForeignKeyConstraint(FOREIGN_KEY_CONSTRAINT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -251,10 +201,8 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 		switch (featureID) {
 			case DatabaseModelingPackage.FK__BASE_PROPERTY:
 				return base_Property != null;
-			case DatabaseModelingPackage.FK__ORACLE_FOREING_KEY_CONSTRAINT_NAME:
-				return ORACLE_FOREING_KEY_CONSTRAINT_NAME_EDEFAULT == null ? oracleForeingKeyConstraintName != null : !ORACLE_FOREING_KEY_CONSTRAINT_NAME_EDEFAULT.equals(oracleForeingKeyConstraintName);
-			case DatabaseModelingPackage.FK__MY_SQL_FOREIGN_KEY_CONSTRAINT:
-				return MY_SQL_FOREIGN_KEY_CONSTRAINT_EDEFAULT == null ? mySqlForeignKeyConstraint != null : !MY_SQL_FOREIGN_KEY_CONSTRAINT_EDEFAULT.equals(mySqlForeignKeyConstraint);
+			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
+				return FOREIGN_KEY_CONSTRAINT_EDEFAULT == null ? foreignKeyConstraint != null : !FOREIGN_KEY_CONSTRAINT_EDEFAULT.equals(foreignKeyConstraint);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -269,10 +217,8 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (oracleForeingKeyConstraintName: ");
-		result.append(oracleForeingKeyConstraintName);
-		result.append(", mySqlForeignKeyConstraint: ");
-		result.append(mySqlForeignKeyConstraint);
+		result.append(" (foreignKeyConstraint: ");
+		result.append(foreignKeyConstraint);
 		result.append(')');
 		return result.toString();
 	}

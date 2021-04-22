@@ -22,15 +22,6 @@ public interface DatabaseModelingFactory extends EFactory {
 	DatabaseModelingFactory eINSTANCE = DatabaseModeling.impl.DatabaseModelingFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Association</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Association</em>'.
-	 * @generated
-	 */
-	Association createAssociation();
-
-	/**
 	 * Returns a new object of class '<em>Column</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,15 +29,6 @@ public interface DatabaseModelingFactory extends EFactory {
 	 * @generated
 	 */
 	Column createColumn();
-
-	/**
-	 * Returns a new object of class '<em>Table</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Table</em>'.
-	 * @generated
-	 */
-	Table createTable();
 
 	/**
 	 * Returns a new object of class '<em>PK</em>'.

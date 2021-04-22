@@ -18,6 +18,22 @@
         <element xmi:type="uml:Property" href="tesztModel.uml#_Si48sKFNEeuYm6l98KrnRQ"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_SltnMaFNEeuYm6l98KrnRQ"/>
       </children>
+      <children xmi:type="notation:Shape" xmi:id="_So9A4KOcEeuqGYISv7TMGA" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="tesztModel.uml#_Sl2CgKOcEeuqGYISv7TMGA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_So9A4aOcEeuqGYISv7TMGA"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TYTaMKOcEeuqGYISv7TMGA" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="tesztModel.uml#_TX38YKOcEeuqGYISv7TMGA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TYTaMaOcEeuqGYISv7TMGA"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_T77EoKOcEeuqGYISv7TMGA" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="tesztModel.uml#_T7iqIKOcEeuqGYISv7TMGA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_T77EoaOcEeuqGYISv7TMGA"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_UWMl0KOcEeuqGYISv7TMGA" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="tesztModel.uml#_UV3OoKOcEeuqGYISv7TMGA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_UWMl0aOcEeuqGYISv7TMGA"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_utSLY6CIEeu15e1X3ZLfsg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_utSLZKCIEeu15e1X3ZLfsg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_utSLZaCIEeu15e1X3ZLfsg"/>
@@ -36,7 +52,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_utSLcKCIEeu15e1X3ZLfsg"/>
     </children>
     <element xmi:type="uml:Class" href="tesztModel.uml#_ur65cKCIEeu15e1X3ZLfsg"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_utQWMaCIEeu15e1X3ZLfsg" x="160" y="80" width="381" height="141"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_utQWMaCIEeu15e1X3ZLfsg" x="160" y="80" width="361" height="221"/>
   </children>
   <styles xmi:type="notation:StringValueStyle" xmi:id="_tFDpUaCIEeu15e1X3ZLfsg" name="diagram_compatibility_version" stringValue="1.4.0"/>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_tFDpUqCIEeu15e1X3ZLfsg"/>

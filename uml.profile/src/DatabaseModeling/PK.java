@@ -16,8 +16,7 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link DatabaseModeling.PK#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link DatabaseModeling.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}</li>
- *   <li>{@link DatabaseModeling.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}</li>
+ *   <li>{@link DatabaseModeling.PK#getPrimaryKeyConstraint <em>Primary Key Constraint</em>}</li>
  * </ul>
  *
  * @see DatabaseModeling.DatabaseModelingPackage#getPK()
@@ -52,55 +51,29 @@ public interface PK extends EObject {
 	void setBase_Property(Property value);
 
 	/**
-	 * Returns the value of the '<em><b>Oracle Primary Key Constraint</b></em>' attribute.
+	 * Returns the value of the '<em><b>Primary Key Constraint</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Oracle Primary Key Constraint</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Primary Key Constraint</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Oracle Primary Key Constraint</em>' attribute.
-	 * @see #setOraclePrimaryKeyConstraint(String)
-	 * @see DatabaseModeling.DatabaseModelingPackage#getPK_OraclePrimaryKeyConstraint()
+	 * @return the value of the '<em>Primary Key Constraint</em>' attribute.
+	 * @see #setPrimaryKeyConstraint(String)
+	 * @see DatabaseModeling.DatabaseModelingPackage#getPK_PrimaryKeyConstraint()
 	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
-	String getOraclePrimaryKeyConstraint();
+	String getPrimaryKeyConstraint();
 
 	/**
-	 * Sets the value of the '{@link DatabaseModeling.PK#getOraclePrimaryKeyConstraint <em>Oracle Primary Key Constraint</em>}' attribute.
+	 * Sets the value of the '{@link DatabaseModeling.PK#getPrimaryKeyConstraint <em>Primary Key Constraint</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Oracle Primary Key Constraint</em>' attribute.
-	 * @see #getOraclePrimaryKeyConstraint()
+	 * @param value the new value of the '<em>Primary Key Constraint</em>' attribute.
+	 * @see #getPrimaryKeyConstraint()
 	 * @generated
 	 */
-	void setOraclePrimaryKeyConstraint(String value);
-
-	/**
-	 * Returns the value of the '<em><b>My Sql Primary Key Constraint</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>My Sql Primary Key Constraint</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>My Sql Primary Key Constraint</em>' attribute.
-	 * @see #setMySqlPrimaryKeyConstraint(String)
-	 * @see DatabaseModeling.DatabaseModelingPackage#getPK_MySqlPrimaryKeyConstraint()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
-	 * @generated
-	 */
-	String getMySqlPrimaryKeyConstraint();
-
-	/**
-	 * Sets the value of the '{@link DatabaseModeling.PK#getMySqlPrimaryKeyConstraint <em>My Sql Primary Key Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>My Sql Primary Key Constraint</em>' attribute.
-	 * @see #getMySqlPrimaryKeyConstraint()
-	 * @generated
-	 */
-	void setMySqlPrimaryKeyConstraint(String value);
+	void setPrimaryKeyConstraint(String value);
 
 } // PK
