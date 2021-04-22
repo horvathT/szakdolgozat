@@ -5,6 +5,7 @@ package DatabaseModeling.impl;
 import DatabaseModeling.Column;
 import DatabaseModeling.DatabaseModelingFactory;
 import DatabaseModeling.DatabaseModelingPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
