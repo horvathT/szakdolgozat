@@ -115,12 +115,12 @@ public interface Column extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Length</em>' attribute.
-	 * @see #setLength(int)
+	 * @see #setLength(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Length()
-	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
-	int getLength();
+	String getLength();
 
 	/**
 	 * Sets the value of the '{@link DatabaseModeling.Column#getLength <em>Length</em>}' attribute.
@@ -130,7 +130,7 @@ public interface Column extends EObject {
 	 * @see #getLength()
 	 * @generated
 	 */
-	void setLength(int value);
+	void setLength(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Precision</b></em>' attribute.
@@ -141,12 +141,12 @@ public interface Column extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Precision</em>' attribute.
-	 * @see #setPrecision(int)
+	 * @see #setPrecision(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Precision()
-	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
-	int getPrecision();
+	String getPrecision();
 
 	/**
 	 * Sets the value of the '{@link DatabaseModeling.Column#getPrecision <em>Precision</em>}' attribute.
@@ -156,7 +156,7 @@ public interface Column extends EObject {
 	 * @see #getPrecision()
 	 * @generated
 	 */
-	void setPrecision(int value);
+	void setPrecision(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Scale</b></em>' attribute.
@@ -167,12 +167,12 @@ public interface Column extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Scale</em>' attribute.
-	 * @see #setScale(int)
+	 * @see #setScale(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Scale()
-	 * @model dataType="org.eclipse.uml2.types.Integer" ordered="false"
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
-	int getScale();
+	String getScale();
 
 	/**
 	 * Sets the value of the '{@link DatabaseModeling.Column#getScale <em>Scale</em>}' attribute.
@@ -182,6 +182,6 @@ public interface Column extends EObject {
 	 * @see #getScale()
 	 * @generated
 	 */
-	void setScale(int value);
+	void setScale(String value);
 
 } // Column

@@ -92,7 +92,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int LENGTH_EDEFAULT = 0;
+	protected static final String LENGTH_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getLength() <em>Length</em>}' attribute.
@@ -102,7 +102,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected int length = LENGTH_EDEFAULT;
+	protected String length = LENGTH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPrecision() <em>Precision</em>}' attribute.
@@ -112,7 +112,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int PRECISION_EDEFAULT = 0;
+	protected static final String PRECISION_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getPrecision() <em>Precision</em>}' attribute.
@@ -122,7 +122,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected int precision = PRECISION_EDEFAULT;
+	protected String precision = PRECISION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getScale() <em>Scale</em>}' attribute.
@@ -132,7 +132,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int SCALE_EDEFAULT = 0;
+	protected static final String SCALE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getScale() <em>Scale</em>}' attribute.
@@ -142,7 +142,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected int scale = SCALE_EDEFAULT;
+	protected String scale = SCALE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -248,7 +248,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getLength() {
+	public String getLength() {
 		return length;
 	}
 
@@ -257,8 +257,8 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLength(int newLength) {
-		int oldLength = length;
+	public void setLength(String newLength) {
+		String oldLength = length;
 		length = newLength;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.COLUMN__LENGTH, oldLength, length));
@@ -269,7 +269,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getPrecision() {
+	public String getPrecision() {
 		return precision;
 	}
 
@@ -278,8 +278,8 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPrecision(int newPrecision) {
-		int oldPrecision = precision;
+	public void setPrecision(String newPrecision) {
+		String oldPrecision = precision;
 		precision = newPrecision;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.COLUMN__PRECISION, oldPrecision, precision));
@@ -290,7 +290,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getScale() {
+	public String getScale() {
 		return scale;
 	}
 
@@ -299,8 +299,8 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setScale(int newScale) {
-		int oldScale = scale;
+	public void setScale(String newScale) {
+		String oldScale = scale;
 		scale = newScale;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.COLUMN__SCALE, oldScale, scale));
@@ -349,13 +349,13 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 				setDefaultValue((String)newValue);
 				return;
 			case DatabaseModelingPackage.COLUMN__LENGTH:
-				setLength((Integer)newValue);
+				setLength((String)newValue);
 				return;
 			case DatabaseModelingPackage.COLUMN__PRECISION:
-				setPrecision((Integer)newValue);
+				setPrecision((String)newValue);
 				return;
 			case DatabaseModelingPackage.COLUMN__SCALE:
-				setScale((Integer)newValue);
+				setScale((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -406,11 +406,11 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 			case DatabaseModelingPackage.COLUMN__DEFAULT_VALUE:
 				return DEFAULT_VALUE_EDEFAULT == null ? defaultValue != null : !DEFAULT_VALUE_EDEFAULT.equals(defaultValue);
 			case DatabaseModelingPackage.COLUMN__LENGTH:
-				return length != LENGTH_EDEFAULT;
+				return LENGTH_EDEFAULT == null ? length != null : !LENGTH_EDEFAULT.equals(length);
 			case DatabaseModelingPackage.COLUMN__PRECISION:
-				return precision != PRECISION_EDEFAULT;
+				return PRECISION_EDEFAULT == null ? precision != null : !PRECISION_EDEFAULT.equals(precision);
 			case DatabaseModelingPackage.COLUMN__SCALE:
-				return scale != SCALE_EDEFAULT;
+				return SCALE_EDEFAULT == null ? scale != null : !SCALE_EDEFAULT.equals(scale);
 		}
 		return super.eIsSet(featureID);
 	}

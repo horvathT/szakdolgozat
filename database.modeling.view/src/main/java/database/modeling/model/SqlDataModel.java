@@ -1,8 +1,5 @@
 package database.modeling.model;
 
-import org.eclipse.uml2.uml.Interface;
-import org.eclipse.uml2.uml.Property;
-
 public class SqlDataModel {
 	
 	private String length;

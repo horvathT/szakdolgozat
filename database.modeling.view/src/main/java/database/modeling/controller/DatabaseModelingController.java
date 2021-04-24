@@ -120,9 +120,9 @@ public class DatabaseModelingController {
 			protected void doExecute() {
 				ProfileUtil.applyPofile(currentPropertySelection);
 				
-				ColumnUtil.setOracleDataType(currentPropertySelection, view.getSqlTypeCombo().getText());
+				ColumnUtil.setDataType(currentPropertySelection, view.getSqlTypeCombo().getText());
 				SqlDataModel data = view.getData();
-				ColumnUtil.setOracleDefaultValue(currentPropertySelection, view.getDefaultValue().getText());
+				ColumnUtil.setDefaultValue(currentPropertySelection, view.getDefaultValue().getText());
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);
