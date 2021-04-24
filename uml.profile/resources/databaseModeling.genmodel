@@ -51,5 +51,10 @@
           propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//FK/base_Property"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//FK/foreignKeyConstraint"/>
     </genClasses>
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="DatabaseModeling.ecore#//DatabaseModel">
+      <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
+          propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//DatabaseModel/base_Package"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//DatabaseModel/databaseType"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -80,6 +80,10 @@ public class DatabaseModelingAdapterFactory extends AdapterFactoryImpl {
 				return createFKAdapter();
 			}
 			@Override
+			public Adapter caseDatabaseModel(DatabaseModel object) {
+				return createDatabaseModelAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -138,6 +142,20 @@ public class DatabaseModelingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFKAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link DatabaseModeling.DatabaseModel <em>Database Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see DatabaseModeling.DatabaseModel
+	 * @generated
+	 */
+	public Adapter createDatabaseModelAdapter() {
 		return null;
 	}
 

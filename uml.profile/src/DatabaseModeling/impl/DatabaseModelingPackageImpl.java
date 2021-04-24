@@ -3,6 +3,7 @@
 package DatabaseModeling.impl;
 
 import DatabaseModeling.Column;
+import DatabaseModeling.DatabaseModel;
 import DatabaseModeling.DatabaseModelingFactory;
 import DatabaseModeling.DatabaseModelingPackage;
 
@@ -45,6 +46,13 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 	 * @generated
 	 */
 	private EClass fkEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass databaseModelEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -234,6 +242,33 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDatabaseModel() {
+		return databaseModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDatabaseModel_Base_Package() {
+		return (EReference)databaseModelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDatabaseModel_DatabaseType() {
+		return (EAttribute)databaseModelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DatabaseModelingFactory getDatabaseModelingFactory() {
 		return (DatabaseModelingFactory)getEFactoryInstance();
 	}
@@ -272,6 +307,10 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 		fkEClass = createEClass(FK);
 		createEReference(fkEClass, FK__BASE_PROPERTY);
 		createEAttribute(fkEClass, FK__FOREIGN_KEY_CONSTRAINT);
+
+		databaseModelEClass = createEClass(DATABASE_MODEL);
+		createEReference(databaseModelEClass, DATABASE_MODEL__BASE_PACKAGE);
+		createEAttribute(databaseModelEClass, DATABASE_MODEL__DATABASE_TYPE);
 	}
 
 	/**
@@ -323,6 +362,10 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 		initEClass(fkEClass, DatabaseModeling.FK.class, "FK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFK_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, DatabaseModeling.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getFK_ForeignKeyConstraint(), theTypesPackage.getString(), "foreignKeyConstraint", null, 0, 1, DatabaseModeling.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(databaseModelEClass, DatabaseModel.class, "DatabaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDatabaseModel_Base_Package(), theUMLPackage.getPackage(), null, "base_Package", null, 0, 1, DatabaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getDatabaseModel_DatabaseType(), theTypesPackage.getString(), "databaseType", null, 1, 1, DatabaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

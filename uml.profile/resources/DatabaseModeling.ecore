@@ -27,4 +27,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="foreignKeyConstraint" ordered="false"
         eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="databaseType" ordered="false"
+        lowerBound="1" eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+  </eClassifiers>
 </ecore:EPackage>

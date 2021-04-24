@@ -59,6 +59,7 @@ public class DatabaseModelingFactoryImpl extends EFactoryImpl implements Databas
 			case DatabaseModelingPackage.COLUMN: return createColumn();
 			case DatabaseModelingPackage.PK: return createPK();
 			case DatabaseModelingPackage.FK: return createFK();
+			case DatabaseModelingPackage.DATABASE_MODEL: return createDatabaseModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +93,16 @@ public class DatabaseModelingFactoryImpl extends EFactoryImpl implements Databas
 	public FK createFK() {
 		FKImpl fk = new FKImpl();
 		return fk;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DatabaseModel createDatabaseModel() {
+		DatabaseModelImpl databaseModel = new DatabaseModelImpl();
+		return databaseModel;
 	}
 
 	/**

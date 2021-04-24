@@ -232,6 +232,53 @@ public interface DatabaseModelingPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link DatabaseModeling.impl.DatabaseModelImpl <em>Database Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see DatabaseModeling.impl.DatabaseModelImpl
+	 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getDatabaseModel()
+	 * @generated
+	 */
+	int DATABASE_MODEL = 3;
+
+	/**
+	 * The feature id for the '<em><b>Base Package</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATABASE_MODEL__BASE_PACKAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Database Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATABASE_MODEL__DATABASE_TYPE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Database Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATABASE_MODEL_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Database Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATABASE_MODEL_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link DatabaseModeling.Column <em>Column</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -372,6 +419,38 @@ public interface DatabaseModelingPackage extends EPackage {
 	EAttribute getFK_ForeignKeyConstraint();
 
 	/**
+	 * Returns the meta object for class '{@link DatabaseModeling.DatabaseModel <em>Database Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Database Model</em>'.
+	 * @see DatabaseModeling.DatabaseModel
+	 * @generated
+	 */
+	EClass getDatabaseModel();
+
+	/**
+	 * Returns the meta object for the reference '{@link DatabaseModeling.DatabaseModel#getBase_Package <em>Base Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Base Package</em>'.
+	 * @see DatabaseModeling.DatabaseModel#getBase_Package()
+	 * @see #getDatabaseModel()
+	 * @generated
+	 */
+	EReference getDatabaseModel_Base_Package();
+
+	/**
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.DatabaseModel#getDatabaseType <em>Database Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Database Type</em>'.
+	 * @see DatabaseModeling.DatabaseModel#getDatabaseType()
+	 * @see #getDatabaseModel()
+	 * @generated
+	 */
+	EAttribute getDatabaseModel_DatabaseType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -503,6 +582,32 @@ public interface DatabaseModelingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FK__FOREIGN_KEY_CONSTRAINT = eINSTANCE.getFK_ForeignKeyConstraint();
+
+		/**
+		 * The meta object literal for the '{@link DatabaseModeling.impl.DatabaseModelImpl <em>Database Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see DatabaseModeling.impl.DatabaseModelImpl
+		 * @see DatabaseModeling.impl.DatabaseModelingPackageImpl#getDatabaseModel()
+		 * @generated
+		 */
+		EClass DATABASE_MODEL = eINSTANCE.getDatabaseModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Package</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATABASE_MODEL__BASE_PACKAGE = eINSTANCE.getDatabaseModel_Base_Package();
+
+		/**
+		 * The meta object literal for the '<em><b>Database Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATABASE_MODEL__DATABASE_TYPE = eINSTANCE.getDatabaseModel_DatabaseType();
 
 	}
 

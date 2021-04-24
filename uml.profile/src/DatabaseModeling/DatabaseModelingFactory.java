@@ -49,6 +49,15 @@ public interface DatabaseModelingFactory extends EFactory {
 	FK createFK();
 
 	/**
+	 * Returns a new object of class '<em>Database Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Database Model</em>'.
+	 * @generated
+	 */
+	DatabaseModel createDatabaseModel();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

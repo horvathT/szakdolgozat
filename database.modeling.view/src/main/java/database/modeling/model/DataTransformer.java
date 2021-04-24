@@ -7,7 +7,7 @@ import database.modeling.view.util.ColumnUtil;
 
 public class DataTransformer {
 
-	public SqlDataModel propertyToSqlDataModel(Property property, String database) {
+	public SqlDataModel propertyToSqlDataModel(Property property) {
 		SqlDataModel dataModel = new SqlDataModel();
 		if (ColumnUtil.hasStereotype(property)) {
 			// dataType
@@ -33,7 +33,7 @@ public class DataTransformer {
 		return dataModel;
 	}
 
-	public Property SqlDataModelToProperty(SqlDataModel dataModel, String database) {
+	public Property SqlDataModelToProperty(SqlDataModel dataModel) {
 		Property property = UMLFactory.eINSTANCE.createProperty();
 		if (dataModel.isPrimaryKey()) {
 
