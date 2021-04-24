@@ -242,6 +242,24 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFK_ReferencedEntity() {
+		return (EAttribute)fkEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFK_ReferencedProperty() {
+		return (EAttribute)fkEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDatabaseModel() {
 		return databaseModelEClass;
 	}
@@ -307,6 +325,8 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 		fkEClass = createEClass(FK);
 		createEReference(fkEClass, FK__BASE_PROPERTY);
 		createEAttribute(fkEClass, FK__FOREIGN_KEY_CONSTRAINT);
+		createEAttribute(fkEClass, FK__REFERENCED_ENTITY);
+		createEAttribute(fkEClass, FK__REFERENCED_PROPERTY);
 
 		databaseModelEClass = createEClass(DATABASE_MODEL);
 		createEReference(databaseModelEClass, DATABASE_MODEL__BASE_PACKAGE);
@@ -362,6 +382,8 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 		initEClass(fkEClass, DatabaseModeling.FK.class, "FK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFK_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, DatabaseModeling.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getFK_ForeignKeyConstraint(), theTypesPackage.getString(), "foreignKeyConstraint", null, 0, 1, DatabaseModeling.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getFK_ReferencedEntity(), theTypesPackage.getString(), "referencedEntity", null, 0, 1, DatabaseModeling.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getFK_ReferencedProperty(), theTypesPackage.getString(), "referencedProperty", null, 0, 1, DatabaseModeling.FK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(databaseModelEClass, DatabaseModel.class, "DatabaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDatabaseModel_Base_Package(), theUMLPackage.getPackage(), null, "base_Package", null, 0, 1, DatabaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

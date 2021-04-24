@@ -213,13 +213,31 @@ public interface DatabaseModelingPackage extends EPackage {
 	int FK__FOREIGN_KEY_CONSTRAINT = 1;
 
 	/**
+	 * The feature id for the '<em><b>Referenced Entity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FK__REFERENCED_ENTITY = 2;
+
+	/**
+	 * The feature id for the '<em><b>Referenced Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FK__REFERENCED_PROPERTY = 3;
+
+	/**
 	 * The number of structural features of the '<em>FK</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FK_FEATURE_COUNT = 2;
+	int FK_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>FK</em>' class.
@@ -419,6 +437,28 @@ public interface DatabaseModelingPackage extends EPackage {
 	EAttribute getFK_ForeignKeyConstraint();
 
 	/**
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.FK#getReferencedEntity <em>Referenced Entity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Referenced Entity</em>'.
+	 * @see DatabaseModeling.FK#getReferencedEntity()
+	 * @see #getFK()
+	 * @generated
+	 */
+	EAttribute getFK_ReferencedEntity();
+
+	/**
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.FK#getReferencedProperty <em>Referenced Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Referenced Property</em>'.
+	 * @see DatabaseModeling.FK#getReferencedProperty()
+	 * @see #getFK()
+	 * @generated
+	 */
+	EAttribute getFK_ReferencedProperty();
+
+	/**
 	 * Returns the meta object for class '{@link DatabaseModeling.DatabaseModel <em>Database Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -582,6 +622,22 @@ public interface DatabaseModelingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FK__FOREIGN_KEY_CONSTRAINT = eINSTANCE.getFK_ForeignKeyConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Referenced Entity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FK__REFERENCED_ENTITY = eINSTANCE.getFK_ReferencedEntity();
+
+		/**
+		 * The meta object literal for the '<em><b>Referenced Property</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FK__REFERENCED_PROPERTY = eINSTANCE.getFK_ReferencedProperty();
 
 		/**
 		 * The meta object literal for the '{@link DatabaseModeling.impl.DatabaseModelImpl <em>Database Model</em>}' class.

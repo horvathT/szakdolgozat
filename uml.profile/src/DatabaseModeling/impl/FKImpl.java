@@ -25,6 +25,8 @@ import org.eclipse.uml2.uml.Property;
  * <ul>
  *   <li>{@link DatabaseModeling.impl.FKImpl#getBase_Property <em>Base Property</em>}</li>
  *   <li>{@link DatabaseModeling.impl.FKImpl#getForeignKeyConstraint <em>Foreign Key Constraint</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.FKImpl#getReferencedEntity <em>Referenced Entity</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.FKImpl#getReferencedProperty <em>Referenced Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,6 +61,46 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * @ordered
 	 */
 	protected String foreignKeyConstraint = FOREIGN_KEY_CONSTRAINT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getReferencedEntity() <em>Referenced Entity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferencedEntity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REFERENCED_ENTITY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getReferencedEntity() <em>Referenced Entity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferencedEntity()
+	 * @generated
+	 * @ordered
+	 */
+	protected String referencedEntity = REFERENCED_ENTITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getReferencedProperty() <em>Referenced Property</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferencedProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REFERENCED_PROPERTY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getReferencedProperty() <em>Referenced Property</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferencedProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected String referencedProperty = REFERENCED_PROPERTY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -143,6 +185,48 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getReferencedEntity() {
+		return referencedEntity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferencedEntity(String newReferencedEntity) {
+		String oldReferencedEntity = referencedEntity;
+		referencedEntity = newReferencedEntity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.FK__REFERENCED_ENTITY, oldReferencedEntity, referencedEntity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getReferencedProperty() {
+		return referencedProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferencedProperty(String newReferencedProperty) {
+		String oldReferencedProperty = referencedProperty;
+		referencedProperty = newReferencedProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.FK__REFERENCED_PROPERTY, oldReferencedProperty, referencedProperty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -151,6 +235,10 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 				return basicGetBase_Property();
 			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
 				return getForeignKeyConstraint();
+			case DatabaseModelingPackage.FK__REFERENCED_ENTITY:
+				return getReferencedEntity();
+			case DatabaseModelingPackage.FK__REFERENCED_PROPERTY:
+				return getReferencedProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -168,6 +256,12 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 				return;
 			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
 				setForeignKeyConstraint((String)newValue);
+				return;
+			case DatabaseModelingPackage.FK__REFERENCED_ENTITY:
+				setReferencedEntity((String)newValue);
+				return;
+			case DatabaseModelingPackage.FK__REFERENCED_PROPERTY:
+				setReferencedProperty((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -187,6 +281,12 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
 				setForeignKeyConstraint(FOREIGN_KEY_CONSTRAINT_EDEFAULT);
 				return;
+			case DatabaseModelingPackage.FK__REFERENCED_ENTITY:
+				setReferencedEntity(REFERENCED_ENTITY_EDEFAULT);
+				return;
+			case DatabaseModelingPackage.FK__REFERENCED_PROPERTY:
+				setReferencedProperty(REFERENCED_PROPERTY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -203,6 +303,10 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 				return base_Property != null;
 			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
 				return FOREIGN_KEY_CONSTRAINT_EDEFAULT == null ? foreignKeyConstraint != null : !FOREIGN_KEY_CONSTRAINT_EDEFAULT.equals(foreignKeyConstraint);
+			case DatabaseModelingPackage.FK__REFERENCED_ENTITY:
+				return REFERENCED_ENTITY_EDEFAULT == null ? referencedEntity != null : !REFERENCED_ENTITY_EDEFAULT.equals(referencedEntity);
+			case DatabaseModelingPackage.FK__REFERENCED_PROPERTY:
+				return REFERENCED_PROPERTY_EDEFAULT == null ? referencedProperty != null : !REFERENCED_PROPERTY_EDEFAULT.equals(referencedProperty);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -219,6 +323,10 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (foreignKeyConstraint: ");
 		result.append(foreignKeyConstraint);
+		result.append(", referencedEntity: ");
+		result.append(referencedEntity);
+		result.append(", referencedProperty: ");
+		result.append(referencedProperty);
 		result.append(')');
 		return result.toString();
 	}

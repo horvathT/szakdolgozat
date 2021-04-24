@@ -17,6 +17,8 @@ import org.eclipse.uml2.uml.Property;
  * <ul>
  *   <li>{@link DatabaseModeling.FK#getBase_Property <em>Base Property</em>}</li>
  *   <li>{@link DatabaseModeling.FK#getForeignKeyConstraint <em>Foreign Key Constraint</em>}</li>
+ *   <li>{@link DatabaseModeling.FK#getReferencedEntity <em>Referenced Entity</em>}</li>
+ *   <li>{@link DatabaseModeling.FK#getReferencedProperty <em>Referenced Property</em>}</li>
  * </ul>
  *
  * @see DatabaseModeling.DatabaseModelingPackage#getFK()
@@ -75,5 +77,57 @@ public interface FK extends EObject {
 	 * @generated
 	 */
 	void setForeignKeyConstraint(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Referenced Entity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referenced Entity</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referenced Entity</em>' attribute.
+	 * @see #setReferencedEntity(String)
+	 * @see DatabaseModeling.DatabaseModelingPackage#getFK_ReferencedEntity()
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @generated
+	 */
+	String getReferencedEntity();
+
+	/**
+	 * Sets the value of the '{@link DatabaseModeling.FK#getReferencedEntity <em>Referenced Entity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referenced Entity</em>' attribute.
+	 * @see #getReferencedEntity()
+	 * @generated
+	 */
+	void setReferencedEntity(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Referenced Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referenced Property</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referenced Property</em>' attribute.
+	 * @see #setReferencedProperty(String)
+	 * @see DatabaseModeling.DatabaseModelingPackage#getFK_ReferencedProperty()
+	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @generated
+	 */
+	String getReferencedProperty();
+
+	/**
+	 * Sets the value of the '{@link DatabaseModeling.FK#getReferencedProperty <em>Referenced Property</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referenced Property</em>' attribute.
+	 * @see #getReferencedProperty()
+	 * @generated
+	 */
+	void setReferencedProperty(String value);
 
 } // FK

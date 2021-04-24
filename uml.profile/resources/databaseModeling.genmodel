@@ -50,6 +50,8 @@
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
           propertySortChoices="true" ecoreFeature="ecore:EReference DatabaseModeling.ecore#//FK/base_Property"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//FK/foreignKeyConstraint"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//FK/referencedEntity"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//FK/referencedProperty"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="DatabaseModeling.ecore#//DatabaseModel">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
