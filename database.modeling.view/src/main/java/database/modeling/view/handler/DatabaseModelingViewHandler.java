@@ -1,6 +1,7 @@
 
 package database.modeling.view.handler;
 
+import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -9,8 +10,6 @@ import org.eclipse.ui.PlatformUI;
 
 import database.modeling.controller.DatabaseModelingController;
 import database.modeling.view.DatabaseModelingView;
-
-import org.eclipse.e4.core.di.annotations.CanExecute;
 
 public class DatabaseModelingViewHandler {
 	

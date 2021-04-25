@@ -1,7 +1,5 @@
 package database.modeling.view.util;
 
-import DatabaseModeling.Column;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
@@ -39,16 +37,7 @@ public class ColumnUtil {
 	}
 
 	public static String getDataType(Property property) {
-		for (EObject object : property.getStereotypeApplications()) {
-			if (object instanceof Column) {
-				Column prop = (Column) object;
-				String value = prop.getDataType();
-				if (value != null && !value.isEmpty()) {
-					return value;
-				}
-			}
-		}
-		return null;
+		return getStringAttributeValue(property, DATA_TYPE);
 	}
 
 	public static void setDataType(Property property, String data) {
@@ -56,16 +45,7 @@ public class ColumnUtil {
 	}
 
 	public static String getDefaultValue(Property property) {
-		for (EObject object : property.getStereotypeApplications()) {
-			if (object instanceof Column) {
-				Column prop = (Column) object;
-				String value = prop.getDefaultValue();
-				if (value != null && !value.isEmpty()) {
-					return value;
-				}
-			}
-		}
-		return null;
+		return getStringAttributeValue(property, DEFAULT_VALUE);
 	}
 
 	public static void setDefaultValue(Property property, String data) {
@@ -73,16 +53,7 @@ public class ColumnUtil {
 	}
 
 	public static String getLength(Property property) {
-		for (EObject object : property.getStereotypeApplications()) {
-			if (object instanceof Column) {
-				Column prop = (Column) object;
-				String value = prop.getLength();
-				if (value != null && !value.isEmpty()) {
-					return value;
-				}
-			}
-		}
-		return null;
+		return getStringAttributeValue(property, LENGTH);
 	}
 
 	public static void setLength(Property property, String data) {
@@ -90,16 +61,7 @@ public class ColumnUtil {
 	}
 
 	public static String getScale(Property property) {
-		for (EObject object : property.getStereotypeApplications()) {
-			if (object instanceof Column) {
-				Column prop = (Column) object;
-				String value = prop.getScale();
-				if (value != null && !value.isEmpty()) {
-					return value;
-				}
-			}
-		}
-		return null;
+		return getStringAttributeValue(property, SCALE);
 	}
 
 	public static void setScale(Property property, String data) {
@@ -107,16 +69,7 @@ public class ColumnUtil {
 	}
 
 	public static String getPrecision(Property property) {
-		for (EObject object : property.getStereotypeApplications()) {
-			if (object instanceof Column) {
-				Column prop = (Column) object;
-				String value = prop.getPrecision();
-				if (value != null && !value.isEmpty()) {
-					return value;
-				}
-			}
-		}
-		return null;
+		return getStringAttributeValue(property, PRECISION);
 	}
 
 	public static void setPrecision(Property property, String data) {
@@ -135,5 +88,16 @@ public class ColumnUtil {
 				}
 			}
 		}
+	}
+	
+	private static String getStringAttributeValue(Property property, String attributeName) {
+		Stereotype applicableStereotype = property.getApplicableStereotype(STEREOTYPE_QUALIFIED_NAME);
+		if (property.isStereotypeApplied(applicableStereotype)) {
+			 String value = (String) property.getValue(applicableStereotype, attributeName);
+			 if(value != null){
+				 return value;
+			 }
+		}
+		return "";
 	}
 }

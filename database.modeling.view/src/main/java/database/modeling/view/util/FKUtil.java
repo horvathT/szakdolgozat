@@ -1,12 +1,11 @@
 package database.modeling.view.util;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
-import DatabaseModeling.FK;
-
 public class FKUtil {
+	private static final String REFERENCED_PROPERTY = "referencedProperty";
+	private static final String REFERENCED_ENTITY = "referencedEntity";
 	private final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::FK";
 	private final static String FOREIGN_KEY_CONSTRAINT = "foreignKeyConstraint";
 
@@ -36,20 +35,27 @@ public class FKUtil {
 	}
 
 	public static String getConstraintName(Property property) {
-		for (EObject object : property.getStereotypeApplications()) {
-			if (object instanceof FK) {
-				FK prop = (FK) object;
-				String value = prop.getForeignKeyConstraint();
-				if (value != null && !value.isEmpty()) {
-					return value;
-				}
-			}
-		}
-		return null;
+		return getStringAttributeValue(property, FOREIGN_KEY_CONSTRAINT);
 	}
 
-	public static void setPrecision(Property property, String data) {
+	public static void setConstraintName(Property property, String data) {
 		setValue(STEREOTYPE_QUALIFIED_NAME, FOREIGN_KEY_CONSTRAINT, property, data);
+	}
+	
+	public static String getReferencedEntity(Property property) {
+		return getStringAttributeValue(property, REFERENCED_ENTITY);
+	}
+
+	public static void setReferencedEntity(Property property, String data) {
+		setValue(STEREOTYPE_QUALIFIED_NAME, REFERENCED_ENTITY, property, data);
+	}
+	
+	public static String getReferencedProperty(Property property) {
+		return getStringAttributeValue(property, REFERENCED_PROPERTY);
+	}
+
+	public static void setReferencedProperty(Property property, String data) {
+		setValue(STEREOTYPE_QUALIFIED_NAME, REFERENCED_PROPERTY, property, data);
 	}
 
 	private static void setValue(String stereotypeName, String propertyName, Property property, String data) {
@@ -65,4 +71,16 @@ public class FKUtil {
 			}
 		}
 	}
+	
+	private static String getStringAttributeValue(Property property, String attributeName) {
+		Stereotype applicableStereotype = property.getApplicableStereotype(STEREOTYPE_QUALIFIED_NAME);
+		if (property.isStereotypeApplied(applicableStereotype)) {
+			 String value = (String) property.getValue(applicableStereotype, attributeName);
+			 if(value != null){
+				 return value;
+			 }
+		}
+		return "";
+	}
+	
 }

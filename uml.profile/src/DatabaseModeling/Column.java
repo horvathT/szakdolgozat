@@ -56,6 +56,7 @@ public interface Column extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Data Type</em>' attribute isn't clear,
@@ -65,7 +66,7 @@ public interface Column extends EObject {
 	 * @return the value of the '<em>Data Type</em>' attribute.
 	 * @see #setDataType(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_DataType()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getDataType();
@@ -82,6 +83,7 @@ public interface Column extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Default Value</em>' attribute isn't clear,
@@ -91,7 +93,7 @@ public interface Column extends EObject {
 	 * @return the value of the '<em>Default Value</em>' attribute.
 	 * @see #setDefaultValue(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_DefaultValue()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getDefaultValue();
@@ -108,6 +110,7 @@ public interface Column extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Length</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Length</em>' attribute isn't clear,
@@ -117,7 +120,7 @@ public interface Column extends EObject {
 	 * @return the value of the '<em>Length</em>' attribute.
 	 * @see #setLength(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Length()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getLength();
@@ -134,6 +137,7 @@ public interface Column extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Precision</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Precision</em>' attribute isn't clear,
@@ -143,7 +147,7 @@ public interface Column extends EObject {
 	 * @return the value of the '<em>Precision</em>' attribute.
 	 * @see #setPrecision(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Precision()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getPrecision();
@@ -160,6 +164,7 @@ public interface Column extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Scale</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Scale</em>' attribute isn't clear,
@@ -169,7 +174,7 @@ public interface Column extends EObject {
 	 * @return the value of the '<em>Scale</em>' attribute.
 	 * @see #setScale(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Scale()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getScale();

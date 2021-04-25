@@ -50,7 +50,7 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String FOREIGN_KEY_CONSTRAINT_EDEFAULT = null;
+	protected static final String FOREIGN_KEY_CONSTRAINT_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getForeignKeyConstraint() <em>Foreign Key Constraint</em>}' attribute.
@@ -70,7 +70,7 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REFERENCED_ENTITY_EDEFAULT = null;
+	protected static final String REFERENCED_ENTITY_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getReferencedEntity() <em>Referenced Entity</em>}' attribute.
@@ -90,7 +90,7 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REFERENCED_PROPERTY_EDEFAULT = null;
+	protected static final String REFERENCED_PROPERTY_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getReferencedProperty() <em>Referenced Property</em>}' attribute.

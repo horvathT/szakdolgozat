@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DatabaseModeling="http:///schemas/DatabaseModeling/_UbLD8KUyEeu2AfpJ5fkmPg/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/DatabaseModeling/_UbLD8KUyEeu2AfpJ5fkmPg/0 platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_UbLD8aUyEeu2AfpJ5fkmPg">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DatabaseModeling="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0 platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw">
   <uml:Model xmi:id="_tDrJQKCIEeu15e1X3ZLfsg" name="tesztModel">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_tH13kKCIEeu15e1X3ZLfsg">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -19,18 +19,19 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_T7iqIKOcEeuqGYISv7TMGA" name="Property6"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_UV3OoKOcEeuqGYISv7TMGA" name="Property7"/>
     </packagedElement>
-    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_CIWDYKOeEeuxKoQeR7RIYA">
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_CIWDYaOeEeuxKoQeR7RIYA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_UbLD8aUyEeu2AfpJ5fkmPg"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_YVGvoKVCEeufdvpS6ksipg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YbTeQKVCEeufdvpS6ksipg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:Column xmi:id="_grTB0KFNEeuYm6l98KrnRQ" base_Property="_Si48sKFNEeuYm6l98KrnRQ"/>
-  <DatabaseModeling:Column xmi:id="_Dyxk4KOeEeuxKoQeR7RIYA" base_Property="_wgZu0KCIEeu15e1X3ZLfsg" dataType="BINARY_FLOAT" defaultValue="asd"/>
-  <DatabaseModeling:Column xmi:id="_FedDkKOeEeuxKoQeR7RIYA" base_Property="_vZJy4KCIEeu15e1X3ZLfsg" dataType="BINARY_FLOAT" defaultValue="asd"/>
-  <DatabaseModeling:Column xmi:id="_IQz2cKOeEeuxKoQeR7RIYA" base_Property="_Si48sKFNEeuYm6l98KrnRQ" dataType="BINARY_FLOAT" defaultValue="asdasdfg"/>
-  <DatabaseModeling:Column xmi:id="_HrQJ8KOsEeud_NPXQWawpQ" base_Property="_Sl2CgKOcEeuqGYISv7TMGA" dataType="" defaultValue="asd"/>
-  <DatabaseModeling:Column xmi:id="_J1xgwKOsEeud_NPXQWawpQ" base_Property="_TX38YKOcEeuqGYISv7TMGA" dataType="" defaultValue="asd"/>
-  <DatabaseModeling:DatabaseModel xmi:id="_v6v-gKUyEeusj4BAttkU5Q" base_Package="_tDrJQKCIEeu15e1X3ZLfsg"/>
+  <DatabaseModeling:Column xmi:id="_adqXkKVCEeufdvpS6ksipg" base_Property="_vZJy4KCIEeu15e1X3ZLfsg" dataType="NUMBER(precision, scale)" defaultValue="p1" length="p1" precision="p1" scale="p1"/>
+  <DatabaseModeling:PK xmi:id="_nJgYEKVCEeufdvpS6ksipg" base_Property="_vZJy4KCIEeu15e1X3ZLfsg" primaryKeyConstraint="asd"/>
+  <DatabaseModeling:FK xmi:id="_nJhmMKVCEeufdvpS6ksipg" base_Property="_vZJy4KCIEeu15e1X3ZLfsg" foreignKeyConstraint="dsa"/>
+  <DatabaseModeling:Column xmi:id="_MfU_AKVDEeufdvpS6ksipg" base_Property="_wgZu0KCIEeu15e1X3ZLfsg" dataType="NUMBER(precision, scale)" defaultValue="p2" length="p2" precision="p2" scale="p2"/>
+  <DatabaseModeling:Column xmi:id="_6IueUKVGEeufdvpS6ksipg" base_Property="_Sl2CgKOcEeuqGYISv7TMGA"/>
+  <DatabaseModeling:FK xmi:id="_CR8BIKVHEeufdvpS6ksipg" base_Property="_TX38YKOcEeuqGYISv7TMGA" foreignKeyConstraint="asdfghj"/>
+  <DatabaseModeling:Column xmi:id="_DhmSMKVHEeufdvpS6ksipg" base_Property="_T7iqIKOcEeuqGYISv7TMGA"/>
+  <DatabaseModeling:Column xmi:id="_Y8KOsKXpEeu9tMrflnU2Gg" base_Property="_UV3OoKOcEeuqGYISv7TMGA"/>
 </xmi:XMI>

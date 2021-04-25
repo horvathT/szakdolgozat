@@ -1,11 +1,10 @@
 package database.modeling.view.util;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Stereotype;
 
 import DatabaseModeling.DatabaseModel;
-
-import org.eclipse.uml2.uml.Package;
 
 
 public class DatabaseModelUtil {

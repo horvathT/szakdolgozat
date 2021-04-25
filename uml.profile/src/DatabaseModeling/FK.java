@@ -54,6 +54,7 @@ public interface FK extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Foreign Key Constraint</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Foreign Key Constraint</em>' attribute isn't clear,
@@ -63,7 +64,7 @@ public interface FK extends EObject {
 	 * @return the value of the '<em>Foreign Key Constraint</em>' attribute.
 	 * @see #setForeignKeyConstraint(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getFK_ForeignKeyConstraint()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getForeignKeyConstraint();
@@ -80,6 +81,7 @@ public interface FK extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Referenced Entity</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Referenced Entity</em>' attribute isn't clear,
@@ -89,7 +91,7 @@ public interface FK extends EObject {
 	 * @return the value of the '<em>Referenced Entity</em>' attribute.
 	 * @see #setReferencedEntity(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getFK_ReferencedEntity()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getReferencedEntity();
@@ -106,6 +108,7 @@ public interface FK extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Referenced Property</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Referenced Property</em>' attribute isn't clear,
@@ -115,7 +118,7 @@ public interface FK extends EObject {
 	 * @return the value of the '<em>Referenced Property</em>' attribute.
 	 * @see #setReferencedProperty(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getFK_ReferencedProperty()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getReferencedProperty();

@@ -52,7 +52,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DATA_TYPE_EDEFAULT = null;
+	protected static final String DATA_TYPE_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
@@ -72,7 +72,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DEFAULT_VALUE_EDEFAULT = null;
+	protected static final String DEFAULT_VALUE_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
@@ -92,7 +92,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LENGTH_EDEFAULT = null;
+	protected static final String LENGTH_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getLength() <em>Length</em>}' attribute.
@@ -112,7 +112,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PRECISION_EDEFAULT = null;
+	protected static final String PRECISION_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getPrecision() <em>Precision</em>}' attribute.
@@ -132,7 +132,7 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SCALE_EDEFAULT = null;
+	protected static final String SCALE_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getScale() <em>Scale</em>}' attribute.

@@ -1,10 +1,7 @@
 package database.modeling.view.util;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
-
-import DatabaseModeling.PK;
 
 public class PKUtil {
 	private final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::PK";
@@ -36,19 +33,10 @@ public class PKUtil {
 	}
 
 	public static String getConstraintName(Property property) {
-		for (EObject object : property.getStereotypeApplications()) {
-			if (object instanceof PK) {
-				PK prop = (PK) object;
-				String value = prop.getPrimaryKeyConstraint();
-				if (value != null && !value.isEmpty()) {
-					return value;
-				}
-			}
-		}
-		return null;
+		return getStringAttributeValue(property, PRIMARY_KEY_CONSTRAINT);
 	}
 
-	public static void setPrecision(Property property, String data) {
+	public static void setConstraintName(Property property, String data) {
 		setValue(STEREOTYPE_QUALIFIED_NAME, PRIMARY_KEY_CONSTRAINT, property, data);
 	}
 
@@ -64,5 +52,16 @@ public class PKUtil {
 				}
 			}
 		}
+	}
+	
+	private static String getStringAttributeValue(Property property, String attributeName) {
+		Stereotype applicableStereotype = property.getApplicableStereotype(STEREOTYPE_QUALIFIED_NAME);
+		if (property.isStereotypeApplied(applicableStereotype)) {
+			 String value = (String) property.getValue(applicableStereotype, attributeName);
+			 if(value != null){
+				 return value;
+			 }
+		}
+		return "";
 	}
 }

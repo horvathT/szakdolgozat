@@ -2,30 +2,25 @@ package database.modeling.view;
 
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.ISelectionService;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.part.ViewPart;
-import org.eclipse.uml2.uml.Property;
-
-import database.modeling.model.SqlDataModel;
-import database.modeling.view.util.SelectionUtil;
-
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.part.ViewPart;
+
+import database.modeling.model.SqlDataModel;
 
 public class DatabaseModelingView extends ViewPart {
 	public DatabaseModelingView() {
@@ -200,6 +195,8 @@ public class DatabaseModelingView extends ViewPart {
 		getPrecision().setText(model.getPrecision());
 		getScale().setText(model.getScale());
 		getDefaultValue().setText(model.getDefaultValue());
+		getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
+		getForeignKeyCheck().setSelection(model.isForeignKey());
 		getPrimaryKeyConstraintName().setText(model.getPrimaryKeyConstraintName());
 		getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
 		

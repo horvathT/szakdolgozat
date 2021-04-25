@@ -48,7 +48,7 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PRIMARY_KEY_CONSTRAINT_EDEFAULT = null;
+	protected static final String PRIMARY_KEY_CONSTRAINT_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getPrimaryKeyConstraint() <em>Primary Key Constraint</em>}' attribute.

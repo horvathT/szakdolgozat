@@ -52,6 +52,7 @@ public interface PK extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Primary Key Constraint</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Primary Key Constraint</em>' attribute isn't clear,
@@ -61,7 +62,7 @@ public interface PK extends EObject {
 	 * @return the value of the '<em>Primary Key Constraint</em>' attribute.
 	 * @see #setPrimaryKeyConstraint(String)
 	 * @see DatabaseModeling.DatabaseModelingPackage#getPK_PrimaryKeyConstraint()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
 	 * @generated
 	 */
 	String getPrimaryKeyConstraint();

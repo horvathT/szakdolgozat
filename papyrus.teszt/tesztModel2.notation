@@ -10,6 +10,10 @@
         <element xmi:type="uml:Property" href="tesztModel2.uml#_EDOw0KOgEeuxKoQeR7RIYA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_EEwa0aOgEeuxKoQeR7RIYA"/>
       </children>
+      <children xmi:type="notation:Shape" xmi:id="_ZmraUKVEEeufdvpS6ksipg" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="tesztModel2.uml#_Zlix4KVEEeufdvpS6ksipg"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZmraUaVEEeufdvpS6ksipg"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_Df2-BKOgEeuxKoQeR7RIYA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Df2-BaOgEeuxKoQeR7RIYA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Df2-BqOgEeuxKoQeR7RIYA"/>
@@ -28,7 +32,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Df2-EaOgEeuxKoQeR7RIYA"/>
     </children>
     <element xmi:type="uml:Class" href="tesztModel2.uml#_DfntcKOgEeuxKoQeR7RIYA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DfyskaOgEeuxKoQeR7RIYA" x="200" y="100"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DfyskaOgEeuxKoQeR7RIYA" x="200" y="100" width="261" height="181"/>
   </children>
   <styles xmi:type="notation:StringValueStyle" xmi:id="_CqW5YaOgEeuxKoQeR7RIYA" name="diagram_compatibility_version" stringValue="1.4.0"/>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_CqW5YqOgEeuxKoQeR7RIYA"/>

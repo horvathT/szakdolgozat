@@ -14,16 +14,12 @@ import org.eclipse.uml2.uml.Property;
 import database.modeling.model.DataTransformer;
 import database.modeling.model.SqlDataModel;
 import database.modeling.view.DatabaseModelingView;
-import database.modeling.view.util.ColumnUtil;
-import database.modeling.view.util.ProfileUtil;
 import database.modeling.view.util.SelectionUtil;
 
 public class DatabaseModelingController {
 	private Property currentPropertySelection = null;
 
 	private DatabaseModelingView view;
-	private DataTransformer dataTransf = new DataTransformer();
-
 	private ToolItem databaseChanger;
 
 	public DatabaseModelingController(DatabaseModelingView view) {
@@ -99,8 +95,8 @@ public class DatabaseModelingController {
 	}
 
 	protected void updateDataInView(Property property) {
-		//SqlDataModel dataModel = dataTransf.propertyToSqlDataModel(property, databaseChanger.getText()); 
-		//view.update(dataModel);
+		SqlDataModel dataModel = DataTransformer.propertyToSqlDataModel(property); 
+		view.update(dataModel);
 	}
 
 	protected void save() {
@@ -118,11 +114,7 @@ public class DatabaseModelingController {
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				ProfileUtil.applyPofile(currentPropertySelection);
-				
-				ColumnUtil.setDataType(currentPropertySelection, view.getSqlTypeCombo().getText());
-				SqlDataModel data = view.getData();
-				ColumnUtil.setDefaultValue(currentPropertySelection, view.getDefaultValue().getText());
+				DataTransformer.applyModelOnProperty(view.getData(), currentPropertySelection);
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);

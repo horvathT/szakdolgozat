@@ -5,31 +5,40 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
         eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PK">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
         eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryKeyConstraint" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FK">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
         eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="foreignKeyConstraint" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referencedEntity" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referencedProperty" ordered="false"
-        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"
+        defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DatabaseModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
