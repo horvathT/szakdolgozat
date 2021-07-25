@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_dbS54B6ZEeu2RJjhRtM4oQ">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_gwDPMB6ZEeu2RJjhRtM4oQ" featurename="menuContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_q3agwB6ZEeu2RJjhRtM4oQ" elementId="uml.excel.exporter.menucontribution" parentId="org.eclipse.papyrus.views.modelexplorer.modelexplorer.popup">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_ujiNMB6ZEeu2RJjhRtM4oQ" elementId="id.exporttoexcel" label="Export to excel" iconURI="platform:/plugin/uml.excel.exporter/resources/icon15x15.jpg" command="_5dA4MB6ZEeu2RJjhRtM4oQ"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_4MCYgB6ZEeu2RJjhRtM4oQ" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_5dA4MB6ZEeu2RJjhRtM4oQ" elementId="uml.excel.exporter.command.exporttoexcel" commandName="Export to excel"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="__D8rgB6ZEeu2RJjhRtM4oQ" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_AWJTMB6aEeu2RJjhRtM4oQ" elementId="uml.excel.exporter.handler.0" contributionURI="bundleclass://uml.excel.exporter/uml.excel.exporter.ExportExcelHandler" command="_5dA4MB6ZEeu2RJjhRtM4oQ"/>
+  </fragments>
+</fragment:ModelFragments>

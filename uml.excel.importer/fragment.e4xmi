@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_yOeQYCl6Eeug0rOGTC1tFA">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_1kABwCl6Eeug0rOGTC1tFA" featurename="menuContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_6LH94Cl6Eeug0rOGTC1tFA" elementId="uml.excel.importer.menucontribution.0" parentId="org.eclipse.papyrus.views.modelexplorer.modelexplorer.popup">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_9oNv0Cl6Eeug0rOGTC1tFA" elementId="id.importfromexcel" label="Import from excel" iconURI="platform:/plugin/uml.excel.importer/resources/icon15x15.jpg" command="_E6S2UCl7Eeug0rOGTC1tFA"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2FYQgCl6Eeug0rOGTC1tFA" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_E6S2UCl7Eeug0rOGTC1tFA" elementId="uml.excel.importer.command.importfromexcel" commandName="Import from excel"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2bIeECl6Eeug0rOGTC1tFA" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_rcHXsIGeEeuNG897vmwp7A" elementId="uml.excel.importer.handler.0" contributionURI="bundleclass://uml.excel.importer/uml.excel.importer.ImportExcelHandler" command="_E6S2UCl7Eeug0rOGTC1tFA"/>
+  </fragments>
+</fragment:ModelFragments>

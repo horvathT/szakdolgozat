@@ -1,8 +1,10 @@
+ 
 package database.modeling.view;
 
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.viewers.ComboViewer;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.annotation.PostConstruct;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -17,16 +19,31 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.ISelectionService;
-import org.eclipse.ui.part.ViewPart;
+import org.eclipse.uml2.uml.Property;
 
+import database.modeling.controller.DatabaseModelingController;
+import database.modeling.controller.DatabaseSelectionListener;
+import database.modeling.model.DataTransformer;
 import database.modeling.model.SqlDataModel;
+import database.modeling.view.util.SelectionUtil;
 
-public class DatabaseModelingView extends ViewPart {
-	public DatabaseModelingView() {
-	}
+import javax.annotation.PreDestroy;
 
-	public static final String ID = "database.modeling.view.ModelingViewPart"; //$NON-NLS-1$
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+
+public class DatabaseModelingView {
 	
 	private Text length;
 	private Text precision;
@@ -45,17 +62,32 @@ public class DatabaseModelingView extends ViewPart {
 	private Button primaryKeyCheck;
 	private Button foreignKeyCheck;
 	
-	private ISelectionListener listener;
-	private Button btnSave;
+	private Button saveButton;
 
 	private ScrolledComposite scrolledComposite;
 	
 	private Label currentSelectionLabel;
 	private ToolBar toolBar;
 	private ToolItem databaseChanger;
+	private Label myLabelInView;
 	
-	@Override
-	public void createPartControl(Composite parent) {
+	private DatabaseModelingController controller;
+	
+	private SqlDataModel dataModel;
+	
+	private Property currentPropertySelection;
+	
+	@Inject
+	public DatabaseModelingView() {
+		this.controller = new DatabaseModelingController(this);
+//		DatabaseSelectionListener dbsl = new DatabaseSelectionListener(databaseChanger, sqlTypeCombo);
+//		dbsl.init();
+//		databaseChanger.addSelectionListener(dbsl);
+	}
+	
+	@PostConstruct
+	public void postConstruct(Composite parent) {
+		dataModel = new SqlDataModel();
 		
 		scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setExpandHorizontal(true);
@@ -109,11 +141,11 @@ public class DatabaseModelingView extends ViewPart {
 		defaultValue = new Text(container, SWT.BORDER);
 		defaultValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		
-		btnSave = new Button(container, SWT.NONE);
+		saveButton = new Button(container, SWT.NONE);
 		GridData gd_btnSave = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_btnSave.widthHint = 104;
-		btnSave.setLayoutData(gd_btnSave);
-		btnSave.setText("Save as Datatype");
+		saveButton.setLayoutData(gd_btnSave);
+		saveButton.setText("Save as Datatype");
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
@@ -175,14 +207,133 @@ public class DatabaseModelingView extends ViewPart {
 		
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-		
-// AUTO-GEN STUFF
-		createActions();
-		// Uncomment if you wish to add code to initialize the toolbar
-		//initializeToolBar();
-		initializeMenu();
 	}
 	
+	
+	
+	private void primaryKeyCannotBeNullable(Button btnPrimarykey, Button btnNullable) {
+		btnPrimarykey.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if(btnPrimarykey.getSelection()) {
+					btnNullable.setEnabled(false);
+					primaryKeyConstraintName.setEnabled(true);
+				}else {
+					btnNullable.setEnabled(true);
+					primaryKeyConstraintName.setEnabled(false);
+				}
+			}
+			
+		});
+		
+		btnNullable.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if(btnNullable.getSelection()) {
+					btnPrimarykey.setEnabled(false);
+					primaryKeyConstraintName.setEnabled(false);
+				}else {
+					btnPrimarykey.setEnabled(true);
+					primaryKeyConstraintName.setEnabled(true);
+				}
+			}
+			
+		});
+	}
+
+	private void foreignKeyCheckBoxListener(Button btnForeignKey, Combo referencedEntity, Combo referencedProperty) {
+		btnForeignKey.addSelectionListener(new SelectionAdapter()
+		{
+		    @Override
+		    public void widgetSelected(SelectionEvent e)
+		    {
+		        if (btnForeignKey.getSelection()) {
+		        	foreignKeyConstraintName.setEnabled(true);
+		        	referencedEntity.setEnabled(true);
+		        	referencedProperty.setEnabled(true);
+		        }else {
+		        	referencedEntity.setEnabled(false);
+		        	referencedProperty.setEnabled(false);
+		        	foreignKeyConstraintName.setEnabled(false);
+		        }
+		    }
+		});
+	}
+	
+	@PreDestroy
+	public void preDestroy() {
+		controller.save();
+	}
+	
+	
+	@Focus
+	public void onFocus() {
+		
+	}
+	
+	
+	@Persist
+	public void save() {
+		if (currentPropertySelection == null) {
+			return;
+		}
+		if(isEmpty()) {
+			return;
+		}
+
+		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(currentPropertySelection);
+		if(editingDomain == null) {
+			return;
+		}
+		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
+			@Override
+			protected void doExecute() {
+				DataTransformer.applyModelOnProperty(getData(), currentPropertySelection);
+			}
+		};
+		editingDomain.getCommandStack().execute(recordingCommand);
+	}
+	
+	@Inject
+	@Optional
+	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
+		if (selection==null || selection.isEmpty())
+			return;
+
+		Property property = SelectionUtil.getProperty(selection);
+		if(property != null) {
+			bindValues();
+			save();
+			updateSelection(property);
+			updateDataInView(property);
+		}
+//		if (s instanceof IStructuredSelection) {
+//			IStructuredSelection iss = (IStructuredSelection) s;
+//			if (iss.size() == 1)
+//				setSelection(iss.getFirstElement());
+//			else
+//				setSelection(iss.toArray());
+//		}
+	}
+	
+	private void bindValues() {
+		DataBindingContext ctx = new DataBindingContext();
+		IObservableValue widgetValue = BeansObservables.observeValue(dataModel, "length");
+		length.add
+	}
+
+	protected void updateDataInView(Property property) {
+		SqlDataModel dataModel = DataTransformer.propertyToSqlDataModel(property); 
+		update(dataModel);
+	}
+	
+	protected void updateSelection(Property property) {
+		currentPropertySelection = property;
+		//view.getLblNewLabel().setText(currentPropertySelection.getName());
+	}
+
 	public void update(SqlDataModel model) {
 		getNullableCheck().setSelection(model.isNullable());
 		getUniqueCheck().setSelection(model.isUnique());
@@ -249,92 +400,6 @@ public class DatabaseModelingView extends ViewPart {
 	
 	public boolean isEmpty(Combo combo) {
 		return combo.getText().isEmpty();
-	}
-	
-	private void primaryKeyCannotBeNullable(Button btnPrimarykey, Button btnNullable) {
-		btnPrimarykey.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if(btnPrimarykey.getSelection()) {
-					btnNullable.setEnabled(false);
-					primaryKeyConstraintName.setEnabled(true);
-				}else {
-					btnNullable.setEnabled(true);
-					primaryKeyConstraintName.setEnabled(false);
-				}
-			}
-			
-		});
-		
-		btnNullable.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if(btnNullable.getSelection()) {
-					btnPrimarykey.setEnabled(false);
-					primaryKeyConstraintName.setEnabled(false);
-				}else {
-					btnPrimarykey.setEnabled(true);
-					primaryKeyConstraintName.setEnabled(true);
-				}
-			}
-			
-		});
-	}
-
-	private void foreignKeyCheckBoxListener(Button btnForeignKey, Combo referencedEntity, Combo referencedProperty) {
-		btnForeignKey.addSelectionListener(new SelectionAdapter()
-		{
-		    @Override
-		    public void widgetSelected(SelectionEvent e)
-		    {
-		        if (btnForeignKey.getSelection()) {
-		        	foreignKeyConstraintName.setEnabled(true);
-		        	referencedEntity.setEnabled(true);
-		        	referencedProperty.setEnabled(true);
-		        }else {
-		        	referencedEntity.setEnabled(false);
-		        	referencedProperty.setEnabled(false);
-		        	foreignKeyConstraintName.setEnabled(false);
-		        }
-		    }
-		});
-	}
-
-	/**
-	 * Create the actions.
-	 */
-	private void createActions() {
-		// Create the actions
-	}
-
-	/**
-	 * Initialize the toolbar.
-	 */
-	private void initializeToolBar() {
-		IToolBarManager toolbarManager = getViewSite().getActionBars().getToolBarManager();
-	}
-
-	/**
-	 * Initialize the menu.
-	 */
-	private void initializeMenu() {
-		IMenuManager menuManager = getViewSite().getActionBars().getMenuManager();
-	}
-
-	@Override
-	public void setFocus() {
-		// Set the focus
-	}
-	
-	public void dispose() {
-		if(listener != null) {
-			ISelectionService selectionService = getSite().getWorkbenchWindow().getSelectionService();
-			selectionService.removeSelectionListener(listener);
-			listener = null;
-		}
-		super.dispose();
 	}
 
 	public Text getLength() {
@@ -449,20 +514,12 @@ public class DatabaseModelingView extends ViewPart {
 		this.foreignKeyCheck = foreignKeyCheck;
 	}
 
-	public ISelectionListener getListener() {
-		return listener;
+	public Button getSaveButton() {
+		return saveButton;
 	}
 
-	public void setListener(ISelectionListener listener) {
-		this.listener = listener;
-	}
-
-	public Button getBtnSave() {
-		return btnSave;
-	}
-
-	public void setBtnSave(Button btnSave) {
-		this.btnSave = btnSave;
+	public void setSaveButton(Button saveButton) {
+		this.saveButton = saveButton;
 	}
 
 	public ScrolledComposite getScrolledComposite() {
@@ -473,12 +530,12 @@ public class DatabaseModelingView extends ViewPart {
 		this.scrolledComposite = scrolledComposite;
 	}
 
-	public Label getLblNewLabel() {
+	public Label getCurrentSelectionLabel() {
 		return currentSelectionLabel;
 	}
 
-	public void setLblNewLabel(Label lblNewLabel) {
-		this.currentSelectionLabel = lblNewLabel;
+	public void setCurrentSelectionLabel(Label currentSelectionLabel) {
+		this.currentSelectionLabel = currentSelectionLabel;
 	}
 
 	public ToolBar getToolBar() {
@@ -489,14 +546,6 @@ public class DatabaseModelingView extends ViewPart {
 		this.toolBar = toolBar;
 	}
 
-	public ToolItem getTltmDropdownItem() {
-		return databaseChanger;
-	}
-
-	public void setTltmDropdownItem(ToolItem tltmDropdownItem) {
-		this.databaseChanger = tltmDropdownItem;
-	}
-
 	public ToolItem getDatabaseChanger() {
 		return databaseChanger;
 	}
@@ -504,7 +553,23 @@ public class DatabaseModelingView extends ViewPart {
 	public void setDatabaseChanger(ToolItem databaseChanger) {
 		this.databaseChanger = databaseChanger;
 	}
-	
-	
 
+	public Label getMyLabelInView() {
+		return myLabelInView;
+	}
+
+	public void setMyLabelInView(Label myLabelInView) {
+		this.myLabelInView = myLabelInView;
+	}
+
+	public DatabaseModelingController getController() {
+		return controller;
+	}
+
+	public void setController(DatabaseModelingController controller) {
+		this.controller = controller;
+	}
+	
+	
+	
 }
