@@ -1,33 +1,10 @@
- 
+
 package database.modeling.view;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.annotation.PostConstruct;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.ui.ISelectionListener;
-import org.eclipse.uml2.uml.Property;
-
-import database.modeling.controller.DatabaseModelingController;
-import database.modeling.controller.DatabaseSelectionListener;
-import database.modeling.model.DataTransformer;
-import database.modeling.model.SqlDataModel;
-import database.modeling.view.util.SelectionUtil;
-
-import javax.annotation.PreDestroy;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -41,42 +18,60 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.uml2.uml.Property;
+
+import database.modeling.controller.DatabaseModelingController;
+import database.modeling.model.DataTransformer;
+import database.modeling.model.SqlDataModel;
+import database.modeling.view.util.SelectionUtil;
 
 public class DatabaseModelingView {
-	
+
 	private Text length;
 	private Text precision;
 	private Text scale;
 	private Text defaultValue;
 	private Text primaryKeyConstraintName;
 	private Text foreignKeyConstraintName;
-	
+
 	private Combo sqlTypeCombo;
 	private Combo referencedEntity;
 	private Combo referencedProperty;
-	
+
 	private Button nullableCheck;
 	private Button uniqueCheck;
 	private Button autoIncrementCheck;
 	private Button primaryKeyCheck;
 	private Button foreignKeyCheck;
-	
+
 	private Button saveButton;
 
 	private ScrolledComposite scrolledComposite;
-	
+
 	private Label currentSelectionLabel;
 	private ToolBar toolBar;
 	private ToolItem databaseChanger;
 	private Label myLabelInView;
-	
+
 	private DatabaseModelingController controller;
-	
+
 	private SqlDataModel dataModel;
-	
+
 	private Property currentPropertySelection;
-	
+
 	@Inject
 	public DatabaseModelingView() {
 		this.controller = new DatabaseModelingController(this);
@@ -84,18 +79,18 @@ public class DatabaseModelingView {
 //		dbsl.init();
 //		databaseChanger.addSelectionListener(dbsl);
 	}
-	
+
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		dataModel = new SqlDataModel();
-		
+
 		scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
-		
+
 		Composite container = new Composite(scrolledComposite, SWT.NONE);
 		container.setLayout(new GridLayout(4, false));
-		
+
 		currentSelectionLabel = new Label(container, SWT.NONE);
 		GridData gd_lblNewLabel = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
 		gd_lblNewLabel.widthHint = 152;
@@ -103,188 +98,180 @@ public class DatabaseModelingView {
 		currentSelectionLabel.setText("Not a valid selection");
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
-		
+
 		toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
 		toolBar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		
+
 		databaseChanger = new ToolItem(toolBar, SWT.DROP_DOWN);
 		databaseChanger.setText("Database");
-		
+
 		Label lblSqlType = new Label(container, SWT.NONE);
 		lblSqlType.setText("SQL type");
-		
+
 		ComboViewer sqlTypeComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		sqlTypeCombo = sqlTypeComboViewer.getCombo();
 		sqlTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		
+
 		Label lblLength = new Label(container, SWT.NONE);
 		lblLength.setText("Length");
-		
+
 		length = new Text(container, SWT.BORDER);
 		length.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		
+
 		Label lblPrecision = new Label(container, SWT.NONE);
 		lblPrecision.setText("Precision");
-		
+
 		precision = new Text(container, SWT.BORDER);
 		precision.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		
+
 		Label lblScale = new Label(container, SWT.NONE);
 		lblScale.setText("Scale");
-		
+
 		scale = new Text(container, SWT.BORDER);
 		scale.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		
+
 		Label lblDefaultValue = new Label(container, SWT.NONE);
 		lblDefaultValue.setText("Default value");
-		
+
 		defaultValue = new Text(container, SWT.BORDER);
 		defaultValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		
+
 		saveButton = new Button(container, SWT.NONE);
 		GridData gd_btnSave = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_btnSave.widthHint = 104;
 		saveButton.setLayoutData(gd_btnSave);
 		saveButton.setText("Save as Datatype");
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
-		
+
 		nullableCheck = new Button(container, SWT.CHECK);
 		nullableCheck.setText("Nullable");
-		
+
 		uniqueCheck = new Button(container, SWT.CHECK);
 		uniqueCheck.setText("Unique");
-		
+
 		autoIncrementCheck = new Button(container, SWT.CHECK);
 		autoIncrementCheck.setText("Auto increment");
 		new Label(container, SWT.NONE);
-		
+
 		primaryKeyCheck = new Button(container, SWT.CHECK);
 		primaryKeyCheck.setText("Primary Key");
 		primaryKeyCheck.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
-		
+
 		Label lblPrimaryKeyConstraint = new Label(container, SWT.NONE);
 		lblPrimaryKeyConstraint.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblPrimaryKeyConstraint.setText("Primary Key Constraint Name");
-		
+
 		primaryKeyConstraintName = new Text(container, SWT.BORDER);
 		primaryKeyConstraintName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		primaryKeyConstraintName.setEnabled(false);
-		
+
 		foreignKeyCheck = new Button(container, SWT.CHECK);
 		foreignKeyCheck.setText("Foreign Key");
 		foreignKeyCheck.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
-		
+
 		Label lblForeignKeyConstraint = new Label(container, SWT.NONE);
 		lblForeignKeyConstraint.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblForeignKeyConstraint.setText("Foreign Key Constraint Name");
-		
+
 		foreignKeyConstraintName = new Text(container, SWT.BORDER);
 		foreignKeyConstraintName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		foreignKeyConstraintName.setEnabled(false);
-		
+
 		Label lblReferencedEntity = new Label(container, SWT.NONE);
 		lblReferencedEntity.setText("Referenced entity");
-		
+
 		ComboViewer referencedEntityComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		referencedEntity = referencedEntityComboViewer.getCombo();
 		referencedEntity.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedEntity.setEnabled(false);
-		
-		
+
 		Label lblReferencedAttribute = new Label(container, SWT.NONE);
-		//lblReferencedAttribute.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblReferencedAttribute.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblReferencedAttribute.setText("Referenced Attribute");
-		
+
 		ComboViewer referencedPropertyComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		referencedProperty = referencedPropertyComboViewer.getCombo();
 		referencedProperty.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedProperty.setEnabled(false);
-		
+
 		foreignKeyCheckBoxListener(foreignKeyCheck, referencedEntity, referencedProperty);
 		primaryKeyCannotBeNullable(primaryKeyCheck, nullableCheck);
-		
+
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
-	
-	
-	
+
 	private void primaryKeyCannotBeNullable(Button btnPrimarykey, Button btnNullable) {
 		btnPrimarykey.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if(btnPrimarykey.getSelection()) {
+				if (btnPrimarykey.getSelection()) {
 					btnNullable.setEnabled(false);
 					primaryKeyConstraintName.setEnabled(true);
-				}else {
+				} else {
 					btnNullable.setEnabled(true);
 					primaryKeyConstraintName.setEnabled(false);
 				}
 			}
-			
+
 		});
-		
+
 		btnNullable.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if(btnNullable.getSelection()) {
+				if (btnNullable.getSelection()) {
 					btnPrimarykey.setEnabled(false);
 					primaryKeyConstraintName.setEnabled(false);
-				}else {
+				} else {
 					btnPrimarykey.setEnabled(true);
 					primaryKeyConstraintName.setEnabled(true);
 				}
 			}
-			
+
 		});
 	}
 
 	private void foreignKeyCheckBoxListener(Button btnForeignKey, Combo referencedEntity, Combo referencedProperty) {
-		btnForeignKey.addSelectionListener(new SelectionAdapter()
-		{
-		    @Override
-		    public void widgetSelected(SelectionEvent e)
-		    {
-		        if (btnForeignKey.getSelection()) {
-		        	foreignKeyConstraintName.setEnabled(true);
-		        	referencedEntity.setEnabled(true);
-		        	referencedProperty.setEnabled(true);
-		        }else {
-		        	referencedEntity.setEnabled(false);
-		        	referencedProperty.setEnabled(false);
-		        	foreignKeyConstraintName.setEnabled(false);
-		        }
-		    }
+		btnForeignKey.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (btnForeignKey.getSelection()) {
+					foreignKeyConstraintName.setEnabled(true);
+					referencedEntity.setEnabled(true);
+					referencedProperty.setEnabled(true);
+				} else {
+					referencedEntity.setEnabled(false);
+					referencedProperty.setEnabled(false);
+					foreignKeyConstraintName.setEnabled(false);
+				}
+			}
 		});
 	}
-	
+
 	@PreDestroy
 	public void preDestroy() {
 		controller.save();
 	}
-	
-	
+
 	@Focus
 	public void onFocus() {
-		
+
 	}
-	
-	
+
 	@Persist
 	public void save() {
 		if (currentPropertySelection == null) {
 			return;
 		}
-		if(isEmpty()) {
+		if (isEmpty()) {
 			return;
 		}
 
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(currentPropertySelection);
-		if(editingDomain == null) {
+		if (editingDomain == null) {
 			return;
 		}
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
@@ -295,15 +282,15 @@ public class DatabaseModelingView {
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);
 	}
-	
+
 	@Inject
 	@Optional
 	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
-		if (selection==null || selection.isEmpty())
+		if (selection == null || selection.isEmpty())
 			return;
 
 		Property property = SelectionUtil.getProperty(selection);
-		if(property != null) {
+		if (property != null) {
 			bindValues();
 			save();
 			updateSelection(property);
@@ -317,21 +304,20 @@ public class DatabaseModelingView {
 //				setSelection(iss.toArray());
 //		}
 	}
-	
+
 	private void bindValues() {
 		DataBindingContext ctx = new DataBindingContext();
 		IObservableValue widgetValue = BeansObservables.observeValue(dataModel, "length");
-		length.add
 	}
 
 	protected void updateDataInView(Property property) {
-		SqlDataModel dataModel = DataTransformer.propertyToSqlDataModel(property); 
+		SqlDataModel dataModel = DataTransformer.propertyToSqlDataModel(property);
 		update(dataModel);
 	}
-	
+
 	protected void updateSelection(Property property) {
 		currentPropertySelection = property;
-		//view.getLblNewLabel().setText(currentPropertySelection.getName());
+		// view.getLblNewLabel().setText(currentPropertySelection.getName());
 	}
 
 	public void update(SqlDataModel model) {
@@ -340,8 +326,8 @@ public class DatabaseModelingView {
 		getAutoIncrementCheck().setSelection(model.isAutoIncrement());
 		getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
 		getForeignKeyCheck().setSelection(model.isForeignKey());
-		
-		//check if enabled
+
+		// check if enabled
 		getLength().setText(model.getLength());
 		getPrecision().setText(model.getPrecision());
 		getScale().setText(model.getScale());
@@ -350,13 +336,13 @@ public class DatabaseModelingView {
 		getForeignKeyCheck().setSelection(model.isForeignKey());
 		getPrimaryKeyConstraintName().setText(model.getPrimaryKeyConstraintName());
 		getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
-		
+
 		getSqlTypeCombo().setText(model.getSqlType());
-		//check if enabled
+		// check if enabled
 		getReferencedEntity().setText(model.getReferencedEntity());
 		getReferencedProperty().setText(model.getReferencedProperty());
 	}
-	
+
 	public SqlDataModel getData() {
 		SqlDataModel model = new SqlDataModel();
 		model.setNullable(nullableCheck.getSelection());
@@ -364,14 +350,14 @@ public class DatabaseModelingView {
 		model.setAutoIncrement(autoIncrementCheck.getSelection());
 		model.setPrimaryKey(primaryKeyCheck.getSelection());
 		model.setForeignKey(foreignKeyCheck.getSelection());
-		
+
 		model.setLength(length.getText());
 		model.setPrecision(precision.getText());
 		model.setScale(scale.getText());
 		model.setDefaultValue(defaultValue.getText());
 		model.setPrimaryKeyConstraintName(primaryKeyConstraintName.getText());
 		model.setForeignKeyConstraintName(foreignKeyConstraintName.getText());
-		
+
 		model.setSqlType(sqlTypeCombo.getText());
 		model.setReferencedEntity(referencedEntity.getText());
 		model.setReferencedProperty(referencedProperty.getText());
@@ -383,21 +369,21 @@ public class DatabaseModelingView {
 				|| primaryKeyCheck.getSelection() || foreignKeyCheck.getSelection()) {
 			return false;
 		}
-		if(!isEmpty(length) || !isEmpty(precision) || !isEmpty(scale) || !isEmpty(defaultValue) ||
-				!isEmpty(primaryKeyConstraintName) || !isEmpty(foreignKeyConstraintName)) {
+		if (!isEmpty(length) || !isEmpty(precision) || !isEmpty(scale) || !isEmpty(defaultValue)
+				|| !isEmpty(primaryKeyConstraintName) || !isEmpty(foreignKeyConstraintName)) {
 			return false;
 		}
-		if(!isEmpty(sqlTypeCombo) || !isEmpty(referencedEntity) || !isEmpty(referencedProperty)) {
+		if (!isEmpty(sqlTypeCombo) || !isEmpty(referencedEntity) || !isEmpty(referencedProperty)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	public boolean isEmpty(Text text) {
 		return text.getText().isEmpty();
 	}
-	
+
 	public boolean isEmpty(Combo combo) {
 		return combo.getText().isEmpty();
 	}
@@ -569,7 +555,5 @@ public class DatabaseModelingView {
 	public void setController(DatabaseModelingController controller) {
 		this.controller = controller;
 	}
-	
-	
-	
+
 }
