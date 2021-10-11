@@ -29,9 +29,10 @@
   <DatabaseModeling:Column xmi:id="_adqXkKVCEeufdvpS6ksipg" base_Property="_vZJy4KCIEeu15e1X3ZLfsg" dataType="NUMBER(precision, scale)" defaultValue="p1" length="p1" precision="p1" scale="p1"/>
   <DatabaseModeling:PK xmi:id="_nJgYEKVCEeufdvpS6ksipg" base_Property="_vZJy4KCIEeu15e1X3ZLfsg" primaryKeyConstraint="asd"/>
   <DatabaseModeling:FK xmi:id="_nJhmMKVCEeufdvpS6ksipg" base_Property="_vZJy4KCIEeu15e1X3ZLfsg" foreignKeyConstraint="dsa"/>
-  <DatabaseModeling:Column xmi:id="_MfU_AKVDEeufdvpS6ksipg" base_Property="_wgZu0KCIEeu15e1X3ZLfsg" dataType="NUMBER(precision, scale)" defaultValue="p2" length="p2" precision="p2" scale="p2"/>
+  <DatabaseModeling:Column xmi:id="_MfU_AKVDEeufdvpS6ksipg" base_Property="_wgZu0KCIEeu15e1X3ZLfsg" defaultValue="p2" length="p2" precision="p2" scale="p2"/>
   <DatabaseModeling:Column xmi:id="_6IueUKVGEeufdvpS6ksipg" base_Property="_Sl2CgKOcEeuqGYISv7TMGA"/>
   <DatabaseModeling:FK xmi:id="_CR8BIKVHEeufdvpS6ksipg" base_Property="_TX38YKOcEeuqGYISv7TMGA" foreignKeyConstraint="asdfghj"/>
   <DatabaseModeling:Column xmi:id="_DhmSMKVHEeufdvpS6ksipg" base_Property="_T7iqIKOcEeuqGYISv7TMGA"/>
   <DatabaseModeling:Column xmi:id="_Y8KOsKXpEeu9tMrflnU2Gg" base_Property="_UV3OoKOcEeuqGYISv7TMGA"/>
+  <DatabaseModeling:Column xmi:id="_EWqp8CqGEey7o4Rv5hXXtQ" base_Property="_TX38YKOcEeuqGYISv7TMGA"/>
 </xmi:XMI>
