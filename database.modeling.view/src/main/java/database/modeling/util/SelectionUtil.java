@@ -37,7 +37,7 @@ public class SelectionUtil {
 		}
 		return null;
 	}
-	
+
 	public static Package getPackage(ISelection selection) {
 		return getPackage(getFirstSelected(selection));
 	}
@@ -48,49 +48,49 @@ public class SelectionUtil {
 		}
 		return null;
 	}
-	
+
 	public static Property getPropertyFromModelExplorer(ISelection selection) {
 		return getProperty(getFirstSelected(selection));
 	}
-	
+
 	private static boolean isProperty(EObjectTreeElement element) {
 		if (element != null && element.getEObject() instanceof Property) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public static boolean isPropertyFromModelExplorer(ISelection selection) {
 		return isProperty(getFirstSelected(selection));
 	}
-	
+
 	public static boolean isPropertyFromModelEditor(ISelection selection) {
 		List<Object> objList = getSelection(selection);
-		if(objList.isEmpty()) {
+		if (objList.isEmpty()) {
 			return false;
 		}
-		
+
 		Object object = objList.get(0);
-		if(object instanceof IAdaptable) {
-			NamedElement element = ((IAdaptable)object).getAdapter(NamedElement.class);
-			if(element instanceof Property) {
+		if (object instanceof IAdaptable) {
+			NamedElement element = ((IAdaptable) object).getAdapter(NamedElement.class);
+			if (element instanceof Property) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public static Property getPropertyFromModelEditor(ISelection selection) {
 		List<Object> objList = getSelection(selection);
-		if(objList.isEmpty()) {
+		if (objList.isEmpty()) {
 			return null;
 		}
-		
+
 		Object object = objList.get(0);
-		if(object instanceof IAdaptable) {
-			NamedElement element = ((IAdaptable)object).getAdapter(NamedElement.class);
-			if(element instanceof Property) {
-				return (Property)element;
+		if (object instanceof IAdaptable) {
+			NamedElement element = ((IAdaptable) object).getAdapter(NamedElement.class);
+			if (element instanceof Property) {
+				return (Property) element;
 			}
 		}
 		return null;
@@ -106,11 +106,18 @@ public class SelectionUtil {
 	}
 
 	public static List<Object> getSelection(ISelection selection) {
-	    if (selection instanceof IStructuredSelection) {
-	      IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-	      return structuredSelection.toList();
-	    }
-	    return Collections.emptyList();
-	  }
+		if (selection instanceof IStructuredSelection) {
+			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+			return structuredSelection.toList();
+		}
+		return Collections.emptyList();
+	}
 
+	public static List<Object> getSelection(Object selection) {
+		if (selection instanceof IStructuredSelection) {
+			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+			return structuredSelection.toList();
+		}
+		return Collections.emptyList();
+	}
 }

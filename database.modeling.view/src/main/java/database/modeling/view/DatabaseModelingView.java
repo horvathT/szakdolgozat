@@ -6,19 +6,23 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.typed.PojoProperties;
+import org.eclipse.core.databinding.beans.typed.BeanProperties;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.e4.ui.workbench.modeling.ISelectionListener;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.typed.WidgetProperties;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -32,14 +36,14 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
 
-import database.modeling.controller.DatabaseModelingController;
 import database.modeling.model.DataTransformer;
 import database.modeling.model.SqlDataModel;
-import database.modeling.util.SelectionUtil;
 
 public class DatabaseModelingView {
+
 	private Text length;
 	private Text precision;
 	private Text scale;
@@ -65,19 +69,19 @@ public class DatabaseModelingView {
 	private Label currentSelectionLabel;
 	private ToolBar toolBar;
 
-	private DatabaseModelingController controller;
-
 	private SqlDataModel dataModel;
-
 	private Property currentPropertySelection;
 
 	@Inject
+	ESelectionService selectionService;
+
+	@Inject
 	public DatabaseModelingView() {
-		// this.controller = new DatabaseModelingController(this);
 	}
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
+
 		dataModel = new SqlDataModel();
 
 		scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
@@ -88,12 +92,10 @@ public class DatabaseModelingView {
 		container.setLayout(new GridLayout(4, false));
 
 		currentSelectionLabel = new Label(container, SWT.NONE);
-		GridData gd_lblNewLabel = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+		GridData gd_lblNewLabel = new GridData(SWT.FILL, SWT.CENTER, false, false, 3, 1);
 		gd_lblNewLabel.widthHint = 152;
 		currentSelectionLabel.setLayoutData(gd_lblNewLabel);
-		currentSelectionLabel.setText("Not a valid selection");
-		new Label(container, SWT.NONE);
-		new Label(container, SWT.NONE);
+		setCurrentSelectionLabel();
 
 		toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
 		toolBar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -183,8 +185,6 @@ public class DatabaseModelingView {
 		referencedEntity.setEnabled(false);
 
 		Label lblReferencedAttribute = new Label(container, SWT.NONE);
-		// lblReferencedAttribute.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
-		// false, false, 1, 1));
 		lblReferencedAttribute.setText("Referenced Attribute");
 
 		ComboViewer referencedPropertyComboViewer = new ComboViewer(container, SWT.READ_ONLY);
@@ -192,11 +192,44 @@ public class DatabaseModelingView {
 		referencedProperty.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		referencedProperty.setEnabled(false);
 
-		foreignKeyCheckBoxListener();
-		primaryKeyCannotBeNullable();
-
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+
+		primaryKeyCannotBeNullable();
+		foreignKeyCheckBoxListener();
+		bindValues();
+		setupSelectionListener();
+	}
+
+	private void setCurrentSelectionLabel() {
+		if (currentPropertySelection != null) {
+			currentSelectionLabel.setText(currentPropertySelection.getName());
+		} else {
+			currentSelectionLabel.setText("Not a valid selection");
+		}
+	}
+
+	private void setupSelectionListener() {
+		selectionService.addSelectionListener(new ISelectionListener() {
+
+			@Override
+			public void selectionChanged(MPart part, Object selection) {
+				if (selection instanceof StructuredSelection) {
+					StructuredSelection sSelection = (StructuredSelection) selection;
+					Object firstElement = sSelection.getFirstElement();
+					if (firstElement instanceof IAdaptable) {
+						NamedElement element = ((IAdaptable) firstElement).getAdapter(NamedElement.class);
+						if (element instanceof Property) {
+							save();
+							dataModel = new SqlDataModel();
+							currentPropertySelection = (Property) element;
+							setCurrentSelectionLabel();
+							updateDataInView(currentPropertySelection);
+						}
+					}
+				}
+			}
+		});
 	}
 
 	private void primaryKeyCannotBeNullable() {
@@ -255,7 +288,7 @@ public class DatabaseModelingView {
 
 	@PreDestroy
 	public void preDestroy() {
-		// controller.save();
+
 	}
 
 	@Persist
@@ -274,7 +307,9 @@ public class DatabaseModelingView {
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				DataTransformer.applyModelOnProperty(getData(), currentPropertySelection);
+				DataTransformer.applyModelOnProperty(updateModelFromView(), currentPropertySelection);
+				// TODO
+				// PropertyEditingViewModelImpl pevmi.selectionChanged();
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);
@@ -282,47 +317,118 @@ public class DatabaseModelingView {
 
 	private void bindValues() {
 		DataBindingContext ctx = new DataBindingContext();
-		IObservableValue<String> propertyLenght = PojoProperties.value(SqlDataModel.class, "length", String.class)
+
+		IObservableValue<String> propertyLength = BeanProperties.value(SqlDataModel.class, "length", String.class)
 				.observe(dataModel);
 		ISWTObservableValue<String> widgetLength = WidgetProperties.text(SWT.Modify).observe(length);
-		ctx.bindValue(widgetLength, propertyLenght);
+		ctx.bindValue(widgetLength, propertyLength);
 
+		IObservableValue<String> propertyPrecision = BeanProperties.value(SqlDataModel.class, "precision", String.class)
+				.observe(dataModel);
+		ISWTObservableValue<String> widgetPrecision = WidgetProperties.text(SWT.Modify).observe(precision);
+		ctx.bindValue(widgetPrecision, propertyPrecision);
+
+		IObservableValue<String> propertyScale = BeanProperties.value(SqlDataModel.class, "scale", String.class)
+				.observe(dataModel);
+		ISWTObservableValue<String> widgetScale = WidgetProperties.text(SWT.Modify).observe(scale);
+		ctx.bindValue(widgetScale, propertyScale);
+
+		IObservableValue<String> propertyDefaultValue = BeanProperties
+				.value(SqlDataModel.class, "defaultValue", String.class).observe(dataModel);
+		ISWTObservableValue<String> widgetDefaultValue = WidgetProperties.text(SWT.Modify).observe(defaultValue);
+		ctx.bindValue(widgetDefaultValue, propertyDefaultValue);
+
+		IObservableValue<String> propertyPrimaryKeyConstraintName = BeanProperties
+				.value(SqlDataModel.class, "primaryKeyConstraintName", String.class).observe(dataModel);
+		ISWTObservableValue<String> widgetPrimaryKeyConstraintName = WidgetProperties.text(SWT.Modify)
+				.observe(primaryKeyConstraintName);
+		ctx.bindValue(widgetPrimaryKeyConstraintName, propertyPrimaryKeyConstraintName);
+
+		IObservableValue<String> propertyForeignKeyConstraintName = BeanProperties
+				.value(SqlDataModel.class, "foreignKeyConstraintName", String.class).observe(dataModel);
+		ISWTObservableValue<String> widgetForeignKeyConstraintName = WidgetProperties.text(SWT.Modify)
+				.observe(foreignKeyConstraintName);
+		ctx.bindValue(widgetForeignKeyConstraintName, propertyForeignKeyConstraintName);
+
+		IObservableValue<String> propertySqlType = BeanProperties.value(SqlDataModel.class, "sqlType", String.class)
+				.observe(dataModel);
+		ISWTObservableValue<String> widgetSqlType = WidgetProperties.comboSelection().observe(sqlTypeCombo);
+		ctx.bindValue(widgetSqlType, propertySqlType);
+
+		IObservableValue<String> propertyReferencedEntity = BeanProperties
+				.value(SqlDataModel.class, "referencedEntity", String.class).observe(dataModel);
+		ISWTObservableValue<String> widgetReferencedEntity = WidgetProperties.comboSelection()
+				.observe(referencedEntity);
+		ctx.bindValue(widgetReferencedEntity, propertyReferencedEntity);
+
+		IObservableValue<String> propertyReferencedProperty = BeanProperties
+				.value(SqlDataModel.class, "referencedProperty", String.class).observe(dataModel);
+		ISWTObservableValue<String> widgetReferencedProperty = WidgetProperties.comboSelection()
+				.observe(referencedProperty);
+		ctx.bindValue(widgetReferencedProperty, propertyReferencedProperty);
+
+		IObservableValue<Boolean> propertyNullable = BeanProperties.value(SqlDataModel.class, "nullable", Boolean.class)
+				.observe(dataModel);
+		ISWTObservableValue<Boolean> widgetNullable = WidgetProperties.buttonSelection().observe(nullableCheck);
+		ctx.bindValue(widgetNullable, propertyNullable);
+
+		IObservableValue<Boolean> propertyUnique = BeanProperties.value(SqlDataModel.class, "unique", Boolean.class)
+				.observe(dataModel);
+		ISWTObservableValue<Boolean> widgetUnique = WidgetProperties.buttonSelection().observe(uniqueCheck);
+		ctx.bindValue(widgetUnique, propertyUnique);
+
+		IObservableValue<Boolean> propertyAutoIncrement = BeanProperties
+				.value(SqlDataModel.class, "autoIncrement", Boolean.class).observe(dataModel);
+		ISWTObservableValue<Boolean> widgetAutoIncrement = WidgetProperties.buttonSelection()
+				.observe(autoIncrementCheck);
+		ctx.bindValue(widgetAutoIncrement, propertyAutoIncrement);
+
+		IObservableValue<Boolean> propertyPrimaryKey = BeanProperties
+				.value(SqlDataModel.class, "primaryKey", Boolean.class).observe(dataModel);
+		ISWTObservableValue<Boolean> widgetPrimaryKey = WidgetProperties.buttonSelection().observe(primaryKeyCheck);
+		ctx.bindValue(widgetPrimaryKey, propertyPrimaryKey);
+
+		IObservableValue<Boolean> propertyForeignKey = BeanProperties
+				.value(SqlDataModel.class, "foreignKey", Boolean.class).observe(dataModel);
+		ISWTObservableValue<Boolean> widgetForeignKey = WidgetProperties.buttonSelection().observe(foreignKeyCheck);
+		ctx.bindValue(widgetForeignKey, propertyForeignKey);
 	}
 
 	protected void updateDataInView(Property property) {
-		SqlDataModel dataModel = DataTransformer.propertyToSqlDataModel(property);
-		update(dataModel);
+		DataTransformer.propertyToSqlDataModel(property, dataModel);
+		updateViewFromModel(dataModel);
 	}
 
-	protected void updateSelection(Property property) {
-		currentPropertySelection = property;
-		currentSelectionLabel.setText(currentPropertySelection.getName());
-	}
-
-	public void update(SqlDataModel model) {
+	private void updateViewFromModel(SqlDataModel model) {
 		getNullableCheck().setSelection(model.isNullable());
 		getUniqueCheck().setSelection(model.isUnique());
 		getAutoIncrementCheck().setSelection(model.isAutoIncrement());
-		getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
-		getForeignKeyCheck().setSelection(model.isForeignKey());
 
 		// check if enabled
 		getLength().setText(model.getLength());
 		getPrecision().setText(model.getPrecision());
 		getScale().setText(model.getScale());
 		getDefaultValue().setText(model.getDefaultValue());
+
 		getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
 		getForeignKeyCheck().setSelection(model.isForeignKey());
-		getPrimaryKeyConstraintName().setText(model.getPrimaryKeyConstraintName());
-		getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
+		if (model.isPrimaryKey()) {
+			getPrimaryKeyConstraintName().setEnabled(true);
+			getPrimaryKeyConstraintName().setText(model.getPrimaryKeyConstraintName());
+		}
+		if (model.isForeignKey()) {
+			getForeignKeyConstraintName().setEnabled(true);
+			getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
+			getReferencedEntity().setText(model.getReferencedEntity());
+			getReferencedEntity().setEnabled(true);
+			getReferencedProperty().setText(model.getReferencedProperty());
+			getReferencedProperty().setEnabled(true);
+		}
 
 		getSqlTypeCombo().setText(model.getSqlType());
-		// check if enabled
-		getReferencedEntity().setText(model.getReferencedEntity());
-		getReferencedProperty().setText(model.getReferencedProperty());
 	}
 
-	public SqlDataModel getData() {
+	public SqlDataModel updateModelFromView() {
 		SqlDataModel model = new SqlDataModel();
 		model.setNullable(nullableCheck.getSelection());
 		model.setUnique(uniqueCheck.getSelection());
@@ -367,6 +473,65 @@ public class DatabaseModelingView {
 		return combo.getText().isEmpty();
 	}
 
+	/**
+	 * This method is kept for E3 compatiblity. You can remove it if you do not mix
+	 * E3 and E4 code. <br/>
+	 * With E4 code you will set directly the selection in ESelectionService and you
+	 * do not receive a ISelection
+	 * 
+	 * @param s the selection received from JFace (E3 mode)
+	 */
+//	@Inject
+//	@Optional
+//	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
+//		if (selection == null || selection.isEmpty())
+//			return;
+//
+//		Property property = SelectionUtil.getProperty(selection);
+//		if (property != null) {
+//			save();
+//			dataModel = new SqlDataModel();
+//			updateSelection(property);
+//			updateDataInView(property);
+//		}
+//	}
+
+	/**
+	 * This method manages the selection of your current object. In this example we
+	 * listen to a single Object (even the ISelection already captured in E3 mode).
+	 * <br/>
+	 * You should change the parameter type of your received Object to manage your
+	 * specific selection
+	 * 
+	 * @param o : the current object received
+	 */
+//	@Inject
+//	@Optional
+//	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object o) {
+//
+//		// Remove the 2 following lines in pure E4 mode, keep them in mixed mode
+//		if (o instanceof ISelection) // Already captured
+//			return;
+//	}
+
+	/**
+	 * This method manages the multiple selection of your current objects. <br/>
+	 * You should change the parameter type of your array of Objects to manage your
+	 * specific selection
+	 * 
+	 * @param o : the current array of objects received in case of multiple
+	 *          selection
+	 */
+	@Inject
+	@Optional
+	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object[] selectedObjects) {
+
+		// Test if label exists (inject methods are called before PostConstruct)
+//		if (myLabelInView != null)
+//			myLabelInView.setText("This is a multiple selection of " + selectedObjects.length + " objects");
+	}
+
+// GETTERS, SETTERS -----------------------------------------------------------------------------------------------
 	public Text getLength() {
 		return length;
 	}
@@ -518,74 +683,12 @@ public class DatabaseModelingView {
 	public void setDatabaseChanger(ToolItem databaseChanger) {
 		this.databaseChanger = databaseChanger;
 	}
+//	public DatabaseModelingController getController() {
+//		return controller;
+//	}
+//
+//	public void setController(DatabaseModelingController controller) {
+//		this.controller = controller;
+//	}
 
-	public DatabaseModelingController getController() {
-		return controller;
-	}
-
-	public void setController(DatabaseModelingController controller) {
-		this.controller = controller;
-	}
-
-	/**
-	 * This method is kept for E3 compatiblity. You can remove it if you do not mix
-	 * E3 and E4 code. <br/>
-	 * With E4 code you will set directly the selection in ESelectionService and you
-	 * do not receive a ISelection
-	 * 
-	 * @param s the selection received from JFace (E3 mode)
-	 */
-	@Inject
-	@Optional
-	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
-		if (selection == null || selection.isEmpty())
-			return;
-
-		Property property = SelectionUtil.getProperty(selection);
-		if (property != null) {
-			bindValues();
-			save();
-			updateSelection(property);
-			updateDataInView(property);
-		}
-	}
-
-	/**
-	 * This method manages the selection of your current object. In this example we
-	 * listen to a single Object (even the ISelection already captured in E3 mode).
-	 * <br/>
-	 * You should change the parameter type of your received Object to manage your
-	 * specific selection
-	 * 
-	 * @param o : the current object received
-	 */
-	@Inject
-	@Optional
-	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object o) {
-
-		// Remove the 2 following lines in pure E4 mode, keep them in mixed mode
-		if (o instanceof ISelection) // Already captured
-			return;
-
-		// Test if label exists (inject methods are called before PostConstruct)
-//		if (myLabelInView != null)
-//			myLabelInView.setText("Current single selection class is : " + o.getClass());
-	}
-
-	/**
-	 * This method manages the multiple selection of your current objects. <br/>
-	 * You should change the parameter type of your array of Objects to manage your
-	 * specific selection
-	 * 
-	 * @param o : the current array of objects received in case of multiple
-	 *          selection
-	 */
-	@Inject
-	@Optional
-	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object[] selectedObjects) {
-
-		// Test if label exists (inject methods are called before PostConstruct)
-//		if (myLabelInView != null)
-//			myLabelInView.setText("This is a multiple selection of " + selectedObjects.length + " objects");
-	}
 }

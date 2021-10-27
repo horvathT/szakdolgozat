@@ -1,11 +1,27 @@
 package database.modeling.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 public class SqlDataModel {
 
-	private List<String> databaseTypes;
+	private final PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		changeSupport.addPropertyChangeListener(listener);
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		changeSupport.removePropertyChangeListener(listener);
+	}
+
+	protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+		changeSupport.firePropertyChange(propertyName, oldValue, newValue);
+	}
+
+	private List<String> databaseTypes;
+	// private WritableValue<String> length = new WritableValue<String>();
 	private String length;
 	private String precision;
 	private String scale;
@@ -24,11 +40,14 @@ public class SqlDataModel {
 	private boolean foreignKey;
 
 	public String getLength() {
+//		return length.getValue();
 		return length;
 	}
 
 	public void setLength(String length) {
-		this.length = length;
+		changeSupport.firePropertyChange("length", this.length, this.length = length);
+//		this.length.setValue(length);
+//		this.length = length;
 	}
 
 	public String getPrecision() {

@@ -112,8 +112,9 @@ public class DatabaseModelingController {
 	}
 
 	protected void updateDataInView(Property property) {
-		SqlDataModel dataModel = DataTransformer.propertyToSqlDataModel(property);
-		view.update(dataModel);
+		SqlDataModel dataModel = null;
+		DataTransformer.propertyToSqlDataModel(property, dataModel);
+		// view.update(dataModel);
 	}
 
 	public void save() {
@@ -131,7 +132,7 @@ public class DatabaseModelingController {
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				DataTransformer.applyModelOnProperty(view.getData(), currentPropertySelection);
+				DataTransformer.applyModelOnProperty(view.updateModelFromView(), currentPropertySelection);
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);

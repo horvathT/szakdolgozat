@@ -9,8 +9,7 @@ import database.modeling.util.ProfileUtil;
 
 public class DataTransformer {
 
-	public static SqlDataModel propertyToSqlDataModel(Property property) {
-		SqlDataModel dataModel = new SqlDataModel();
+	public static SqlDataModel propertyToSqlDataModel(Property property, SqlDataModel dataModel) {
 		if (ColumnUtil.hasStereotype(property)) {
 			// dataType
 			dataModel.setSqlType(ColumnUtil.getDataType(property));
