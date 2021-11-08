@@ -17,6 +17,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -110,18 +111,21 @@ public class DatabaseModelingView {
 
 		length = new Text(container, SWT.BORDER);
 		length.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		length.addVerifyListener(DatabaseModelingView::verifyNumberField);
 
 		Label lblPrecision = new Label(container, SWT.NONE);
 		lblPrecision.setText("Precision");
 
 		precision = new Text(container, SWT.BORDER);
 		precision.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		precision.addVerifyListener(DatabaseModelingView::verifyNumberField);
 
 		Label lblScale = new Label(container, SWT.NONE);
 		lblScale.setText("Scale");
 
 		scale = new Text(container, SWT.BORDER);
 		scale.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		scale.addVerifyListener(DatabaseModelingView::verifyNumberField);
 
 		Label lblDefaultValue = new Label(container, SWT.NONE);
 		lblDefaultValue.setText("Default value");
@@ -196,6 +200,12 @@ public class DatabaseModelingView {
 
 		dbSelectionListener = new DatabaseSelectionListener(this);
 		databaseChanger.addSelectionListener(dbSelectionListener);
+	}
+
+	private static void verifyNumberField(VerifyEvent e) {
+		String string = e.text;
+		e.doit = string.matches("\\d*");
+		return;
 	}
 
 	private void setupSelectionListener() {
