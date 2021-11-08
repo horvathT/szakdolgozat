@@ -111,17 +111,17 @@
     <ownedAttribute xmi:type="uml:Property" xmi:id="_8D7ZgJo_EeuPL-k41ngcPg" name="length">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_x2UEwKB7EeuoMsVJhEZSVw"/>
-      <defaultValue xmi:type="uml:LiteralString" xmi:id="_Unxd0KXoEeu9qvqunr-EBw" name="emptyString" value=""/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_qOdrAEDLEeyP_6XgkV1-0A" name="emptyString" value=""/>
     </ownedAttribute>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_-nIWEJo_EeuPL-k41ngcPg" name="precision">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yreLIKB7EeuoMsVJhEZSVw"/>
-      <defaultValue xmi:type="uml:LiteralString" xmi:id="_Vxh7MKXoEeu9qvqunr-EBw" name="emptyString" value=""/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_kK4X8EDLEeyP_6XgkV1-0A" name="emptyString" value=""/>
     </ownedAttribute>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_A7EHkJpAEeuPL-k41ngcPg" name="scale">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0LAEMKB7EeuoMsVJhEZSVw"/>
-      <defaultValue xmi:type="uml:LiteralString" xmi:id="_W-1b0KXoEeu9qvqunr-EBw" name="emptyString" value=""/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_nrPgUEDLEeyP_6XgkV1-0A" name="emptyString" value=""/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_PL7vQITCEeuEgOVa5Jvuvg" name="E_Column_Property10" memberEnd="_PL7vQYTCEeuEgOVa5Jvuvg _PL8WUITCEeuEgOVa5Jvuvg">

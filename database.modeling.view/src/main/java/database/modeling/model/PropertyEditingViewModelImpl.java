@@ -10,7 +10,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
 
-import database.modeling.util.EclipseResourceUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
@@ -35,13 +34,14 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	@Override
 	public void databaseChanged(String currentDbSelected, String newDbName, SelectionEvent event) {
+		// (modellen lévő adatok validálása)
 		// modellen lévő összes adat begyűjtése
-		// Kell a régiDB neve, az újDB neve célmappa helye
 
 		Property currentPropertySelection = view.getCurrentPropertySelection();
 		Model model = currentPropertySelection.getModel();
-		String resourceFileLocation = EclipseResourceUtil.getResourceFileLocation(model.eResource());
-		System.out.println("");
+		ModelConverter converter = new ModelConverter(model, view);
+		converter.convertModelToFile();
+
 		// adatok kiírása xml-be vagy gson/json serializer
 		// modell letakarítása
 		// újonnan kiválaszttot DB-hez xml fájl keresése (ha nincs akkor nem csinálunk
