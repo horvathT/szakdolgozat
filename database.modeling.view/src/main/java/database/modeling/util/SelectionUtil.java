@@ -11,6 +11,7 @@ import org.eclipse.papyrus.emf.facet.custom.metamodel.v0_2_0.internal.treeproxy.
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
 
+@Deprecated
 public class SelectionUtil {
 
 	private static EObjectTreeElement getFirstSelected(ISelection selection) {

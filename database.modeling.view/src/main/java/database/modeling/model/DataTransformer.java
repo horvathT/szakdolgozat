@@ -9,7 +9,8 @@ import database.modeling.util.ProfileUtil;
 
 public class DataTransformer {
 
-	public static SqlDataModel propertyToSqlDataModel(Property property, SqlDataModel dataModel) {
+	public static SqlDataModel propertyToSqlDataModel(Property property) {
+		SqlDataModel dataModel = new SqlDataModel();
 		if (ColumnUtil.hasStereotype(property)) {
 			// dataType
 			dataModel.setSqlType(ColumnUtil.getDataType(property));
@@ -35,9 +36,7 @@ public class DataTransformer {
 			dataModel.setAutoIncrement(false);
 		}
 		if (PKUtil.hasStereotype(property)) {
-			// primarykey
 			dataModel.setPrimaryKey(true);
-			// pk constraint
 			dataModel.setPrimaryKeyConstraintName(PKUtil.getConstraintName(property));
 		} else {
 			dataModel.setPrimaryKey(false);

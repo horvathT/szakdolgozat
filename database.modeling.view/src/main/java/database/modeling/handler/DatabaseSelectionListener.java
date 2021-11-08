@@ -14,18 +14,34 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolItem;
 
+import database.modeling.model.PropertyEditingViewModelImpl;
 import database.modeling.util.DatabaseTypesUtil;
+import database.modeling.view.DatabaseModelingView;
 
 public class DatabaseSelectionListener extends SelectionAdapter {
 	private ToolItem dropdown;
 	private Menu menu;
 	private Combo combo;
+	PropertyEditingViewModelImpl viewModel;
 	private DatabaseTypesUtil dbUtil = new DatabaseTypesUtil();
 
-	public DatabaseSelectionListener(ToolItem dropdown, Combo typeCombo) {
-		this.dropdown = dropdown;
-		this.combo = typeCombo;
+	private String currentDbSelected;
+	private DatabaseModelingView view;
+
+	public DatabaseSelectionListener(DatabaseModelingView view) {
+		this.view = view;
+		this.viewModel = view.getViewModel();
+		this.dropdown = view.getDatabaseChanger();
+		this.combo = view.getSqlTypeCombo();
 		menu = new Menu(dropdown.getParent().getShell());
+
+		List<String> databases = dbUtil.getDatabases();
+		add(databases);
+
+		String defaultDb = databases.get(0);
+		dropdown.setText(defaultDb);
+		currentDbSelected = defaultDb;
+		combo.setItems(dbUtil.getDatabaseTypeMap().get(defaultDb));
 	}
 
 	public void add(Collection<String> items) {
@@ -41,10 +57,12 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				MenuItem selected = (MenuItem) event.widget;
-				String text = selected.getText();
-				dropdown.setText(text);
+				String newDbName = selected.getText();
+				dropdown.setText(newDbName);
 				Map<String, String[]> dbMap = dbUtil.getDatabaseTypeMap();
-				combo.setItems(dbMap.get(text));
+				combo.setItems(dbMap.get(newDbName));
+
+				viewModel.databaseChanged(currentDbSelected, newDbName, event);
 			}
 		});
 	}
@@ -57,14 +75,16 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 			Point pt = item.getParent().toDisplay(new Point(rect.x, rect.y));
 			menu.setLocation(pt.x, pt.y + rect.height);
 			menu.setVisible(true);
+
+			setCurrentlySelectedDb();
 		}
 	}
 
-	public void init() {
-		List<String> databases = dbUtil.getDatabases();
-		add(databases);
-		String deafultDb = databases.get(0);
-		dropdown.setText(deafultDb);
-		combo.setItems(dbUtil.getDatabaseTypeMap().get(deafultDb));
+	private void setCurrentlySelectedDb() {
+		int selectionIndex = combo.getSelectionIndex();
+		if (selectionIndex != -1) {
+			currentDbSelected = combo.getItem(selectionIndex);
+		}
 	}
+
 }

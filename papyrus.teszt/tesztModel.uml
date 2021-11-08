@@ -36,4 +36,8 @@
   <DatabaseModeling:Column xmi:id="_Y8KOsKXpEeu9tMrflnU2Gg" base_Property="_UV3OoKOcEeuqGYISv7TMGA"/>
   <DatabaseModeling:Column xmi:id="_EWqp8CqGEey7o4Rv5hXXtQ" base_Property="_TX38YKOcEeuqGYISv7TMGA"/>
   <DatabaseModeling:Column xmi:id="_hx944DaQEeyvnIjYEeA_Hw" base_Property="_Si48sKFNEeuYm6l98KrnRQ"/>
+  <DatabaseModeling:PK xmi:id="_n6Q0sD8TEeyGr7yj3LXqKA" base_Property="_Sl2CgKOcEeuqGYISv7TMGA" primaryKeyConstraint="asd"/>
+  <DatabaseModeling:FK xmi:id="_n6T4AD8TEeyGr7yj3LXqKA" base_Property="_Sl2CgKOcEeuqGYISv7TMGA" foreignKeyConstraint="dsa"/>
+  <DatabaseModeling:PK xmi:id="_qO0RQD8TEeyGr7yj3LXqKA" base_Property="_TX38YKOcEeuqGYISv7TMGA" primaryKeyConstraint="asd"/>
+  <DatabaseModeling:PK xmi:id="_n0OD0D8jEeyjIaHBU-C9bQ" base_Property="_Si48sKFNEeuYm6l98KrnRQ" primaryKeyConstraint="asd"/>
 </xmi:XMI>

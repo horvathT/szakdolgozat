@@ -19,8 +19,13 @@ Require-Bundle: javax.inject,
  org.eclipse.core.databinding.property,
  org.eclipse.core.databinding.beans,
  org.eclipse.e4.ui.workbench,
- org.eclipse.ui.workbench
+ org.eclipse.ui.workbench,
+ org.eclipse.ui.ide,
+ org.eclipse.ltk.core.refactoring
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: database.modeling.view
-Import-Package: javax.annotation
+Import-Package: javax.annotation,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.core.refactoring,
+ org.eclipse.jdt.core.refactoring.descriptors
 Bundle-ActivationPolicy: lazy
