@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import database.modeling.util.ColumnUtil;
 import database.modeling.util.EclipseResourceUtil;
+import database.modeling.util.StereotypeApplicationUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class ModelConverter {
@@ -51,7 +52,7 @@ public class ModelConverter {
 	private List<SQLProperty> convertToSqlProperties(Collection<Property> properties) {
 		List<SQLProperty> sqlProperties = new ArrayList<>();
 		for (Property property : properties) {
-			if (ColumnUtil.hasStereotype(property)) {
+			if (StereotypeApplicationUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
 				sqlProperties.add(convertToSqlPropery(property));
 			}
 		}

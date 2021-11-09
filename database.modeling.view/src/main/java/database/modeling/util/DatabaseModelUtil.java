@@ -6,35 +6,9 @@ import org.eclipse.uml2.uml.Stereotype;
 
 import DatabaseModeling.DatabaseModel;
 
-
 public class DatabaseModelUtil {
-	private final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::DatabaseModel";
+	public final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::DatabaseModel";
 	private final static String DATABASE_TYPE = "databaseType";
-
-	public static boolean hasStereotype(Package pack) {
-		if (pack == null) {
-			return false;
-		}
-
-		Stereotype applicableStereotype = pack.getApplicableStereotype(STEREOTYPE_QUALIFIED_NAME);
-		if (pack.isStereotypeApplied(applicableStereotype)) {
-			return true;
-		}
-		return false;
-	}
-
-	public static void applyStereotype(Package pack) {
-		if (pack == null) {
-			return;
-		}
-		Stereotype applicableStereotype = pack.getApplicableStereotype(STEREOTYPE_QUALIFIED_NAME);
-		if (pack.isStereotypeApplied(applicableStereotype)) {
-		} else {
-			if (applicableStereotype != null) {
-				pack.applyStereotype(applicableStereotype);
-			}
-		}
-	}
 
 	public static String getConstraintName(Package pack) {
 		for (EObject object : pack.getStereotypeApplications()) {
@@ -56,11 +30,11 @@ public class DatabaseModelUtil {
 	private static void setValue(String stereotypeName, String propertyName, Package pack, String data) {
 		if (data != null && pack != null) {
 			Stereotype applicableStereotype = pack.getApplicableStereotype(stereotypeName);
-			if (hasStereotype(pack)) {
+			if (StereotypeApplicationUtil.hasStereotype(pack, STEREOTYPE_QUALIFIED_NAME)) {
 				pack.setValue(applicableStereotype, propertyName, data);
 			} else {
 				if (applicableStereotype != null) {
-					applyStereotype(pack);
+					StereotypeApplicationUtil.applyStereotype(pack, STEREOTYPE_QUALIFIED_NAME);
 					pack.setValue(applicableStereotype, propertyName, data);
 				}
 			}

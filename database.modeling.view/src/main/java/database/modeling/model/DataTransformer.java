@@ -6,12 +6,13 @@ import database.modeling.util.ColumnUtil;
 import database.modeling.util.FKUtil;
 import database.modeling.util.PKUtil;
 import database.modeling.util.ProfileUtil;
+import database.modeling.util.StereotypeApplicationUtil;
 
 public class DataTransformer {
 
 	public static SqlDataModel propertyToSqlDataModel(Property property) {
 		SqlDataModel dataModel = new SQLProperty();
-		if (ColumnUtil.hasStereotype(property)) {
+		if (StereotypeApplicationUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			// dataType
 			dataModel.setSqlType(ColumnUtil.getDataType(property));
 			// defaultValue
@@ -35,14 +36,14 @@ public class DataTransformer {
 			dataModel.setUnique(false);
 			dataModel.setAutoIncrement(false);
 		}
-		if (PKUtil.hasStereotype(property)) {
+		if (StereotypeApplicationUtil.hasStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			dataModel.setPrimaryKey(true);
 			dataModel.setPrimaryKeyConstraintName(PKUtil.getConstraintName(property));
 		} else {
 			dataModel.setPrimaryKey(false);
 			dataModel.setPrimaryKeyConstraintName("");
 		}
-		if (FKUtil.hasStereotype(property)) {
+		if (StereotypeApplicationUtil.hasStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			// fk
 			dataModel.setForeignKey(true);
 			// fk constraint
@@ -63,7 +64,7 @@ public class DataTransformer {
 
 	public static Property applyModelOnProperty(SqlDataModel dataModel, Property property) {
 		ProfileUtil.applyPofile(property);
-		ColumnUtil.applyStereotype(property);
+		StereotypeApplicationUtil.applyStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME);
 		ColumnUtil.setDataType(property, dataModel.getSqlType());
 		ColumnUtil.setDefaultValue(property, dataModel.getDefaultValue());
 		ColumnUtil.setLength(property, dataModel.getLength());
@@ -71,11 +72,11 @@ public class DataTransformer {
 		ColumnUtil.setScale(property, dataModel.getScale());
 
 		if (dataModel.isPrimaryKey()) {
-			PKUtil.applyStereotype(property);
+			StereotypeApplicationUtil.applyStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME);
 			PKUtil.setConstraintName(property, dataModel.getPrimaryKeyConstraintName());
 		}
 		if (dataModel.isForeignKey()) {
-			FKUtil.applyStereotype(property);
+			StereotypeApplicationUtil.applyStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME);
 			FKUtil.setConstraintName(property, dataModel.getForeignKeyConstraintName());
 			FKUtil.setReferencedEntity(property, dataModel.getReferencedEntity());
 			FKUtil.setReferencedProperty(property, dataModel.getReferencedProperty());
