@@ -8,25 +8,13 @@ Require-Bundle: javax.inject,
  org.eclipse.jface,
  org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.ui.di,
- org.eclipse.e4.ui.services,
- org.eclipse.e4.core.di.annotations,
- org.eclipse.uml2.uml,
  uml.profile,
- org.eclipse.papyrus.emf.facet.custom.metamodel,
  org.eclipse.emf.transaction,
- org.eclipse.core.databinding,
- org.eclipse.jface.databinding,
- org.eclipse.core.databinding.property,
- org.eclipse.core.databinding.beans,
  org.eclipse.e4.ui.workbench,
- org.eclipse.ui.workbench,
- org.eclipse.ui.ide,
- org.eclipse.ltk.core.refactoring,
- com.google.gson;bundle-version="2.8.6"
+ com.google.gson,
+ modeling.tools.util
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: database.modeling.view
 Import-Package: javax.annotation,
- org.eclipse.jdt.core,
- org.eclipse.jdt.core.refactoring,
- org.eclipse.jdt.core.refactoring.descriptors
+ org.slf4j;version="1.7.30"
 Bundle-ActivationPolicy: lazy

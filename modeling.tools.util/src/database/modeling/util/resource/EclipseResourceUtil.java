@@ -1,4 +1,4 @@
-package database.modeling.util;
+package database.modeling.util.resource;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,9 +68,8 @@ public class EclipseResourceUtil {
 		IPath ipath = org.eclipse.core.runtime.Path.fromOSString(path);
 		if (URI.createURI(path).isRelative()) {
 			return getResource(ipath, resourceType).getLocation();
-		} else {
-			return ipath;
 		}
+		return ipath;
 	}
 
 	public static IResource getResource(String path, int resourceType) {
@@ -160,8 +159,7 @@ public class EclipseResourceUtil {
 				IEditorRegistry.SYSTEM_EXTERNAL_EDITOR_ID);
 	}
 
-	public static void writeFile(String fileLocation, String fileName, InputStream targetStream)
-			throws CoreException, IOException {
+	public static void writeFile(String fileLocation, String fileName, InputStream targetStream) throws CoreException {
 		File file = new File(fileLocation, fileName);
 		IPath fromOSString = org.eclipse.core.runtime.Path.fromOSString(file.getPath());
 		IFile iFile = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(fromOSString);

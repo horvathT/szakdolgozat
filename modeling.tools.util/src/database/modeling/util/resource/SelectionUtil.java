@@ -1,4 +1,4 @@
-package database.modeling.util;
+package database.modeling.util.resource;
 
 import java.util.Collections;
 import java.util.List;

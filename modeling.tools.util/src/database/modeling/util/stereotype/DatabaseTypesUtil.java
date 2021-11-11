@@ -1,4 +1,4 @@
-package database.modeling.util;
+package database.modeling.util.stereotype;
 
 import java.util.ArrayList;
 import java.util.Arrays;

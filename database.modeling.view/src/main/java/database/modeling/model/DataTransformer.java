@@ -2,11 +2,11 @@ package database.modeling.model;
 
 import org.eclipse.uml2.uml.Property;
 
-import database.modeling.util.ColumnUtil;
-import database.modeling.util.FKUtil;
-import database.modeling.util.PKUtil;
-import database.modeling.util.ProfileUtil;
-import database.modeling.util.StereotypeApplicationUtil;
+import database.modeling.util.stereotype.ColumnUtil;
+import database.modeling.util.stereotype.FKUtil;
+import database.modeling.util.stereotype.PKUtil;
+import database.modeling.util.stereotype.ProfileUtil;
+import database.modeling.util.stereotype.StereotypeApplicationUtil;
 
 public class DataTransformer {
 

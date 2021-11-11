@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolItem;
 
 import database.modeling.model.PropertyEditingViewModelImpl;
-import database.modeling.util.DatabaseTypesUtil;
+import database.modeling.util.stereotype.DatabaseTypesUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class DatabaseSelectionListener extends SelectionAdapter {

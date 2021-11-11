@@ -1,4 +1,4 @@
-package database.modeling.util;
+package database.modeling.util.stereotype;
 
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;

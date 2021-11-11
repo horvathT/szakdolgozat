@@ -1,24 +1,33 @@
 package database.modeling.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLPackage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
-import database.modeling.util.ColumnUtil;
-import database.modeling.util.EclipseResourceUtil;
-import database.modeling.util.StereotypeApplicationUtil;
+import database.modeling.util.resource.EclipseResourceUtil;
+import database.modeling.util.stereotype.ColumnUtil;
+import database.modeling.util.stereotype.StereotypeApplicationUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class ModelConverter {
+
+	public static final Logger log = LoggerFactory.getLogger(ModelConverter.class);
 
 	Model model;
 
@@ -29,12 +38,32 @@ public class ModelConverter {
 		this.view = view;
 	}
 
-	public void convertModelToFile() {
+	public void writeModelToFile() {
 		Collection<Property> propertiesFromModel = getPropertiesFromModel(model);
-		// transform property to sql property
 		List<SQLProperty> sqlProperties = convertToSqlProperties(propertiesFromModel);
 		String json = new Gson().toJson(sqlProperties);
-		System.out.println("");
+
+		String filePath = constructFilePath();
+		String fileName = constructFileName();
+
+		try (InputStream targetStream = new ByteArrayInputStream(json.getBytes())) {
+			EclipseResourceUtil.writeFile(filePath, fileName, targetStream);
+			EclipseResourceUtil.refreshWorkspaceRoot();
+		} catch (IOException e) {
+			log.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
+		} catch (CoreException e) {
+			log.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
+		}
+	}
+
+	private String constructFileName() {
+		return model.getName() + "." + view.getDatabaseChanger().getText();
+	}
+
+	private String constructFilePath() {
+		IPath modelFilePath = getModelFilePath();
+		String filePath = modelFilePath.removeLastSegments(1).toOSString();
+		return filePath;
 	}
 
 	private Collection<Property> getProperties(EList<Element> elementList) {
@@ -45,8 +74,8 @@ public class ModelConverter {
 		return getProperties(model.allOwnedElements());
 	}
 
-	private String getModelFilePath() {
-		return EclipseResourceUtil.getResourceFileLocation(model.eResource());
+	private IPath getModelFilePath() {
+		return EclipseResourceUtil.getResourceFileLocationPath(model.eResource());
 	}
 
 	private List<SQLProperty> convertToSqlProperties(Collection<Property> properties) {

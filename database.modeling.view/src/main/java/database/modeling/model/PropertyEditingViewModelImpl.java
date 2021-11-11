@@ -40,7 +40,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		Property currentPropertySelection = view.getCurrentPropertySelection();
 		Model model = currentPropertySelection.getModel();
 		ModelConverter converter = new ModelConverter(model, view);
-		converter.convertModelToFile();
+		converter.writeModelToFile();
 
 		// adatok kiírása xml-be vagy gson/json serializer
 		// modell letakarítása
