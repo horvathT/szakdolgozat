@@ -38,13 +38,13 @@ public class ModelConverter {
 		this.view = view;
 	}
 
-	public void writeModelToFile() {
+	public void writeModelToFile(String currentySelectedDb) {
 		Collection<Property> propertiesFromModel = getPropertiesFromModel(model);
 		List<SQLProperty> sqlProperties = convertToSqlProperties(propertiesFromModel);
 		String json = new Gson().toJson(sqlProperties);
 
 		String filePath = constructFilePath();
-		String fileName = constructFileName();
+		String fileName = constructFileName(currentySelectedDb);
 
 		try (InputStream targetStream = new ByteArrayInputStream(json.getBytes())) {
 			EclipseResourceUtil.writeFile(filePath, fileName, targetStream);
@@ -56,8 +56,8 @@ public class ModelConverter {
 		}
 	}
 
-	private String constructFileName() {
-		return model.getName() + "." + view.getDatabaseChanger().getText();
+	private String constructFileName(String currentySelectedDb) {
+		return model.getName() + "." + currentySelectedDb;
 	}
 
 	private String constructFilePath() {
@@ -93,6 +93,16 @@ public class ModelConverter {
 		String xmiId = EcoreUtil.getURI(property).fragment();
 		sqlProperty.setXmiId(xmiId);
 		return sqlProperty;
+	}
+
+	public void clearModel() {
+
+		Collection<Property> properties = getPropertiesFromModel(model);
+	}
+
+	public void applyFileOnModel(String newlySelectedDbName) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

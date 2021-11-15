@@ -33,20 +33,22 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	}
 
 	@Override
-	public void databaseChanged(String currentDbSelected, String newDbName, SelectionEvent event) {
+	public void databaseChanged(String curentlySelectedDB, String newlySelectedDbName, SelectionEvent event) {
 		// (modellen lévő adatok validálása)
 		// modellen lévő összes adat begyűjtése
-
+		// adatok kiírása xml-be vagy gson/json serializer
 		Property currentPropertySelection = view.getCurrentPropertySelection();
 		Model model = currentPropertySelection.getModel();
 		ModelConverter converter = new ModelConverter(model, view);
-		converter.writeModelToFile();
+		converter.writeModelToFile(curentlySelectedDB);
 
-		// adatok kiírása xml-be vagy gson/json serializer
 		// modell letakarítása
+		converter.clearModel();
+
 		// újonnan kiválaszttot DB-hez xml fájl keresése (ha nincs akkor nem csinálunk
 		// semmit)
 		// fájl felolvsása
+		converter.applyFileOnModel(newlySelectedDbName);
 		// összevetés a modellel, esetleges változások/ összeférhetetlenség keresése (ha
 		// van hiba akkor error és hiba üzenet)
 		// apply on model
