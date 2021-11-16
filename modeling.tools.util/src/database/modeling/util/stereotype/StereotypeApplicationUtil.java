@@ -30,13 +30,6 @@ public class StereotypeApplicationUtil {
 		}
 	}
 
-	public static void removeStereotype(NamedElement property, String stereotpyeQualifiedName) {
-		if (hasStereotype(property, stereotpyeQualifiedName)) {
-			Stereotype applicableStereotype = property.getApplicableStereotype(stereotpyeQualifiedName);
-			property.unapplyStereotype(applicableStereotype);
-		}
-	}
-
 	static void setValue(String stereotpyeQualifiedName, String propertyName, NamedElement property, String data) {
 		if (data != null && property != null) {
 			Stereotype applicableStereotype = property.getApplicableStereotype(stereotpyeQualifiedName);
