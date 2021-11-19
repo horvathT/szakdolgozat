@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_H7RIcEcqEey1N5vSPJkqqg" name="DBprototype">
-  <packageImport xmi:type="uml:PackageImport" xmi:id="_H-HoIEcqEey1N5vSPJkqqg">
-    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
-  </packageImport>
-  <packagedElement xmi:type="uml:Interface" xmi:id="_M7gIIEcqEey1N5vSPJkqqg" name="Interface">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_ZH07EEcqEey1N5vSPJkqqg" name="interfacProp1">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_bTdFIEcqEey1N5vSPJkqqg" name="interfacProp2">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_O1GuEEcqEey1N5vSPJkqqg" name="Class">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_UUM0AEcqEey1N5vSPJkqqg" name="classProp1">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_WI9WMEcqEey1N5vSPJkqqg" name="classProp2">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
-  </packagedElement>
-  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_hslKYEcqEey1N5vSPJkqqg">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_hsnmoEcqEey1N5vSPJkqqg" source="PapyrusVersion">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmoUcqEey1N5vSPJkqqg" key="Version" value="0.0.1"/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmokcqEey1N5vSPJkqqg" key="Comment" value=""/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmo0cqEey1N5vSPJkqqg" key="Copyright" value=""/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmpEcqEey1N5vSPJkqqg" key="Date" value="2021-04-25"/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmpUcqEey1N5vSPJkqqg" key="Author" value=""/>
-    </eAnnotations>
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_hsmYgEcqEey1N5vSPJkqqg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-      <references xmi:type="ecore:EPackage" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw"/>
-    </eAnnotations>
-    <appliedProfile xmi:type="uml:Profile" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
-  </profileApplication>
-</uml:Model>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DatabaseModeling="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0 pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw">
+  <uml:Model xmi:id="_H7RIcEcqEey1N5vSPJkqqg" name="DBprototype">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_H-HoIEcqEey1N5vSPJkqqg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_M7gIIEcqEey1N5vSPJkqqg" name="Interface">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ZH07EEcqEey1N5vSPJkqqg" name="interfacProp1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_bTdFIEcqEey1N5vSPJkqqg" name="interfacProp2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_O1GuEEcqEey1N5vSPJkqqg" name="Class">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_UUM0AEcqEey1N5vSPJkqqg" name="classProp1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_WI9WMEcqEey1N5vSPJkqqg" name="classProp2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_hslKYEcqEey1N5vSPJkqqg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_hsnmoEcqEey1N5vSPJkqqg" source="PapyrusVersion">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmoUcqEey1N5vSPJkqqg" key="Version" value="0.0.1"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmokcqEey1N5vSPJkqqg" key="Comment" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmo0cqEey1N5vSPJkqqg" key="Copyright" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmpEcqEey1N5vSPJkqqg" key="Date" value="2021-04-25"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmpUcqEey1N5vSPJkqqg" key="Author" value=""/>
+      </eAnnotations>
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_hsmYgEcqEey1N5vSPJkqqg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
+    </profileApplication>
+  </uml:Model>
+  <DatabaseModeling:Column xmi:id="_TXxF8ElkEeytn4gMHN5rhw" base_Property="_ZH07EEcqEey1N5vSPJkqqg" dataType="NUMBER(precision, scale)" defaultValue="oracle" length="1" precision="1" scale="1"/>
+  <DatabaseModeling:Column xmi:id="_TX3zoElkEeytn4gMHN5rhw" base_Property="_bTdFIEcqEey1N5vSPJkqqg" defaultValue="oracle" length="1" precision="1" scale="1"/>
+  <DatabaseModeling:PK xmi:id="_TX6P4ElkEeytn4gMHN5rhw" base_Property="_bTdFIEcqEey1N5vSPJkqqg" primaryKeyConstraint="oracle"/>
+  <DatabaseModeling:FK xmi:id="_TX628ElkEeytn4gMHN5rhw" base_Property="_bTdFIEcqEey1N5vSPJkqqg" foreignKeyConstraint="oracle"/>
+</xmi:XMI>

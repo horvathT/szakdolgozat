@@ -1,6 +1,8 @@
 package database.modeling.model;
 
-public class SqlDataModel {
+public class PropertyDataModel {
+
+	private String xmiId;
 
 	private String length;
 	private String precision;
@@ -129,6 +131,14 @@ public class SqlDataModel {
 
 	public void setForeignKey(boolean foreignKey) {
 		this.foreignKey = foreignKey;
+	}
+
+	public String getXmiId() {
+		return xmiId;
+	}
+
+	public void setXmiId(String xmiId) {
+		this.xmiId = xmiId;
 	}
 
 }

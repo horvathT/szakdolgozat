@@ -63,6 +63,7 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 				combo.setItems(dbMap.get(newDbName));
 
 				viewModel.databaseChanged(currentDbSelected, newDbName, event);
+
 			}
 		});
 	}
@@ -81,10 +82,7 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 	}
 
 	private void setCurrentlySelectedDb() {
-		int selectionIndex = combo.getSelectionIndex();
-		if (selectionIndex != -1) {
-			currentDbSelected = combo.getItem(selectionIndex);
-		}
+		currentDbSelected = dropdown.getText();
 	}
 
 }

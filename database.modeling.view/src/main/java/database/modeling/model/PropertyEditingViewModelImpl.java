@@ -1,6 +1,7 @@
 package database.modeling.model;
 
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -10,6 +11,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
 
+import database.modeling.util.resource.EclipseModelUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
@@ -26,7 +28,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	@Override
 	public void selectionChanged(Property porperty) {
 		save();
-		view.setDataModel(new SqlDataModel());
+		view.setDataModel(new PropertyDataModel());
 		view.setCurrentPropertySelection(porperty);
 		setCurrentSelectionLabel();
 		updateDataInView(view.getCurrentPropertySelection());
@@ -34,10 +36,16 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	@Override
 	public void databaseChanged(String curentlySelectedDB, String newlySelectedDbName, SelectionEvent event) {
-		// (modellen lévő adatok validálása)
+		// adott selection mentése
+		save();
+		// selection xmiId-t elrakjuk későbbre
+		Property currentPropertySelection = view.getCurrentPropertySelection();
+		String fragment = EcoreUtil.getURI(currentPropertySelection).fragment();
+
+		// TODO(modellen lévő adatok validálása)
+
 		// modellen lévő összes adat begyűjtése
 		// adatok kiírása xml-be vagy gson/json serializer
-		Property currentPropertySelection = view.getCurrentPropertySelection();
 		Model model = currentPropertySelection.getModel();
 		ModelConverter converter = new ModelConverter(model, view);
 		converter.writeModelToFile(curentlySelectedDB);
@@ -45,13 +53,23 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		// modell letakarítása
 		converter.clearModel();
 
+		// TODO összevetés a modellel, esetleges változások/ összeférhetetlenség
+		// keresése (ha
+		// TODO van hiba akkor error és hiba üzenet)
+
 		// újonnan kiválaszttot DB-hez xml fájl keresése (ha nincs akkor nem csinálunk
 		// semmit)
 		// fájl felolvsása
-		converter.applyFileOnModel(newlySelectedDbName);
-		// összevetés a modellel, esetleges változások/ összeférhetetlenség keresése (ha
-		// van hiba akkor error és hiba üzenet)
 		// apply on model
+		converter.applyFileOnModel(newlySelectedDbName);
+
+		// view frissítése az új db adatokkal
+		Property propertySelectionAfterDBChange = EclipseModelUtil.getPropertyByXmiId(fragment, model);
+		if (propertySelectionAfterDBChange != null) {
+			updateDataInView(propertySelectionAfterDBChange);
+		} else {
+			resetView();
+		}
 	}
 
 	@Override
@@ -76,9 +94,10 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		editingDomain.getCommandStack().execute(recordingCommand);
 	}
 
-	protected void updateDataInView(Property property) {
+	@Override
+	public void updateDataInView(Property property) {
 		resetView();
-		SqlDataModel dataModel = DataTransformer.propertyToSqlDataModel(property);
+		PropertyDataModel dataModel = DataTransformer.propertyToSqlDataModel(property);
 		view.setDataModel(dataModel);
 		updateViewFromModel(dataModel);
 	}
@@ -104,7 +123,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getForeignKeyCheck().setSelection(false);
 	}
 
-	private void updateViewFromModel(SqlDataModel model) {
+	private void updateViewFromModel(PropertyDataModel model) {
 		view.getNullableCheck().setSelection(model.isNullable());
 		view.getUniqueCheck().setSelection(model.isUnique());
 		view.getAutoIncrementCheck().setSelection(model.isAutoIncrement());
@@ -142,7 +161,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		}
 	}
 
-	public boolean isEmpty() {
+	private boolean isEmpty() {
 		if (view.getNullableCheck().getSelection() || view.getUniqueCheck().getSelection()
 				|| view.getAutoIncrementCheck().getSelection() || view.getPrimaryKeyCheck().getSelection()
 				|| view.getForeignKeyCheck().getSelection()) {
@@ -161,16 +180,16 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		return true;
 	}
 
-	public boolean isEmpty(Text text) {
+	private boolean isEmpty(Text text) {
 		return text.getText().isEmpty();
 	}
 
-	public boolean isEmpty(Combo combo) {
+	private boolean isEmpty(Combo combo) {
 		return combo.getText().isEmpty();
 	}
 
-	public SqlDataModel updateModelFromView() {
-		SqlDataModel model = new SqlDataModel();
+	public PropertyDataModel updateModelFromView() {
+		PropertyDataModel model = new PropertyDataModel();
 		model.setNullable(view.getNullableCheck().getSelection());
 		model.setUnique(view.getUniqueCheck().getSelection());
 		model.setAutoIncrement(view.getAutoIncrementCheck().getSelection());

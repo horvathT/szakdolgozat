@@ -1,5 +1,6 @@
 package database.modeling.model;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Property;
 
 import database.modeling.util.stereotype.ColumnUtil;
@@ -10,8 +11,11 @@ import database.modeling.util.stereotype.StereotypeApplicationUtil;
 
 public class DataTransformer {
 
-	public static SqlDataModel propertyToSqlDataModel(Property property) {
-		SqlDataModel dataModel = new SQLProperty();
+	public static PropertyDataModel propertyToSqlDataModel(Property property) {
+		PropertyDataModel dataModel = new PropertyDataModel();
+
+		dataModel.setXmiId(EcoreUtil.getURI(property).fragment());
+
 		if (StereotypeApplicationUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			// dataType
 			dataModel.setSqlType(ColumnUtil.getDataType(property));
@@ -62,7 +66,7 @@ public class DataTransformer {
 		return dataModel;
 	}
 
-	public static Property applyModelOnProperty(SqlDataModel dataModel, Property property) {
+	public static Property applyModelOnProperty(PropertyDataModel dataModel, Property property) {
 		ProfileUtil.applyPofile(property);
 		StereotypeApplicationUtil.applyStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME);
 		ColumnUtil.setDataType(property, dataModel.getSqlType());

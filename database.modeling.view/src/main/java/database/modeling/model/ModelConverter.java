@@ -3,6 +3,9 @@ package database.modeling.model;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,16 +17,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
-import org.eclipse.uml2.uml.UMLPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import database.modeling.util.resource.EclipseModelUtil;
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
@@ -44,8 +47,8 @@ public class ModelConverter {
 	}
 
 	public void writeModelToFile(String currentySelectedDb) {
-		Collection<Property> propertiesFromModel = getPropertiesFromModel(model);
-		List<SQLProperty> sqlProperties = convertToSqlProperties(propertiesFromModel);
+		Collection<Property> propertiesFromModel = EclipseModelUtil.getPropertiesFromModel(model);
+		List<PropertyDataModel> sqlProperties = convertToSqlProperties(propertiesFromModel);
 		String json = new Gson().toJson(sqlProperties);
 
 		String filePath = constructFilePath();
@@ -66,25 +69,13 @@ public class ModelConverter {
 	}
 
 	private String constructFilePath() {
-		IPath modelFilePath = getModelFilePath();
+		IPath modelFilePath = EclipseModelUtil.getModelFilePath(model);
 		String filePath = modelFilePath.removeLastSegments(1).toOSString();
 		return filePath;
 	}
 
-	private Collection<Property> getProperties(EList<Element> elementList) {
-		return EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.PROPERTY);
-	}
-
-	private Collection<Property> getPropertiesFromModel(Model model) {
-		return getProperties(model.allOwnedElements());
-	}
-
-	private IPath getModelFilePath() {
-		return EclipseResourceUtil.getResourceFileLocationPath(model.eResource());
-	}
-
-	private List<SQLProperty> convertToSqlProperties(Collection<Property> properties) {
-		List<SQLProperty> sqlProperties = new ArrayList<>();
+	private List<PropertyDataModel> convertToSqlProperties(Collection<Property> properties) {
+		List<PropertyDataModel> sqlProperties = new ArrayList<>();
 		for (Property property : properties) {
 			if (StereotypeApplicationUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
 				sqlProperties.add(convertToSqlPropery(property));
@@ -93,8 +84,8 @@ public class ModelConverter {
 		return sqlProperties;
 	}
 
-	private SQLProperty convertToSqlPropery(Property property) {
-		SQLProperty sqlProperty = (SQLProperty) DataTransformer.propertyToSqlDataModel(property);
+	private PropertyDataModel convertToSqlPropery(Property property) {
+		PropertyDataModel sqlProperty = DataTransformer.propertyToSqlDataModel(property);
 		String xmiId = EcoreUtil.getURI(property).fragment();
 		sqlProperty.setXmiId(xmiId);
 		return sqlProperty;
@@ -112,7 +103,7 @@ public class ModelConverter {
 					model.unapplyStereotype(appliedStereotype);
 				}
 
-				Collection<Property> properties = getPropertiesFromModel(model);
+				Collection<Property> properties = EclipseModelUtil.getPropertiesFromModel(model);
 				for (Property property : properties) {
 					EList<Stereotype> appliedStereotypes = property.getAppliedStereotypes();
 					for (Stereotype stereotype : appliedStereotypes) {
@@ -126,31 +117,49 @@ public class ModelConverter {
 	}
 
 	public void applyFileOnModel(String newlySelectedDbName) {
-//		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(model);
-//		RecordingCommand command = new RecordingCommand(editingDomain) {
-//			@Override
-//			protected void doExecute() {
-//
-//				String filePath = constructFilePath();
-//				String fileName = constructFileName(newlySelectedDbName);
-//				Path path = Path.of(filePath, fileName);
-//
-//				if (Files.exists(path)) {
-//					String fileString = null;
-//					try {
-//						fileString = Files.readString(path);
-//					} catch (IOException e) {
-//						log.error("Error reading file from path: " + path);
-//						e.printStackTrace();
-//					}
-//					Type targetClassType = new TypeToken<ArrayList<SQLProperty>>() {
-//					}.getType();
-//					Collection<SQLProperty> propertyCollection = new Gson().fromJson(fileString, targetClassType);
-//				}
-//
-//			}
-//		};
-//		editingDomain.getCommandStack().execute(command);
+		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(model);
+		RecordingCommand command = new RecordingCommand(editingDomain) {
+			@Override
+			protected void doExecute() {
+
+				String filePath = constructFilePath();
+				String fileName = constructFileName(newlySelectedDbName);
+				Path path = Path.of(filePath, fileName);
+
+				if (Files.exists(path)) {
+					String fileString = null;
+					try {
+						fileString = Files.readString(path);
+					} catch (IOException e) {
+						log.error("Error reading file from path: " + path);
+						e.printStackTrace();
+					}
+					Type targetClassType = new TypeToken<ArrayList<PropertyDataModel>>() {
+					}.getType();
+					Collection<PropertyDataModel> propertyCollection = new Gson().fromJson(fileString, targetClassType);
+					applyOnProperties(propertyCollection);
+				}
+
+			}
+
+		};
+		editingDomain.getCommandStack().execute(command);
+	}
+
+	private void applyOnProperties(Collection<PropertyDataModel> propertyCollection) {
+		for (PropertyDataModel sqlProperty : propertyCollection) {
+			applyOnProperty(sqlProperty);
+		}
+
+	}
+
+	private void applyOnProperty(PropertyDataModel sqlProperty) {
+		String xmiId = sqlProperty.getXmiId();
+		Property property = EclipseModelUtil.getPropertyByXmiId(xmiId, model);
+		if (property != null) {
+			DataTransformer.applyModelOnProperty(sqlProperty, property);
+		}
+
 	}
 
 }

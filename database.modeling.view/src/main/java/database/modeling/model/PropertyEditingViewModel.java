@@ -11,4 +11,5 @@ public interface PropertyEditingViewModel {
 
 	public void save();
 
+	public void updateDataInView(Property property);
 }

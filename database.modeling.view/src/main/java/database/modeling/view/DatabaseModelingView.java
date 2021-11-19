@@ -32,7 +32,7 @@ import org.eclipse.uml2.uml.Property;
 
 import database.modeling.handler.DatabaseSelectionListener;
 import database.modeling.model.PropertyEditingViewModelImpl;
-import database.modeling.model.SqlDataModel;
+import database.modeling.model.PropertyDataModel;
 
 public class DatabaseModelingView {
 
@@ -61,7 +61,7 @@ public class DatabaseModelingView {
 	private Label currentSelectionLabel;
 	private ToolBar toolBar;
 
-	private SqlDataModel dataModel;
+	private PropertyDataModel dataModel;
 	private Property currentPropertySelection;
 
 	@Inject
@@ -78,7 +78,7 @@ public class DatabaseModelingView {
 	@PostConstruct
 	public void createPartControl(Composite parent) {
 
-		dataModel = new SqlDataModel();
+		dataModel = new PropertyDataModel();
 
 		scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setExpandHorizontal(true);
@@ -369,11 +369,11 @@ public class DatabaseModelingView {
 		return databaseChanger;
 	}
 
-	public SqlDataModel getDataModel() {
+	public PropertyDataModel getDataModel() {
 		return dataModel;
 	}
 
-	public void setDataModel(SqlDataModel dataModel) {
+	public void setDataModel(PropertyDataModel dataModel) {
 		this.dataModel = dataModel;
 	}
 
