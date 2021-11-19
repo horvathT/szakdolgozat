@@ -62,7 +62,7 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 				Map<String, String[]> dbMap = dbUtil.getDatabaseTypeMap();
 				combo.setItems(dbMap.get(newDbName));
 
-				viewModel.databaseChanged(currentDbSelected, newDbName, event);
+				viewModel.databaseChanged(currentDbSelected, newDbName);
 
 			}
 		});

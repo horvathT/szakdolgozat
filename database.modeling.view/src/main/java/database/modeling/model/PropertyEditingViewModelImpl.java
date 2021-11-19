@@ -1,28 +1,25 @@
 package database.modeling.model;
 
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
 
 import database.modeling.util.resource.EclipseModelUtil;
+import database.modeling.util.stereotype.DatabaseModelUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	DatabaseModelingView view;
 
-	EPartService partService;
-
-	public PropertyEditingViewModelImpl(DatabaseModelingView view, EPartService partService) {
+	public PropertyEditingViewModelImpl(DatabaseModelingView view) {
 		this.view = view;
-		this.partService = partService;
 	}
 
 	@Override
@@ -31,11 +28,27 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.setDataModel(new PropertyDataModel());
 		view.setCurrentPropertySelection(porperty);
 		setCurrentSelectionLabel();
-		updateDataInView(view.getCurrentPropertySelection());
+
+		// Meg kell nézni hogy a váltás után is ugyan abban a DB típusban vagyunk-e
+		Model model = porperty.getModel();
+		String modelDBType = DatabaseModelUtil.getDatabaseType(model);
+		ToolItem databaseChanger = view.getDatabaseChanger();
+
+		if (modelDBType != null) {
+			String selectedDBType = databaseChanger.getText();
+			if (modelDBType.equals(selectedDBType)) {
+				updateDataInView(view.getCurrentPropertySelection());
+			} else {
+				databaseChanged(selectedDBType, selectedDBType);
+				updateDataInView(view.getCurrentPropertySelection());
+			}
+		} else {
+			updateDataInView(view.getCurrentPropertySelection());
+		}
 	}
 
 	@Override
-	public void databaseChanged(String curentlySelectedDB, String newlySelectedDbName, SelectionEvent event) {
+	public void databaseChanged(String curentlySelectedDB, String newlySelectedDbName) {
 		// adott selection mentése
 		save();
 		// selection xmiId-t elrakjuk későbbre

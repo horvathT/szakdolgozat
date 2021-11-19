@@ -8,13 +8,14 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.modeling.ISelectionListener;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.VerifyEvent;
@@ -31,8 +32,8 @@ import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
 
 import database.modeling.handler.DatabaseSelectionListener;
-import database.modeling.model.PropertyEditingViewModelImpl;
 import database.modeling.model.PropertyDataModel;
+import database.modeling.model.PropertyEditingViewModelImpl;
 
 public class DatabaseModelingView {
 
@@ -64,19 +65,25 @@ public class DatabaseModelingView {
 	private PropertyDataModel dataModel;
 	private Property currentPropertySelection;
 
-	@Inject
-	ESelectionService selectionService;
-
 	private PropertyEditingViewModelImpl viewModel;
 	private DatabaseSelectionListener dbSelectionListener;
 
 	@Inject
-	public DatabaseModelingView(EPartService partService) {
-		viewModel = new PropertyEditingViewModelImpl(this, partService);
+	ESelectionService selectionService;
+
+	private SelectionAdapter forignKeyCheckListener;
+	private SelectionAdapter primaryKeyCheckListener;
+	private SelectionAdapter nullableCheckListener;
+	private ISelectionListener selectionChangeListener;
+
+	@Inject
+	public DatabaseModelingView() {
+
 	}
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
+		onDispose(parent);
 
 		dataModel = new PropertyDataModel();
 
@@ -200,6 +207,23 @@ public class DatabaseModelingView {
 
 		dbSelectionListener = new DatabaseSelectionListener(this);
 		databaseChanger.addSelectionListener(dbSelectionListener);
+
+		viewModel = new PropertyEditingViewModelImpl(this);
+	}
+
+	private void onDispose(Composite parent) {
+		parent.addDisposeListener(new DisposeListener() {
+
+			@Override
+			public void widgetDisposed(DisposeEvent e) {
+				foreignKeyCheck.removeSelectionListener(forignKeyCheckListener);
+				primaryKeyCheck.removeSelectionListener(primaryKeyCheckListener);
+				nullableCheck.removeSelectionListener(nullableCheckListener);
+				databaseChanger.removeSelectionListener(dbSelectionListener);
+				selectionService.removeSelectionListener(selectionChangeListener);
+			}
+		});
+
 	}
 
 	private static void verifyNumberField(VerifyEvent e) {
@@ -209,7 +233,7 @@ public class DatabaseModelingView {
 	}
 
 	private void setupSelectionListener() {
-		selectionService.addSelectionListener(new ISelectionListener() {
+		selectionChangeListener = new ISelectionListener() {
 
 			@Override
 			public void selectionChanged(MPart part, Object selection) {
@@ -225,12 +249,12 @@ public class DatabaseModelingView {
 					}
 				}
 			}
-		});
+		};
+		selectionService.addSelectionListener(selectionChangeListener);
 	}
 
 	private void primaryKeyCannotBeNullable() {
-		primaryKeyCheck.addSelectionListener(new SelectionAdapter() {
-
+		primaryKeyCheckListener = new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (primaryKeyCheck.getSelection()) {
@@ -241,11 +265,10 @@ public class DatabaseModelingView {
 					primaryKeyConstraintName.setEnabled(false);
 				}
 			}
+		};
+		primaryKeyCheck.addSelectionListener(primaryKeyCheckListener);
 
-		});
-
-		nullableCheck.addSelectionListener(new SelectionAdapter() {
-
+		nullableCheckListener = new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (nullableCheck.getSelection()) {
@@ -256,12 +279,12 @@ public class DatabaseModelingView {
 					primaryKeyConstraintName.setEnabled(true);
 				}
 			}
-
-		});
+		};
+		nullableCheck.addSelectionListener(nullableCheckListener);
 	}
 
 	private void foreignKeyCheckBoxListener() {
-		foreignKeyCheck.addSelectionListener(new SelectionAdapter() {
+		forignKeyCheckListener = new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (foreignKeyCheck.getSelection()) {
@@ -274,7 +297,8 @@ public class DatabaseModelingView {
 					foreignKeyConstraintName.setEnabled(false);
 				}
 			}
-		});
+		};
+		foreignKeyCheck.addSelectionListener(forignKeyCheckListener);
 	}
 
 	@Focus
