@@ -34,8 +34,9 @@
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:Column xmi:id="_TXxF8ElkEeytn4gMHN5rhw" base_Property="_ZH07EEcqEey1N5vSPJkqqg" dataType="NUMBER(precision, scale)" defaultValue="oracle" length="1" precision="1" scale="1"/>
-  <DatabaseModeling:Column xmi:id="_TX3zoElkEeytn4gMHN5rhw" base_Property="_bTdFIEcqEey1N5vSPJkqqg" defaultValue="oracle" length="1" precision="1" scale="1"/>
-  <DatabaseModeling:PK xmi:id="_TX6P4ElkEeytn4gMHN5rhw" base_Property="_bTdFIEcqEey1N5vSPJkqqg" primaryKeyConstraint="oracle"/>
-  <DatabaseModeling:FK xmi:id="_TX628ElkEeytn4gMHN5rhw" base_Property="_bTdFIEcqEey1N5vSPJkqqg" foreignKeyConstraint="oracle"/>
+  <DatabaseModeling:Column xmi:id="_kG88EEmQEeyWroKH7NIoJQ" base_Property="_ZH07EEcqEey1N5vSPJkqqg" dataType="INT" defaultValue="oracle"/>
+  <DatabaseModeling:Column xmi:id="_kHGGAEmQEeyWroKH7NIoJQ" base_Property="_bTdFIEcqEey1N5vSPJkqqg" dataType="INT" defaultValue="oracle"/>
+  <DatabaseModeling:Column xmi:id="_kHOB0EmQEeyWroKH7NIoJQ" base_Property="_UUM0AEcqEey1N5vSPJkqqg" dataType="INT" defaultValue="oracle"/>
+  <DatabaseModeling:Column xmi:id="_kHXLwEmQEeyWroKH7NIoJQ" base_Property="_WI9WMEcqEey1N5vSPJkqqg" defaultValue="oracle"/>
+  <DatabaseModeling:DatabaseModel xmi:id="_kHZA8EmQEeyWroKH7NIoJQ" base_Package="_H7RIcEcqEey1N5vSPJkqqg" databaseType="Oracle"/>
 </xmi:XMI>

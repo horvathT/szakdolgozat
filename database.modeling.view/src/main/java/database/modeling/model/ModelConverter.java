@@ -138,6 +138,7 @@ public class ModelConverter {
 					}.getType();
 					Collection<PropertyDataModel> propertyCollection = new Gson().fromJson(fileString, targetClassType);
 					applyOnProperties(propertyCollection);
+					applyOnModelPackage(newlySelectedDbName);
 				}
 
 			}
@@ -159,7 +160,10 @@ public class ModelConverter {
 		if (property != null) {
 			DataTransformer.applyModelOnProperty(sqlProperty, property);
 		}
+	}
 
+	private void applyOnModelPackage(String newlySelectedDbName) {
+		DatabaseModelUtil.setDatabaseType(model, newlySelectedDbName);
 	}
 
 }

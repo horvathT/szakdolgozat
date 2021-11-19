@@ -1,5 +1,8 @@
 package database.modeling.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -12,11 +15,14 @@ import org.eclipse.uml2.uml.Property;
 
 import database.modeling.util.resource.EclipseModelUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
+import database.modeling.util.stereotype.DatabaseTypesUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	DatabaseModelingView view;
+
+	private DatabaseTypesUtil dbUtil = new DatabaseTypesUtil();
 
 	public PropertyEditingViewModelImpl(DatabaseModelingView view) {
 		this.view = view;
@@ -39,7 +45,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 			if (modelDBType.equals(selectedDBType)) {
 				updateDataInView(view.getCurrentPropertySelection());
 			} else {
-				databaseChanged(selectedDBType, selectedDBType);
+				databaseChanged(selectedDBType, modelDBType);
+				view.getDatabaseChanger().setText(modelDBType);
+
 				updateDataInView(view.getCurrentPropertySelection());
 			}
 		} else {
@@ -220,6 +228,19 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		model.setReferencedEntity(view.getReferencedEntity().getText());
 		model.setReferencedProperty(view.getReferencedProperty().getText());
 		return model;
+	}
+
+	@Override
+	public void updateDatabaseChanger(String newDbName) {
+		view.getDatabaseChanger().setText(newDbName);
+		view.getDatabaseChanger().setSelection(true);
+		Map<String, String[]> dbMap = dbUtil.getDatabaseTypeMap();
+		view.getSqlTypeCombo().setItems(dbMap.get(newDbName));
+	}
+
+	@Override
+	public List<String> getDatabaseTypes() {
+		return dbUtil.getDatabases();
 	}
 
 }

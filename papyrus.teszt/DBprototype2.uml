@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DatabaseModeling="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0 platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw">
+  <uml:Model xmi:id="_q50YAEmFEey7GItKbTSaRw" name="papyrus">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_q7cvsEmFEey7GItKbTSaRw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_wQfhwEmFEey7GItKbTSaRw" name="Class2">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_5eC2cEmFEey7GItKbTSaRw" name="classProperty9">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_CnJwAEmGEey7GItKbTSaRw" name="classProperty8">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_xCwsMEmFEey7GItKbTSaRw" name="Interface3">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_GflaIEmGEey7GItKbTSaRw" name="interfaceProperty7">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_IuKKgEmGEey7GItKbTSaRw" name="interfaceProperty6">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_OzLoAEmGEey7GItKbTSaRw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_OzMPEEmGEey7GItKbTSaRw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
+    </profileApplication>
+  </uml:Model>
+  <DatabaseModeling:Column xmi:id="_kfFvQEmQEeyWroKH7NIoJQ" base_Property="_5eC2cEmFEey7GItKbTSaRw" dataType="INT" defaultValue="mysql" length="9" precision="9" scale="9"/>
+  <DatabaseModeling:Column xmi:id="_kfNrEEmQEeyWroKH7NIoJQ" base_Property="_CnJwAEmGEey7GItKbTSaRw" defaultValue="mysql" length="8" precision="8" scale="8"/>
+  <DatabaseModeling:Column xmi:id="_kfWN8EmQEeyWroKH7NIoJQ" base_Property="_GflaIEmGEey7GItKbTSaRw" dataType="INT" defaultValue="mysql" length="7" precision="7" scale="7"/>
+  <DatabaseModeling:Column xmi:id="_kfeJwEmQEeyWroKH7NIoJQ" base_Property="_IuKKgEmGEey7GItKbTSaRw" defaultValue="mysql" length="6" precision="6" scale="6"/>
+  <DatabaseModeling:DatabaseModel xmi:id="_kff-8EmQEeyWroKH7NIoJQ" base_Package="_q50YAEmFEey7GItKbTSaRw" databaseType="MySQL"/>
+</xmi:XMI>

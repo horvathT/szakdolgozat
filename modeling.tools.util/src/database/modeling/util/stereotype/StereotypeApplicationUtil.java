@@ -44,10 +44,10 @@ public class StereotypeApplicationUtil {
 		}
 	}
 
-	static String getStringAttributeValue(String stereotpyeQualifiedName, NamedElement property, String attributeName) {
-		Stereotype applicableStereotype = property.getApplicableStereotype(stereotpyeQualifiedName);
-		if (property.isStereotypeApplied(applicableStereotype)) {
-			String value = (String) property.getValue(applicableStereotype, attributeName);
+	static String getStringAttributeValue(String stereotpyeQualifiedName, NamedElement element, String attributeName) {
+		Stereotype applicableStereotype = element.getApplicableStereotype(stereotpyeQualifiedName);
+		if (element.isStereotypeApplied(applicableStereotype)) {
+			String value = (String) element.getValue(applicableStereotype, attributeName);
 			if (value != null) {
 				return value;
 			}

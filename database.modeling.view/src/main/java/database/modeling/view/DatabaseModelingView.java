@@ -205,10 +205,11 @@ public class DatabaseModelingView {
 		foreignKeyCheckBoxListener();
 		setupSelectionListener();
 
+		viewModel = new PropertyEditingViewModelImpl(this);
+
 		dbSelectionListener = new DatabaseSelectionListener(this);
 		databaseChanger.addSelectionListener(dbSelectionListener);
 
-		viewModel = new PropertyEditingViewModelImpl(this);
 	}
 
 	private void onDispose(Composite parent) {
