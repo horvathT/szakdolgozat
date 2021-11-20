@@ -11,7 +11,7 @@ public class DatabaseModelUtil {
 	}
 
 	public static void setDatabaseType(Package pack, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, DATABASE_TYPE, pack, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, DATABASE_TYPE, pack, data);
 	}
 
 }

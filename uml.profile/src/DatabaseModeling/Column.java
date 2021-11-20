@@ -21,6 +21,8 @@ import org.eclipse.uml2.uml.Property;
  *   <li>{@link DatabaseModeling.Column#getLength <em>Length</em>}</li>
  *   <li>{@link DatabaseModeling.Column#getPrecision <em>Precision</em>}</li>
  *   <li>{@link DatabaseModeling.Column#getScale <em>Scale</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#isUnique <em>Unique</em>}</li>
+ *   <li>{@link DatabaseModeling.Column#isNullable <em>Nullable</em>}</li>
  * </ul>
  *
  * @see DatabaseModeling.DatabaseModelingPackage#getColumn()
@@ -188,5 +190,59 @@ public interface Column extends EObject {
 	 * @generated
 	 */
 	void setScale(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Unique</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unique</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Unique</em>' attribute.
+	 * @see #setUnique(boolean)
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Unique()
+	 * @model default="false" dataType="org.eclipse.uml2.types.Boolean" required="true" ordered="false"
+	 * @generated
+	 */
+	boolean isUnique();
+
+	/**
+	 * Sets the value of the '{@link DatabaseModeling.Column#isUnique <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unique</em>' attribute.
+	 * @see #isUnique()
+	 * @generated
+	 */
+	void setUnique(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Nullable</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nullable</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nullable</em>' attribute.
+	 * @see #setNullable(boolean)
+	 * @see DatabaseModeling.DatabaseModelingPackage#getColumn_Nullable()
+	 * @model default="false" dataType="org.eclipse.uml2.types.Boolean" ordered="false"
+	 * @generated
+	 */
+	boolean isNullable();
+
+	/**
+	 * Sets the value of the '{@link DatabaseModeling.Column#isNullable <em>Nullable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Nullable</em>' attribute.
+	 * @see #isNullable()
+	 * @generated
+	 */
+	void setNullable(boolean value);
 
 } // Column

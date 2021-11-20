@@ -30,7 +30,8 @@ public class StereotypeApplicationUtil {
 		}
 	}
 
-	static void setValue(String stereotpyeQualifiedName, String propertyName, NamedElement property, String data) {
+	static void setStringValue(String stereotpyeQualifiedName, String propertyName, NamedElement property,
+			String data) {
 		if (data != null && property != null) {
 			Stereotype applicableStereotype = property.getApplicableStereotype(stereotpyeQualifiedName);
 			if (StereotypeApplicationUtil.hasStereotype(property, stereotpyeQualifiedName)) {
@@ -53,6 +54,32 @@ public class StereotypeApplicationUtil {
 			}
 		}
 		return "";
+	}
+
+	static void setBooleanValue(String stereotpyeQualifiedName, String propertyName, NamedElement property,
+			boolean data) {
+
+		if (property != null) {
+			Stereotype applicableStereotype = property.getApplicableStereotype(stereotpyeQualifiedName);
+			if (StereotypeApplicationUtil.hasStereotype(property, stereotpyeQualifiedName)) {
+				property.setValue(applicableStereotype, propertyName, Boolean.valueOf(data));
+			} else {
+				if (applicableStereotype != null) {
+					StereotypeApplicationUtil.applyStereotype(property, stereotpyeQualifiedName);
+					property.setValue(applicableStereotype, propertyName, data);
+				}
+			}
+		}
+	}
+
+	static boolean getBooleanAttributeValue(String stereotpyeQualifiedName, NamedElement element,
+			String attributeName) {
+		Stereotype applicableStereotype = element.getApplicableStereotype(stereotpyeQualifiedName);
+		if (element.isStereotypeApplied(applicableStereotype)) {
+			return (boolean) element.getValue(applicableStereotype, attributeName);
+		}
+		throw new IllegalArgumentException(
+				"Stereotype: " + stereotpyeQualifiedName + "is not applied on element: " + element.toString());
 	}
 
 }

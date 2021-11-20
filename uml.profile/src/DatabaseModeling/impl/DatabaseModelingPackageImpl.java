@@ -188,6 +188,24 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getColumn_Unique() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumn_Nullable() {
+		return (EAttribute)columnEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPK() {
 		return pkEClass;
 	}
@@ -317,6 +335,8 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 		createEAttribute(columnEClass, COLUMN__LENGTH);
 		createEAttribute(columnEClass, COLUMN__PRECISION);
 		createEAttribute(columnEClass, COLUMN__SCALE);
+		createEAttribute(columnEClass, COLUMN__UNIQUE);
+		createEAttribute(columnEClass, COLUMN__NULLABLE);
 
 		pkEClass = createEClass(PK);
 		createEReference(pkEClass, PK__BASE_PROPERTY);
@@ -374,6 +394,8 @@ public class DatabaseModelingPackageImpl extends EPackageImpl implements Databas
 		initEAttribute(getColumn_Length(), theTypesPackage.getString(), "length", "", 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getColumn_Precision(), theTypesPackage.getString(), "precision", "", 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getColumn_Scale(), theTypesPackage.getString(), "scale", "", 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_Unique(), theTypesPackage.getBoolean(), "unique", "false", 1, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getColumn_Nullable(), theTypesPackage.getBoolean(), "nullable", "false", 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(pkEClass, DatabaseModeling.PK.class, "PK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPK_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 0, 1, DatabaseModeling.PK.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

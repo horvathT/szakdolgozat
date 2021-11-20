@@ -8,6 +8,8 @@ public class ColumnUtil {
 	private static final String LENGTH = "length";
 	private static final String DATA_TYPE = "dataType";
 	private static final String DEFAULT_VALUE = "defaultValue";
+	private static final String NULLABLE = "nullable";
+	private static final String UNIQUE = "unique";
 
 	public final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::Column";
 
@@ -16,7 +18,7 @@ public class ColumnUtil {
 	}
 
 	public static void setDataType(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, DATA_TYPE, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, DATA_TYPE, property, data);
 	}
 
 	public static String getDefaultValue(Property property) {
@@ -24,7 +26,7 @@ public class ColumnUtil {
 	}
 
 	public static void setDefaultValue(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, DEFAULT_VALUE, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, DEFAULT_VALUE, property, data);
 	}
 
 	public static String getLength(Property property) {
@@ -32,7 +34,7 @@ public class ColumnUtil {
 	}
 
 	public static void setLength(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, LENGTH, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, LENGTH, property, data);
 	}
 
 	public static String getScale(Property property) {
@@ -40,7 +42,7 @@ public class ColumnUtil {
 	}
 
 	public static void setScale(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, SCALE, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, SCALE, property, data);
 	}
 
 	public static String getPrecision(Property property) {
@@ -48,7 +50,23 @@ public class ColumnUtil {
 	}
 
 	public static void setPrecision(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, PRECISION, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, PRECISION, property, data);
+	}
+
+	public static boolean getUnique(Property property) {
+		return StereotypeApplicationUtil.getBooleanAttributeValue(STEREOTYPE_QUALIFIED_NAME, property, UNIQUE);
+	}
+
+	public static void setUnique(Property property, boolean data) {
+		StereotypeApplicationUtil.setBooleanValue(STEREOTYPE_QUALIFIED_NAME, UNIQUE, property, data);
+	}
+
+	public static boolean getNullable(Property property) {
+		return StereotypeApplicationUtil.getBooleanAttributeValue(STEREOTYPE_QUALIFIED_NAME, property, NULLABLE);
+	}
+
+	public static void setNullable(Property property, boolean data) {
+		StereotypeApplicationUtil.setBooleanValue(STEREOTYPE_QUALIFIED_NAME, NULLABLE, property, data);
 	}
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DatabaseModeling="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0 platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DatabaseModeling="http:///schemas/DatabaseModeling/_zxtksEpUEeykKLPoPu3NAg/2" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/DatabaseModeling/_zxtksEpUEeykKLPoPu3NAg/2 platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_zxuLwEpUEeykKLPoPu3NAg">
   <uml:Model xmi:id="_q50YAEmFEey7GItKbTSaRw" name="papyrus">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_q7cvsEmFEey7GItKbTSaRw">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -21,15 +21,18 @@
       </ownedAttribute>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_OzLoAEmGEey7GItKbTSaRw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_K5zhoEpVEeycBIuMEUOj6A" source="PapyrusVersion">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_K5zhoUpVEeycBIuMEUOj6A" key="Version" value="0.0.3"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_K5zhokpVEeycBIuMEUOj6A" key="Comment" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_K5zho0pVEeycBIuMEUOj6A" key="Copyright" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_K5zhpEpVEeycBIuMEUOj6A" key="Date" value="2021-11-20"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_K5zhpUpVEeycBIuMEUOj6A" key="Author" value=""/>
+      </eAnnotations>
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_OzMPEEmGEey7GItKbTSaRw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw"/>
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_zxuLwEpUEeykKLPoPu3NAg"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:Column xmi:id="_Oth5cEoqEeya0PPbS98n_A" base_Property="_5eC2cEmFEey7GItKbTSaRw" dataType="INT" defaultValue="mysql" length="9" precision="9" scale="9"/>
-  <DatabaseModeling:Column xmi:id="_OtnZAEoqEeya0PPbS98n_A" base_Property="_CnJwAEmGEey7GItKbTSaRw" defaultValue="mysql" length="8" precision="8" scale="8"/>
-  <DatabaseModeling:Column xmi:id="_OtsRgEoqEeya0PPbS98n_A" base_Property="_GflaIEmGEey7GItKbTSaRw" dataType="INT" defaultValue="mysql" length="7" precision="7" scale="7"/>
-  <DatabaseModeling:Column xmi:id="_Otwi8EoqEeya0PPbS98n_A" base_Property="_IuKKgEmGEey7GItKbTSaRw" defaultValue="mysql" length="6" precision="6" scale="6"/>
   <DatabaseModeling:DatabaseModel xmi:id="_OtxxEEoqEeya0PPbS98n_A" base_Package="_q50YAEmFEey7GItKbTSaRw" databaseType="MySQL"/>
 </xmi:XMI>

@@ -40,6 +40,8 @@
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/length"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/precision"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/scale"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/unique"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute DatabaseModeling.ecore#//Column/nullable"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="DatabaseModeling.ecore#//PK">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"

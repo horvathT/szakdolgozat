@@ -15,7 +15,7 @@ public class FKUtil {
 	}
 
 	public static void setConstraintName(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, FOREIGN_KEY_CONSTRAINT, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, FOREIGN_KEY_CONSTRAINT, property, data);
 	}
 
 	public static String getReferencedEntity(Property property) {
@@ -24,7 +24,7 @@ public class FKUtil {
 	}
 
 	public static void setReferencedEntity(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, REFERENCED_ENTITY, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, REFERENCED_ENTITY, property, data);
 	}
 
 	public static String getReferencedProperty(Property property) {
@@ -33,7 +33,7 @@ public class FKUtil {
 	}
 
 	public static void setReferencedProperty(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, REFERENCED_PROPERTY, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, REFERENCED_PROPERTY, property, data);
 	}
 
 }

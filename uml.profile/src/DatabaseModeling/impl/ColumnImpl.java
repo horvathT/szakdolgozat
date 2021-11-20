@@ -29,6 +29,8 @@ import org.eclipse.uml2.uml.Property;
  *   <li>{@link DatabaseModeling.impl.ColumnImpl#getLength <em>Length</em>}</li>
  *   <li>{@link DatabaseModeling.impl.ColumnImpl#getPrecision <em>Precision</em>}</li>
  *   <li>{@link DatabaseModeling.impl.ColumnImpl#getScale <em>Scale</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.ColumnImpl#isUnique <em>Unique</em>}</li>
+ *   <li>{@link DatabaseModeling.impl.ColumnImpl#isNullable <em>Nullable</em>}</li>
  * </ul>
  *
  * @generated
@@ -143,6 +145,46 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * @ordered
 	 */
 	protected String scale = SCALE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean UNIQUE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean unique = UNIQUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isNullable() <em>Nullable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNullable()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean NULLABLE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isNullable() <em>Nullable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNullable()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean nullable = NULLABLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -311,6 +353,48 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isUnique() {
+		return unique;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUnique(boolean newUnique) {
+		boolean oldUnique = unique;
+		unique = newUnique;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.COLUMN__UNIQUE, oldUnique, unique));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isNullable() {
+		return nullable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNullable(boolean newNullable) {
+		boolean oldNullable = nullable;
+		nullable = newNullable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.COLUMN__NULLABLE, oldNullable, nullable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -327,6 +411,10 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 				return getPrecision();
 			case DatabaseModelingPackage.COLUMN__SCALE:
 				return getScale();
+			case DatabaseModelingPackage.COLUMN__UNIQUE:
+				return isUnique();
+			case DatabaseModelingPackage.COLUMN__NULLABLE:
+				return isNullable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -356,6 +444,12 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 				return;
 			case DatabaseModelingPackage.COLUMN__SCALE:
 				setScale((String)newValue);
+				return;
+			case DatabaseModelingPackage.COLUMN__UNIQUE:
+				setUnique((Boolean)newValue);
+				return;
+			case DatabaseModelingPackage.COLUMN__NULLABLE:
+				setNullable((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -387,6 +481,12 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 			case DatabaseModelingPackage.COLUMN__SCALE:
 				setScale(SCALE_EDEFAULT);
 				return;
+			case DatabaseModelingPackage.COLUMN__UNIQUE:
+				setUnique(UNIQUE_EDEFAULT);
+				return;
+			case DatabaseModelingPackage.COLUMN__NULLABLE:
+				setNullable(NULLABLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -411,6 +511,10 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 				return PRECISION_EDEFAULT == null ? precision != null : !PRECISION_EDEFAULT.equals(precision);
 			case DatabaseModelingPackage.COLUMN__SCALE:
 				return SCALE_EDEFAULT == null ? scale != null : !SCALE_EDEFAULT.equals(scale);
+			case DatabaseModelingPackage.COLUMN__UNIQUE:
+				return unique != UNIQUE_EDEFAULT;
+			case DatabaseModelingPackage.COLUMN__NULLABLE:
+				return nullable != NULLABLE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -435,6 +539,10 @@ public class ColumnImpl extends MinimalEObjectImpl.Container implements Column {
 		result.append(precision);
 		result.append(", scale: ");
 		result.append(scale);
+		result.append(", unique: ");
+		result.append(unique);
+		result.append(", nullable: ");
+		result.append(nullable);
 		result.append(')');
 		return result.toString();
 	}

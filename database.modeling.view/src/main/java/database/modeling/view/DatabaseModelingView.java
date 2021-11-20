@@ -44,13 +44,12 @@ public class DatabaseModelingView {
 	private Text foreignKeyConstraintName;
 
 	private ToolItem databaseChanger;
-	private Combo sqlTypeCombo;
+	private Combo dataTypeCombo;
 	private Combo referencedEntity;
 	private Combo referencedProperty;
 
 	private Button nullableCheck;
 	private Button uniqueCheck;
-	private Button autoIncrementCheck;
 	private Button primaryKeyCheck;
 	private Button foreignKeyCheck;
 
@@ -73,6 +72,7 @@ public class DatabaseModelingView {
 	private SelectionAdapter primaryKeyCheckListener;
 	private SelectionAdapter nullableCheckListener;
 	private ISelectionListener selectionChangeListener;
+	private SelectionAdapter dataTypeSelectionListener;
 
 	@Inject
 	public DatabaseModelingView() {
@@ -106,8 +106,8 @@ public class DatabaseModelingView {
 		lblSqlType.setText("SQL type");
 
 		ComboViewer sqlTypeComboViewer = new ComboViewer(container, SWT.READ_ONLY);
-		sqlTypeCombo = sqlTypeComboViewer.getCombo();
-		sqlTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		dataTypeCombo = sqlTypeComboViewer.getCombo();
+		dataTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 
 		Label lblLength = new Label(container, SWT.NONE);
 		lblLength.setText("Length");
@@ -149,10 +149,6 @@ public class DatabaseModelingView {
 
 		uniqueCheck = new Button(container, SWT.CHECK);
 		uniqueCheck.setText("Unique");
-
-		autoIncrementCheck = new Button(container, SWT.CHECK);
-		autoIncrementCheck.setText("Auto increment");
-		new Label(container, SWT.NONE);
 
 		primaryKeyCheck = new Button(container, SWT.CHECK);
 		primaryKeyCheck.setText("Primary Key");
@@ -197,6 +193,7 @@ public class DatabaseModelingView {
 		scrolledComposite.setContent(container);
 		scrolledComposite.setMinSize(container.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
+		dataTypeSelectionListener();
 		primaryKeyCannotBeNullable();
 		foreignKeyCheckBoxListener();
 		setupSelectionListener();
@@ -229,6 +226,26 @@ public class DatabaseModelingView {
 		return;
 	}
 
+	private void dataTypeSelectionListener() {
+		dataTypeSelectionListener = new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				int selectionIndex = dataTypeCombo.getSelectionIndex();
+				if (selectionIndex == 0 || selectionIndex == -1) {
+					length.setEnabled(false);
+					scale.setEnabled(false);
+					precision.setEnabled(false);
+					defaultValue.setEnabled(false);
+					primaryKeyCheck.setEnabled(false);
+					foreignKeyCheck.setEnabled(false);
+					nullableCheck.setEnabled(false);
+					uniqueCheck.setEnabled(false);
+				}
+			}
+		};
+		dataTypeCombo.addSelectionListener(dataTypeSelectionListener);
+	}
+
 	private void setupSelectionListener() {
 		selectionChangeListener = new ISelectionListener() {
 
@@ -256,6 +273,7 @@ public class DatabaseModelingView {
 			public void widgetSelected(SelectionEvent e) {
 				if (primaryKeyCheck.getSelection()) {
 					nullableCheck.setEnabled(false);
+					uniqueCheck.setSelection(true);
 					primaryKeyConstraintName.setEnabled(true);
 				} else {
 					nullableCheck.setEnabled(true);
@@ -339,7 +357,7 @@ public class DatabaseModelingView {
 	}
 
 	public Combo getSqlTypeCombo() {
-		return sqlTypeCombo;
+		return dataTypeCombo;
 	}
 
 	public Combo getReferencedEntity() {
@@ -356,10 +374,6 @@ public class DatabaseModelingView {
 
 	public Button getUniqueCheck() {
 		return uniqueCheck;
-	}
-
-	public Button getAutoIncrementCheck() {
-		return autoIncrementCheck;
 	}
 
 	public Button getPrimaryKeyCheck() {

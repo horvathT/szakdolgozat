@@ -134,9 +134,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getReferencedEntity().setEnabled(false);
 		view.getReferencedProperty().clearSelection();
 		view.getReferencedProperty().setEnabled(false);
-		view.getNullableCheck().setEnabled(false);
+
+		view.getNullableCheck().setSelection(false);
 		view.getUniqueCheck().setSelection(false);
-		view.getAutoIncrementCheck().setSelection(false);
 		view.getPrimaryKeyCheck().setSelection(false);
 		view.getForeignKeyCheck().setSelection(false);
 	}
@@ -144,7 +144,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	private void updateViewFromModel(PropertyDataModel model) {
 		view.getNullableCheck().setSelection(model.isNullable());
 		view.getUniqueCheck().setSelection(model.isUnique());
-		view.getAutoIncrementCheck().setSelection(model.isAutoIncrement());
 
 		view.getLength().setText(model.getLength());
 		view.getPrecision().setText(model.getPrecision());
@@ -185,8 +184,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	private boolean isEmpty() {
 		if (view.getNullableCheck().getSelection() || view.getUniqueCheck().getSelection()
-				|| view.getAutoIncrementCheck().getSelection() || view.getPrimaryKeyCheck().getSelection()
-				|| view.getForeignKeyCheck().getSelection()) {
+				|| view.getPrimaryKeyCheck().getSelection() || view.getForeignKeyCheck().getSelection()) {
 			return false;
 		}
 		if (!isEmpty(view.getLength()) || !isEmpty(view.getPrecision()) || !isEmpty(view.getScale())
@@ -214,7 +212,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		PropertyDataModel model = new PropertyDataModel();
 		model.setNullable(view.getNullableCheck().getSelection());
 		model.setUnique(view.getUniqueCheck().getSelection());
-		model.setAutoIncrement(view.getAutoIncrementCheck().getSelection());
 		model.setPrimaryKey(view.getPrimaryKeyCheck().getSelection());
 		model.setForeignKey(view.getForeignKeyCheck().getSelection());
 

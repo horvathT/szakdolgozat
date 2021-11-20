@@ -13,7 +13,7 @@ public class PKUtil {
 	}
 
 	public static void setConstraintName(Property property, String data) {
-		StereotypeApplicationUtil.setValue(STEREOTYPE_QUALIFIED_NAME, PRIMARY_KEY_CONSTRAINT, property, data);
+		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, PRIMARY_KEY_CONSTRAINT, property, data);
 	}
 
 }

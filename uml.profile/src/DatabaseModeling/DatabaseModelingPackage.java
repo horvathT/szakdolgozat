@@ -121,13 +121,31 @@ public interface DatabaseModelingPackage extends EPackage {
 	int COLUMN__SCALE = 5;
 
 	/**
+	 * The feature id for the '<em><b>Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__UNIQUE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Nullable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__NULLABLE = 7;
+
+	/**
 	 * The number of structural features of the '<em>Column</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_FEATURE_COUNT = 6;
+	int COLUMN_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Column</em>' class.
@@ -373,6 +391,28 @@ public interface DatabaseModelingPackage extends EPackage {
 	EAttribute getColumn_Scale();
 
 	/**
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#isUnique <em>Unique</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unique</em>'.
+	 * @see DatabaseModeling.Column#isUnique()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_Unique();
+
+	/**
+	 * Returns the meta object for the attribute '{@link DatabaseModeling.Column#isNullable <em>Nullable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Nullable</em>'.
+	 * @see DatabaseModeling.Column#isNullable()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EAttribute getColumn_Nullable();
+
+	/**
 	 * Returns the meta object for class '{@link DatabaseModeling.PK <em>PK</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -570,6 +610,22 @@ public interface DatabaseModelingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLUMN__SCALE = eINSTANCE.getColumn_Scale();
+
+		/**
+		 * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__UNIQUE = eINSTANCE.getColumn_Unique();
+
+		/**
+		 * The meta object literal for the '<em><b>Nullable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN__NULLABLE = eINSTANCE.getColumn_Nullable();
 
 		/**
 		 * The meta object literal for the '{@link DatabaseModeling.impl.PKImpl <em>PK</em>}' class.

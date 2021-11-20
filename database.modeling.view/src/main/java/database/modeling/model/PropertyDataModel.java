@@ -17,7 +17,6 @@ public class PropertyDataModel {
 
 	private boolean nullable;
 	private boolean unique;
-	private boolean autoIncrement;
 	private boolean primaryKey;
 	private boolean foreignKey;
 
@@ -107,14 +106,6 @@ public class PropertyDataModel {
 
 	public void setUnique(boolean unique) {
 		this.unique = unique;
-	}
-
-	public boolean isAutoIncrement() {
-		return autoIncrement;
-	}
-
-	public void setAutoIncrement(boolean autoIncrement) {
-		this.autoIncrement = autoIncrement;
 	}
 
 	public boolean isPrimaryKey() {

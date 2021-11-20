@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DatabaseModeling="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/DatabaseModeling/_hpscAKXoEeu9qvqunr-EBw/0 pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DatabaseModeling="http:///schemas/DatabaseModeling/_zxtksEpUEeykKLPoPu3NAg/2" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/DatabaseModeling/_zxtksEpUEeykKLPoPu3NAg/2 pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_zxuLwEpUEeykKLPoPu3NAg">
   <uml:Model xmi:id="_H7RIcEcqEey1N5vSPJkqqg" name="DBprototype">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_H-HoIEcqEey1N5vSPJkqqg">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -27,22 +27,20 @@
       </ownedAttribute>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_hslKYEcqEey1N5vSPJkqqg">
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_hsnmoEcqEey1N5vSPJkqqg" source="PapyrusVersion">
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmoUcqEey1N5vSPJkqqg" key="Version" value="0.0.1"/>
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmokcqEey1N5vSPJkqqg" key="Comment" value=""/>
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmo0cqEey1N5vSPJkqqg" key="Copyright" value=""/>
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmpEcqEey1N5vSPJkqqg" key="Date" value="2021-04-25"/>
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hsnmpUcqEey1N5vSPJkqqg" key="Author" value=""/>
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_LG14EEpVEeycBIuMEUOj6A" source="PapyrusVersion">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_LG14EUpVEeycBIuMEUOj6A" key="Version" value="0.0.3"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_LG14EkpVEeycBIuMEUOj6A" key="Comment" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_LG14E0pVEeycBIuMEUOj6A" key="Copyright" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_LG14FEpVEeycBIuMEUOj6A" key="Date" value="2021-11-20"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_LG14FUpVEeycBIuMEUOj6A" key="Author" value=""/>
       </eAnnotations>
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_hsmYgEcqEey1N5vSPJkqqg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_hpscAaXoEeu9qvqunr-EBw"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_zxuLwEpUEeykKLPoPu3NAg"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:Column xmi:id="_PCQzUEoqEeya0PPbS98n_A" base_Property="_ZH07EEcqEey1N5vSPJkqqg" dataType="INT" defaultValue="oracle"/>
-  <DatabaseModeling:Column xmi:id="_PCUdsEoqEeya0PPbS98n_A" base_Property="_bTdFIEcqEey1N5vSPJkqqg" dataType="FLOAT" defaultValue="oracle"/>
-  <DatabaseModeling:Column xmi:id="_PCYIEEoqEeya0PPbS98n_A" base_Property="_UUM0AEcqEey1N5vSPJkqqg" dataType="INT" defaultValue="oracle"/>
-  <DatabaseModeling:Column xmi:id="_PCbycEoqEeya0PPbS98n_A" base_Property="_WI9WMEcqEey1N5vSPJkqqg" dataType="FLOAT" defaultValue="oracle"/>
   <DatabaseModeling:DatabaseModel xmi:id="_PCcZgEoqEeya0PPbS98n_A" base_Package="_H7RIcEcqEey1N5vSPJkqqg" databaseType="Oracle"/>
+  <DatabaseModeling:Column xmi:id="_UB9OYEpUEeyIwoiHLDyeZw" base_Property="_WI9WMEcqEey1N5vSPJkqqg" length="11" precision="1" scale="1"/>
+  <DatabaseModeling:Column xmi:id="_ReogkEpVEeycBIuMEUOj6A" base_Property="_ZH07EEcqEey1N5vSPJkqqg" length="11" precision="11" unique="true" nullable="true"/>
 </xmi:XMI>

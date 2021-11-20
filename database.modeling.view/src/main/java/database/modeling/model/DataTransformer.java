@@ -28,8 +28,9 @@ public class DataTransformer {
 			// scale
 			dataModel.setScale(ColumnUtil.getScale(property));
 			// nullable
+			dataModel.setNullable(ColumnUtil.getNullable(property));
 			// unique
-			// auto increment
+			dataModel.setUnique(ColumnUtil.getUnique(property));
 		} else {
 			dataModel.setSqlType("");
 			dataModel.setDefaultValue("");
@@ -38,7 +39,6 @@ public class DataTransformer {
 			dataModel.setScale("");
 			dataModel.setNullable(false);
 			dataModel.setUnique(false);
-			dataModel.setAutoIncrement(false);
 		}
 		if (StereotypeApplicationUtil.hasStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			dataModel.setPrimaryKey(true);
@@ -74,6 +74,8 @@ public class DataTransformer {
 		ColumnUtil.setLength(property, dataModel.getLength());
 		ColumnUtil.setPrecision(property, dataModel.getPrecision());
 		ColumnUtil.setScale(property, dataModel.getScale());
+		ColumnUtil.setUnique(property, dataModel.isUnique());
+		ColumnUtil.setNullable(property, dataModel.isNullable());
 
 		if (dataModel.isPrimaryKey()) {
 			StereotypeApplicationUtil.applyStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME);
