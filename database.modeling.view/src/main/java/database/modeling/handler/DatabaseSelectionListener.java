@@ -52,8 +52,9 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 				MenuItem selected = (MenuItem) event.widget;
 				String newDbName = selected.getText();
 
+				viewModel.save();
 				viewModel.updateDatabaseChanger(newDbName);
-				viewModel.databaseChanged(currentDbSelected, newDbName);
+				viewModel.changeDatabaseImplementation(currentDbSelected, newDbName);
 
 			}
 		});

@@ -8,7 +8,7 @@ public interface PropertyEditingViewModel {
 
 	public void selectionChanged(Property property);
 
-	public void databaseChanged(String currentDbName, String newDbName);
+	public void changeDatabaseImplementation(String currentDbName, String newDbName);
 
 	public void save();
 

@@ -31,7 +31,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	@Override
 	public void selectionChanged(Property porperty) {
 		save();
-		view.setDataModel(new PropertyDataModel());
 		view.setCurrentPropertySelection(porperty);
 		setCurrentSelectionLabel();
 
@@ -45,9 +44,8 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 			if (modelDBType.equals(selectedDBType)) {
 				updateDataInView(view.getCurrentPropertySelection());
 			} else {
-				databaseChanged(selectedDBType, modelDBType);
-				view.getDatabaseChanger().setText(modelDBType);
-
+				changeDatabaseImplementation(selectedDBType, modelDBType);
+				updateDatabaseChanger(selectedDBType);
 				updateDataInView(view.getCurrentPropertySelection());
 			}
 		} else {
@@ -56,9 +54,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	}
 
 	@Override
-	public void databaseChanged(String curentlySelectedDB, String newlySelectedDbName) {
-		// adott selection mentése
-		save();
+	public void changeDatabaseImplementation(String curentlySelectedDB, String newlySelectedDbName) {
 		// selection xmiId-t elrakjuk későbbre
 		Property currentPropertySelection = view.getCurrentPropertySelection();
 		String fragment = EcoreUtil.getURI(currentPropertySelection).fragment();
@@ -119,7 +115,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	public void updateDataInView(Property property) {
 		resetView();
 		PropertyDataModel dataModel = DataTransformer.propertyToSqlDataModel(property);
-		view.setDataModel(dataModel);
 		updateViewFromModel(dataModel);
 	}
 
@@ -171,9 +166,10 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getReferencedEntity().setText(model.getReferencedEntity());
 		view.getReferencedProperty().setText(model.getReferencedProperty());
 
-		view.getSqlTypeCombo().setText(model.getSqlType());
 		if (model.getSqlType().isEmpty()) {
 			view.getSqlTypeCombo().clearSelection();
+		} else {
+			view.getSqlTypeCombo().setText(model.getSqlType());
 		}
 	}
 
