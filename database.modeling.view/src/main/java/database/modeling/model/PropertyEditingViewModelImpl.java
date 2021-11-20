@@ -132,7 +132,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getPrimaryKeyConstraintName().setEnabled(false);
 		view.getForeignKeyConstraintName().setText("");
 		view.getForeignKeyConstraintName().setEnabled(false);
-		view.getSqlTypeCombo().clearSelection();
+
+		view.getSqlTypeCombo().select(0);
+
 		view.getReferencedEntity().clearSelection();
 		view.getReferencedEntity().setEnabled(false);
 		view.getReferencedProperty().clearSelection();
@@ -170,6 +172,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getReferencedProperty().setText(model.getReferencedProperty());
 
 		view.getSqlTypeCombo().setText(model.getSqlType());
+		if (model.getSqlType().isEmpty()) {
+			view.getSqlTypeCombo().clearSelection();
+		}
 	}
 
 	private void setCurrentSelectionLabel() {
@@ -236,6 +241,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getDatabaseChanger().setSelection(true);
 		Map<String, String[]> dbMap = dbUtil.getDatabaseTypeMap();
 		view.getSqlTypeCombo().setItems(dbMap.get(newDbName));
+		view.getSqlTypeCombo().add("", 0);
 	}
 
 	@Override

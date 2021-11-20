@@ -14,6 +14,14 @@
         <element xmi:type="uml:Property" href="DBprototype.uml#_bTdFIEcqEey1N5vSPJkqqg"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_f0zJY0cqEey1N5vSPJkqqg"/>
       </children>
+      <children xmi:type="notation:Shape" xmi:id="_SYBYwEorEeya0PPbS98n_A" type="Property_InterfaceAttributeLabel">
+        <element xmi:type="uml:Property" href="DBprototype.uml#_IcotsEorEeya0PPbS98n_A"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_SYBYwUorEeya0PPbS98n_A"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_2vhAIEo0EeyUutstZmK00w" type="Property_InterfaceAttributeLabel">
+        <element xmi:type="uml:Property" href="DBprototype.uml#_2nlFwEosEey01r_yqKcRyA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2vhAIUo0EeyUutstZmK00w"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_cQHhs0cqEey1N5vSPJkqqg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_cQHhtEcqEey1N5vSPJkqqg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_cQHhtUcqEey1N5vSPJkqqg"/>

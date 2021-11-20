@@ -27,9 +27,9 @@
       <appliedProfile xmi:type="uml:Profile" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:Column xmi:id="_kfFvQEmQEeyWroKH7NIoJQ" base_Property="_5eC2cEmFEey7GItKbTSaRw" dataType="INT" defaultValue="mysql" length="9" precision="9" scale="9"/>
-  <DatabaseModeling:Column xmi:id="_kfNrEEmQEeyWroKH7NIoJQ" base_Property="_CnJwAEmGEey7GItKbTSaRw" defaultValue="mysql" length="8" precision="8" scale="8"/>
-  <DatabaseModeling:Column xmi:id="_kfWN8EmQEeyWroKH7NIoJQ" base_Property="_GflaIEmGEey7GItKbTSaRw" dataType="INT" defaultValue="mysql" length="7" precision="7" scale="7"/>
-  <DatabaseModeling:Column xmi:id="_kfeJwEmQEeyWroKH7NIoJQ" base_Property="_IuKKgEmGEey7GItKbTSaRw" defaultValue="mysql" length="6" precision="6" scale="6"/>
-  <DatabaseModeling:DatabaseModel xmi:id="_kff-8EmQEeyWroKH7NIoJQ" base_Package="_q50YAEmFEey7GItKbTSaRw" databaseType="MySQL"/>
+  <DatabaseModeling:Column xmi:id="_Oth5cEoqEeya0PPbS98n_A" base_Property="_5eC2cEmFEey7GItKbTSaRw" dataType="INT" defaultValue="mysql" length="9" precision="9" scale="9"/>
+  <DatabaseModeling:Column xmi:id="_OtnZAEoqEeya0PPbS98n_A" base_Property="_CnJwAEmGEey7GItKbTSaRw" defaultValue="mysql" length="8" precision="8" scale="8"/>
+  <DatabaseModeling:Column xmi:id="_OtsRgEoqEeya0PPbS98n_A" base_Property="_GflaIEmGEey7GItKbTSaRw" dataType="INT" defaultValue="mysql" length="7" precision="7" scale="7"/>
+  <DatabaseModeling:Column xmi:id="_Otwi8EoqEeya0PPbS98n_A" base_Property="_IuKKgEmGEey7GItKbTSaRw" defaultValue="mysql" length="6" precision="6" scale="6"/>
+  <DatabaseModeling:DatabaseModel xmi:id="_OtxxEEoqEeya0PPbS98n_A" base_Package="_q50YAEmFEey7GItKbTSaRw" databaseType="MySQL"/>
 </xmi:XMI>
