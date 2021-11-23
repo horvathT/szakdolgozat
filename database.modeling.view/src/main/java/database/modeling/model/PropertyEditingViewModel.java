@@ -17,4 +17,10 @@ public interface PropertyEditingViewModel {
 	public void updateDatabaseChanger(String newDbName);
 
 	public List<String> getDatabaseTypes();
+
+	public void isAttributeEditingEnabled(boolean isEnabled);
+
+	public void setupReferenceEntityCombo();
+
+	public void setupReferencePropertyCombo(String entityName);
 }

@@ -1,8 +1,14 @@
 package database.modeling.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -10,8 +16,15 @@ import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.uml2.uml.Association;
+import org.eclipse.uml2.uml.Classifier;
+import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
+import org.eclipse.uml2.uml.Type;
+import org.eclipse.uml2.uml.UMLPackage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import database.modeling.util.resource.EclipseModelUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
@@ -19,6 +32,8 @@ import database.modeling.util.stereotype.DatabaseTypesUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
+
+	public static final Logger log = LoggerFactory.getLogger(PropertyEditingViewModelImpl.class);
 
 	DatabaseModelingView view;
 
@@ -167,9 +182,30 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 		if (model.getSqlType().isEmpty()) {
 			view.getSqlTypeCombo().clearSelection();
+			isAttributeEditingEnabled(false);
 		} else {
 			view.getSqlTypeCombo().setText(model.getSqlType());
+			isAttributeEditingEnabled(true);
 		}
+	}
+
+	@Override
+	public void isAttributeEditingEnabled(boolean isEnabled) {
+		view.getLength().setEnabled(isEnabled);
+		view.getScale().setEnabled(isEnabled);
+		view.getPrecision().setEnabled(isEnabled);
+		view.getDefaultValue().setEnabled(isEnabled);
+
+		view.getNullableCheck().setEnabled(isEnabled);
+		view.getUniqueCheck().setEnabled(isEnabled);
+
+		view.getPrimaryKeyCheck().setEnabled(isEnabled);
+//		view.getPrimaryKeyConstraintName().setEditable(isEnabled);
+
+		view.getForeignKeyCheck().setEnabled(isEnabled);
+//		view.getForeignKeyConstraintName().setEnabled(isEnabled);
+//		view.getReferencedEntity().setEnabled(isEnabled);
+//		view.getReferencedProperty().setEnabled(isEnabled);
 	}
 
 	private void setCurrentSelectionLabel() {
@@ -240,6 +276,78 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	@Override
 	public List<String> getDatabaseTypes() {
 		return dbUtil.getDatabases();
+	}
+
+	private Map<String, String> getReferencedEntityNameMap(Property property) {
+		Map<String, String> referencedEntityFragmentsByName = new HashMap<>();
+
+		Element owner = property.getOwner();
+		if (owner instanceof Classifier) {
+
+			Classifier classifier = (Classifier) owner;
+			EList<Association> associations = classifier.getAssociations();
+			for (Association association : associations) {
+				EList<Property> memberEnds = association.getMemberEnds();
+				Property refProp = memberEnds.get(0);
+				Type type = refProp.getType();
+				String fragment = EcoreUtil.getURI(type).fragment();
+				referencedEntityFragmentsByName.put(type.getName(), fragment);
+			}
+		}
+		return referencedEntityFragmentsByName;
+	}
+
+	@Override
+	public void setupReferenceEntityCombo() {
+		Property currentPropertySelection = view.getCurrentPropertySelection();
+		Map<String, String> referencedEntityNameMap = getReferencedEntityNameMap(currentPropertySelection);
+		Set<String> keySet = referencedEntityNameMap.keySet();
+		view.getReferencedEntity().setItems(keySet.toArray(new String[keySet.size()]));
+		view.getReferencedEntity().add("", 0);
+	}
+
+	@Override
+	public void setupReferencePropertyCombo(String entityName) {
+		Classifier classifierByName = getClassifierByName(entityName);
+		if (classifierByName != null) {
+			List<Property> allAttributes = getOwnedAttributes(classifierByName);
+			List<String> listOfPropertyNames = allAttributes.stream().map(Property::getName)
+					.collect(Collectors.toList());
+			view.getReferencedProperty().setItems(listOfPropertyNames.toArray(new String[listOfPropertyNames.size()]));
+		} else {
+			log.error("Classifier by name: " + entityName + "not found!");
+		}
+	}
+
+	private List<Property> getOwnedAttributes(Classifier classifierByName) {
+		List<Property> propertyList = new ArrayList<>();
+		for (Property property : classifierByName.getAllAttributes()) {
+			if (isAssociation(property)) {
+				propertyList.add(property);
+			}
+		}
+		return propertyList;
+	}
+
+	public static boolean isAssociation(Property property) {
+		return property.getAssociation() != null;
+	}
+
+	private Classifier getClassifierByName(String name) {
+		Model model = view.getCurrentPropertySelection().getModel();
+		Collection<Classifier> classifiers = getClassifiers(model.allOwnedElements());
+		for (Classifier classifier : classifiers) {
+			if (classifier.getName().equals(name)) {
+				return classifier;
+			}
+		}
+		return null;
+	}
+
+	public static Collection<Classifier> getClassifiers(EList<Element> elementList) {
+		Collection<Classifier> classifiers = EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.INTERFACE);
+		classifiers.addAll(EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.CLASS));
+		return classifiers;
 	}
 
 }

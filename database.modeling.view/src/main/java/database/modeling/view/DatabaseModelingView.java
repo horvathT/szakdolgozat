@@ -16,6 +16,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.VerifyEvent;
@@ -53,8 +55,6 @@ public class DatabaseModelingView {
 	private Button primaryKeyCheck;
 	private Button foreignKeyCheck;
 
-	private Button saveButton;
-
 	private ScrolledComposite scrolledComposite;
 
 	private Label currentSelectionLabel;
@@ -73,6 +73,9 @@ public class DatabaseModelingView {
 	private SelectionAdapter nullableCheckListener;
 	private ISelectionListener selectionChangeListener;
 	private SelectionAdapter dataTypeSelectionListener;
+	private FocusListener referencedEntityFocusListener;
+	private SelectionAdapter refernecedEntitySelectionListener;
+	private FocusListener referencedPropertyFocusListener;
 
 	@Inject
 	public DatabaseModelingView() {
@@ -136,14 +139,6 @@ public class DatabaseModelingView {
 		defaultValue = new Text(container, SWT.BORDER);
 		defaultValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 
-		saveButton = new Button(container, SWT.NONE);
-		GridData gd_btnSave = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		saveButton.setLayoutData(gd_btnSave);
-		saveButton.setText("Save as Datatype");
-		new Label(container, SWT.NONE);
-		new Label(container, SWT.NONE);
-		new Label(container, SWT.NONE);
-
 		nullableCheck = new Button(container, SWT.CHECK);
 		nullableCheck.setText("Nullable");
 
@@ -197,12 +192,68 @@ public class DatabaseModelingView {
 		primaryKeyCannotBeNullable();
 		foreignKeyCheckBoxListener();
 		setupSelectionListener();
+		referenceEntityFocusListener();
+		referenceEntitySelectionListener();
+		referencePropertyFocusListener();
 
 		viewModel = new PropertyEditingViewModelImpl(this);
 
 		dbSelectionListener = new DatabaseSelectionListener(this);
 		databaseChanger.addSelectionListener(dbSelectionListener);
 
+	}
+
+	private void referencePropertyFocusListener() {
+		referencedPropertyFocusListener = new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				String entityName = referencedEntity.getText();
+				if (!entityName.isEmpty()) {
+					viewModel.setupReferencePropertyCombo(entityName);
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		};
+		referencedProperty.addFocusListener(referencedPropertyFocusListener);
+	}
+
+	private void referenceEntitySelectionListener() {
+		refernecedEntitySelectionListener = new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				String entityName = referencedEntity.getText();
+				if (!entityName.isEmpty()) {
+					viewModel.setupReferencePropertyCombo(entityName);
+				}
+			}
+
+		};
+		referencedEntity.addSelectionListener(refernecedEntitySelectionListener);
+	}
+
+	private void referenceEntityFocusListener() {
+		referencedEntityFocusListener = new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				viewModel.setupReferenceEntityCombo();
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		};
+		referencedEntity.addFocusListener(referencedEntityFocusListener);
 	}
 
 	private void onDispose(Composite parent) {
@@ -215,6 +266,8 @@ public class DatabaseModelingView {
 				nullableCheck.removeSelectionListener(nullableCheckListener);
 				databaseChanger.removeSelectionListener(dbSelectionListener);
 				selectionService.removeSelectionListener(selectionChangeListener);
+				referencedEntity.removeFocusListener(referencedEntityFocusListener);
+				referencedEntity.removeSelectionListener(refernecedEntitySelectionListener);
 			}
 		});
 
@@ -232,14 +285,9 @@ public class DatabaseModelingView {
 			public void widgetSelected(SelectionEvent e) {
 				int selectionIndex = dataTypeCombo.getSelectionIndex();
 				if (selectionIndex == 0 || selectionIndex == -1) {
-					length.setEnabled(false);
-					scale.setEnabled(false);
-					precision.setEnabled(false);
-					defaultValue.setEnabled(false);
-					primaryKeyCheck.setEnabled(false);
-					foreignKeyCheck.setEnabled(false);
-					nullableCheck.setEnabled(false);
-					uniqueCheck.setEnabled(false);
+					viewModel.isAttributeEditingEnabled(false);
+				} else {
+					viewModel.isAttributeEditingEnabled(true);
 				}
 			}
 		};
@@ -272,6 +320,7 @@ public class DatabaseModelingView {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (primaryKeyCheck.getSelection()) {
+					nullableCheck.setSelection(false);
 					nullableCheck.setEnabled(false);
 					uniqueCheck.setSelection(true);
 					primaryKeyConstraintName.setEnabled(true);
@@ -306,6 +355,7 @@ public class DatabaseModelingView {
 					foreignKeyConstraintName.setEnabled(true);
 					referencedEntity.setEnabled(true);
 					referencedProperty.setEnabled(true);
+					viewModel.setupReferenceEntityCombo();
 				} else {
 					referencedEntity.setEnabled(false);
 					referencedProperty.setEnabled(false);
@@ -382,10 +432,6 @@ public class DatabaseModelingView {
 
 	public Button getForeignKeyCheck() {
 		return foreignKeyCheck;
-	}
-
-	public Button getSaveButton() {
-		return saveButton;
 	}
 
 	public ScrolledComposite getScrolledComposite() {

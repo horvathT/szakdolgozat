@@ -17,14 +17,66 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_2nlFwEosEey01r_yqKcRyA" name="strippedProperty2">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_aIASUEyTEeyT2-SeRH0fHA" name="class" type="_O1GuEEcqEey1N5vSPJkqqg" association="_aH4WgEyTEeyT2-SeRH0fHA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_aIA5YEyTEeyT2-SeRH0fHA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_aIA5YUyTEeyT2-SeRH0fHA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_kdzog0yTEeyT2-SeRH0fHA" name="alma" type="_ffmpIEyTEeyT2-SeRH0fHA" association="_kdzogEyTEeyT2-SeRH0fHA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_kdzohEyTEeyT2-SeRH0fHA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kdzohUyTEeyT2-SeRH0fHA" value="1"/>
+      </ownedAttribute>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_O1GuEEcqEey1N5vSPJkqqg" name="Class">
+    <packagedElement xmi:type="uml:Class" xmi:id="_O1GuEEcqEey1N5vSPJkqqg" name="Korte">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_UUM0AEcqEey1N5vSPJkqqg" name="classProp1">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_WI9WMEcqEey1N5vSPJkqqg" name="classProp2">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_5-BPYEyYEeyUYuO6ZYa5gA" name="alma" type="_ffmpIEyTEeyT2-SeRH0fHA" association="_587qQEyYEeyUYuO6ZYa5gA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5-BPYUyYEeyUYuO6ZYa5gA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5-BPYkyYEeyUYuO6ZYa5gA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_B3Ju0UyZEeyUYuO6ZYa5gA" name="interface" type="_M7gIIEcqEey1N5vSPJkqqg" association="_B3H5oEyZEeyUYuO6ZYa5gA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_B3Ju0kyZEeyUYuO6ZYa5gA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_B3Ju00yZEeyUYuO6ZYa5gA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_aH4WgEyTEeyT2-SeRH0fHA" memberEnd="_aIASUEyTEeyT2-SeRH0fHA _aIBgcEyTEeyT2-SeRH0fHA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_aH_EMEyTEeyT2-SeRH0fHA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_aH_rQEyTEeyT2-SeRH0fHA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_aIBgcEyTEeyT2-SeRH0fHA" name="interface" type="_M7gIIEcqEey1N5vSPJkqqg" association="_aH4WgEyTEeyT2-SeRH0fHA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ffmpIEyTEeyT2-SeRH0fHA" name="Alma">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_6dJbYEyYEeyUYuO6ZYa5gA" name="korte" type="_O1GuEEcqEey1N5vSPJkqqg" association="_6dINQEyYEeyUYuO6ZYa5gA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6dJbYUyYEeyUYuO6ZYa5gA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6dJbYkyYEeyUYuO6ZYa5gA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_kdzogEyTEeyT2-SeRH0fHA" memberEnd="_kdzog0yTEeyT2-SeRH0fHA _kdzohkyTEeyT2-SeRH0fHA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_kdzogUyTEeyT2-SeRH0fHA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_kdzogkyTEeyT2-SeRH0fHA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_kdzohkyTEeyT2-SeRH0fHA" name="interface" type="_M7gIIEcqEey1N5vSPJkqqg" association="_kdzogEyTEeyT2-SeRH0fHA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_587qQEyYEeyUYuO6ZYa5gA" memberEnd="_5-BPYEyYEeyUYuO6ZYa5gA _5-B2cEyYEeyUYuO6ZYa5gA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_5-ABQEyYEeyUYuO6ZYa5gA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_5-AoUEyYEeyUYuO6ZYa5gA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_5-B2cEyYEeyUYuO6ZYa5gA" name="korte" type="_O1GuEEcqEey1N5vSPJkqqg" association="_587qQEyYEeyUYuO6ZYa5gA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_6dINQEyYEeyUYuO6ZYa5gA" memberEnd="_6dJbYEyYEeyUYuO6ZYa5gA _6dJbY0yYEeyUYuO6ZYa5gA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_6dI0UEyYEeyUYuO6ZYa5gA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_6dI0UUyYEeyUYuO6ZYa5gA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_6dJbY0yYEeyUYuO6ZYa5gA" name="alma" type="_ffmpIEyTEeyT2-SeRH0fHA" association="_6dINQEyYEeyUYuO6ZYa5gA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_B3H5oEyZEeyUYuO6ZYa5gA" memberEnd="_B3Ju0UyZEeyUYuO6ZYa5gA _B3Ju1EyZEeyUYuO6ZYa5gA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_B3JHwEyZEeyUYuO6ZYa5gA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_B3Ju0EyZEeyUYuO6ZYa5gA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_B3Ju1EyZEeyUYuO6ZYa5gA" name="korte" type="_O1GuEEcqEey1N5vSPJkqqg" association="_B3H5oEyZEeyUYuO6ZYa5gA"/>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_hslKYEcqEey1N5vSPJkqqg">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_LG14EEpVEeycBIuMEUOj6A" source="PapyrusVersion">
@@ -43,4 +95,6 @@
   <DatabaseModeling:DatabaseModel xmi:id="_PCcZgEoqEeya0PPbS98n_A" base_Package="_H7RIcEcqEey1N5vSPJkqqg" databaseType="Oracle"/>
   <DatabaseModeling:Column xmi:id="_UB9OYEpUEeyIwoiHLDyeZw" base_Property="_WI9WMEcqEey1N5vSPJkqqg" length="11" precision="1" scale="1"/>
   <DatabaseModeling:Column xmi:id="_ReogkEpVEeycBIuMEUOj6A" base_Property="_ZH07EEcqEey1N5vSPJkqqg" length="11" precision="11" unique="true" nullable="true"/>
+  <DatabaseModeling:Column xmi:id="_XrmhUEyTEeyT2-SeRH0fHA" base_Property="_2nlFwEosEey01r_yqKcRyA" dataType="NUMBER(precision, scale)"/>
+  <DatabaseModeling:FK xmi:id="_ZMfFQEyTEeyT2-SeRH0fHA" base_Property="_2nlFwEosEey01r_yqKcRyA"/>
 </xmi:XMI>
