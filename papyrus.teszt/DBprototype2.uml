@@ -4,21 +4,33 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_q7cvsEmFEey7GItKbTSaRw">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
-    <packagedElement xmi:type="uml:Class" xmi:id="_wQfhwEmFEey7GItKbTSaRw" name="Class2">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_5eC2cEmFEey7GItKbTSaRw" name="classProperty9">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_2aoBEE1cEeyZ2YO7BIWEHg" name="Class3">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_5xlV001cEeyZ2YO7BIWEHg" name="interface4" type="_3lDz4E1cEeyZ2YO7BIWEHg" association="_5xlV0E1cEeyZ2YO7BIWEHg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5xl84E1cEeyZ2YO7BIWEHg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5xl84U1cEeyZ2YO7BIWEHg" value="1"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_CnJwAEmGEey7GItKbTSaRw" name="classProperty8">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_74h0ME1cEeyZ2YO7BIWEHg" name="Property4"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_8hzasE1cEeyZ2YO7BIWEHg" name="Property5" visibility="public"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Interface" xmi:id="_xCwsMEmFEey7GItKbTSaRw" name="Interface3">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_GflaIEmGEey7GItKbTSaRw" name="interfaceProperty7">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_3lDz4E1cEeyZ2YO7BIWEHg" name="Interface4">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_5Nw3EE1cEeyZ2YO7BIWEHg" name="class3" type="_2aoBEE1cEeyZ2YO7BIWEHg" association="_5Nvo8E1cEeyZ2YO7BIWEHg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5NxeIE1cEeyZ2YO7BIWEHg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5NxeIU1cEeyZ2YO7BIWEHg" value="1"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_IuKKgEmGEey7GItKbTSaRw" name="interfaceProperty6">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_6xIuUE1cEeyZ2YO7BIWEHg" name="Property2"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_7NQCkE1cEeyZ2YO7BIWEHg" name="Property3"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_5Nvo8E1cEeyZ2YO7BIWEHg" memberEnd="_5Nw3EE1cEeyZ2YO7BIWEHg _5NxeIk1cEeyZ2YO7BIWEHg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_5NwQAE1cEeyZ2YO7BIWEHg" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_5NwQAU1cEeyZ2YO7BIWEHg" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_5NxeIk1cEeyZ2YO7BIWEHg" name="interface4" type="_3lDz4E1cEeyZ2YO7BIWEHg" association="_5Nvo8E1cEeyZ2YO7BIWEHg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_5xlV0E1cEeyZ2YO7BIWEHg" memberEnd="_5xlV001cEeyZ2YO7BIWEHg _5xl84k1cEeyZ2YO7BIWEHg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_5xlV0U1cEeyZ2YO7BIWEHg" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_5xlV0k1cEeyZ2YO7BIWEHg" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_5xl84k1cEeyZ2YO7BIWEHg" name="class3" type="_2aoBEE1cEeyZ2YO7BIWEHg" association="_5xlV0E1cEeyZ2YO7BIWEHg"/>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_OzLoAEmGEey7GItKbTSaRw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_K5zhoEpVEeycBIuMEUOj6A" source="PapyrusVersion">
@@ -34,5 +46,7 @@
       <appliedProfile xmi:type="uml:Profile" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:DatabaseModel xmi:id="_OtxxEEoqEeya0PPbS98n_A" base_Package="_q50YAEmFEey7GItKbTSaRw" databaseType="MySQL"/>
+  <DatabaseModeling:DatabaseModel xmi:id="_4vtYQE8AEeyo495UKVnICQ" base_Package="_q50YAEmFEey7GItKbTSaRw" databaseType="Oracle"/>
+  <DatabaseModeling:Column xmi:id="_6GhaME8AEeyo495UKVnICQ" base_Property="_74h0ME1cEeyZ2YO7BIWEHg" dataType="NUMBER(precision, scale)" defaultValue="oooo"/>
+  <DatabaseModeling:Column xmi:id="_7umLQE8AEeyo495UKVnICQ" base_Property="_8hzasE1cEeyZ2YO7BIWEHg" dataType="NUMBER(precision, scale)" defaultValue="o"/>
 </xmi:XMI>

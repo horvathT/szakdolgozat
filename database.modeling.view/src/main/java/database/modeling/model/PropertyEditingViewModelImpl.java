@@ -54,25 +54,45 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		String modelDBType = DatabaseModelUtil.getDatabaseType(model);
 		ToolItem databaseChanger = view.getDatabaseChanger();
 
-		if (modelDBType != null) {
-			String selectedDBType = databaseChanger.getText();
+//		if (modelDBType != null || !modelDBType.isEmpty()) {
+//			String selectedDBType = databaseChanger.getText();
+//			if (modelDBType.equals(selectedDBType)) {
+//				updateDataInView(view.getCurrentPropertySelection());
+//			} else {
+//				updateDatabaseChanger(selectedDBType);
+//				changeDatabaseImplementation(selectedDBType, modelDBType);
+//			}
+//		} else {
+//			updateDataInView(view.getCurrentPropertySelection());
+//		}
+
+		String selectedDBType = databaseChanger.getText();
+		if (modelDBType == null || modelDBType.isEmpty()) {
+			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(model);
+			RecordingCommand command = new RecordingCommand(editingDomain) {
+				@Override
+				protected void doExecute() {
+					DatabaseModelUtil.setDatabaseType(model, selectedDBType);
+				}
+			};
+			editingDomain.getCommandStack().execute(command);
+			updateDataInView(view.getCurrentPropertySelection());
+		} else {
 			if (modelDBType.equals(selectedDBType)) {
 				updateDataInView(view.getCurrentPropertySelection());
 			} else {
-				changeDatabaseImplementation(selectedDBType, modelDBType);
-				updateDatabaseChanger(selectedDBType);
+				updateDatabaseChanger(modelDBType);
 				updateDataInView(view.getCurrentPropertySelection());
+//				changeDatabaseImplementation(selectedDBType, modelDBType);
 			}
-		} else {
-			updateDataInView(view.getCurrentPropertySelection());
 		}
+
 	}
 
 	@Override
 	public void changeDatabaseImplementation(String curentlySelectedDB, String newlySelectedDbName) {
 		// selection xmiId-t elrakjuk későbbre
 		Property currentPropertySelection = view.getCurrentPropertySelection();
-		String fragment = EcoreUtil.getURI(currentPropertySelection).fragment();
 
 		// TODO(modellen lévő adatok validálása)
 
@@ -96,6 +116,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		converter.applyFileOnModel(newlySelectedDbName);
 
 		// view frissítése az új db adatokkal
+		String fragment = EcoreUtil.getURI(currentPropertySelection).fragment();
 		Property propertySelectionAfterDBChange = EclipseModelUtil.getPropertyByXmiId(fragment, model);
 		if (propertySelectionAfterDBChange != null) {
 			updateDataInView(propertySelectionAfterDBChange);
@@ -131,6 +152,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		resetView();
 		PropertyDataModel dataModel = DataTransformer.propertyToSqlDataModel(property);
 		updateViewFromModel(dataModel);
+
 	}
 
 	private void resetView() {
@@ -177,7 +199,13 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 			view.getReferencedProperty().setEnabled(true);
 		}
 		view.getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
-		view.getReferencedEntity().setText(model.getReferencedEntity());
+
+		setupReferenceEntityCombo();
+		String referencedEntity = model.getReferencedEntity();
+		view.getReferencedEntity().setText(referencedEntity);
+		if (!referencedEntity.isEmpty()) {
+			setupReferencePropertyCombo(referencedEntity);
+		}
 		view.getReferencedProperty().setText(model.getReferencedProperty());
 
 		if (model.getSqlType().isEmpty()) {
@@ -290,8 +318,10 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 				EList<Property> memberEnds = association.getMemberEnds();
 				Property refProp = memberEnds.get(0);
 				Type type = refProp.getType();
-				String fragment = EcoreUtil.getURI(type).fragment();
-				referencedEntityFragmentsByName.put(type.getName(), fragment);
+				if (!classifier.equals(type)) {
+					String fragment = EcoreUtil.getURI(type).fragment();
+					referencedEntityFragmentsByName.put(type.getName(), fragment);
+				}
 			}
 		}
 		return referencedEntityFragmentsByName;
@@ -314,6 +344,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 			List<String> listOfPropertyNames = allAttributes.stream().map(Property::getName)
 					.collect(Collectors.toList());
 			view.getReferencedProperty().setItems(listOfPropertyNames.toArray(new String[listOfPropertyNames.size()]));
+			view.getReferencedProperty().add("", 0);
 		} else {
 			log.error("Classifier by name: " + entityName + "not found!");
 		}
@@ -322,7 +353,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	private List<Property> getOwnedAttributes(Classifier classifierByName) {
 		List<Property> propertyList = new ArrayList<>();
 		for (Property property : classifierByName.getAllAttributes()) {
-			if (isAssociation(property)) {
+			if (!isAssociation(property)) {
 				propertyList.add(property);
 			}
 		}

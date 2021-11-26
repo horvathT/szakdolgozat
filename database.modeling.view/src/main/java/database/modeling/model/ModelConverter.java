@@ -140,6 +140,7 @@ public class ModelConverter {
 					applyOnProperties(propertyCollection);
 					applyOnModelPackage(newlySelectedDbName);
 				}
+				applyOnModelPackage(newlySelectedDbName);
 
 			}
 
