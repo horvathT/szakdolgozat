@@ -30,7 +30,7 @@ import database.modeling.util.resource.EclipseModelUtil;
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
-import database.modeling.util.stereotype.StereotypeApplicationUtil;
+import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class ModelConverter {
@@ -49,18 +49,20 @@ public class ModelConverter {
 	public void writeModelToFile(String currentySelectedDb) {
 		Collection<Property> propertiesFromModel = EclipseModelUtil.getPropertiesFromModel(model);
 		List<PropertyDataModel> sqlProperties = convertToSqlProperties(propertiesFromModel);
-		String json = new Gson().toJson(sqlProperties);
+		if (!sqlProperties.isEmpty()) {
+			String json = new Gson().toJson(sqlProperties);
 
-		String filePath = constructFilePath();
-		String fileName = constructFileName(currentySelectedDb);
+			String filePath = constructFilePath();
+			String fileName = constructFileName(currentySelectedDb);
 
-		try (InputStream targetStream = new ByteArrayInputStream(json.getBytes())) {
-			EclipseResourceUtil.writeFile(filePath, fileName, targetStream);
-			EclipseResourceUtil.refreshWorkspaceRoot();
-		} catch (IOException e) {
-			log.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
-		} catch (CoreException e) {
-			log.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
+			try (InputStream targetStream = new ByteArrayInputStream(json.getBytes())) {
+				EclipseResourceUtil.writeFile(filePath, fileName, targetStream);
+				EclipseResourceUtil.refreshWorkspaceRoot();
+			} catch (IOException e) {
+				log.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
+			} catch (CoreException e) {
+				log.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
+			}
 		}
 	}
 
@@ -77,7 +79,7 @@ public class ModelConverter {
 	private List<PropertyDataModel> convertToSqlProperties(Collection<Property> properties) {
 		List<PropertyDataModel> sqlProperties = new ArrayList<>();
 		for (Property property : properties) {
-			if (StereotypeApplicationUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
+			if (StereotypeManagementUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
 				sqlProperties.add(convertToSqlPropery(property));
 			}
 		}
