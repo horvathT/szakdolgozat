@@ -49,4 +49,6 @@
   <DatabaseModeling:DatabaseModel xmi:id="_4vtYQE8AEeyo495UKVnICQ" base_Package="_q50YAEmFEey7GItKbTSaRw" databaseType="Oracle"/>
   <DatabaseModeling:Column xmi:id="_6GhaME8AEeyo495UKVnICQ" base_Property="_74h0ME1cEeyZ2YO7BIWEHg" dataType="NUMBER(precision, scale)" defaultValue="oooo"/>
   <DatabaseModeling:Column xmi:id="_7umLQE8AEeyo495UKVnICQ" base_Property="_8hzasE1cEeyZ2YO7BIWEHg" dataType="NUMBER(precision, scale)" defaultValue="o"/>
+  <DatabaseModeling:Column xmi:id="_7FtTYE8NEeyi6sfBGm-fyg" base_Property="_6xIuUE1cEeyZ2YO7BIWEHg" dataType="BINARY_FLOAT"/>
+  <DatabaseModeling:FK xmi:id="_7F1PME8NEeyi6sfBGm-fyg" base_Property="_6xIuUE1cEeyZ2YO7BIWEHg" foreignKeyConstraint="toDelete" referencedEntity="Class7"/>
 </xmi:XMI>

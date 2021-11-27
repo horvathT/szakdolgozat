@@ -54,18 +54,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		String modelDBType = DatabaseModelUtil.getDatabaseType(model);
 		ToolItem databaseChanger = view.getDatabaseChanger();
 
-//		if (modelDBType != null || !modelDBType.isEmpty()) {
-//			String selectedDBType = databaseChanger.getText();
-//			if (modelDBType.equals(selectedDBType)) {
-//				updateDataInView(view.getCurrentPropertySelection());
-//			} else {
-//				updateDatabaseChanger(selectedDBType);
-//				changeDatabaseImplementation(selectedDBType, modelDBType);
-//			}
-//		} else {
-//			updateDataInView(view.getCurrentPropertySelection());
-//		}
-
 		String selectedDBType = databaseChanger.getText();
 		if (modelDBType == null || modelDBType.isEmpty()) {
 			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(model);

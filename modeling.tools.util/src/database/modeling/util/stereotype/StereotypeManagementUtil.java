@@ -3,7 +3,7 @@ package database.modeling.util.stereotype;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Stereotype;
 
-public class StereotypeApplicationUtil {
+public class StereotypeManagementUtil {
 
 	public static boolean hasStereotype(NamedElement property, String stereotpyeQualifiedName) {
 		if (property == null) {
@@ -34,11 +34,11 @@ public class StereotypeApplicationUtil {
 			String data) {
 		if (data != null && property != null) {
 			Stereotype applicableStereotype = property.getApplicableStereotype(stereotpyeQualifiedName);
-			if (StereotypeApplicationUtil.hasStereotype(property, stereotpyeQualifiedName)) {
+			if (StereotypeManagementUtil.hasStereotype(property, stereotpyeQualifiedName)) {
 				property.setValue(applicableStereotype, propertyName, data);
 			} else {
 				if (applicableStereotype != null) {
-					StereotypeApplicationUtil.applyStereotype(property, stereotpyeQualifiedName);
+					StereotypeManagementUtil.applyStereotype(property, stereotpyeQualifiedName);
 					property.setValue(applicableStereotype, propertyName, data);
 				}
 			}
@@ -61,14 +61,30 @@ public class StereotypeApplicationUtil {
 
 		if (property != null) {
 			Stereotype applicableStereotype = property.getApplicableStereotype(stereotpyeQualifiedName);
-			if (StereotypeApplicationUtil.hasStereotype(property, stereotpyeQualifiedName)) {
+			if (StereotypeManagementUtil.hasStereotype(property, stereotpyeQualifiedName)) {
 				property.setValue(applicableStereotype, propertyName, Boolean.valueOf(data));
 			} else {
 				if (applicableStereotype != null) {
-					StereotypeApplicationUtil.applyStereotype(property, stereotpyeQualifiedName);
+					StereotypeManagementUtil.applyStereotype(property, stereotpyeQualifiedName);
 					property.setValue(applicableStereotype, propertyName, data);
 				}
 			}
+		}
+	}
+
+	/**
+	 * Az {@element} paraméterben megadott elemről eltávolítja a
+	 * {@stereotpyeQualifiedName} megnevezésű sztereotípust ha az alkalmazva van
+	 * rajta. Fontos hogy a metódust RecordingCommand belsejéből kell hívni,
+	 * különben a változatás nem hajtható végre.
+	 * 
+	 * @param element
+	 * @param stereotpyeQualifiedName
+	 */
+	public static void unapplyStereotype(NamedElement element, String stereotpyeQualifiedName) {
+		Stereotype appliedStereotype = element.getAppliedStereotype(stereotpyeQualifiedName);
+		if (appliedStereotype != null) {
+			element.unapplyStereotype(appliedStereotype);
 		}
 	}
 

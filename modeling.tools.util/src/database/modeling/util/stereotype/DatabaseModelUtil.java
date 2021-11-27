@@ -7,11 +7,11 @@ public class DatabaseModelUtil {
 	private final static String DATABASE_TYPE = "databaseType";
 
 	public static String getDatabaseType(Package pack) {
-		return StereotypeApplicationUtil.getStringAttributeValue(STEREOTYPE_QUALIFIED_NAME, pack, DATABASE_TYPE);
+		return StereotypeManagementUtil.getStringAttributeValue(STEREOTYPE_QUALIFIED_NAME, pack, DATABASE_TYPE);
 	}
 
 	public static void setDatabaseType(Package pack, String data) {
-		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, DATABASE_TYPE, pack, data);
+		StereotypeManagementUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, DATABASE_TYPE, pack, data);
 	}
 
 }

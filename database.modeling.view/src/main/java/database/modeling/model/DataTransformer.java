@@ -7,7 +7,7 @@ import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.FKUtil;
 import database.modeling.util.stereotype.PKUtil;
 import database.modeling.util.stereotype.ProfileUtil;
-import database.modeling.util.stereotype.StereotypeApplicationUtil;
+import database.modeling.util.stereotype.StereotypeManagementUtil;
 
 public class DataTransformer {
 
@@ -16,7 +16,7 @@ public class DataTransformer {
 
 		dataModel.setXmiId(EcoreUtil.getURI(property).fragment());
 
-		if (StereotypeApplicationUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
+		if (StereotypeManagementUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			// dataType
 			dataModel.setSqlType(ColumnUtil.getDataType(property));
 			// defaultValue
@@ -40,14 +40,14 @@ public class DataTransformer {
 			dataModel.setNullable(false);
 			dataModel.setUnique(false);
 		}
-		if (StereotypeApplicationUtil.hasStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME)) {
+		if (StereotypeManagementUtil.hasStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			dataModel.setPrimaryKey(true);
 			dataModel.setPrimaryKeyConstraintName(PKUtil.getConstraintName(property));
 		} else {
 			dataModel.setPrimaryKey(false);
 			dataModel.setPrimaryKeyConstraintName("");
 		}
-		if (StereotypeApplicationUtil.hasStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME)) {
+		if (StereotypeManagementUtil.hasStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			// fk
 			dataModel.setForeignKey(true);
 			// fk constraint
@@ -68,7 +68,7 @@ public class DataTransformer {
 
 	public static Property applyModelOnProperty(PropertyDataModel dataModel, Property property) {
 		ProfileUtil.applyPofile(property);
-		StereotypeApplicationUtil.applyStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME);
+		StereotypeManagementUtil.applyStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME);
 		ColumnUtil.setDataType(property, dataModel.getSqlType());
 		ColumnUtil.setDefaultValue(property, dataModel.getDefaultValue());
 		ColumnUtil.setLength(property, dataModel.getLength());
@@ -78,14 +78,18 @@ public class DataTransformer {
 		ColumnUtil.setNullable(property, dataModel.isNullable());
 
 		if (dataModel.isPrimaryKey()) {
-			StereotypeApplicationUtil.applyStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME);
+			StereotypeManagementUtil.applyStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME);
 			PKUtil.setConstraintName(property, dataModel.getPrimaryKeyConstraintName());
+		} else {
+			StereotypeManagementUtil.unapplyStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME);
 		}
 		if (dataModel.isForeignKey()) {
-			StereotypeApplicationUtil.applyStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME);
+			StereotypeManagementUtil.applyStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME);
 			FKUtil.setConstraintName(property, dataModel.getForeignKeyConstraintName());
 			FKUtil.setReferencedEntity(property, dataModel.getReferencedEntity());
 			FKUtil.setReferencedProperty(property, dataModel.getReferencedProperty());
+		} else {
+			StereotypeManagementUtil.unapplyStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME);
 		}
 
 		return property;

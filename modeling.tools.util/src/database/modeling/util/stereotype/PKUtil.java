@@ -8,12 +8,12 @@ public class PKUtil {
 	public final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::PK";
 
 	public static String getConstraintName(Property property) {
-		return StereotypeApplicationUtil.getStringAttributeValue(STEREOTYPE_QUALIFIED_NAME, property,
+		return StereotypeManagementUtil.getStringAttributeValue(STEREOTYPE_QUALIFIED_NAME, property,
 				PRIMARY_KEY_CONSTRAINT);
 	}
 
 	public static void setConstraintName(Property property, String data) {
-		StereotypeApplicationUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, PRIMARY_KEY_CONSTRAINT, property, data);
+		StereotypeManagementUtil.setStringValue(STEREOTYPE_QUALIFIED_NAME, PRIMARY_KEY_CONSTRAINT, property, data);
 	}
 
 }
