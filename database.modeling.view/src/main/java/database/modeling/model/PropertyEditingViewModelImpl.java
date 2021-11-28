@@ -17,8 +17,10 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.uml2.uml.Association;
+import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
@@ -298,7 +300,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		Map<String, String> referencedEntityFragmentsByName = new HashMap<>();
 
 		Element owner = property.getOwner();
-		if (owner instanceof Classifier) {
+		if (owner instanceof Interface || owner instanceof Class) {
 
 			Classifier classifier = (Classifier) owner;
 			EList<Association> associations = classifier.getAssociations();
@@ -306,9 +308,11 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 				EList<Property> memberEnds = association.getMemberEnds();
 				Property refProp = memberEnds.get(0);
 				Type type = refProp.getType();
-				if (!classifier.equals(type)) {
-					String fragment = EcoreUtil.getURI(type).fragment();
-					referencedEntityFragmentsByName.put(type.getName(), fragment);
+				if (type instanceof Interface || type instanceof Class) {
+					if (!classifier.equals(type)) {
+						String fragment = EcoreUtil.getURI(type).fragment();
+						referencedEntityFragmentsByName.put(type.getName(), fragment);
+					}
 				}
 			}
 		}

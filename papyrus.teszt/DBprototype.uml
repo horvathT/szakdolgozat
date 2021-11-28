@@ -19,6 +19,10 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_F2-aUk1dEeyZ2YO7BIWEHg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_F2-aU01dEeyZ2YO7BIWEHg" value="1"/>
       </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_G4Bu8FCPEeyP5q0aB70Vqw" name="enumeration8" type="_FzE5EFCPEeyP5q0aB70Vqw" association="_G3_SsFCPEeyP5q0aB70Vqw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G4Bu8VCPEeyP5q0aB70Vqw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G4Bu8lCPEeyP5q0aB70Vqw" value="1"/>
+      </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_F29zQE1dEeyZ2YO7BIWEHg" memberEnd="_F2-aUU1dEeyZ2YO7BIWEHg _F2-aVE1dEeyZ2YO7BIWEHg">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_F29zQU1dEeyZ2YO7BIWEHg" source="org.eclipse.papyrus">
@@ -31,6 +35,19 @@
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_GSeDgU1dEeyZ2YO7BIWEHg" key="nature" value="UML_Nature"/>
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_GSeqkk1dEeyZ2YO7BIWEHg" name="class3" type="_0ZmkgE1cEeyZ2YO7BIWEHg" association="_GSdccE1dEeyZ2YO7BIWEHg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="__uh-sFB4EeyEOefCyS9NCg" name="types">
+      <packagedElement xmi:type="uml:DataType" xmi:id="_AzCvsFB5EeyEOefCyS9NCg" name="CustomDT"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_CmrQgFB5EeyEOefCyS9NCg" name="CustomPT"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_FzE5EFCPEeyP5q0aB70Vqw" name="Enumeration8">
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_GeJPUFCPEeyP5q0aB70Vqw" name="EnumerationLiteral1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_G3_SsFCPEeyP5q0aB70Vqw" memberEnd="_G4Bu8FCPEeyP5q0aB70Vqw _G4CWAFCPEeyP5q0aB70Vqw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_G4Ag0FCPEeyP5q0aB70Vqw" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_G4BH4FCPEeyP5q0aB70Vqw" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_G4CWAFCPEeyP5q0aB70Vqw" name="class4" type="_1HaswE1cEeyZ2YO7BIWEHg" association="_G3_SsFCPEeyP5q0aB70Vqw"/>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_hslKYEcqEey1N5vSPJkqqg">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_LG14EEpVEeycBIuMEUOj6A" source="PapyrusVersion">

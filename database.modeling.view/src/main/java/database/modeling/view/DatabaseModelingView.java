@@ -197,6 +197,8 @@ public class DatabaseModelingView {
 		referencePropertyFocusListener();
 
 		viewModel = new PropertyEditingViewModelImpl(this);
+		viewModel.isAttributeEditingEnabled(false);
+		dataTypeCombo.setEnabled(false);
 
 		dbSelectionListener = new DatabaseSelectionListener(this);
 		databaseChanger.addSelectionListener(dbSelectionListener);
@@ -307,6 +309,7 @@ public class DatabaseModelingView {
 						if (element instanceof Property) {
 							viewModel.selectionChanged((Property) element);
 							databaseChanger.setEnabled(true);
+							dataTypeCombo.setEnabled(true);
 						}
 					}
 				}
