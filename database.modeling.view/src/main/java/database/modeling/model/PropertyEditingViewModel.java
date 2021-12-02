@@ -1,6 +1,6 @@
 package database.modeling.model;
 
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.uml2.uml.Property;
 
@@ -16,7 +16,7 @@ public interface PropertyEditingViewModel {
 
 	public void updateDatabaseChanger(String newDbName);
 
-	public List<String> getDatabaseTypes();
+	public Set<String> getDatabaseTypes();
 
 	public void isAttributeEditingEnabled(boolean isEnabled);
 

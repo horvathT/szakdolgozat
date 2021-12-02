@@ -12,9 +12,11 @@ Require-Bundle: javax.inject,
  org.eclipse.emf.transaction,
  org.eclipse.e4.ui.workbench,
  com.google.gson,
- modeling.tools.util
+ modeling.tools.util,
+ org.eclipse.ui.workbench
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: database.modeling.view
 Import-Package: javax.annotation,
  org.slf4j;version="1.7.30"
 Bundle-ActivationPolicy: lazy
+Export-Package: database.modeling.model

@@ -10,7 +10,7 @@ public class PropertyDataModel {
 	private String defaultValue;
 	private String primaryKeyConstraintName;
 	private String foreignKeyConstraintName;
-	private String sqlType;
+	private DataTypeDefinition sqlType;
 
 	private String referencedEntity;
 	private String referencedProperty;
@@ -68,11 +68,11 @@ public class PropertyDataModel {
 		this.foreignKeyConstraintName = foreignKeyConstraintName;
 	}
 
-	public String getSqlType() {
+	public DataTypeDefinition getSqlType() {
 		return sqlType;
 	}
 
-	public void setSqlType(String sqlType) {
+	public void setSqlType(DataTypeDefinition sqlType) {
 		this.sqlType = sqlType;
 	}
 

@@ -1,9 +1,16 @@
 package database.modeling.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.uml2.uml.Property;
 
 import database.modeling.util.stereotype.ColumnUtil;
+import database.modeling.util.stereotype.DatabaseModelUtil;
 import database.modeling.util.stereotype.FKUtil;
 import database.modeling.util.stereotype.PKUtil;
 import database.modeling.util.stereotype.ProfileUtil;
@@ -18,7 +25,8 @@ public class DataTransformer {
 
 		if (StereotypeManagementUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			// dataType
-			dataModel.setSqlType(ColumnUtil.getDataType(property));
+			DataTypeDefinition dtd = getDataTypeDefinition(property);
+			dataModel.setSqlType(dtd);
 			// defaultValue
 			dataModel.setDefaultValue(ColumnUtil.getDefaultValue(property));
 			// length
@@ -32,7 +40,7 @@ public class DataTransformer {
 			// unique
 			dataModel.setUnique(ColumnUtil.getUnique(property));
 		} else {
-			dataModel.setSqlType("");
+//			dataModel.setSqlType("");
 			dataModel.setDefaultValue("");
 			dataModel.setLength("");
 			dataModel.setPrecision("");
@@ -66,10 +74,29 @@ public class DataTransformer {
 		return dataModel;
 	}
 
+	private static DataTypeDefinition getDataTypeDefinition(Property property) {
+		String dataType = ColumnUtil.getDataType(property);
+		String databaseType = DatabaseModelUtil.getDatabaseType(property.getModel());
+
+		Map<String, List<DataTypeDefinition>> databaseTypeMap = new DatabaseTypesUtil().getDatabaseTypeMap();
+		List<DataTypeDefinition> dataTypeList = databaseTypeMap.get(databaseType);
+		for (DataTypeDefinition dtd : dataTypeList) {
+			if (dtd.getName().equals(dataType)) {
+				return dtd;
+			}
+		}
+
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		MessageDialog.openError(shell, "",
+				"Adattípus " + dataType + " névvel nem található a(z) " + databaseType + " adattípusai közt!");
+		throw new IllegalArgumentException(
+				"Adattípus " + dataType + " névvel nem található a(z) " + databaseType + " adattípusai közt!");
+	}
+
 	public static Property applyModelOnProperty(PropertyDataModel dataModel, Property property) {
 		ProfileUtil.applyPofile(property);
 		StereotypeManagementUtil.applyStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME);
-		ColumnUtil.setDataType(property, dataModel.getSqlType());
+		ColumnUtil.setDataType(property, dataModel.getSqlType().getName());
 		ColumnUtil.setDefaultValue(property, dataModel.getDefaultValue());
 		ColumnUtil.setLength(property, dataModel.getLength());
 		ColumnUtil.setPrecision(property, dataModel.getPrecision());

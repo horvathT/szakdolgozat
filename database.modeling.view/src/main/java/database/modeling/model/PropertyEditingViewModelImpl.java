@@ -13,6 +13,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolItem;
@@ -28,9 +32,10 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import database.modeling.model.DataTypeDefinition.InputType;
+import database.modeling.util.InputVerifier;
 import database.modeling.util.resource.EclipseModelUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
-import database.modeling.util.stereotype.DatabaseTypesUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
@@ -155,7 +160,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getForeignKeyConstraintName().setText("");
 		view.getForeignKeyConstraintName().setEnabled(false);
 
-		view.getSqlTypeCombo().select(0);
+		view.getDataTypeCombo().select(0);
 
 		view.getReferencedEntity().clearSelection();
 		view.getReferencedEntity().setEnabled(false);
@@ -198,13 +203,61 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		}
 		view.getReferencedProperty().setText(model.getReferencedProperty());
 
-		if (model.getSqlType().isEmpty()) {
-			view.getSqlTypeCombo().clearSelection();
-			isAttributeEditingEnabled(false);
+		isAttributeEditingEnabled(false);
+		DataTypeDefinition sqlType = model.getSqlType();
+		if (sqlType == null) {
+			view.getSqlTypeComboViewer()
+					.setSelection(new StructuredSelection(DataTypeDefinition.of().name("").hasDefaulValue(false)));
 		} else {
-			view.getSqlTypeCombo().setText(model.getSqlType());
-			isAttributeEditingEnabled(true);
+			view.getSqlTypeComboViewer().setSelection(new StructuredSelection(sqlType), true);
 		}
+
+	}
+
+	public void setupdataTypeInpuScheme(DataTypeDefinition dtd) {
+		if (dtd.getName().isEmpty()) {
+			isAttributeEditingEnabled(false);
+		}
+
+		InputType type = dtd.getType();
+
+		if (InputType.NUMERIC.equals(type)) {
+			if (dtd.hasLength()) {
+				view.getLength().setEnabled(true);
+				view.getLength().addVerifyListener(e -> {
+					InputVerifier.verifyNumberFieldLength(e, dtd);
+				});
+			}
+			if (dtd.hasScale()) {
+				view.getScale().setEnabled(true);
+				view.getScale().addVerifyListener(e -> {
+					InputVerifier.verifyNumberFieldScale(e, dtd);
+				});
+			}
+			if (dtd.hasPrecision()) {
+				view.getPrecision().setEnabled(true);
+				view.getPrecision().addVerifyListener(e -> {
+					InputVerifier.verifyNumberFieldPrecision(e, dtd);
+				});
+			}
+			if (dtd.hasDefaulValue()) {
+				view.getDefaultValue().setEnabled(true);
+				view.getDefaultValue().addVerifyListener(e -> {
+					InputVerifier.verifyNumberField(e, dtd);
+				});
+			}
+		} else {
+			if (dtd.hasLength()) {
+				view.getLength().setEnabled(true);
+				view.getLength().addVerifyListener(e -> {
+					InputVerifier.verifyTextFieldLength(e, dtd);
+				});
+			}
+			if (dtd.hasDefaulValue()) {
+				view.getDefaultValue().setEnabled(true);
+			}
+		}
+
 	}
 
 	@Override
@@ -218,12 +271,8 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getUniqueCheck().setEnabled(isEnabled);
 
 		view.getPrimaryKeyCheck().setEnabled(isEnabled);
-//		view.getPrimaryKeyConstraintName().setEditable(isEnabled);
 
 		view.getForeignKeyCheck().setEnabled(isEnabled);
-//		view.getForeignKeyConstraintName().setEnabled(isEnabled);
-//		view.getReferencedEntity().setEnabled(isEnabled);
-//		view.getReferencedProperty().setEnabled(isEnabled);
 	}
 
 	private void setCurrentSelectionLabel() {
@@ -246,7 +295,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 				|| !isEmpty(view.getForeignKeyConstraintName())) {
 			return false;
 		}
-		if (!isEmpty(view.getSqlTypeCombo()) || !isEmpty(view.getReferencedEntity())
+		if (!isEmpty(view.getDataTypeCombo()) || !isEmpty(view.getReferencedEntity())
 				|| !isEmpty(view.getReferencedProperty())) {
 			return false;
 		}
@@ -276,7 +325,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		model.setPrimaryKeyConstraintName(view.getPrimaryKeyConstraintName().getText());
 		model.setForeignKeyConstraintName(view.getForeignKeyConstraintName().getText());
 
-		model.setSqlType(view.getSqlTypeCombo().getText());
+		IStructuredSelection structuredSelection = view.getSqlTypeComboViewer().getStructuredSelection();
+		DataTypeDefinition selection = (DataTypeDefinition) structuredSelection.getFirstElement();
+		model.setSqlType(selection);
 		model.setReferencedEntity(view.getReferencedEntity().getText());
 		model.setReferencedProperty(view.getReferencedProperty().getText());
 		return model;
@@ -286,13 +337,30 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	public void updateDatabaseChanger(String newDbName) {
 		view.getDatabaseChanger().setText(newDbName);
 		view.getDatabaseChanger().setSelection(true);
-		Map<String, String[]> dbMap = dbUtil.getDatabaseTypeMap();
-		view.getSqlTypeCombo().setItems(dbMap.get(newDbName));
-		view.getSqlTypeCombo().add("", 0);
+		fillDatatTypeCombo(newDbName);
+	}
+
+	private void fillDatatTypeCombo(String newDbName) {
+		Map<String, List<DataTypeDefinition>> dbMap = dbUtil.getDatabaseTypeMap();
+		List<DataTypeDefinition> list = dbMap.get(newDbName);
+
+		view.getSqlTypeComboViewer().setContentProvider(ArrayContentProvider.getInstance());
+		view.getSqlTypeComboViewer().setLabelProvider(new LabelProvider() {
+			@Override
+			public String getText(Object element) {
+				if (element instanceof DataTypeDefinition) {
+					DataTypeDefinition dtd = (DataTypeDefinition) element;
+					return dtd.getName();
+				}
+				return super.getText(element);
+			}
+		});
+
+		view.getSqlTypeComboViewer().setInput(list);
 	}
 
 	@Override
-	public List<String> getDatabaseTypes() {
+	public Set<String> getDatabaseTypes() {
 		return dbUtil.getDatabases();
 	}
 

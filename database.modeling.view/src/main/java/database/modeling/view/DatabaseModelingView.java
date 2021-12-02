@@ -11,6 +11,9 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.modeling.ISelectionListener;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -20,7 +23,6 @@ import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -34,6 +36,7 @@ import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
 
 import database.modeling.handler.DatabaseSelectionListener;
+import database.modeling.model.DataTypeDefinition;
 import database.modeling.model.PropertyEditingViewModelImpl;
 
 public class DatabaseModelingView {
@@ -72,10 +75,11 @@ public class DatabaseModelingView {
 	private SelectionAdapter primaryKeyCheckListener;
 	private SelectionAdapter nullableCheckListener;
 	private ISelectionListener selectionChangeListener;
-	private SelectionAdapter dataTypeSelectionListener;
+	private ISelectionChangedListener dataTypeSelectionListener;
 	private FocusListener referencedEntityFocusListener;
 	private SelectionAdapter refernecedEntitySelectionListener;
 	private FocusListener referencedPropertyFocusListener;
+	private ComboViewer sqlTypeComboViewer;
 
 	@Inject
 	public DatabaseModelingView() {
@@ -108,7 +112,7 @@ public class DatabaseModelingView {
 		Label lblSqlType = new Label(container, SWT.NONE);
 		lblSqlType.setText("SQL type");
 
-		ComboViewer sqlTypeComboViewer = new ComboViewer(container, SWT.READ_ONLY);
+		sqlTypeComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		dataTypeCombo = sqlTypeComboViewer.getCombo();
 		dataTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 
@@ -117,21 +121,18 @@ public class DatabaseModelingView {
 
 		length = new Text(container, SWT.BORDER);
 		length.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		length.addVerifyListener(DatabaseModelingView::verifyNumberField);
 
 		Label lblPrecision = new Label(container, SWT.NONE);
 		lblPrecision.setText("Precision");
 
 		precision = new Text(container, SWT.BORDER);
 		precision.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		precision.addVerifyListener(DatabaseModelingView::verifyNumberField);
 
 		Label lblScale = new Label(container, SWT.NONE);
 		lblScale.setText("Scale");
 
 		scale = new Text(container, SWT.BORDER);
 		scale.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		scale.addVerifyListener(DatabaseModelingView::verifyNumberField);
 
 		Label lblDefaultValue = new Label(container, SWT.NONE);
 		lblDefaultValue.setText("Default value");
@@ -270,30 +271,26 @@ public class DatabaseModelingView {
 				selectionService.removeSelectionListener(selectionChangeListener);
 				referencedEntity.removeFocusListener(referencedEntityFocusListener);
 				referencedEntity.removeSelectionListener(refernecedEntitySelectionListener);
+				sqlTypeComboViewer.removeSelectionChangedListener(dataTypeSelectionListener);
 			}
 		});
 
 	}
 
-	private static void verifyNumberField(VerifyEvent e) {
-		String string = e.text;
-		e.doit = string.matches("\\d*");
-		return;
-	}
-
 	private void dataTypeSelectionListener() {
-		dataTypeSelectionListener = new SelectionAdapter() {
+		dataTypeSelectionListener = new ISelectionChangedListener() {
+
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				int selectionIndex = dataTypeCombo.getSelectionIndex();
-				if (selectionIndex == 0 || selectionIndex == -1) {
-					viewModel.isAttributeEditingEnabled(false);
-				} else {
-					viewModel.isAttributeEditingEnabled(true);
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+				if (selection.size() > 0) {
+					DataTypeDefinition dtd = (DataTypeDefinition) selection.getFirstElement();
+					viewModel.setupdataTypeInpuScheme(dtd);
 				}
 			}
 		};
-		dataTypeCombo.addSelectionListener(dataTypeSelectionListener);
+
+		sqlTypeComboViewer.addSelectionChangedListener(dataTypeSelectionListener);
 	}
 
 	private void setupSelectionListener() {
@@ -409,7 +406,7 @@ public class DatabaseModelingView {
 		return foreignKeyConstraintName;
 	}
 
-	public Combo getSqlTypeCombo() {
+	public Combo getDataTypeCombo() {
 		return dataTypeCombo;
 	}
 
@@ -463,6 +460,14 @@ public class DatabaseModelingView {
 
 	public PropertyEditingViewModelImpl getViewModel() {
 		return viewModel;
+	}
+
+	public ComboViewer getSqlTypeComboViewer() {
+		return sqlTypeComboViewer;
+	}
+
+	public void setSqlTypeComboViewer(ComboViewer sqlTypeComboViewer) {
+		this.sqlTypeComboViewer = sqlTypeComboViewer;
 	}
 
 }

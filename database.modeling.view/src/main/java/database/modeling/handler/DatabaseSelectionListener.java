@@ -1,7 +1,7 @@
 package database.modeling.handler;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolItem;
 
+import database.modeling.model.DatabaseTypesUtil;
 import database.modeling.model.PropertyEditingViewModelImpl;
 import database.modeling.view.DatabaseModelingView;
 
@@ -29,12 +30,11 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 
 		menu = new Menu(dropdown.getParent().getShell());
 
-		List<String> databases = viewModel.getDatabaseTypes();
+		Set<String> databases = viewModel.getDatabaseTypes();
 		add(databases);
 
-		String defaultDb = databases.get(0);
-		currentDbSelected = defaultDb;
-		viewModel.updateDatabaseChanger(defaultDb);
+		currentDbSelected = DatabaseTypesUtil.DEFAULT_DB;
+		viewModel.updateDatabaseChanger(currentDbSelected);
 	}
 
 	public void add(Collection<String> items) {
