@@ -110,11 +110,12 @@ public class DatabaseModelingView {
 		databaseChanger.setEnabled(false);
 
 		Label lblSqlType = new Label(container, SWT.NONE);
-		lblSqlType.setText("SQL type");
+		lblSqlType.setText("Data type");
 
 		sqlTypeComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		dataTypeCombo = sqlTypeComboViewer.getCombo();
 		dataTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		dataTypeCombo.setToolTipText("Érték választás után szerkeszthetővé válnak a típushoz tartozó mezők.");
 
 		Label lblLength = new Label(container, SWT.NONE);
 		lblLength.setText("Length");
@@ -198,7 +199,7 @@ public class DatabaseModelingView {
 		referencePropertyFocusListener();
 
 		viewModel = new PropertyEditingViewModelImpl(this);
-		viewModel.isAttributeEditingEnabled(false);
+		viewModel.attributeEditingEnabled(false);
 		dataTypeCombo.setEnabled(false);
 
 		dbSelectionListener = new DatabaseSelectionListener(this);
@@ -285,7 +286,7 @@ public class DatabaseModelingView {
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 				if (selection.size() > 0) {
 					DataTypeDefinition dtd = (DataTypeDefinition) selection.getFirstElement();
-					viewModel.setupdataTypeInpuScheme(dtd);
+					viewModel.changeDataTypeInpuScheme(dtd);
 				}
 			}
 		};
@@ -321,11 +322,9 @@ public class DatabaseModelingView {
 			public void widgetSelected(SelectionEvent e) {
 				if (primaryKeyCheck.getSelection()) {
 					nullableCheck.setSelection(false);
-					nullableCheck.setEnabled(false);
 					uniqueCheck.setSelection(true);
 					primaryKeyConstraintName.setEnabled(true);
 				} else {
-					nullableCheck.setEnabled(true);
 					primaryKeyConstraintName.setEnabled(false);
 				}
 			}
@@ -336,11 +335,8 @@ public class DatabaseModelingView {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (nullableCheck.getSelection()) {
-					primaryKeyCheck.setEnabled(false);
+					primaryKeyCheck.setSelection(false);
 					primaryKeyConstraintName.setEnabled(false);
-				} else {
-					primaryKeyCheck.setEnabled(true);
-					primaryKeyConstraintName.setEnabled(true);
 				}
 			}
 		};

@@ -8,8 +8,15 @@ public class InputVerifier {
 
 	public static void verifyNumberFieldLength(VerifyEvent e, DataTypeDefinition dtd) {
 		String input = e.text;
-		boolean isValidInput = false;
-		isValidInput = input.matches("\\d*");
+		if (input.isEmpty()) {
+			e.doit = true;
+			return;
+		}
+
+		if (!input.matches("\\d*")) {
+			e.doit = false;
+			return;
+		}
 
 		Long longInput = Long.valueOf(input);
 		if (dtd.getLengthLowerBound() > longInput) {
@@ -22,14 +29,21 @@ public class InputVerifier {
 			return;
 		}
 
-		e.doit = isValidInput;
+		e.doit = true;
 		return;
 	}
 
 	public static void verifyNumberFieldPrecision(VerifyEvent e, DataTypeDefinition dtd) {
 		String input = e.text;
-		boolean isValidInput = false;
-		isValidInput = input.matches("\\d*");
+		if (input.isEmpty()) {
+			e.doit = true;
+			return;
+		}
+
+		if (!input.matches("\\d*")) {
+			e.doit = false;
+			return;
+		}
 
 		Long longInput = Long.valueOf(input);
 		if (dtd.getPrecisionLowerBound() > longInput) {
@@ -42,14 +56,21 @@ public class InputVerifier {
 			return;
 		}
 
-		e.doit = isValidInput;
+		e.doit = true;
 		return;
 	}
 
 	public static void verifyNumberFieldScale(VerifyEvent e, DataTypeDefinition dtd) {
 		String input = e.text;
-		boolean isValidInput = false;
-		isValidInput = input.matches("\\d*");
+		if (input.isEmpty()) {
+			e.doit = true;
+			return;
+		}
+
+		if (!input.matches("\\d*")) {
+			e.doit = false;
+			return;
+		}
 
 		Long longInput = Long.valueOf(input);
 		if (dtd.getScaleLowerBound() > longInput) {
@@ -62,12 +83,17 @@ public class InputVerifier {
 			return;
 		}
 
-		e.doit = isValidInput;
+		e.doit = true;
 		return;
 	}
 
 	public static void verifyNumberField(VerifyEvent e, DataTypeDefinition dtd) {
 		String input = e.text;
+		if (input.isEmpty()) {
+			e.doit = true;
+			return;
+		}
+
 		e.doit = input.matches("\\d*");
 		return;
 	}

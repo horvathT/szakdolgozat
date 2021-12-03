@@ -18,7 +18,7 @@ public interface PropertyEditingViewModel {
 
 	public Set<String> getDatabaseTypes();
 
-	public void isAttributeEditingEnabled(boolean isEnabled);
+	public void attributeEditingEnabled(boolean isEnabled);
 
 	public void setupReferenceEntityCombo();
 

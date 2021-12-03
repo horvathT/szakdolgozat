@@ -78,7 +78,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 			} else {
 				updateDatabaseChanger(modelDBType);
 				updateDataInView(view.getCurrentPropertySelection());
-//				changeDatabaseImplementation(selectedDBType, modelDBType);
 			}
 		}
 
@@ -151,49 +150,55 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	}
 
 	private void resetView() {
-		view.getLength().setText("");
-		view.getPrecision().setText("");
-		view.getScale().setText("");
-		view.getDefaultValue().setText("");
-		view.getPrimaryKeyConstraintName().setText("");
-		view.getPrimaryKeyConstraintName().setEnabled(false);
-		view.getForeignKeyConstraintName().setText("");
-		view.getForeignKeyConstraintName().setEnabled(false);
+		resetTypeParameterFields();
+		resetConstraintfields();
 
 		view.getDataTypeCombo().select(0);
+	}
 
-		view.getReferencedEntity().clearSelection();
-		view.getReferencedEntity().setEnabled(false);
-		view.getReferencedProperty().clearSelection();
-		view.getReferencedProperty().setEnabled(false);
-
+	private void resetConstraintfields() {
 		view.getNullableCheck().setSelection(false);
 		view.getUniqueCheck().setSelection(false);
+
 		view.getPrimaryKeyCheck().setSelection(false);
+
+		view.getPrimaryKeyConstraintName().setText("");
+
 		view.getForeignKeyCheck().setSelection(false);
+
+		view.getForeignKeyConstraintName().setText("");
+
+		view.getReferencedEntity().clearSelection();
+		view.getReferencedProperty().clearSelection();
+	}
+
+	private void resetTypeParameterFields() {
+		view.getLength().setText("");
+		view.getLength().setEnabled(false);
+		view.getPrecision().setText("");
+		view.getPrecision().setEnabled(false);
+		view.getScale().setText("");
+		view.getScale().setEnabled(false);
+		view.getDefaultValue().setText("");
+		view.getDefaultValue().setEnabled(false);
 	}
 
 	private void updateViewFromModel(PropertyDataModel model) {
-		view.getNullableCheck().setSelection(model.isNullable());
-		view.getUniqueCheck().setSelection(model.isUnique());
+//		attributeEditingEnabled(false);
+		DataTypeDefinition dataType = model.getSqlType();
+		if (dataType == null) {
+			view.getSqlTypeComboViewer()
+					.setSelection(new StructuredSelection(DataTypeDefinition.of().name("").hasDefaulValue(false)));
+		} else {
+			view.getSqlTypeComboViewer().setSelection(new StructuredSelection(dataType), true);
+		}
 
 		view.getLength().setText(model.getLength());
 		view.getPrecision().setText(model.getPrecision());
 		view.getScale().setText(model.getScale());
 		view.getDefaultValue().setText(model.getDefaultValue());
 
-		view.getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
-		view.getForeignKeyCheck().setSelection(model.isForeignKey());
-		if (model.isPrimaryKey()) {
-			view.getPrimaryKeyConstraintName().setEnabled(true);
-		}
-		view.getPrimaryKeyConstraintName().setText(model.getPrimaryKeyConstraintName());
-		if (model.isForeignKey()) {
-			view.getForeignKeyConstraintName().setEnabled(true);
-			view.getReferencedEntity().setEnabled(true);
-			view.getReferencedProperty().setEnabled(true);
-		}
-		view.getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
+		updateConstraintCheckboxSegment(model);
 
 		setupReferenceEntityCombo();
 		String referencedEntity = model.getReferencedEntity();
@@ -203,70 +208,86 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		}
 		view.getReferencedProperty().setText(model.getReferencedProperty());
 
-		isAttributeEditingEnabled(false);
-		DataTypeDefinition sqlType = model.getSqlType();
-		if (sqlType == null) {
-			view.getSqlTypeComboViewer()
-					.setSelection(new StructuredSelection(DataTypeDefinition.of().name("").hasDefaulValue(false)));
-		} else {
-			view.getSqlTypeComboViewer().setSelection(new StructuredSelection(sqlType), true);
-		}
-
 	}
 
-	public void setupdataTypeInpuScheme(DataTypeDefinition dtd) {
+	private void updateConstraintCheckboxSegment(PropertyDataModel model) {
+		view.getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
+		if (model.isPrimaryKey()) {
+			view.getPrimaryKeyConstraintName().setEnabled(true);
+		}
+		view.getPrimaryKeyConstraintName().setText(model.getPrimaryKeyConstraintName());
+
+		view.getUniqueCheck().setSelection(model.isUnique());
+
+		view.getNullableCheck().setSelection(model.isNullable());
+
+		view.getForeignKeyCheck().setSelection(model.isForeignKey());
+		if (model.isForeignKey()) {
+			view.getForeignKeyConstraintName().setEnabled(true);
+			view.getReferencedEntity().setEnabled(true);
+			view.getReferencedProperty().setEnabled(true);
+		}
+		view.getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
+	}
+
+	public void changeDataTypeInpuScheme(DataTypeDefinition dtd) {
 		if (dtd.getName().isEmpty()) {
-			isAttributeEditingEnabled(false);
-		}
-
-		InputType type = dtd.getType();
-
-		if (InputType.NUMERIC.equals(type)) {
-			if (dtd.hasLength()) {
-				view.getLength().setEnabled(true);
-				view.getLength().addVerifyListener(e -> {
-					InputVerifier.verifyNumberFieldLength(e, dtd);
-				});
-			}
-			if (dtd.hasScale()) {
-				view.getScale().setEnabled(true);
-				view.getScale().addVerifyListener(e -> {
-					InputVerifier.verifyNumberFieldScale(e, dtd);
-				});
-			}
-			if (dtd.hasPrecision()) {
-				view.getPrecision().setEnabled(true);
-				view.getPrecision().addVerifyListener(e -> {
-					InputVerifier.verifyNumberFieldPrecision(e, dtd);
-				});
-			}
-			if (dtd.hasDefaulValue()) {
-				view.getDefaultValue().setEnabled(true);
-				view.getDefaultValue().addVerifyListener(e -> {
-					InputVerifier.verifyNumberField(e, dtd);
-				});
-			}
+			resetView();
 		} else {
-			if (dtd.hasLength()) {
-				view.getLength().setEnabled(true);
-				view.getLength().addVerifyListener(e -> {
-					InputVerifier.verifyTextFieldLength(e, dtd);
-				});
-			}
-			if (dtd.hasDefaulValue()) {
-				view.getDefaultValue().setEnabled(true);
+			resetTypeParameterFields();
+			checkboxEditingEnabled(true);
+			InputType type = dtd.getType();
+
+			if (InputType.NUMERIC.equals(type)) {
+				if (dtd.hasLength()) {
+					view.getLength().setEnabled(true);
+					view.getLength().addVerifyListener(e -> {
+						InputVerifier.verifyNumberFieldLength(e, dtd);
+					});
+				}
+				if (dtd.hasScale()) {
+					view.getScale().setEnabled(true);
+					view.getScale().addVerifyListener(e -> {
+						InputVerifier.verifyNumberFieldScale(e, dtd);
+					});
+				}
+				if (dtd.hasPrecision()) {
+					view.getPrecision().setEnabled(true);
+					view.getPrecision().addVerifyListener(e -> {
+						InputVerifier.verifyNumberFieldPrecision(e, dtd);
+					});
+				}
+				if (dtd.hasDefaulValue()) {
+					view.getDefaultValue().setEnabled(true);
+					view.getDefaultValue().addVerifyListener(e -> {
+						InputVerifier.verifyNumberField(e, dtd);
+					});
+				}
+			} else {
+				if (dtd.hasLength()) {
+					view.getLength().setEnabled(true);
+					view.getLength().addVerifyListener(e -> {
+						InputVerifier.verifyNumberFieldLength(e, dtd);
+					});
+				}
+				if (dtd.hasDefaulValue()) {
+					view.getDefaultValue().setEnabled(true);
+				}
 			}
 		}
-
 	}
 
 	@Override
-	public void isAttributeEditingEnabled(boolean isEnabled) {
+	public void attributeEditingEnabled(boolean isEnabled) {
 		view.getLength().setEnabled(isEnabled);
 		view.getScale().setEnabled(isEnabled);
 		view.getPrecision().setEnabled(isEnabled);
 		view.getDefaultValue().setEnabled(isEnabled);
 
+		checkboxEditingEnabled(isEnabled);
+	}
+
+	private void checkboxEditingEnabled(boolean isEnabled) {
 		view.getNullableCheck().setEnabled(isEnabled);
 		view.getUniqueCheck().setEnabled(isEnabled);
 
