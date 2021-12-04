@@ -30,7 +30,6 @@ public class InputVerifier {
 		}
 
 		e.doit = true;
-		return;
 	}
 
 	public static void verifyNumberFieldPrecision(VerifyEvent e, DataTypeDefinition dtd) {
@@ -57,7 +56,6 @@ public class InputVerifier {
 		}
 
 		e.doit = true;
-		return;
 	}
 
 	public static void verifyNumberFieldScale(VerifyEvent e, DataTypeDefinition dtd) {
@@ -84,18 +82,6 @@ public class InputVerifier {
 		}
 
 		e.doit = true;
-		return;
-	}
-
-	public static void verifyNumberField(VerifyEvent e, DataTypeDefinition dtd) {
-		String input = e.text;
-		if (input.isEmpty()) {
-			e.doit = true;
-			return;
-		}
-
-		e.doit = input.matches("\\d*");
-		return;
 	}
 
 	public static void verifyTextFieldLength(VerifyEvent e, DataTypeDefinition dtd) {
@@ -112,7 +98,6 @@ public class InputVerifier {
 		}
 
 		e.doit = true;
-		return;
 	}
 
 }

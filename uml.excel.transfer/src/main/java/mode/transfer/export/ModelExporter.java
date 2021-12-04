@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -46,31 +44,37 @@ import database.modeling.util.resource.EclipseResourceUtil;
 public class ModelExporter {
 	public static final Logger log = LoggerFactory.getLogger(ModelExporter.class);
 
-	private SheetFactory sheetFactory = new SheetFactory();
-
 	public void export(Package modelPackage, String filePath) {
 
-		List<DataType> dataTypes = getDataTypes(modelPackage);
-		Comparator<DataType> compareByName = (DataType dt1, DataType dt2) -> dt1.getName().compareTo(dt2.getName());
-		Collections.sort(dataTypes, compareByName);
-
 		Workbook workbook = new XSSFWorkbook();
-		sheetFactory.createDataTypeSheet(workbook, dataTypes);
-
 		EList<Element> modelPackageElements = getModelPackageElements(modelPackage);
 
-		Collection<Association> associations = getAssociations(modelPackageElements);
-		sheetFactory.createAssociationSheet(workbook, associations);
+		// DATA TYPE
+		List<DataType> dataTypes = getDataTypes(modelPackage);
+		DataTypeSheetCreator dataTypeSheetCreator = new DataTypeSheetCreator(workbook, dataTypes);
+		dataTypeSheetCreator.createSheet();
 
+		// ASSOCIATION
+		Collection<Association> associations = getAssociations(modelPackageElements);
+		AssociationSheetCreator associationSheetCreator = new AssociationSheetCreator(workbook, associations);
+		associationSheetCreator.createSheet();
+
+		// ENUM
+		Collection<Enumeration> enumerations = getEnumerations(modelPackageElements);
+		EnumSheetCreator enumSheetCreator = new EnumSheetCreator(workbook, enumerations);
+		enumSheetCreator.creatSheet();
+
+		// ENTITY SUMMARY
 		List<Classifier> classifiers = new ArrayList<>();
 		classifiers.addAll(getInterfaces(modelPackageElements));
 		classifiers.addAll(getClasses(modelPackageElements));
 
-		sheetFactory.createEntitySummarySheet(workbook, classifiers);
-		sheetFactory.createEntityPropertySheets(workbook, classifiers);
+		EntitySummarySheetCreator entitySummarySheetCreator = new EntitySummarySheetCreator(workbook, classifiers);
+		entitySummarySheetCreator.createSheet();
 
-		Collection<Enumeration> enumerations = getEnumerations(modelPackageElements);
-		sheetFactory.creatEnumerationSheet(workbook, enumerations);
+		// ENTITY DETAIL SHEETS
+		EntitySheetCreator entitySheetCreator = new EntitySheetCreator(workbook, classifiers);
+		entitySheetCreator.createEntityPropertySheets();
 
 		autoSizeColumns(workbook);
 

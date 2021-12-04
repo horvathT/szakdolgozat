@@ -259,9 +259,11 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 				}
 				if (dtd.hasDefaulValue()) {
 					view.getDefaultValue().setEnabled(true);
-					view.getDefaultValue().addVerifyListener(e -> {
-						InputVerifier.verifyNumberField(e, dtd);
-					});
+					if (dtd.hasLength()) {
+						view.getLength().addVerifyListener(e -> {
+							InputVerifier.verifyNumberFieldLength(e, dtd);
+						});
+					}
 				}
 			} else {
 				if (dtd.hasLength()) {
