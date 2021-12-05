@@ -11,11 +11,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.Interface;
-import org.eclipse.uml2.uml.NamedElement;
 
 import mode.transfer.export.util.CellAppender;
 
-public class InterfaceSummarySheetCreator {
+public class InterfaceSummarySheetCreator extends SheetCreator {
 
 	private final String SHEET_NAME = "Interfészek";
 
@@ -84,20 +83,14 @@ public class InterfaceSummarySheetCreator {
 	}
 
 	private void createEntityHeaderRow(Sheet entitySheet) {
-		CellAppender row = new CellAppender(entitySheet.createRow(0));
-		row.appendCellWithValue("Xmi Id")
+		Row row = entitySheet.createRow(0);
+		CellAppender appender = new CellAppender(row);
+		appender.appendCellWithValue("Xmi Id")
 				.appendCellWithValue("Név")
 				.appendCellWithValue("Láthatóság")
 				.appendCellWithValue("Leszármazza")
 				.appendCellWithValue("Leírás");
-
-	}
-
-	private String getFirstComment(NamedElement element) {
-		if (element.getOwnedComments().size() > 0) {
-			return element.getOwnedComments().get(0).getBody();
-		}
-		return "";
+		makeRowBold(workbook, row);
 	}
 
 }

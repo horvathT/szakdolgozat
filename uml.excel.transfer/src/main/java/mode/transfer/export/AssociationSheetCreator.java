@@ -12,9 +12,9 @@ import org.eclipse.uml2.uml.Property;
 
 import mode.transfer.export.util.CellAppender;
 
-public class AssociationSheetCreator {
+public class AssociationSheetCreator extends SheetCreator {
 
-	private final String ASSOCIATION_SHEET_NAME = "Associations";
+	private final String ASSOCIATION_SHEET_NAME = "Asszociációk";
 
 	private Workbook workbook;
 
@@ -62,14 +62,15 @@ public class AssociationSheetCreator {
 	}
 
 	private void createAssociationHeaderRow(Sheet associationSheet) {
-		CellAppender row = new CellAppender(associationSheet.createRow(0));
-		row.appendCellWithValue("XmiId")
+		Row row = associationSheet.createRow(0);
+		CellAppender appender = new CellAppender(row);
+		appender.appendCellWithValue("XmiId")
 
 				.appendCellWithValue("Entity").appendCellWithValue("Property").appendCellWithValue("Navigable")
 				.appendCellWithValue("Aggregation Type").appendCellWithValue("Lower").appendCellWithValue("Upper")
 
 				.appendCellWithValue("Entity").appendCellWithValue("Property").appendCellWithValue("Navigable")
 				.appendCellWithValue("Aggregation Type").appendCellWithValue("Lower").appendCellWithValue("Upper");
-
+		makeRowBold(workbook, row);
 	}
 }

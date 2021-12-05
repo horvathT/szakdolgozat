@@ -12,9 +12,9 @@ import org.eclipse.uml2.uml.DataType;
 
 import mode.transfer.export.util.CellAppender;
 
-public class DataTypeSheetCreator {
+public class DataTypeSheetCreator extends SheetCreator {
 
-	private final String DATA_TYPE_SHEET_NAME = "DataTypes";
+	private final String DATA_TYPE_SHEET_NAME = "Adattípusok";
 
 	private Workbook workbook;
 
@@ -51,8 +51,10 @@ public class DataTypeSheetCreator {
 	}
 
 	private void createDataTypeHeaderRow(Sheet sheet) {
-		CellAppender row = new CellAppender(sheet.createRow(0));
-		row.appendCellWithValue("XmiId").appendCellWithValue("TypeName");
+		Row row = sheet.createRow(0);
+		CellAppender appender = new CellAppender(row);
+		appender.appendCellWithValue("XmiId").appendCellWithValue("TypeName");
+		makeRowBold(workbook, row);
 	}
 
 }

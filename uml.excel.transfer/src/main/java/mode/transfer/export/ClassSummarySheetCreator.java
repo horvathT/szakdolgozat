@@ -12,11 +12,10 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.Interface;
-import org.eclipse.uml2.uml.NamedElement;
 
 import mode.transfer.export.util.CellAppender;
 
-public class ClassSummarySheetCreator {
+public class ClassSummarySheetCreator extends SheetCreator {
 
 	private final String SHEET_NAME = "Osztályok";
 
@@ -93,29 +92,17 @@ public class ClassSummarySheetCreator {
 		return general.getName();
 	}
 
-	private String booleanTostring(boolean bool) {
-		if (bool) {
-			return "y";
-		}
-		return "n";
-	}
-
 	private void createEntityHeaderRow(Sheet classSheet) {
-		CellAppender row = new CellAppender(classSheet.createRow(0));
-		row.appendCellWithValue("Xmi Id")
+		Row row = classSheet.createRow(0);
+		CellAppender appender = new CellAppender(row);
+		appender.appendCellWithValue("Xmi Id")
 				.appendCellWithValue("Név")
 				.appendCellWithValue("Láthatóság")
 				.appendCellWithValue("Absztrakt")
 				.appendCellWithValue("Leszármazza")
 				.appendCellWithValue("Implementálja")
 				.appendCellWithValue("Leírás");
-	}
-
-	private String getFirstComment(NamedElement element) {
-		if (element.getOwnedComments().size() > 0) {
-			return element.getOwnedComments().get(0).getBody();
-		}
-		return "";
+		makeRowBold(workbook, row);
 	}
 
 }

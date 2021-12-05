@@ -12,9 +12,9 @@ import org.eclipse.uml2.uml.EnumerationLiteral;
 
 import mode.transfer.export.util.CellAppender;
 
-public class EnumSheetCreator {
+public class EnumSheetCreator extends SheetCreator {
 
-	private final String ENUM_SHEET_NAME = "Enumerations";
+	private final String ENUM_SHEET_NAME = "Enumerációk";
 
 	private Workbook workbook;
 
@@ -59,8 +59,9 @@ public class EnumSheetCreator {
 	}
 
 	private void createEnumHeaderRow(Sheet sheet) {
-		CellAppender row = new CellAppender(sheet.createRow(0));
-		row.appendCellWithValue("Xmi Id").appendCellWithValue("Enumeration").appendCellWithValue("Literal");
-
+		Row row = sheet.createRow(0);
+		CellAppender appender = new CellAppender(row);
+		appender.appendCellWithValue("Xmi Id").appendCellWithValue("Enumeration").appendCellWithValue("Literal");
+		makeRowBold(workbook, row);
 	}
 }
