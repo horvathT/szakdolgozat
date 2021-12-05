@@ -7,11 +7,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -114,14 +111,8 @@ public class ModelExporter {
 		int numberOfSheets = workbook.getNumberOfSheets();
 		for (int i = 0; i < numberOfSheets; i++) {
 			Sheet sheet = workbook.getSheetAt(i);
-			if (sheet.getPhysicalNumberOfRows() > 0) {
-				Row row = sheet.getRow(sheet.getFirstRowNum());
-				Iterator<Cell> cellIterator = row.cellIterator();
-				while (cellIterator.hasNext()) {
-					Cell cell = cellIterator.next();
-					int columnIndex = cell.getColumnIndex();
-					sheet.autoSizeColumn(columnIndex);
-				}
+			for (int index = 0; index < 21; index++) {
+				sheet.autoSizeColumn(index);
 			}
 		}
 	}

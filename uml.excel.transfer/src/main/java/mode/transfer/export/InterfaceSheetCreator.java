@@ -34,12 +34,12 @@ public class InterfaceSheetCreator extends SheetCreator {
 	public List<Sheet> createInterfaceSheets() {
 		List<Sheet> sheets = new ArrayList<>();
 		for (Interface interfac : interfaces) {
-			sheets.add(createEntityPropertySheet(workbook, interfac));
+			sheets.add(createInterfacePropertySheet(workbook, interfac));
 		}
 		return sheets;
 	}
 
-	private Sheet createEntityPropertySheet(Workbook workbook, Interface interfac) {
+	private Sheet createInterfacePropertySheet(Workbook workbook, Interface interfac) {
 		Sheet sheet = workbook.createSheet(interfac.getName());
 		int rowNumber = 0;
 		rowNumber = createPropertyHeaderRow(sheet, rowNumber);
@@ -70,6 +70,7 @@ public class InterfaceSheetCreator extends SheetCreator {
 		methodRow.appendCellWithValue("")
 				.appendCellWithValue(EcoreUtil.getURI(operation).fragment())
 				.appendCellWithValue(operation.getName())
+				.appendCellWithValue(operation.getVisibility().toString())
 				.appendCellWithValue(booleanTostring(operation.isAbstract()))
 				.appendCellWithValue(getReturnType(operation))
 				.appendCellWithValue(getFirstParameterType(ownedParameters))
@@ -87,17 +88,17 @@ public class InterfaceSheetCreator extends SheetCreator {
 			if (!(direction.getValue() == ParameterDirectionKind.RETURN)) {
 				Row row = sheet.createRow(rowNumber);
 
-				Cell typeCell = row.createCell(5);
+				Cell typeCell = row.createCell(6);
 				if (parameter.getType() != null) {
 					typeCell.setCellValue(parameter.getType().getName());
 				} else {
 					typeCell.setCellValue("");
 				}
 
-				Cell nameCell = row.createCell(6);
+				Cell nameCell = row.createCell(7);
 				nameCell.setCellValue(parameter.getName());
 
-				Cell commentCell = row.createCell(7);
+				Cell commentCell = row.createCell(8);
 				commentCell.setCellValue(getFirstComment(parameter));
 
 				rowNumber++;
@@ -179,7 +180,8 @@ public class InterfaceSheetCreator extends SheetCreator {
 		appender.appendCellWithValue("Metódusok")
 				.appendCellWithValue("Xmi ID")
 				.appendCellWithValue("Név")
-				.appendCellWithValue("Absztrakt")
+				.appendCellWithValue("Láthatóság")
+				.appendCellWithValue("Abstract")
 				.appendCellWithValue("Visszatérési érték")
 				.appendCellWithValue("Paraméter típus")
 				.appendCellWithValue("Paraméter név")
