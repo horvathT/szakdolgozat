@@ -10,24 +10,25 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Classifier;
+import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 
 import mode.transfer.export.util.CellAppender;
 
-public class EntitySheetCreator {
+public class InterfaceSheetCreator {
 
 	private Workbook workbook;
 
-	private Collection<Classifier> classifiers;
+	private Collection<Interface> classifiers;
 
-	public EntitySheetCreator(Workbook workbook, Collection<Classifier> classifiers) {
+	public InterfaceSheetCreator(Workbook workbook, Collection<Interface> classifiers) {
 		this.workbook = workbook;
 		this.classifiers = classifiers;
 	}
 
-	public List<Sheet> createEntityPropertySheets() {
+	public List<Sheet> createInterfaceSheets() {
 		List<Sheet> sheets = new ArrayList<>();
 		for (Classifier classifier : classifiers) {
 			sheets.add(createEntityPropertySheet(workbook, classifier));

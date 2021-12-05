@@ -66,15 +66,24 @@ public class ModelExporter {
 
 		// ENTITY SUMMARY
 		List<Classifier> classifiers = new ArrayList<>();
-		classifiers.addAll(getInterfaces(modelPackageElements));
-		classifiers.addAll(getClasses(modelPackageElements));
+		Collection<Interface> interfaces = getInterfaces(modelPackageElements);
+		classifiers.addAll(interfaces);
+		Collection<Class> classes = getClasses(modelPackageElements);
+		classifiers.addAll(classes);
 
-		EntitySummarySheetCreator entitySummarySheetCreator = new EntitySummarySheetCreator(workbook, classifiers);
-		entitySummarySheetCreator.createSheet();
+		InterfaceSummarySheetCreator interfaceSummarySheetCreator = new InterfaceSummarySheetCreator(workbook,
+				interfaces);
+		interfaceSummarySheetCreator.createSheet();
+
+		ClassSummarySheetCreator classSummarySheetCreator = new ClassSummarySheetCreator(workbook, classes);
+		classSummarySheetCreator.createSheet();
 
 		// ENTITY DETAIL SHEETS
-		EntitySheetCreator entitySheetCreator = new EntitySheetCreator(workbook, classifiers);
-		entitySheetCreator.createEntityPropertySheets();
+		InterfaceSheetCreator entitySheetCreator = new InterfaceSheetCreator(workbook, interfaces);
+		entitySheetCreator.createInterfaceSheets();
+
+		ClassSheetCreator classSheetCreator = new ClassSheetCreator(workbook, classes);
+		classSheetCreator.createClassSheets();
 
 		autoSizeColumns(workbook);
 
