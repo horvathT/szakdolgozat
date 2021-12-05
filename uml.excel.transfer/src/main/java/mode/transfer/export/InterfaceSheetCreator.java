@@ -14,6 +14,7 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Parameter;
+import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 
@@ -81,23 +82,27 @@ public class InterfaceSheetCreator extends SheetCreator {
 
 	private int appendRemainingParameters(int rowNumber, Sheet sheet, EList<Parameter> ownedParameters) {
 		for (int i = 1; i < ownedParameters.size(); i++) {
-			Row row = sheet.createRow(rowNumber);
 			Parameter parameter = ownedParameters.get(i);
+			ParameterDirectionKind direction = parameter.getDirection();
+			if (!(direction.getValue() == ParameterDirectionKind.RETURN)) {
+				Row row = sheet.createRow(rowNumber);
 
-			Cell typeCell = row.createCell(5);
-			if (parameter.getType() != null) {
-				typeCell.setCellValue(parameter.getType().getName());
-			} else {
-				typeCell.setCellValue("");
+				Cell typeCell = row.createCell(5);
+				if (parameter.getType() != null) {
+					typeCell.setCellValue(parameter.getType().getName());
+				} else {
+					typeCell.setCellValue("");
+				}
+
+				Cell nameCell = row.createCell(6);
+				nameCell.setCellValue(parameter.getName());
+
+				Cell commentCell = row.createCell(7);
+				commentCell.setCellValue(getFirstComment(parameter));
+
+				rowNumber++;
 			}
 
-			Cell nameCell = row.createCell(6);
-			nameCell.setCellValue(parameter.getName());
-
-			Cell commentCell = row.createCell(7);
-			commentCell.setCellValue(getFirstComment(parameter));
-
-			rowNumber++;
 		}
 		return rowNumber;
 	}
