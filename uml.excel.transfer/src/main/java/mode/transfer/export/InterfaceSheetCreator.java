@@ -18,7 +18,7 @@ import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 
-import mode.transfer.export.util.CellAppender;
+import mode.transfer.util.CellAppender;
 
 public class InterfaceSheetCreator extends SheetCreator {
 

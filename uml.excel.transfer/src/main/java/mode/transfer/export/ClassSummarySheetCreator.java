@@ -13,11 +13,11 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.Interface;
 
-import mode.transfer.export.util.CellAppender;
+import mode.transfer.util.CellAppender;
 
 public class ClassSummarySheetCreator extends SheetCreator {
 
-	private final String SHEET_NAME = "Osztályok";
+	public final static String SHEET_NAME = "Osztályok";
 
 	private Workbook workbook;
 

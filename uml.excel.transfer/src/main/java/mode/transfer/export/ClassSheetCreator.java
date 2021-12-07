@@ -18,7 +18,7 @@ import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 
-import mode.transfer.export.util.CellAppender;
+import mode.transfer.util.CellAppender;
 
 public class ClassSheetCreator extends SheetCreator {
 
@@ -84,7 +84,7 @@ public class ClassSheetCreator extends SheetCreator {
 		for (int i = 1; i < ownedParameters.size(); i++) {
 			Parameter parameter = ownedParameters.get(i);
 			ParameterDirectionKind direction = parameter.getDirection();
-			if (!(direction.getValue() == ParameterDirectionKind.RETURN)) {
+			if (direction.getValue() != ParameterDirectionKind.RETURN) {
 				Row row = sheet.createRow(rowNumber);
 
 				Cell typeCell = row.createCell(5);

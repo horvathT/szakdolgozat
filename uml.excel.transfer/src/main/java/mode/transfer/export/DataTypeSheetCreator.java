@@ -10,11 +10,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.DataType;
 
-import mode.transfer.export.util.CellAppender;
+import mode.transfer.util.CellAppender;
 
 public class DataTypeSheetCreator extends SheetCreator {
 
-	private final String DATA_TYPE_SHEET_NAME = "Adattípusok";
+	public static final String DATA_TYPE_SHEET_NAME = "Adattípusok";
 
 	private Workbook workbook;
 

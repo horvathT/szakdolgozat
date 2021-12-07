@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Property;
 
-import mode.transfer.export.util.CellAppender;
+import mode.transfer.util.CellAppender;
 
 public class AssociationSheetCreator extends SheetCreator {
 

@@ -12,11 +12,11 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.Interface;
 
-import mode.transfer.export.util.CellAppender;
+import mode.transfer.util.CellAppender;
 
 public class InterfaceSummarySheetCreator extends SheetCreator {
 
-	private final String SHEET_NAME = "Interfészek";
+	public static final String SHEET_NAME = "Interfészek";
 
 	private Workbook workbook;
 

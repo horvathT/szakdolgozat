@@ -1,12 +1,16 @@
 
 package model.transfer.importer;
 
+import java.io.IOException;
+
 import javax.inject.Named;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
@@ -17,7 +21,6 @@ import org.slf4j.Logger;
 
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.resource.EclipseSelectionUtil;
-import mode.transfer.export.ModelExporter;
 
 public class ExcelImportHandler {
 
@@ -34,11 +37,19 @@ public class ExcelImportHandler {
 
 		ModelImporter excel2Model = new ModelImporter(modelPackage, filePath);
 		excel2Model.validateInput();
-		excel2Model.executeImport();
+		try {
+			excel2Model.executeImport();
 
-		// RE-EXPORT TO FILL UP XMI ID-s
-		ModelExporter model2excel = new ModelExporter();
-		model2excel.export(modelPackage, filePath);
+			// RE-EXPORT TO FILL UP XMI ID-s
+//			ModelExporter model2excel = new ModelExporter();
+//			model2excel.export(modelPackage, filePath);
+		} catch (EncryptedDocumentException e) {
+			MessageDialog.openError(shell, "Import sikertelen",
+					"Fájl importálása sikertelen! Győződjön meg róla, hogy a fájl nincs jelszóvédelemmel ellátva.");
+		} catch (IOException e) {
+			MessageDialog.openError(shell, "Import sikertelen",
+					"Fájl importálása sikertelen! Győződjön meg róla, hogy bezárta a fájlt importálás előtt.");
+		}
 	}
 
 	@CanExecute

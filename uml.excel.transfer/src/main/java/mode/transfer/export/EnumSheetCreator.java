@@ -10,11 +10,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Enumeration;
 import org.eclipse.uml2.uml.EnumerationLiteral;
 
-import mode.transfer.export.util.CellAppender;
+import mode.transfer.util.CellAppender;
 
 public class EnumSheetCreator extends SheetCreator {
 
-	private final String ENUM_SHEET_NAME = "Enumerációk";
+	public static final String SHEET_NAME = "Enumerációk";
 
 	private Workbook workbook;
 
@@ -26,7 +26,7 @@ public class EnumSheetCreator extends SheetCreator {
 	}
 
 	public Sheet creatSheet() {
-		Sheet sheet = workbook.createSheet(ENUM_SHEET_NAME);
+		Sheet sheet = workbook.createSheet(SHEET_NAME);
 		createEnumHeaderRow(sheet);
 		fillEnumRows(sheet, enumerations);
 		return sheet;
