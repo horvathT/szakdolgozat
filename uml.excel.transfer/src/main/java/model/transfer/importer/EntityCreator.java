@@ -1,6 +1,8 @@
 package model.transfer.importer;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -13,12 +15,12 @@ import org.eclipse.uml2.uml.EnumerationLiteral;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLFactory;
-import org.eclipse.uml2.uml.VisibilityKind;
 
 import mode.transfer.export.ClassSummarySheetCreator;
 import mode.transfer.export.EnumSheetCreator;
 import mode.transfer.export.InterfaceSummarySheetCreator;
 import mode.transfer.util.CellUtil;
+import mode.transfer.util.ExcelReaderUtil;
 import mode.transfer.util.ModelObjectUtil;
 
 public class EntityCreator {
@@ -36,6 +38,54 @@ public class EntityCreator {
 		createInterfaces();
 		createClasses();
 		createEnums();
+		removeDeletedInterfaces();
+		removeDeletedClasses();
+		removeDeletedEnumerations();
+	}
+
+	private void removeDeletedEnumerations() {
+		Sheet enumSheet = workbook.getSheet(EnumSheetCreator.SHEET_NAME);
+		Collection<Enumeration> enumerations = ModelObjectUtil.getEnumerations(modelPackage.allOwnedElements());
+		List<String> enumNamesInExcel = collectEntityNamesFromSheet(enumSheet);
+		for (Enumeration enumeration : enumerations) {
+			if (!enumNamesInExcel.contains(enumeration.getName())) {
+				EcoreUtil.delete(enumeration);
+			}
+		}
+	}
+
+	private void removeDeletedClasses() {
+		Sheet classSheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
+		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
+		List<String> classNamesInExcel = collectEntityNamesFromSheet(classSheet);
+		for (Class clazz : classes) {
+			if (!classNamesInExcel.contains(clazz.getName())) {
+				EcoreUtil.delete(clazz);
+			}
+		}
+	}
+
+	private void removeDeletedInterfaces() {
+		Sheet interfaceSheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
+		Collection<Interface> interfaces = ModelObjectUtil.getInterfaces(modelPackage.allOwnedElements());
+		List<String> interfaceNamesInExcel = collectEntityNamesFromSheet(interfaceSheet);
+		for (Interface interfac : interfaces) {
+			if (!interfaceNamesInExcel.contains(interfac.getName())) {
+				EcoreUtil.delete(interfac);
+			}
+		}
+	}
+
+	private List<String> collectEntityNamesFromSheet(Sheet interfaceSheet) {
+		List<String> interfacesInExcel = new ArrayList<String>();
+		int rowNum = interfaceSheet.getLastRowNum();
+		for (int i = 1; i <= rowNum; i++) {
+			String interfaceName = CellUtil.getStringCellValue(interfaceSheet.getRow(i).getCell(1));
+			if (!interfaceName.isEmpty()) {
+				interfacesInExcel.add(interfaceName);
+			}
+		}
+		return interfacesInExcel;
 	}
 
 	private void createEnums() {
@@ -58,7 +108,7 @@ public class EntityCreator {
 					currentEnum.setName(enumName);
 				}
 			}
-			String literalName = CellUtil.getStringCellValue(row.getCell(0));
+			String literalName = CellUtil.getStringCellValue(row.getCell(1));
 			if (!literalName.isEmpty() && currentEnum != null) {
 				EnumerationLiteral literal = (EnumerationLiteral) getByXmiId(currentEnum.getOwnedLiterals(), xmiId);
 				if (literal != null) {
@@ -105,12 +155,10 @@ public class EntityCreator {
 
 	private Class setClassParameters(String name, String visibility, String isAbstract, String comment, Class clazz) {
 		clazz.setName(name);
-		clazz.setVisibility(stringToVisibilityKind(visibility));
-		clazz.setIsAbstract(stringToBoolean(isAbstract));
-		if (!comment.isEmpty()) {
-			clazz.createOwnedComment().setBody(comment);
-		}
-		return null;
+		clazz.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
+		clazz.setIsAbstract(ExcelReaderUtil.stringToBoolean(isAbstract));
+		ModelObjectUtil.addComment(clazz, comment);
+		return clazz;
 	}
 
 	private void createInterfaces() {
@@ -141,32 +189,8 @@ public class EntityCreator {
 
 	private void setInterfaceParameters(String interfaceName, String visibility, String comment, Interface interfac) {
 		interfac.setName(interfaceName);
-		interfac.setVisibility(stringToVisibilityKind(visibility));
-		if (!comment.isEmpty()) {
-			interfac.createOwnedComment().setBody(comment);
-		}
-	}
-
-	private VisibilityKind stringToVisibilityKind(String visibility) {
-		if (visibility.equals("public")) {
-			return VisibilityKind.PUBLIC_LITERAL;
-		} else if (visibility.equals("private")) {
-			return VisibilityKind.PRIVATE_LITERAL;
-		} else if (visibility.equals("protected")) {
-			return VisibilityKind.PROTECTED_LITERAL;
-		} else if (visibility.equals("package")) {
-			return VisibilityKind.PACKAGE_LITERAL;
-		}
-		throw new IllegalArgumentException("Hibás láthatósági paraméter: " + visibility);
-	}
-
-	private boolean stringToBoolean(String boolString) {
-		if ("igen".equals(boolString)) {
-			return true;
-		} else if ("nem".equals(boolString)) {
-			return false;
-		}
-		throw new IllegalArgumentException("Hibás igen/nem paraméter: " + boolString);
+		interfac.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
+		ModelObjectUtil.addComment(interfac, comment);
 	}
 
 	private EObject getByXmiId(Collection<? extends EObject> classifiers, String xmiId) {

@@ -14,12 +14,24 @@
         <element xmi:type="uml:Property" href="DBprototype2.uml#_8hzasE1cEeyZ2YO7BIWEHg"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_8h6vcU1cEeyZ2YO7BIWEHg"/>
       </children>
+      <children xmi:type="notation:Shape" xmi:id="_-orzwFeFEeyhTZTlkhpR0A" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="DBprototype2.uml#_5xlV001cEeyZ2YO7BIWEHg"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-orzwVeFEeyhTZTlkhpR0A"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_-ox6YFeFEeyhTZTlkhpR0A" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="DBprototype2.uml#_OTPiEFYbEeyzWIy-BpzvfQ"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-ox6YVeFEeyhTZTlkhpR0A"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_2ap2Rk1cEeyZ2YO7BIWEHg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_2ap2R01cEeyZ2YO7BIWEHg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_2ap2SE1cEeyZ2YO7BIWEHg"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2ap2SU1cEeyZ2YO7BIWEHg"/>
     </children>
     <children xmi:type="notation:BasicCompartment" xmi:id="_2ap2Sk1cEeyZ2YO7BIWEHg" type="Class_OperationCompartment">
+      <children xmi:type="notation:Shape" xmi:id="_-oyhcFeFEeyhTZTlkhpR0A" type="Operation_ClassOperationLabel">
+        <element xmi:type="uml:Operation" href="DBprototype2.uml#_QLZWgFYbEeyzWIy-BpzvfQ"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-oyhcVeFEeyhTZTlkhpR0A"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_2ap2S01cEeyZ2YO7BIWEHg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_2ap2TE1cEeyZ2YO7BIWEHg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_2ap2TU1cEeyZ2YO7BIWEHg"/>

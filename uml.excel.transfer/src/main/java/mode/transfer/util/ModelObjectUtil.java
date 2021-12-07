@@ -10,6 +10,7 @@ import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Enumeration;
 import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.UMLPackage;
 
 public class ModelObjectUtil {
@@ -34,6 +35,12 @@ public class ModelObjectUtil {
 		Collection<DataType> dataTypes = EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.DATA_TYPE);
 		dataTypes.removeIf(dt -> dt instanceof Enumeration);
 		return dataTypes;
+	}
+
+	public static void addComment(NamedElement element, String comment) {
+		if (!comment.isEmpty()) {
+			element.createOwnedComment().setBody(comment);
+		}
 	}
 
 }

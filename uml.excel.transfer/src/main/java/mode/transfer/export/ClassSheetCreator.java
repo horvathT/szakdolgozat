@@ -70,6 +70,8 @@ public class ClassSheetCreator extends SheetCreator {
 		methodRow.appendCellWithValue("")
 				.appendCellWithValue(EcoreUtil.getURI(operation).fragment())
 				.appendCellWithValue(operation.getName())
+				.appendCellWithValue(operation.getVisibility().toString())
+				.appendCellWithValue(booleanTostring(operation.isStatic()))
 				.appendCellWithValue(booleanTostring(operation.isAbstract()))
 				.appendCellWithValue(getReturnType(operation))
 				.appendCellWithValue(getFirstParameterType(ownedParameters))
@@ -87,17 +89,17 @@ public class ClassSheetCreator extends SheetCreator {
 			if (direction.getValue() != ParameterDirectionKind.RETURN) {
 				Row row = sheet.createRow(rowNumber);
 
-				Cell typeCell = row.createCell(5);
+				Cell typeCell = row.createCell(7);
 				if (parameter.getType() != null) {
 					typeCell.setCellValue(parameter.getType().getName());
 				} else {
 					typeCell.setCellValue("");
 				}
 
-				Cell nameCell = row.createCell(6);
+				Cell nameCell = row.createCell(8);
 				nameCell.setCellValue(parameter.getName());
 
-				Cell commentCell = row.createCell(7);
+				Cell commentCell = row.createCell(9);
 				commentCell.setCellValue(getFirstComment(parameter));
 
 				rowNumber++;
@@ -111,17 +113,27 @@ public class ClassSheetCreator extends SheetCreator {
 		if (ownedParameters.isEmpty()) {
 			return "";
 		}
-		Parameter parameter = ownedParameters.get(0);
-		return parameter.getName();
+		for (Parameter param : ownedParameters) {
+			ParameterDirectionKind direction = param.getDirection();
+			if (direction.getValue() != ParameterDirectionKind.RETURN) {
+				return param.getName();
+			}
+		}
+		return "";
 	}
 
 	private String getFirstParameterType(EList<Parameter> ownedParameters) {
 		if (ownedParameters.isEmpty()) {
 			return "";
 		}
-		Parameter parameter = ownedParameters.get(0);
-		if (parameter.getType() != null) {
-			return parameter.getType().getName();
+
+		for (Parameter param : ownedParameters) {
+			ParameterDirectionKind direction = param.getDirection();
+			if (direction.getValue() != ParameterDirectionKind.RETURN) {
+				if (param.getType() != null) {
+					return param.getType().getName();
+				}
+			}
 		}
 		return "";
 	}
@@ -186,7 +198,6 @@ public class ClassSheetCreator extends SheetCreator {
 				.appendCellWithValue("Láthatóság")
 				.appendCellWithValue("Static")
 				.appendCellWithValue("Abstract")
-				.appendCellWithValue("Final")
 				.appendCellWithValue("Visszatérési érték")
 				.appendCellWithValue("Paraméter típus")
 				.appendCellWithValue("Paraméter név")

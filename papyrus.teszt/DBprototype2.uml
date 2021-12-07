@@ -49,7 +49,17 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_NT5GUFVJEeyhz6JhVJGNrA" name="Paaaarent" visibility="private">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_OTPiEFYbEeyzWIy-BpzvfQ" name="parentClassProp"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_QLZWgFYbEeyzWIy-BpzvfQ" name="parentClassOperation"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_QLZWgFYbEeyzWIy-BpzvfQ" name="parentClassOperation" isStatic="true" isAbstract="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_E0-98FeGEeyhTZTlkhpR0A" name="returnttttt" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Oa_18FeGEeyhTZTlkhpR0A" name="aaaaaa">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_PYuCcFeGEeyhTZTlkhpR0A" name="sssss">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+        </ownedParameter>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Interface" xmi:id="_aHX_4FVJEeyhz6JhVJGNrA" name="Interfaaaaac"/>
     <packagedElement xmi:type="uml:Interface" xmi:id="_uNcrYFVLEeyAfZYt004xOQ" name="Interface10"/>

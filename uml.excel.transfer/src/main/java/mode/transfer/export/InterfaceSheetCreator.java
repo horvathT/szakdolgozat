@@ -112,17 +112,27 @@ public class InterfaceSheetCreator extends SheetCreator {
 		if (ownedParameters.isEmpty()) {
 			return "";
 		}
-		Parameter parameter = ownedParameters.get(0);
-		return parameter.getName();
+		for (Parameter param : ownedParameters) {
+			ParameterDirectionKind direction = param.getDirection();
+			if (direction.getValue() != ParameterDirectionKind.RETURN) {
+				return param.getName();
+			}
+		}
+		return "";
 	}
 
 	private String getFirstParameterType(EList<Parameter> ownedParameters) {
 		if (ownedParameters.isEmpty()) {
 			return "";
 		}
-		Parameter parameter = ownedParameters.get(0);
-		if (parameter.getType() != null) {
-			return parameter.getType().getName();
+
+		for (Parameter param : ownedParameters) {
+			ParameterDirectionKind direction = param.getDirection();
+			if (direction.getValue() != ParameterDirectionKind.RETURN) {
+				if (param.getType() != null) {
+					return param.getType().getName();
+				}
+			}
 		}
 		return "";
 	}

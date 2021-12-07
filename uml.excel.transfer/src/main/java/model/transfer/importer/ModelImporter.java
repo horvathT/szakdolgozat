@@ -69,6 +69,12 @@ public class ModelImporter {
 			protected void doExecute() {
 				createDataTypes(workbook);
 			}
+
+			private void createDataTypes(Workbook workbook) {
+				DataTypeCreator dtc = new DataTypeCreator(workbook, modelPackage, editingDomain);
+				dtc.createTypes();
+
+			}
 		};
 		editingDomain.getCommandStack().execute(dataTypeRecordingCommand);
 
@@ -76,21 +82,21 @@ public class ModelImporter {
 			@Override
 			protected void doExecute() {
 				createEntities(workbook);
+				createMethodsAndProperties(workbook);
+			}
+
+			private void createMethodsAndProperties(Workbook workbook) {
+				PropertyCreator propertyCreator = new PropertyCreator(workbook, modelPackage);
+				propertyCreator.createProperties();
+			}
+
+			private void createEntities(Workbook workbook) {
+				EntityCreator entitycreator = new EntityCreator(workbook, modelPackage);
+				entitycreator.createEntities();
+
 			}
 		};
 		editingDomain.getCommandStack().execute(entityRecordingCommand);
-	}
-
-	private void createEntities(Workbook workbook) {
-		EntityCreator entitycreator = new EntityCreator(workbook, modelPackage);
-		entitycreator.createEntities();
-
-	}
-
-	private void createDataTypes(Workbook workbook) {
-		DataTypeCreator dtc = new DataTypeCreator(workbook, modelPackage, editingDomain);
-		dtc.createTypes();
-
 	}
 
 }
