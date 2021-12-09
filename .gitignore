@@ -1,2 +1,6 @@
-uml.papyrus.scriptgen/
 *.class
+uml.papyrus.scriptgen/
+uml.papyrus.doc/
+uml.excel.importer/
+uml.excel.exporter/
+database.modeling.view.prototype/
