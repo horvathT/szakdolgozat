@@ -53,9 +53,9 @@ public class ClassSheetCreator extends SheetCreator {
 	}
 
 	private int fillMethodrows(Sheet sheet, Class clazz, int rowNumber) {
-		EList<Operation> allOperations = clazz.getAllOperations();
+		EList<Operation> ownedOperations = clazz.getOwnedOperations();
 
-		for (Operation operation : allOperations) {
+		for (Operation operation : ownedOperations) {
 			rowNumber = fillMethodRow(sheet, rowNumber, operation);
 		}
 		return rowNumber;

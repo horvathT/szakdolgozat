@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
@@ -38,7 +39,7 @@ public class PropertyCreator {
 		this.modelPackage = modelPackage;
 	}
 
-	public void createProperties() {
+	public void createMethodsAndProperties() {
 		dataTypes = ModelObjectUtil.getDataTypes(modelPackage.getModel().allOwnedElements());
 
 		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
@@ -54,38 +55,7 @@ public class PropertyCreator {
 				createClassProperty(clazz, row);
 			}
 
-			Operation operation = null;
-			for (int i = ++mehtodHeaderRowNumber; i < lastRowNum; i++) {
-				Row row = classSheet.getRow(i);
-				String xmiId = CellUtil.getStringCellValue(row.getCell(1));
-				String name = CellUtil.getStringCellValue(row.getCell(2));
-				String visibility = CellUtil.getStringCellValue(row.getCell(3));
-				String isAbstract = CellUtil.getStringCellValue(row.getCell(4));
-				String returnTypeName = CellUtil.getStringCellValue(row.getCell(5));
-				String parameterTypeName = CellUtil.getStringCellValue(row.getCell(6));
-				String parameterName = CellUtil.getStringCellValue(row.getCell(7));
-				String comment = CellUtil.getStringCellValue(row.getCell(8));
-
-				if (name.isEmpty()) {
-					addOperationParameter(operation, parameterTypeName, parameterName);
-				} else {
-					operation = getOrCreateOperation(clazz, xmiId);
-					operation.setName(name);
-					operation.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
-					operation.setIsAbstract(ExcelReaderUtil.stringToBoolean(isAbstract));
-					DataType returnType = getdataTypeByName(returnTypeName);
-					if (returnType != null) {
-						Parameter parameter = UMLFactory.eINSTANCE.createParameter();
-						parameter.setType(returnType);
-						operation.getOwnedParameters().add(parameter);
-					}
-					addOperationParameter(operation, parameterTypeName, parameterName);
-					ModelObjectUtil.addComment(operation, comment);
-				}
-				if (operation != null) {
-					clazz.getOwnedOperations().add(operation);
-				}
-			}
+			createClassMethod(clazz, classSheet, lastRowNum, mehtodHeaderRowNumber);
 
 		}
 
@@ -103,40 +73,80 @@ public class PropertyCreator {
 				createInterfaceProperty(interfac, row);
 			}
 
-			Operation operation = null;
-			for (int i = ++mehtodHeaderRowNumber; i < lastRowNum; i++) {
-				Row row = interfacSheet.getRow(i);
-				String xmiId = CellUtil.getStringCellValue(row.getCell(1));
-				String name = CellUtil.getStringCellValue(row.getCell(2));
-				String visibility = CellUtil.getStringCellValue(row.getCell(3));
-				String isAbstract = CellUtil.getStringCellValue(row.getCell(4));
-				String returnTypeName = CellUtil.getStringCellValue(row.getCell(5));
-				String parameterTypeName = CellUtil.getStringCellValue(row.getCell(6));
-				String parameterName = CellUtil.getStringCellValue(row.getCell(7));
-				String comment = CellUtil.getStringCellValue(row.getCell(8));
+			createInterfaceMethod(interfac, interfacSheet, lastRowNum, mehtodHeaderRowNumber);
 
-				if (name.isEmpty()) {
-					addOperationParameter(operation, parameterTypeName, parameterName);
-				} else {
-					operation = getOrCreateOperation(interfac, xmiId);
-					operation.setName(name);
-					operation.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
-					operation.setIsAbstract(ExcelReaderUtil.stringToBoolean(isAbstract));
-					DataType returnType = getdataTypeByName(returnTypeName);
-					if (returnType != null) {
-						Parameter parameter = UMLFactory.eINSTANCE.createParameter();
-						parameter.setType(returnType);
-						operation.getOwnedParameters().add(parameter);
-					}
-					addOperationParameter(operation, parameterTypeName, parameterName);
-					ModelObjectUtil.addComment(operation, comment);
-				}
-				if (operation != null) {
-					operation.setInterface(interfac);
-				}
+		}
+	}
 
+	private void createInterfaceMethod(Interface interfac, Sheet interfacSheet, int lastRowNum,
+			int mehtodHeaderRowNumber) {
+		Operation operation = null;
+		for (int i = ++mehtodHeaderRowNumber; i < lastRowNum; i++) {
+			Row row = interfacSheet.getRow(i);
+			String xmiId = CellUtil.getStringCellValue(row.getCell(1));
+			String name = CellUtil.getStringCellValue(row.getCell(2));
+			String visibility = CellUtil.getStringCellValue(row.getCell(3));
+			String isAbstract = CellUtil.getStringCellValue(row.getCell(4));
+			String returnTypeName = CellUtil.getStringCellValue(row.getCell(5));
+			String parameterTypeName = CellUtil.getStringCellValue(row.getCell(6));
+			String parameterName = CellUtil.getStringCellValue(row.getCell(7));
+			String comment = CellUtil.getStringCellValue(row.getCell(8));
+
+			if (name.isEmpty()) {
+				addOperationParameter(operation, parameterTypeName, parameterName);
+			} else {
+				operation = getOrCreateOperation(interfac, xmiId);
+				operation.setName(name);
+				operation.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
+				operation.setIsAbstract(ExcelReaderUtil.stringToBoolean(isAbstract));
+				DataType returnType = getdataTypeByName(returnTypeName);
+				if (returnType != null) {
+					Parameter parameter = UMLFactory.eINSTANCE.createParameter();
+					parameter.setType(returnType);
+					operation.getOwnedParameters().add(parameter);
+				}
+				addOperationParameter(operation, parameterTypeName, parameterName);
+				ModelObjectUtil.addComment(operation, comment);
+			}
+			if (operation != null) {
+				operation.setInterface(interfac);
 			}
 
+		}
+	}
+
+	private void createClassMethod(Class clazz, Sheet classSheet, int lastRowNum, int mehtodHeaderRowNumber) {
+		Operation operation = null;
+		for (int i = ++mehtodHeaderRowNumber; i < lastRowNum; i++) {
+			Row row = classSheet.getRow(i);
+			String xmiId = CellUtil.getStringCellValue(row.getCell(1));
+			String name = CellUtil.getStringCellValue(row.getCell(2));
+			String visibility = CellUtil.getStringCellValue(row.getCell(3));
+			String isAbstract = CellUtil.getStringCellValue(row.getCell(4));
+			String returnTypeName = CellUtil.getStringCellValue(row.getCell(5));
+			String parameterTypeName = CellUtil.getStringCellValue(row.getCell(6));
+			String parameterName = CellUtil.getStringCellValue(row.getCell(7));
+			String comment = CellUtil.getStringCellValue(row.getCell(8));
+
+			if (name.isEmpty()) {
+				addOperationParameter(operation, parameterTypeName, parameterName);
+			} else {
+				operation = getOrCreateOperation(clazz, xmiId);
+				operation.setName(name);
+				operation.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
+				operation.setIsAbstract(ExcelReaderUtil.stringToBoolean(isAbstract));
+				DataType returnType = getdataTypeByName(returnTypeName);
+				if (returnType != null) {
+					Parameter parameter = UMLFactory.eINSTANCE.createParameter();
+					parameter.setType(returnType);
+					operation.getOwnedParameters().add(parameter);
+				}
+				addOperationParameter(operation, parameterTypeName, parameterName);
+				ModelObjectUtil.addComment(operation, comment);
+			}
+			if (operation != null) {
+				clazz.getOwnedOperations().add(operation);
+			}
 		}
 	}
 
@@ -237,18 +247,37 @@ public class PropertyCreator {
 		clazz.getOwnedAttributes().add(property);
 	}
 
-	public void removeDeletedProperties() {
+	public void removeDeletedMethodsAndProperties() {
 		Collection<Interface> interfaces = ModelObjectUtil.getInterfaces(modelPackage.allOwnedElements());
 		removeDeletedProperties(interfaces);
 		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
 		removeDeletedProperties(classes);
+
+		removeDeletedMethods(interfaces);
+		removeDeletedMethods(classes);
+
+	}
+
+	private void removeDeletedMethods(Collection<? extends Classifier> classifiers) {
+		for (Classifier classifier : classifiers) {
+			Sheet classSheet = workbook.getSheet(classifier.getName());
+			int mehtodHeaderRowNumber = getMethodHeaderRowNumber(classSheet);
+			int lastRowNum = classSheet.getLastRowNum();
+			List<String> excelMethodNames = collectMethodOrPropertyNames(mehtodHeaderRowNumber, lastRowNum, classifier);
+			EList<Operation> operations = classifier.getOperations();
+			for (Operation operation : operations) {
+				if (!excelMethodNames.contains(operation.getName())) {
+					EcoreUtil.delete(operation);
+				}
+			}
+		}
 	}
 
 	private void removeDeletedProperties(Collection<? extends Classifier> classifiers) {
 		for (Classifier classifier : classifiers) {
 			Sheet classSheet = workbook.getSheet(classifier.getName());
 			int mehtodHeaderRowNumber = getMethodHeaderRowNumber(classSheet);
-			List<String> propertyNames = collectPropertyNames(mehtodHeaderRowNumber, classifier);
+			List<String> propertyNames = collectMethodOrPropertyNames(1, mehtodHeaderRowNumber, classifier);
 			for (Property property : classifier.allAttributes()) {
 				if (property.getAssociation() == null) {
 					if (!propertyNames.contains(property.getName())) {
@@ -259,11 +288,11 @@ public class PropertyCreator {
 		}
 	}
 
-	private List<String> collectPropertyNames(int lastRowNum, Classifier clazz) {
+	private List<String> collectMethodOrPropertyNames(int firstRowNum, int lastRowNum, Classifier clazz) {
 		List<String> propertyNames = new ArrayList<>();
 		Sheet sheet = workbook.getSheet(clazz.getName());
 
-		for (int i = 1; i <= lastRowNum; i++) {
+		for (int i = firstRowNum; i <= lastRowNum; i++) {
 			if (i == lastRowNum) {
 				continue;
 			}
@@ -277,11 +306,6 @@ public class PropertyCreator {
 			}
 		}
 		return propertyNames;
-	}
-
-	private void removeDeletedInterfaceProperties() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

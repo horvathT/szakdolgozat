@@ -53,9 +53,9 @@ public class InterfaceSheetCreator extends SheetCreator {
 	}
 
 	private int fillMethodrows(Sheet sheet, Interface interfac, int rowNumber) {
-		EList<Operation> allOperations = interfac.getAllOperations();
+		EList<Operation> ownedOperations = interfac.getOwnedOperations();
 
-		for (Operation operation : allOperations) {
+		for (Operation operation : ownedOperations) {
 			rowNumber = fillMethodRow(sheet, rowNumber, operation);
 		}
 		return rowNumber;

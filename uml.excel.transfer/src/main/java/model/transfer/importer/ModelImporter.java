@@ -87,8 +87,8 @@ public class ModelImporter {
 
 			private void createMethodsAndProperties(Workbook workbook) {
 				PropertyCreator propertyCreator = new PropertyCreator(workbook, modelPackage);
-				propertyCreator.createProperties();
-				propertyCreator.removeDeletedProperties();
+				propertyCreator.createMethodsAndProperties();
+				propertyCreator.removeDeletedMethodsAndProperties();
 			}
 
 			private void createEntities(Workbook workbook) {
