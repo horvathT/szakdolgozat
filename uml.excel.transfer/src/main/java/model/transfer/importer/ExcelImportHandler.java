@@ -34,7 +34,9 @@ public class ExcelImportHandler {
 
 		String excelFolderLoc = getExcelFolderPath(modelPackage);
 		String filePath = importFileDialog(shell, excelFolderLoc);
-
+		if (filePath == null) {
+			return;
+		}
 		ModelImporter excel2Model = new ModelImporter(modelPackage, filePath);
 		excel2Model.validateInput();
 		try {

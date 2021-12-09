@@ -38,6 +38,9 @@ public class EntityCreator {
 		createInterfaces();
 		createClasses();
 		createEnums();
+	}
+
+	public void removeDeletedEntities() {
 		removeDeletedInterfaces();
 		removeDeletedClasses();
 		removeDeletedEnumerations();
@@ -108,7 +111,7 @@ public class EntityCreator {
 					currentEnum.setName(enumName);
 				}
 			}
-			String literalName = CellUtil.getStringCellValue(row.getCell(1));
+			String literalName = CellUtil.getStringCellValue(row.getCell(2));
 			if (!literalName.isEmpty() && currentEnum != null) {
 				EnumerationLiteral literal = (EnumerationLiteral) getByXmiId(currentEnum.getOwnedLiterals(), xmiId);
 				if (literal != null) {

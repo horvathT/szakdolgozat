@@ -88,12 +88,14 @@ public class ModelImporter {
 			private void createMethodsAndProperties(Workbook workbook) {
 				PropertyCreator propertyCreator = new PropertyCreator(workbook, modelPackage);
 				propertyCreator.createProperties();
+				propertyCreator.removeDeletedProperties();
 			}
 
 			private void createEntities(Workbook workbook) {
 				EntityCreator entitycreator = new EntityCreator(workbook, modelPackage);
 				entitycreator.createEntities();
-
+				entitycreator.removeDeletedEntities();
+//				entitycreator.createHierarchy();
 			}
 		};
 		editingDomain.getCommandStack().execute(entityRecordingCommand);

@@ -1,6 +1,8 @@
 package model.transfer.importer;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -233,6 +235,53 @@ public class PropertyCreator {
 		property.setIsStatic(ExcelReaderUtil.stringToBoolean(isStatic));
 		ModelObjectUtil.addComment(property, comment);
 		clazz.getOwnedAttributes().add(property);
+	}
+
+	public void removeDeletedProperties() {
+		Collection<Interface> interfaces = ModelObjectUtil.getInterfaces(modelPackage.allOwnedElements());
+		removeDeletedProperties(interfaces);
+		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
+		removeDeletedProperties(classes);
+	}
+
+	private void removeDeletedProperties(Collection<? extends Classifier> classifiers) {
+		for (Classifier classifier : classifiers) {
+			Sheet classSheet = workbook.getSheet(classifier.getName());
+			int mehtodHeaderRowNumber = getMethodHeaderRowNumber(classSheet);
+			List<String> propertyNames = collectPropertyNames(mehtodHeaderRowNumber, classifier);
+			for (Property property : classifier.allAttributes()) {
+				if (property.getAssociation() == null) {
+					if (!propertyNames.contains(property.getName())) {
+						EcoreUtil.delete(property);
+					}
+				}
+			}
+		}
+	}
+
+	private List<String> collectPropertyNames(int lastRowNum, Classifier clazz) {
+		List<String> propertyNames = new ArrayList<>();
+		Sheet sheet = workbook.getSheet(clazz.getName());
+
+		for (int i = 1; i <= lastRowNum; i++) {
+			if (i == lastRowNum) {
+				continue;
+			}
+
+			Row row = sheet.getRow(i);
+			if (row != null) {
+				String name = CellUtil.getStringCellValue(row.getCell(2));
+				if (!name.isEmpty()) {
+					propertyNames.add(name);
+				}
+			}
+		}
+		return propertyNames;
+	}
+
+	private void removeDeletedInterfaceProperties() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
