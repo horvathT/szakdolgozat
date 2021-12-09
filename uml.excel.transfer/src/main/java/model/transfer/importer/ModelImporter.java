@@ -95,10 +95,30 @@ public class ModelImporter {
 				EntityCreator entitycreator = new EntityCreator(workbook, modelPackage);
 				entitycreator.createEntities();
 				entitycreator.removeDeletedEntities();
-//				entitycreator.createHierarchy();
 			}
 		};
 		editingDomain.getCommandStack().execute(entityRecordingCommand);
+
+		RecordingCommand associationRecordingCommand = new RecordingCommand(editingDomain) {
+			@Override
+			protected void doExecute() {
+				createAssociations(workbook);
+				createEntityHierarchy(workbook);
+			}
+
+			private void createEntityHierarchy(Workbook workbook) {
+				// TODO Auto-generated method stub
+
+			}
+
+			private void createAssociations(Workbook workbook) {
+				AssociationCreator associationCreator = new AssociationCreator(workbook, modelPackage);
+				associationCreator.createAssociations();
+				associationCreator.removeDeletedAssociations();
+			}
+
+		};
+		editingDomain.getCommandStack().execute(associationRecordingCommand);
 	}
 
 }

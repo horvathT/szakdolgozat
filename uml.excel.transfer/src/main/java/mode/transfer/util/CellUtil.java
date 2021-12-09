@@ -24,4 +24,22 @@ public class CellUtil {
 		return "";
 	}
 
+	public static int getNumericCellValue(Cell cell) {
+		if (cell == null) {
+			return 0;
+		}
+
+		CellType cellType = cell.getCellType();
+
+		if (CellType.BLANK == cellType) {
+			return 0;
+		} else if (CellType.STRING == cellType) {
+			return Integer.parseInt(cell.getStringCellValue());
+		} else if (CellType.NUMERIC == cellType) {
+			return (int) cell.getNumericCellValue();
+		}
+
+		return 0;
+	}
+
 }
