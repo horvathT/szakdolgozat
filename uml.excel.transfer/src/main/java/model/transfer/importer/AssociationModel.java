@@ -6,14 +6,14 @@ public class AssociationModel {
 
 	private String modelId;
 
-	private String end1InterfaceName;
+	private String end1ClassifierName;
 	private String end1PropertyName;
 	private boolean end1IsNavigable;
 	private AggregationKind end1Aggregation;
 	private int end1Lower;
 	private int end1Upper;
 
-	private String end2InterfaceName;
+	private String end2ClassifierName;
 	private String end2PropertyName;
 	private boolean end2IsNavigable;
 	private AggregationKind end2Aggregation;
@@ -30,12 +30,12 @@ public class AssociationModel {
 		this.modelId = modelId;
 	}
 
-	public String getEnd1InterfaceName() {
-		return end1InterfaceName;
+	public String getEnd1ClassifierName() {
+		return end1ClassifierName;
 	}
 
-	public void setEnd1InterfaceName(String end1InterfaceName) {
-		this.end1InterfaceName = end1InterfaceName;
+	public void setEnd1ClassifierName(String end1InterfaceName) {
+		this.end1ClassifierName = end1InterfaceName;
 	}
 
 	public String getEnd1PropertyName() {
@@ -78,12 +78,12 @@ public class AssociationModel {
 		this.end1Upper = end1Upper;
 	}
 
-	public String getEnd2InterfaceName() {
-		return end2InterfaceName;
+	public String getEnd2ClassifierName() {
+		return end2ClassifierName;
 	}
 
-	public void setEnd2InterfaceName(String end2InterfaceName) {
-		this.end2InterfaceName = end2InterfaceName;
+	public void setEnd2ClassifierName(String end2InterfaceName) {
+		this.end2ClassifierName = end2InterfaceName;
 	}
 
 	public String getEnd2PropertyName() {

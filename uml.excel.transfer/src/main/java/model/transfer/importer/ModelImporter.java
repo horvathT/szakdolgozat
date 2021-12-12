@@ -103,18 +103,14 @@ public class ModelImporter {
 			@Override
 			protected void doExecute() {
 				createAssociations(workbook);
-				createEntityHierarchy(workbook);
-			}
-
-			private void createEntityHierarchy(Workbook workbook) {
-				// TODO Auto-generated method stub
-
 			}
 
 			private void createAssociations(Workbook workbook) {
 				AssociationCreator associationCreator = new AssociationCreator(workbook, modelPackage);
 				associationCreator.createAssociations();
 				associationCreator.removeDeletedAssociations();
+
+				associationCreator.createEntityHierarchy();
 			}
 
 		};

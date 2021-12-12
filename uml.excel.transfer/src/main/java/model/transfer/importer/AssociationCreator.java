@@ -18,10 +18,14 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Comment;
 import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.InterfaceRealization;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
+import org.eclipse.uml2.uml.UMLFactory;
 
 import mode.transfer.export.AssociationSheetCreator;
+import mode.transfer.export.ClassSummarySheetCreator;
+import mode.transfer.export.InterfaceSummarySheetCreator;
 import mode.transfer.util.CellUtil;
 import mode.transfer.util.ModelObjectUtil;
 
@@ -33,19 +37,22 @@ public class AssociationCreator {
 
 	private List<Classifier> classifiers = new ArrayList<>();
 
+	private List<AssociationModel> associationsFromExcel;
+
 	public AssociationCreator(Workbook workbook, Package modelPackage) {
 		this.workbook = workbook;
 		this.modelPackage = modelPackage;
-	}
 
-	public void createAssociations() {
 		Collection<Interface> interfaces = ModelObjectUtil.getInterfaces(modelPackage.allOwnedElements());
 		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
 		classifiers.addAll(interfaces);
 		classifiers.addAll(classes);
 
-		List<AssociationModel> associationsFromExcel = getAssociationsFromExcel(
+		associationsFromExcel = getAssociationsFromExcel(
 				workbook.getSheet(AssociationSheetCreator.ASSOCIATION_SHEET_NAME));
+	}
+
+	public void createAssociations() {
 
 		for (AssociationModel associationModel : associationsFromExcel) {
 			createAssociation(associationModel);
@@ -60,14 +67,14 @@ public class AssociationCreator {
 		if (associationInModel != null) {
 			updateValues(associationInModel, associationData);
 		} else {
-			Classifier start = getClassifierByName(associationData.getEnd1InterfaceName());
-			Classifier end = getClassifierByName(associationData.getEnd2InterfaceName());
+			Classifier start = getClassifierByName(associationData.getEnd1ClassifierName());
+			Classifier end = getClassifierByName(associationData.getEnd2ClassifierName());
 			if (start == null) {
 				warningMessageDialog("Missing association endpoint " + associationData.getEnd1PropertyName() + " at: "
-						+ associationData.getEnd1InterfaceName());
+						+ associationData.getEnd1ClassifierName());
 			} else if (end == null) {
 				warningMessageDialog("Missing association endpoint " + associationData.getEnd2PropertyName() + " at: "
-						+ associationData.getEnd2InterfaceName());
+						+ associationData.getEnd2ClassifierName());
 			} else {
 				Association newAssociation = start.createAssociation(associationData.isEnd2IsNavigable(),
 						associationData.getEnd2Aggregation(), associationData.getEnd2PropertyName(),
@@ -106,7 +113,7 @@ public class AssociationCreator {
 					.setModelId(CellUtil.getStringCellValue(row.getCell(0)));
 			// END1
 			associationData
-					.setEnd1InterfaceName(CellUtil.getStringCellValue(row.getCell(1)));
+					.setEnd1ClassifierName(CellUtil.getStringCellValue(row.getCell(1)));
 			associationData
 					.setEnd1PropertyName(CellUtil.getStringCellValue(row.getCell(2)));
 
@@ -128,7 +135,7 @@ public class AssociationCreator {
 
 			// END2
 			associationData
-					.setEnd2InterfaceName(CellUtil.getStringCellValue(row.getCell(7)));
+					.setEnd2ClassifierName(CellUtil.getStringCellValue(row.getCell(7)));
 			associationData
 					.setEnd2PropertyName(CellUtil.getStringCellValue(row.getCell(8)));
 
@@ -162,8 +169,8 @@ public class AssociationCreator {
 		Property end2 = memberEnds.get(0);
 		Property end1 = memberEnds.get(1);
 
-		Classifier end1Type = getClassifierByName(assoc.getEnd1InterfaceName());
-		Classifier end2Type = getClassifierByName(assoc.getEnd2InterfaceName());
+		Classifier end1Type = getClassifierByName(assoc.getEnd1ClassifierName());
+		Classifier end2Type = getClassifierByName(assoc.getEnd2ClassifierName());
 
 		end1.setType(end1Type);
 		end1.setName(assoc.getEnd1PropertyName());
@@ -204,6 +211,98 @@ public class AssociationCreator {
 	public void warningMessageDialog(String message) {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		MessageDialog.openWarning(shell, "Warning", message);
+	}
+
+	public void removeDeletedAssociations() {
+		Collection<Association> associations = ModelObjectUtil.getAssociations(modelPackage.allOwnedElements());
+		for (Association association : associations) {
+			if (!validAssociation(association)) {
+				EcoreUtil.remove(association);
+			}
+		}
+	}
+
+	private boolean validAssociation(Association association) {
+		if (associationsFromExcel.isEmpty()) {
+			return false;
+		}
+		for (AssociationModel associationModel : associationsFromExcel) {
+			EList<Property> memberEnds = association.getMemberEnds();
+			Property end1 = memberEnds.get(0);
+			Property end2 = memberEnds.get(1);
+			String end1ClassifierName = end1.getType().getName();
+			String end1PropertyName = end1.getName();
+			String end2ClassifierName = end2.getType().getName();
+			String end2PropertyName = end2.getName();
+
+			if (associationModel.getEnd1ClassifierName().equals(end1ClassifierName) &&
+					associationModel.getEnd1PropertyName().equals(end1PropertyName) &&
+					associationModel.getEnd2ClassifierName().equals(end2ClassifierName) &&
+					associationModel.getEnd2PropertyName().equals(end2PropertyName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void createEntityHierarchy() {
+		createInterfaceGeneralizations();
+
+		Sheet classSummarySheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
+		int lastRowNum = classSummarySheet.getLastRowNum();
+		Classifier classifier = null;
+
+		for (int i = 1; i <= lastRowNum; i++) {
+			Row row = classSummarySheet.getRow(i);
+			if (row == null) {
+				continue;
+			}
+
+			String name = CellUtil.getStringCellValue(row.getCell(1));
+			if (!name.isEmpty()) {
+				classifier = getClassifierByName(name);
+			}
+			String generalizedInterfaceName = CellUtil.getStringCellValue(row.getCell(4));
+			if (!generalizedInterfaceName.isEmpty()) {
+				Classifier parentClassifier = getClassifierByName(generalizedInterfaceName);
+				classifier.createGeneralization(parentClassifier);
+			}
+
+			String implementedInterfaceName = CellUtil.getStringCellValue(row.getCell(5));
+			if (!implementedInterfaceName.isEmpty()) {
+				Classifier implementedInterface = getClassifierByName(implementedInterfaceName);
+				addInterfaceImplenetationRelation(classifier, implementedInterface);
+			}
+		}
+	}
+
+	private void createInterfaceGeneralizations() {
+		Sheet interfaceSummarySheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
+		int lastRowNum = interfaceSummarySheet.getLastRowNum();
+		Classifier classifier = null;
+
+		for (int i = 1; i <= lastRowNum; i++) {
+			Row row = interfaceSummarySheet.getRow(i);
+			if (row == null) {
+				continue;
+			}
+
+			String name = CellUtil.getStringCellValue(row.getCell(1));
+			if (!name.isEmpty()) {
+				classifier = getClassifierByName(name);
+			}
+			String generalizedClassifierName = CellUtil.getStringCellValue(row.getCell(3));
+			if (!generalizedClassifierName.isEmpty()) {
+				Classifier parentClassifier = getClassifierByName(generalizedClassifierName);
+				classifier.createGeneralization(parentClassifier);
+			}
+		}
+	}
+
+	private void addInterfaceImplenetationRelation(Classifier classifier, Classifier implementedInterface) {
+		InterfaceRealization realization = UMLFactory.eINSTANCE.createInterfaceRealization();
+		realization.setContract((Interface) implementedInterface);
+		realization.setImplementingClassifier((Class) classifier);
 	}
 
 }

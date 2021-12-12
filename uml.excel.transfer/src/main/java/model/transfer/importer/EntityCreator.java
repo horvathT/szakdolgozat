@@ -138,13 +138,12 @@ public class EntityCreator {
 	private void createClassFromRow(Row row, Collection<Class> classes) {
 		String xmiId = CellUtil.getStringCellValue(row.getCell(0));
 		String name = CellUtil.getStringCellValue(row.getCell(1));
-		String visibility = CellUtil.getStringCellValue(row.getCell(2));
-		String isAbstract = CellUtil.getStringCellValue(row.getCell(3));
-		String comment = CellUtil.getStringCellValue(row.getCell(6));
-
 		if (name.isEmpty()) {
 			return;
 		}
+		String visibility = CellUtil.getStringCellValue(row.getCell(2));
+		String isAbstract = CellUtil.getStringCellValue(row.getCell(3));
+		String comment = CellUtil.getStringCellValue(row.getCell(6));
 
 		Class clazz = (Class) getByXmiId(classes, xmiId);
 		if (clazz != null) {
@@ -173,9 +172,12 @@ public class EntityCreator {
 		}
 	}
 
-	private Interface createInterfaceFromRow(Row row, Collection<Interface> interfaces) {
+	private void createInterfaceFromRow(Row row, Collection<Interface> interfaces) {
 		String xmiId = CellUtil.getStringCellValue(row.getCell(0));
 		String name = CellUtil.getStringCellValue(row.getCell(1));
+		if (name.isEmpty()) {
+			return;
+		}
 		String visibility = CellUtil.getStringCellValue(row.getCell(2));
 		String comment = CellUtil.getStringCellValue(row.getCell(4));
 
@@ -187,7 +189,6 @@ public class EntityCreator {
 			modelPackage.getPackagedElements().add(newInterfac);
 			setInterfaceParameters(name, visibility, comment, newInterfac);
 		}
-		return interfac;
 	}
 
 	private void setInterfaceParameters(String interfaceName, String visibility, String comment, Interface interfac) {
