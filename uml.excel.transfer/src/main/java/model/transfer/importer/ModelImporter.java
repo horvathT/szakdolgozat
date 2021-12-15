@@ -64,6 +64,21 @@ public class ModelImporter {
 	public void executeImport() throws EncryptedDocumentException, IOException {
 		Workbook workbook = WorkbookFactory.create(new File(filePath));
 		editingDomain = TransactionUtil.getEditingDomain(modelPackage);
+
+		RecordingCommand enumRecordingCommand = new RecordingCommand(editingDomain) {
+			@Override
+			protected void doExecute() {
+				createDataTypes(workbook);
+			}
+
+			private void createDataTypes(Workbook workbook) {
+				EnumCreator enumCreator = new EnumCreator(workbook, modelPackage);
+				enumCreator.createEnums();
+				enumCreator.removeDeletedEnumerations();
+			}
+		};
+		editingDomain.getCommandStack().execute(enumRecordingCommand);
+
 		RecordingCommand dataTypeRecordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {

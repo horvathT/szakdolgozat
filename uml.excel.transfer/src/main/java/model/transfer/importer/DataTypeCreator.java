@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Model;
@@ -15,19 +14,14 @@ import mode.transfer.export.DataTypeSheetCreator;
 import mode.transfer.util.CellUtil;
 import mode.transfer.util.ModelObjectUtil;
 
-public class DataTypeCreator {
-
-	private Package modelPackage;
-
-	private Workbook workbook;
+public class DataTypeCreator extends ObjectImporter {
 
 	private TransactionalEditingDomain editingDomain;
 
 	private static final String EXCEL_DATA_TYPES = "ImportaltTipusok";
 
 	public DataTypeCreator(Workbook workbook, Package modelPackage, TransactionalEditingDomain editingDomain) {
-		this.workbook = workbook;
-		this.modelPackage = modelPackage;
+		super(workbook, modelPackage);
 		this.editingDomain = editingDomain;
 	}
 
@@ -35,7 +29,7 @@ public class DataTypeCreator {
 		Sheet dataTypeSheet = workbook.getSheet(DataTypeSheetCreator.DATA_TYPE_SHEET_NAME);
 
 		Package targetPackage = createDataTypePackage(modelPackage);
-		Collection<DataType> existingTypes = ModelObjectUtil.getDataTypes(modelPackage.allOwnedElements());
+		Collection<DataType> existingTypes = ModelObjectUtil.getDataTypesFromModel(modelPackage);
 		createDataTypes(existingTypes, dataTypeSheet, targetPackage);
 	}
 
@@ -53,7 +47,7 @@ public class DataTypeCreator {
 
 	private DataType createDataTypeByXmiId(Collection<DataType> existingTypes, String xmiId, String typeName,
 			Package targetPackage) {
-		DataType dataType = getDataTypeByXmiId(existingTypes, xmiId);
+		DataType dataType = (DataType) getByXmiId(existingTypes, xmiId);
 		if (dataType == null) {
 			return createNewDataType(typeName, targetPackage);
 		}
@@ -83,16 +77,6 @@ public class DataTypeCreator {
 	private DataType getDataTypeByName(Collection<DataType> existingTypes, String typeName) {
 		for (DataType dataType : existingTypes) {
 			if (typeName.equals(dataType.getName())) {
-				return dataType;
-			}
-		}
-		return null;
-	}
-
-	private DataType getDataTypeByXmiId(Collection<DataType> existingTypes, String xmiId) {
-		for (DataType dataType : existingTypes) {
-			String fragment = EcoreUtil.getURI(dataType).fragment();
-			if (fragment.equals(xmiId)) {
 				return dataType;
 			}
 		}

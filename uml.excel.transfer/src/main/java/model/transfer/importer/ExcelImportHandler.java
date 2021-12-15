@@ -42,7 +42,7 @@ public class ExcelImportHandler {
 		try {
 			excel2Model.executeImport();
 
-			// RE-EXPORT TO FILL UP XMI ID-s
+//			 RE-EXPORT TO FILL UP XMI ID-s
 //			ModelExporter model2excel = new ModelExporter();
 //			model2excel.export(modelPackage, filePath);
 		} catch (EncryptedDocumentException e) {

@@ -2,7 +2,9 @@ package model.transfer.importer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -23,24 +25,19 @@ import mode.transfer.util.CellUtil;
 import mode.transfer.util.ExcelReaderUtil;
 import mode.transfer.util.ModelObjectUtil;
 
-public class PropertyCreator {
+public class PropertyCreator extends ObjectImporter {
 
 	private final String METHODS = "metódusok";
-	private final String ATTRIBUTES = "attribútumok";
 
-	private Package modelPackage;
-
-	private Workbook workbook;
-
-	private Collection<DataType> dataTypes;
+	private Set<DataType> dataTypes = new HashSet<>();
 
 	public PropertyCreator(Workbook workbook, Package modelPackage) {
-		this.workbook = workbook;
-		this.modelPackage = modelPackage;
+		super(workbook, modelPackage);
+
+		dataTypes = ModelObjectUtil.getDataTypesFromModel(modelPackage);
 	}
 
 	public void createMethodsAndProperties() {
-		dataTypes = ModelObjectUtil.getDataTypes(modelPackage.getModel().allOwnedElements());
 
 		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
 		for (Class clazz : classes) {
@@ -70,7 +67,7 @@ public class PropertyCreator {
 				if (row == null) {
 					continue;
 				}
-				createInterfaceProperty(interfac, row);
+//				createInterfaceProperty(interfac, row);
 			}
 
 			createInterfaceMethod(interfac, interfacSheet, lastRowNum, mehtodHeaderRowNumber);
@@ -187,7 +184,7 @@ public class PropertyCreator {
 		property.setName(name);
 		DataType dataType = getdataTypeByName(dataTypeName);
 		if (dataType != null) {
-			property.setDatatype(dataType);
+			property.setType(dataType);
 		}
 		ModelObjectUtil.addComment(property, comment);
 		property.setInterface(interfac);
@@ -240,7 +237,7 @@ public class PropertyCreator {
 		property.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
 		DataType dataType = getdataTypeByName(dataTypeName);
 		if (dataType != null) {
-			property.setDatatype(dataType);
+			property.setType(dataType);
 		}
 		property.setIsStatic(ExcelReaderUtil.stringToBoolean(isStatic));
 		ModelObjectUtil.addComment(property, comment);

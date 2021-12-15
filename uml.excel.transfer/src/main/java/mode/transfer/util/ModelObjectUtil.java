@@ -1,8 +1,15 @@
 package mode.transfer.util;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
@@ -10,7 +17,9 @@ import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Enumeration;
 import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.NamedElement;
+import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLPackage;
 
 public class ModelObjectUtil {
@@ -37,10 +46,33 @@ public class ModelObjectUtil {
 		return dataTypes;
 	}
 
+	public static Set<DataType> getDataTypesFromModel(Package modelPackage) {
+		Set<DataType> dataTypes = new HashSet<>();
+
+		Model model = modelPackage.getModel();
+		ResourceSet resourceSet = model.eResource().getResourceSet();
+		for (Resource resource : resourceSet.getResources()) {
+			dataTypes.addAll(getObjectsByType(resource.getAllContents(), UMLPackage.Literals.DATA_TYPE));
+		}
+		return dataTypes;
+	}
+
 	public static void addComment(NamedElement element, String comment) {
 		if (!comment.isEmpty()) {
 			element.createOwnedComment().setBody(comment);
 		}
 	}
 
+	public static <T> Collection<T> getObjectsByType(TreeIterator<EObject> elements,
+			EClassifier type) {
+		Collection<T> collection = new HashSet<T>();
+		while (elements.hasNext()) {
+			EObject next = elements.next();
+			if (type.isInstance(next)) {
+				T element = (T) next;
+				collection.add(element);
+			}
+		}
+		return collection;
+	}
 }

@@ -38,7 +38,7 @@ public class ModelExporter {
 		EList<Element> modelPackageElements = getModelPackageElements(modelPackage);
 
 		// DATA TYPE
-		Collection<DataType> dataTypes = ModelObjectUtil.getDataTypes(modelPackageElements);
+		Collection<DataType> dataTypes = ModelObjectUtil.getDataTypesFromModel(modelPackage);
 		DataTypeSheetCreator dataTypeSheetCreator = new DataTypeSheetCreator(workbook,
 				new ArrayList<DataType>(dataTypes));
 		dataTypeSheetCreator.createSheet();

@@ -29,19 +29,14 @@ import mode.transfer.export.InterfaceSummarySheetCreator;
 import mode.transfer.util.CellUtil;
 import mode.transfer.util.ModelObjectUtil;
 
-public class AssociationCreator {
-
-	private Workbook workbook;
-
-	private Package modelPackage;
+public class AssociationCreator extends ObjectImporter {
 
 	private List<Classifier> classifiers = new ArrayList<>();
 
 	private List<AssociationModel> associationsFromExcel;
 
 	public AssociationCreator(Workbook workbook, Package modelPackage) {
-		this.workbook = workbook;
-		this.modelPackage = modelPackage;
+		super(workbook, modelPackage);
 
 		Collection<Interface> interfaces = ModelObjectUtil.getInterfaces(modelPackage.allOwnedElements());
 		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
