@@ -12,9 +12,9 @@ import org.eclipse.uml2.uml.EnumerationLiteral;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLFactory;
 
+import database.modeling.util.uml.ModelObjectUtil;
 import mode.transfer.export.EnumSheetCreator;
 import mode.transfer.util.CellUtil;
-import mode.transfer.util.ModelObjectUtil;
 
 public class EnumCreator extends ObjectImporter {
 

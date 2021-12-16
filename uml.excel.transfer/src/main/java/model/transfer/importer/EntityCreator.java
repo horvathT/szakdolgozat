@@ -12,11 +12,11 @@ import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLFactory;
 
+import database.modeling.util.uml.ModelObjectUtil;
 import mode.transfer.export.ClassSummarySheetCreator;
 import mode.transfer.export.InterfaceSummarySheetCreator;
 import mode.transfer.util.CellUtil;
 import mode.transfer.util.ExcelReaderUtil;
-import mode.transfer.util.ModelObjectUtil;
 
 public class EntityCreator extends ObjectImporter {
 

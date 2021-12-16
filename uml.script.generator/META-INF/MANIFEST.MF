@@ -1,23 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Transfer
-Bundle-SymbolicName: uml.excel.transfer;singleton:=true
+Bundle-Name: Generator
+Bundle-SymbolicName: uml.script.generator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.e4.ui.model.workbench;bundle-version="2.1.1000.v20210111-0958",
  org.eclipse.e4.core.di,
+ modeling.tools.util,
  org.eclipse.e4.ui.services,
  org.eclipse.jface,
- modeling.tools.util,
  org.eclipse.papyrus.emf.facet.custom.metamodel,
- org.eclipse.ui.workbench,
- org.eclipse.equinox.registry,
  org.eclipse.uml2.uml,
- tooling.apache-poi,
- org.eclipse.core.resources,
- org.eclipse.emf.transaction
-Automatic-Module-Name: uml.excel.transfer
+ org.eclipse.ui.workbench
+Automatic-Module-Name: uml.script.generator
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: javax.inject;version="1.0.0",
  org.slf4j;version="1.7.30"
-Bundle-ActivationPolicy: lazy
-

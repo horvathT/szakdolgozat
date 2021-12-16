@@ -1,4 +1,4 @@
-package mode.transfer.util;
+package database.modeling.util.uml;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,9 +20,14 @@ import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLPackage;
 
 public class ModelObjectUtil {
+
+	public static Collection<Property> getProperties(EList<Element> elementList) {
+		return EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.PROPERTY);
+	}
 
 	public static Collection<Interface> getInterfaces(EList<Element> elementList) {
 		return EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.INTERFACE);

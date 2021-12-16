@@ -21,9 +21,9 @@ import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLFactory;
 
+import database.modeling.util.uml.ModelObjectUtil;
 import mode.transfer.util.CellUtil;
 import mode.transfer.util.ExcelReaderUtil;
-import mode.transfer.util.ModelObjectUtil;
 
 public class PropertyCreator extends ObjectImporter {
 

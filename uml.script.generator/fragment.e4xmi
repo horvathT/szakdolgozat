@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_362jQF6rEeyKEJ6eVP2kTw">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Anx3IF6sEeyKEJ6eVP2kTw" featurename="menuContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_DasqsF6sEeyKEJ6eVP2kTw" elementId="uml.script.generator.menucontribution.0" parentId="org.eclipse.papyrus.views.modelexplorer.modelexplorer.popup">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_HBsmkF6sEeyKEJ6eVP2kTw" elementId="id.script.generator" label="DDL script gener&#xe1;l&#xe1;s" command="_O2QvEF6sEeyKEJ6eVP2kTw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Nd6cEF6sEeyKEJ6eVP2kTw" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_O2QvEF6sEeyKEJ6eVP2kTw" elementId="uml.script.generator.command.ddlscriptgeneralas" commandName="DDL script gener&#xe1;l&#xe1;s"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_TKchEF6sEeyKEJ6eVP2kTw" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_UwmmkF6sEeyKEJ6eVP2kTw" elementId="uml.script.generator.handler.0" contributionURI="bundleclass://uml.script.generator/uml.papyrus.script.generator.ScriptGeneratorHandler" command="_O2QvEF6sEeyKEJ6eVP2kTw"/>
+  </fragments>
+</fragment:ModelFragments>

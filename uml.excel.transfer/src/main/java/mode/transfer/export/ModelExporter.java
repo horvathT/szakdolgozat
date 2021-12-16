@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import database.modeling.util.resource.EclipseResourceUtil;
-import mode.transfer.util.ModelObjectUtil;
+import database.modeling.util.uml.ModelObjectUtil;
 
 public class ModelExporter {
 	public static final Logger log = LoggerFactory.getLogger(ModelExporter.class);
