@@ -13,13 +13,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
@@ -27,6 +30,7 @@ import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
+import org.eclipse.uml2.uml.Stereotype;
 import org.eclipse.uml2.uml.Type;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.slf4j.Logger;
@@ -42,12 +46,15 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	public static final Logger log = LoggerFactory.getLogger(PropertyEditingViewModelImpl.class);
 
-	DatabaseModelingView view;
+	private DatabaseModelingView view;
+
+	private Shell shell;
 
 	private DatabaseTypesUtil dbUtil = new DatabaseTypesUtil();
 
 	public PropertyEditingViewModelImpl(DatabaseModelingView view) {
 		this.view = view;
+		shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 	}
 
 	@Override
@@ -56,7 +63,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.setCurrentPropertySelection(porperty);
 		setCurrentSelectionLabel();
 
-		// Meg kell nézni hogy a váltás után is ugyan abban a DB típusban vagyunk-e
 		Model model = porperty.getModel();
 		String modelDBType = DatabaseModelUtil.getDatabaseType(model);
 		ToolItem databaseChanger = view.getDatabaseChanger();
@@ -85,27 +91,22 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	@Override
 	public void changeDatabaseImplementation(String curentlySelectedDB, String newlySelectedDbName) {
-		// selection xmiId-t elrakjuk későbbre
 		Property currentPropertySelection = view.getCurrentPropertySelection();
-
-		// TODO(modellen lévő adatok validálása)
+		Model model = currentPropertySelection.getModel();
+		if (model == null) {
+			MessageDialog.openError(shell, "Adatbázis váltás sikertelen!",
+					"A kijelölt attribútum nem része a modellnek!");
+			return;
+		}
 
 		// modellen lévő összes adat begyűjtése
 		// adatok kiírása xml-be vagy gson/json serializer
-		Model model = currentPropertySelection.getModel();
 		ModelConverter converter = new ModelConverter(model, view);
 		converter.writeModelToFile(curentlySelectedDB);
 
 		// modell letakarítása
 		converter.clearModel();
 
-		// TODO összevetés a modellel, esetleges változások/ összeférhetetlenség
-		// keresése (ha
-		// TODO van hiba akkor error és hiba üzenet)
-
-		// újonnan kiválaszttot DB-hez xml fájl keresése (ha nincs akkor nem csinálunk
-		// semmit)
-		// fájl felolvsása
 		// apply on model
 		converter.applyFileOnModel(newlySelectedDbName);
 
@@ -124,9 +125,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		if (view.getCurrentPropertySelection() == null) {
 			return;
 		}
-		if (isEmpty()) {
-			return;
-		}
 
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(view.getCurrentPropertySelection());
 		if (editingDomain == null) {
@@ -135,7 +133,17 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		RecordingCommand recordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				DataTransformer.applyModelOnProperty(updateModelFromView(), view.getCurrentPropertySelection());
+				if (isEmpty()) {
+					// remove all Stereotypes
+					Property property = view.getCurrentPropertySelection();
+
+					EList<Stereotype> appliedStereotypes = property.getAppliedStereotypes();
+					for (Stereotype stereotype : appliedStereotypes) {
+						property.unapplyStereotype(stereotype);
+					}
+				} else {
+					DataTransformer.applyModelOnProperty(updateModelFromView(), view.getCurrentPropertySelection());
+				}
 			}
 		};
 		editingDomain.getCommandStack().execute(recordingCommand);
@@ -184,7 +192,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	}
 
 	private void updateViewFromModel(PropertyDataModel model) {
-//		attributeEditingEnabled(false);
 		DataTypeDefinition dataType = model.getSqlType();
 		if (dataType == null) {
 			view.getSqlTypeComboViewer()

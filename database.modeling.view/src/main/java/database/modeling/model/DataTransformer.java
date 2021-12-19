@@ -61,7 +61,8 @@ public class DataTransformer {
 			// fk constraint
 			dataModel.setForeignKeyConstraintName(FKUtil.getConstraintName(property));
 			// referenced entity, property
-			dataModel.setReferencedEntity(FKUtil.getReferencedEntity(property));
+			String referencedEntity = FKUtil.getReferencedEntity(property);
+			dataModel.setReferencedEntity(referencedEntity);
 			dataModel.setReferencedProperty(FKUtil.getReferencedProperty(property));
 
 		} else {
