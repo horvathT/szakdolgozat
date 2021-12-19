@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
+import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Enumeration;
@@ -35,6 +36,12 @@ public class ModelObjectUtil {
 
 	public static Collection<Class> getClasses(EList<Element> elementList) {
 		return EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.CLASS);
+	}
+
+	public static Collection<Classifier> getClassifiers(EList<Element> elementList) {
+		Collection<Classifier> objectsByType = EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.INTERFACE);
+		objectsByType.addAll(EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.CLASS));
+		return objectsByType;
 	}
 
 	public static Collection<Enumeration> getEnumerations(EList<Element> elementList) {

@@ -1,11 +1,14 @@
 package uml.papyrus.script.generator;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -13,6 +16,8 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,11 +30,19 @@ public class ModelValidator {
 
 	public static final Logger log = LoggerFactory.getLogger(ModelValidator.class);
 
+	private static final Bundle BUNDLE = FrameworkUtil.getBundle(ModelValidator.class);
+	private static final ILog LOGGER = Platform.getLog(BUNDLE);
+
 	private Package modelPackage;
 
 	private Shell shell;
 
 	private Collection<Property> properties;
+
+	private Map<Property, Property> fkTypeConsistency;
+	private Map<Property, Property> fkReferencedAttrNullable;
+	private Map<Property, Property> fkReferencedAttrNotUnique;
+	private Set<Property> fkMissingReference;
 
 	public ModelValidator(Package modelPackage) {
 		this.modelPackage = modelPackage;
@@ -42,45 +55,181 @@ public class ModelValidator {
 
 		if (!propertyMissingType.isEmpty()) {
 			String errorMessage = compilePropertyMissingSqlTypeErrorMessage(propertyMissingType);
-			MessageDialog.openError(shell, "Generálási hiba", errorMessage);
-			System.exit(1);
+			validationErrorMessage(errorMessage);
 		}
-		Set<Property> fkMissingReference = checkFkMissingReference();
 
-		Map<Property, Property> fkTypeConsistency = checkFkTypeConsitency();
+		checkFkReferenceConsistency();
+
+		if (!fkMissingReference.isEmpty()) {
+			String errorMessage = compileFkMissingReferenceErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+
+		if (!fkTypeConsistency.isEmpty()) {
+			String errorMessage = compileFkTypeConsistencyErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+
+		if (!fkReferencedAttrNullable.isEmpty()) {
+			String errorMessage = compileFkReferencedAttrNullableErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+
+		if (!fkReferencedAttrNotUnique.isEmpty()) {
+			String errorMessage = compileFkReferencedAttrNotUniqueErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
 
 	}
 
-	/**
-	 * Ellenőrzés, hogy az idegenkulcshoz be van-e állítva hivatkozott attribútum. A
-	 * hibás elemek egy Set-be kerülnek összegyűjtésre.
-	 * 
-	 * @return Set<Property>
-	 */
-	private Set<Property> checkFkMissingReference() {
-		Set<Property> fkMissingReference = new HashSet<>();
+	private String compileFkReferencedAttrNotUniqueErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(
+				"Generálás sikertelen! A következő idegenkulcsok referált attribútuma nem egyedi: "
+						+ System.lineSeparator());
+
+		for (Entry<Property, Property> entry : fkReferencedAttrNotUnique.entrySet()) {
+
+			Property key = entry.getKey();
+			Property value = entry.getValue();
+
+			LOGGER.error(
+					"A következő idegenkulcs referált attribútuma nem egyedi: "
+							+ key.getName() + " -> " + value.getName());
+
+			sb.append(key.getName() + " -> " + value.getName() + System.lineSeparator());
+		}
+		return sb.toString();
+	}
+
+	private String compileFkReferencedAttrNullableErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(
+				"Generálás sikertelen! A következő idegenkulcsok referált attribútuma nullozható: "
+						+ System.lineSeparator());
+
+		for (Entry<Property, Property> entry : fkReferencedAttrNullable.entrySet()) {
+
+			Property key = entry.getKey();
+			Property value = entry.getValue();
+
+			LOGGER.error(
+					"A következő idegenkulcs referált attribútuma nullozható: "
+							+ key.getName() + " -> " + value.getName());
+
+			sb.append(key.getName() + " -> " + value.getName() + System.lineSeparator());
+		}
+		return sb.toString();
+	}
+
+	private String compileFkTypeConsistencyErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(
+				"Generálás sikertelen! A következő idegenkulcsok és refereált attribútumaik típusa eltérő: "
+						+ System.lineSeparator());
+
+		for (Entry<Property, Property> entry : fkTypeConsistency.entrySet()) {
+
+			Property key = entry.getKey();
+			Property value = entry.getValue();
+
+			LOGGER.error(
+					"A következő idegenkulcs és refereált attribútuma eltérő típusú: "
+							+ key.getName() + " -> " + value.getName());
+
+			sb.append(key.getName() + " -> " + value.getName() + System.lineSeparator());
+		}
+		return sb.toString();
+	}
+
+	private String compileFkMissingReferenceErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(
+				"Generálás sikertelen! A következő attribútumok idegenkulcsként vannak megjelölve, "
+						+ "de nincs referált elem beállítva: " + System.lineSeparator());
+
+		for (Property property : fkMissingReference) {
+			LOGGER.error(
+					"A következő attribútum idegenkulcsként van megjelölve, de nincs referált elem beállítva: "
+							+ property.getName());
+
+			Element owner = property.getOwner();
+			if (owner instanceof Classifier) {
+				Classifier classifier = (Classifier) owner;
+				sb.append(classifier.getName() + "." + property.getName() + System.lineSeparator());
+			}
+		}
+		return sb.toString();
+	}
+
+	private void validationErrorMessage(String errorMessage) {
+		MessageDialog.openError(shell, "Generálási hiba", errorMessage);
+		System.exit(1);
+	}
+
+	private void checkFkReferenceConsistency() {
 		for (Property property : properties) {
 			boolean hasStereotype = StereotypeManagementUtil.hasStereotype(property,
 					FKUtil.STEREOTYPE_QUALIFIED_NAME);
 			if (hasStereotype) {
+
 				String referencedEntityName = FKUtil.getReferencedEntity(property);
 				String referencedPropertyName = FKUtil.getReferencedProperty(property);
+				if (referencedEntityName.isEmpty() || referencedPropertyName.isEmpty()) {
+					fkMissingReference.add(property);
+					continue;
+				}
+
+				Classifier classifier = getEntityByName(referencedEntityName);
+				if (classifier == null) {
+					fkMissingReference.add(property);
+					continue;
+				}
+				Property propertyByName = getPropertyByName(referencedPropertyName, classifier.getAttributes());
+				if (propertyByName == null) {
+					fkMissingReference.add(property);
+					continue;
+				}
+
+				String dataType = ColumnUtil.getDataType(property);
+				String referredDataType = ColumnUtil.getDataType(propertyByName);
+				if (!dataType.equals(referredDataType)) {
+					fkTypeConsistency.put(property, propertyByName);
+				}
+
+				boolean unique = ColumnUtil.getUnique(propertyByName);
+				if (!unique) {
+					fkReferencedAttrNotUnique.put(property, propertyByName);
+				}
+
+				boolean nullable = ColumnUtil.getNullable(propertyByName);
+				if (nullable) {
+					fkReferencedAttrNullable.put(property, propertyByName);
+				}
+
 			}
 		}
-
-		return fkMissingReference;
 	}
 
-	/**
-	 * Összegyűjti azon idegenkulcs - hivatkozott attribútum párokat amelyek typusa
-	 * nem egyezik, vagy a hivatkozott attribútum nullozható.
-	 * 
-	 * @return Map<Property, Property>
-	 */
-	private Map<Property, Property> checkFkTypeConsitency() {
-		Map<Property, Property> fkTypeConsistency = new HashMap<>();
+	private Property getPropertyByName(String referencedPropertyName, List<Property> properties) {
+		for (Property property : properties) {
+			String name = property.getName();
+			if (name.equals(referencedPropertyName)) {
+				return property;
+			}
+		}
+		return null;
+	}
 
-		return fkTypeConsistency;
+	private Classifier getEntityByName(String referencedEntityName) {
+		Collection<Classifier> classifiers = ModelObjectUtil.getClassifiers(modelPackage.allOwnedElements());
+		for (Classifier classifier : classifiers) {
+			String name = classifier.getName();
+			if (name.equals(referencedEntityName)) {
+				return classifier;
+			}
+		}
+		return null;
 	}
 
 	private String compilePropertyMissingSqlTypeErrorMessage(Set<Property> propertyMissingType) {
@@ -88,6 +237,8 @@ public class ModelValidator {
 		sb.append("Generálás sikertelen! A következő attribútumok nem rendelekeznek SQL adattípussal: "
 				+ System.lineSeparator());
 		for (Property property : propertyMissingType) {
+			LOGGER.error(
+					"A következő attribútum nem rendelekezik SQL adattípussal: " + property.getName());
 			Element owner = property.getOwner();
 			if (owner instanceof Classifier) {
 				Classifier classifier = (Classifier) owner;
