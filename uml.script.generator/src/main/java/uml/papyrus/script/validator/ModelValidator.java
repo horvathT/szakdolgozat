@@ -1,4 +1,4 @@
-package uml.papyrus.script.generator;
+package uml.papyrus.script.validator;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -18,8 +18,6 @@ import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.FKUtil;
@@ -27,8 +25,6 @@ import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 
 public class ModelValidator {
-
-	public static final Logger log = LoggerFactory.getLogger(ModelValidator.class);
 
 	private static final Bundle BUNDLE = FrameworkUtil.getBundle(ModelValidator.class);
 	private static final ILog LOGGER = Platform.getLog(BUNDLE);

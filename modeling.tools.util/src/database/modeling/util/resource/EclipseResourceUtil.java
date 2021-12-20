@@ -174,6 +174,21 @@ public class EclipseResourceUtil {
 
 	}
 
+	public static void writeFile(String fileLocation, InputStream targetStream) throws CoreException {
+		File file = new File(fileLocation);
+		IPath fromOSString = org.eclipse.core.runtime.Path.fromOSString(file.getPath());
+		IFile iFile = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(fromOSString);
+		String oldFile = iFile.toString();
+		String newFile = targetStream.toString();
+
+		if (!iFile.exists()) {
+			iFile.create(targetStream, true, null);
+		} else if (!newFile.equals(oldFile)) {
+			iFile.setContents(targetStream, true, true, null);
+		}
+
+	}
+
 	public static void rename(IFile file, String newName) throws CoreException {
 		RefactoringContribution contribution = RefactoringCore
 				.getRefactoringContribution(IJavaRefactorings.RENAME_COMPILATION_UNIT);
