@@ -1,6 +1,7 @@
 package database.modeling.util.resource;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -26,11 +27,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.refactoring.IJavaRefactorings;
 import org.eclipse.jdt.core.refactoring.descriptors.RenameJavaElementDescriptor;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringContribution;
 import org.eclipse.ltk.core.refactoring.RefactoringCore;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -174,19 +177,20 @@ public class EclipseResourceUtil {
 
 	}
 
-	public static void writeFile(String fileLocation, InputStream targetStream) throws CoreException {
+	public static void writeFile(String fileLocation, String content) {
 		File file = new File(fileLocation);
-		IPath fromOSString = org.eclipse.core.runtime.Path.fromOSString(file.getPath());
-		IFile iFile = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(fromOSString);
-		String oldFile = iFile.toString();
-		String newFile = targetStream.toString();
+		try {
+			file.createNewFile();
 
-		if (!iFile.exists()) {
-			iFile.create(targetStream, true, null);
-		} else if (!newFile.equals(oldFile)) {
-			iFile.setContents(targetStream, true, true, null);
+			FileWriter writer = new FileWriter(file);
+			writer.write(content);
+			writer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+			MessageDialog.openError(shell, "DDL generálás sikertelen", "Fájl létrehozás sikertelen!");
 		}
-
 	}
 
 	public static void rename(IFile file, String newName) throws CoreException {

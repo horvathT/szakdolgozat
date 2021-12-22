@@ -65,6 +65,7 @@ public class ScriptGeneratorHandler {
 
 	private String openFileDialog(Shell shell) {
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE);
+		dialog.setFilterExtensions(new String[] { "*.sql" });
 		return dialog.open();
 	}
 

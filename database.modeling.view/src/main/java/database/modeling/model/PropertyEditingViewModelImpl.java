@@ -170,11 +170,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 		view.getPrimaryKeyCheck().setSelection(false);
 
-		view.getPrimaryKeyConstraintName().setText("");
-
 		view.getForeignKeyCheck().setSelection(false);
-
-		view.getForeignKeyConstraintName().setText("");
 
 		view.getReferencedEntity().clearSelection();
 		view.getReferencedProperty().clearSelection();
@@ -220,9 +216,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 	private void updateConstraintCheckboxSegment(PropertyDataModel model) {
 		view.getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
 		if (model.isPrimaryKey()) {
-			view.getPrimaryKeyConstraintName().setEnabled(true);
 		}
-		view.getPrimaryKeyConstraintName().setText(model.getPrimaryKeyConstraintName());
 
 		view.getUniqueCheck().setSelection(model.isUnique());
 
@@ -230,11 +224,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 		view.getForeignKeyCheck().setSelection(model.isForeignKey());
 		if (model.isForeignKey()) {
-			view.getForeignKeyConstraintName().setEnabled(true);
 			view.getReferencedEntity().setEnabled(true);
 			view.getReferencedProperty().setEnabled(true);
 		}
-		view.getForeignKeyConstraintName().setText(model.getForeignKeyConstraintName());
 	}
 
 	public void changeDataTypeInpuScheme(DataTypeDefinition dtd) {
@@ -321,8 +313,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 			return false;
 		}
 		if (!isEmpty(view.getLength()) || !isEmpty(view.getPrecision()) || !isEmpty(view.getScale())
-				|| !isEmpty(view.getDefaultValue()) || !isEmpty(view.getPrimaryKeyConstraintName())
-				|| !isEmpty(view.getForeignKeyConstraintName())) {
+				|| !isEmpty(view.getDefaultValue())) {
 			return false;
 		}
 		if (!isEmpty(view.getDataTypeCombo()) || !isEmpty(view.getReferencedEntity())
@@ -352,8 +343,6 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		model.setPrecision(view.getPrecision().getText());
 		model.setScale(view.getScale().getText());
 		model.setDefaultValue(view.getDefaultValue().getText());
-		model.setPrimaryKeyConstraintName(view.getPrimaryKeyConstraintName().getText());
-		model.setForeignKeyConstraintName(view.getForeignKeyConstraintName().getText());
 
 		IStructuredSelection structuredSelection = view.getSqlTypeComboViewer().getStructuredSelection();
 		DataTypeDefinition selection = (DataTypeDefinition) structuredSelection.getFirstElement();

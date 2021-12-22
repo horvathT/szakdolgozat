@@ -1,14 +1,14 @@
 package uml.papyrus.script.generator;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.Property;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
@@ -81,17 +81,6 @@ public class ScriptGenerator {
 		return " DEFAULT " + defaultValue;
 	}
 
-	protected void writeToFile(String content, String path) {
-		try (InputStream targetStream = new ByteArrayInputStream(content.getBytes())) {
-			database.modeling.util.resource.EclipseResourceUtil.writeFile(path, targetStream);
-		} catch (CoreException e) {
-			LOGGER.error("Hiba történt a fájl írása során!", e);
-		} catch (IOException e1) {
-			LOGGER.error("Hiba történt a fájl írása során!", e1);
-		}
-
-	}
-
 	protected DataTypeDefinition getTypeDefinitionByName(String name) {
 		for (DataTypeDefinition dataTypeDefinition : dataTypes) {
 			if (dataTypeDefinition.getName().equals(name)) {
@@ -101,4 +90,8 @@ public class ScriptGenerator {
 		throw new IllegalArgumentException("Nem található típus " + name + " névvel");
 	}
 
+	protected List<Property> getOwnedAttributes(Classifier classifier) {
+		EList<Property> attributes = classifier.getAttributes();
+		return attributes.stream().filter(p -> p.getAssociation() == null).collect(Collectors.toList());
+	}
 }

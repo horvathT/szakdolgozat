@@ -45,8 +45,6 @@ public class DatabaseModelingView {
 	private Text precision;
 	private Text scale;
 	private Text defaultValue;
-	private Text primaryKeyConstraintName;
-	private Text foreignKeyConstraintName;
 
 	private ToolItem databaseChanger;
 	private Combo dataTypeCombo;
@@ -151,25 +149,9 @@ public class DatabaseModelingView {
 		primaryKeyCheck.setText("Primary Key");
 		primaryKeyCheck.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
 
-		Label lblPrimaryKeyConstraint = new Label(container, SWT.NONE);
-		lblPrimaryKeyConstraint.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblPrimaryKeyConstraint.setText("Primary Key Constraint Name");
-
-		primaryKeyConstraintName = new Text(container, SWT.BORDER);
-		primaryKeyConstraintName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		primaryKeyConstraintName.setEnabled(false);
-
 		foreignKeyCheck = new Button(container, SWT.CHECK);
 		foreignKeyCheck.setText("Foreign Key");
 		foreignKeyCheck.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
-
-		Label lblForeignKeyConstraint = new Label(container, SWT.NONE);
-		lblForeignKeyConstraint.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblForeignKeyConstraint.setText("Foreign Key Constraint Name");
-
-		foreignKeyConstraintName = new Text(container, SWT.BORDER);
-		foreignKeyConstraintName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		foreignKeyConstraintName.setEnabled(false);
 
 		Label lblReferencedEntity = new Label(container, SWT.NONE);
 		lblReferencedEntity.setText("Referenced entity");
@@ -323,9 +305,6 @@ public class DatabaseModelingView {
 				if (primaryKeyCheck.getSelection()) {
 					nullableCheck.setSelection(false);
 					uniqueCheck.setSelection(true);
-					primaryKeyConstraintName.setEnabled(true);
-				} else {
-					primaryKeyConstraintName.setEnabled(false);
 				}
 			}
 		};
@@ -336,7 +315,6 @@ public class DatabaseModelingView {
 			public void widgetSelected(SelectionEvent e) {
 				if (nullableCheck.getSelection()) {
 					primaryKeyCheck.setSelection(false);
-					primaryKeyConstraintName.setEnabled(false);
 				}
 			}
 		};
@@ -348,14 +326,12 @@ public class DatabaseModelingView {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (foreignKeyCheck.getSelection()) {
-					foreignKeyConstraintName.setEnabled(true);
 					referencedEntity.setEnabled(true);
 					referencedProperty.setEnabled(true);
 					viewModel.setupReferenceEntityCombo();
 				} else {
 					referencedEntity.setEnabled(false);
 					referencedProperty.setEnabled(false);
-					foreignKeyConstraintName.setEnabled(false);
 				}
 			}
 		};
@@ -392,14 +368,6 @@ public class DatabaseModelingView {
 
 	public Text getDefaultValue() {
 		return defaultValue;
-	}
-
-	public Text getPrimaryKeyConstraintName() {
-		return primaryKeyConstraintName;
-	}
-
-	public Text getForeignKeyConstraintName() {
-		return foreignKeyConstraintName;
 	}
 
 	public Combo getDataTypeCombo() {

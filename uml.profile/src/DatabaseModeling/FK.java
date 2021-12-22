@@ -16,7 +16,6 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link DatabaseModeling.FK#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link DatabaseModeling.FK#getForeignKeyConstraint <em>Foreign Key Constraint</em>}</li>
  *   <li>{@link DatabaseModeling.FK#getReferencedEntity <em>Referenced Entity</em>}</li>
  *   <li>{@link DatabaseModeling.FK#getReferencedProperty <em>Referenced Property</em>}</li>
  * </ul>
@@ -51,33 +50,6 @@ public interface FK extends EObject {
 	 * @generated
 	 */
 	void setBase_Property(Property value);
-
-	/**
-	 * Returns the value of the '<em><b>Foreign Key Constraint</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Foreign Key Constraint</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Foreign Key Constraint</em>' attribute.
-	 * @see #setForeignKeyConstraint(String)
-	 * @see DatabaseModeling.DatabaseModelingPackage#getFK_ForeignKeyConstraint()
-	 * @model default="" dataType="org.eclipse.uml2.types.String" ordered="false"
-	 * @generated
-	 */
-	String getForeignKeyConstraint();
-
-	/**
-	 * Sets the value of the '{@link DatabaseModeling.FK#getForeignKeyConstraint <em>Foreign Key Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Foreign Key Constraint</em>' attribute.
-	 * @see #getForeignKeyConstraint()
-	 * @generated
-	 */
-	void setForeignKeyConstraint(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Referenced Entity</b></em>' attribute.

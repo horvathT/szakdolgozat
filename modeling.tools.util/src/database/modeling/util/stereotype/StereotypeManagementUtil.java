@@ -95,7 +95,8 @@ public class StereotypeManagementUtil {
 			return (boolean) element.getValue(applicableStereotype, attributeName);
 		}
 		throw new IllegalArgumentException(
-				"Stereotype: " + stereotpyeQualifiedName + "is not applied on element: " + element.toString());
+				"Sztereotípus: " + stereotpyeQualifiedName + " nem található a következő elemen: "
+						+ element.toString());
 	}
 
 }

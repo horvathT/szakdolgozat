@@ -1,6 +1,7 @@
 package uml.papyrus.script.validator;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -35,10 +36,10 @@ public class ModelValidator {
 
 	private Collection<Property> properties;
 
-	private Map<Property, Property> fkTypeConsistency;
-	private Map<Property, Property> fkReferencedAttrNullable;
-	private Map<Property, Property> fkReferencedAttrNotUnique;
-	private Set<Property> fkMissingReference;
+	private Map<Property, Property> fkTypeConsistency = new HashMap<>();
+	private Map<Property, Property> fkReferencedAttrNullable = new HashMap<>();
+	private Map<Property, Property> fkReferencedAttrNotUnique = new HashMap<>();
+	private Set<Property> fkMissingReference = new HashSet<>();
 
 	public ModelValidator(Package modelPackage) {
 		this.modelPackage = modelPackage;

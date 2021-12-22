@@ -24,7 +24,6 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link DatabaseModeling.impl.PKImpl#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link DatabaseModeling.impl.PKImpl#getPrimaryKeyConstraint <em>Primary Key Constraint</em>}</li>
  * </ul>
  *
  * @generated
@@ -39,26 +38,6 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 	 * @ordered
 	 */
 	protected Property base_Property;
-
-	/**
-	 * The default value of the '{@link #getPrimaryKeyConstraint() <em>Primary Key Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPrimaryKeyConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String PRIMARY_KEY_CONSTRAINT_EDEFAULT = "";
-
-	/**
-	 * The cached value of the '{@link #getPrimaryKeyConstraint() <em>Primary Key Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPrimaryKeyConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected String primaryKeyConstraint = PRIMARY_KEY_CONSTRAINT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,35 +101,12 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPrimaryKeyConstraint() {
-		return primaryKeyConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPrimaryKeyConstraint(String newPrimaryKeyConstraint) {
-		String oldPrimaryKeyConstraint = primaryKeyConstraint;
-		primaryKeyConstraint = newPrimaryKeyConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.PK__PRIMARY_KEY_CONSTRAINT, oldPrimaryKeyConstraint, primaryKeyConstraint));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DatabaseModelingPackage.PK__BASE_PROPERTY:
 				if (resolve) return getBase_Property();
 				return basicGetBase_Property();
-			case DatabaseModelingPackage.PK__PRIMARY_KEY_CONSTRAINT:
-				return getPrimaryKeyConstraint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -165,9 +121,6 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 		switch (featureID) {
 			case DatabaseModelingPackage.PK__BASE_PROPERTY:
 				setBase_Property((Property)newValue);
-				return;
-			case DatabaseModelingPackage.PK__PRIMARY_KEY_CONSTRAINT:
-				setPrimaryKeyConstraint((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,9 +137,6 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 			case DatabaseModelingPackage.PK__BASE_PROPERTY:
 				setBase_Property((Property)null);
 				return;
-			case DatabaseModelingPackage.PK__PRIMARY_KEY_CONSTRAINT:
-				setPrimaryKeyConstraint(PRIMARY_KEY_CONSTRAINT_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -201,26 +151,8 @@ public class PKImpl extends MinimalEObjectImpl.Container implements PK {
 		switch (featureID) {
 			case DatabaseModelingPackage.PK__BASE_PROPERTY:
 				return base_Property != null;
-			case DatabaseModelingPackage.PK__PRIMARY_KEY_CONSTRAINT:
-				return PRIMARY_KEY_CONSTRAINT_EDEFAULT == null ? primaryKeyConstraint != null : !PRIMARY_KEY_CONSTRAINT_EDEFAULT.equals(primaryKeyConstraint);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (primaryKeyConstraint: ");
-		result.append(primaryKeyConstraint);
-		result.append(')');
-		return result.toString();
 	}
 
 } //PKImpl

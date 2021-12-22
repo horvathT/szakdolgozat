@@ -40,7 +40,6 @@ public class DataTransformer {
 			// unique
 			dataModel.setUnique(ColumnUtil.getUnique(property));
 		} else {
-//			dataModel.setSqlType("");
 			dataModel.setDefaultValue("");
 			dataModel.setLength("");
 			dataModel.setPrecision("");
@@ -50,23 +49,18 @@ public class DataTransformer {
 		}
 		if (StereotypeManagementUtil.hasStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			dataModel.setPrimaryKey(true);
-			dataModel.setPrimaryKeyConstraintName(PKUtil.getConstraintName(property));
 		} else {
 			dataModel.setPrimaryKey(false);
-			dataModel.setPrimaryKeyConstraintName("");
 		}
 		if (StereotypeManagementUtil.hasStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME)) {
 			// fk
 			dataModel.setForeignKey(true);
-			// fk constraint
-			dataModel.setForeignKeyConstraintName(FKUtil.getConstraintName(property));
 			// referenced entity, property
 			dataModel.setReferencedEntity(FKUtil.getReferencedEntity(property));
 			dataModel.setReferencedProperty(FKUtil.getReferencedProperty(property));
 
 		} else {
 			dataModel.setForeignKey(false);
-			dataModel.setForeignKeyConstraintName("");
 			dataModel.setReferencedEntity("");
 			dataModel.setReferencedProperty("");
 		}
@@ -106,13 +100,11 @@ public class DataTransformer {
 
 		if (dataModel.isPrimaryKey()) {
 			StereotypeManagementUtil.applyStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME);
-			PKUtil.setConstraintName(property, dataModel.getPrimaryKeyConstraintName());
 		} else {
 			StereotypeManagementUtil.unapplyStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME);
 		}
 		if (dataModel.isForeignKey()) {
 			StereotypeManagementUtil.applyStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME);
-			FKUtil.setConstraintName(property, dataModel.getForeignKeyConstraintName());
 			FKUtil.setReferencedEntity(property, dataModel.getReferencedEntity());
 			FKUtil.setReferencedProperty(property, dataModel.getReferencedProperty());
 		} else {

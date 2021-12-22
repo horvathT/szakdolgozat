@@ -2,8 +2,10 @@ package uml.papyrus.script.generator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Classifier;
@@ -12,7 +14,10 @@ import org.eclipse.uml2.uml.Property;
 
 import database.modeling.model.DataTypeDefinition;
 import database.modeling.model.DatabaseTypesUtil;
+import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.stereotype.ColumnUtil;
+import database.modeling.util.stereotype.FKUtil;
+import database.modeling.util.stereotype.PKUtil;
 import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 
@@ -45,13 +50,78 @@ public class OracleScriptGenerator extends ScriptGenerator {
 			sb.append(foreignKeyConstraints(classifier));
 			sb.append(appendLineSeparator());
 		}
+
+		EclipseResourceUtil.writeFile(filePath, sb.toString());
 	}
 
-	private Object foreignKeyConstraints(Classifier classifier) {
-		// TODO Auto-generated method stub
-		return null;
+	private String foreignKeyConstraints(Classifier classifier) {
+		StringBuilder fkConstraints = new StringBuilder();
+
+		Map<String, List<Property>> fkMap = getFKProperties(classifier);
+		if (fkMap.isEmpty()) {
+			return "";
+		}
+		for (Entry<String, List<Property>> entry : fkMap.entrySet()) {
+			fkConstraints.append(foreignKeyConstraint(classifier.getName(), fkMap, entry));
+		}
+
+		return fkConstraints.toString();
 	}
 
+	private String foreignKeyConstraint(String classifierName, Map<String, List<Property>> fkMap,
+			Entry<String, List<Property>> entry) {
+		String referredEntityName = entry.getKey();
+		List<Property> fkPropList = entry.getValue();
+
+		StringBuilder localProps = new StringBuilder();
+		StringBuilder refProps = new StringBuilder();
+
+		for (int i = 0; i < fkPropList.size(); i++) {
+			Property property = fkPropList.get(i);
+			localProps.append("\"" + property.getName() + "\"");
+
+			String referencedProperty = FKUtil.getReferencedProperty(property);
+			refProps.append("\"" + referencedProperty + "\"");
+
+			if (i != fkPropList.size() - 1) {
+				localProps.append(", ");
+				refProps.append(", ");
+			}
+
+		}
+
+		return "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT \"FK_" + classifierName
+				+ "\" FOREIGN KEY(" + localProps.toString() + ") REFERENCES \"" + referredEntityName + "\" ("
+				+ refProps.toString() + ")";
+	}
+
+	private Map<String, List<Property>> getFKProperties(Classifier classifier) {
+		Map<String, List<Property>> fkByReferencedentity = new HashMap<>();
+
+		EList<Property> attributes = classifier.getAttributes();
+		for (Property property : attributes) {
+			if (StereotypeManagementUtil.hasStereotype(property, FKUtil.STEREOTYPE_QUALIFIED_NAME)) {
+				String referencedEntity = FKUtil.getReferencedEntity(property);
+				List<Property> list = fkByReferencedentity.get(referencedEntity);
+				if (list == null) {
+					List<Property> propList = new ArrayList<>();
+					propList.add(property);
+					fkByReferencedentity.put(referencedEntity, propList);
+				} else {
+					list.add(property);
+				}
+			}
+		}
+		return fkByReferencedentity;
+	}
+
+	/**
+	 * A paraméterben kapott Classifier-nek megfeleltethető tábla létrehozására
+	 * alkalmas DDL script összeállítását végzi.
+	 * 
+	 * @param classifier
+	 * @return
+	 */
 	private String createTableScript(Classifier classifier) {
 		String createTable = "CREATE TABLE \"" + classifier.getName() + "\" ("
 				+ appendLineSeparator()
@@ -61,20 +131,30 @@ public class OracleScriptGenerator extends ScriptGenerator {
 	}
 
 	private String primaryKeyConstraint(Classifier classifier) {
-		List<Property> pkProp = getPripmaryKeyProperties(classifier);
+		List<Property> pkProp = getPKProperties(classifier);
 		if (pkProp.isEmpty()) {
 			return "";
 		}
 
-		String statement = "ALTER TABLE \"" + classifier.getName() + "\" ADD CONSTRAINT PK_" + classifier.getName();
+		StringBuilder pk = new StringBuilder();
+		for (int i = 0; i < pkProp.size(); i++) {
+			Property property = pkProp.get(i);
+			pk.append("\"" + property.getName() + "\"");
+			if (i != pkProp.size() - 1) {
+				pk.append(", ");
+			}
+		}
+		String classifierName = classifier.getName();
+		String statement = "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT PK_" + classifierName
+				+ " PRIMARY KEY(" + pk.toString() + ");";
 		return statement;
 	}
 
-	private List<Property> getPripmaryKeyProperties(Classifier classifier) {
+	private List<Property> getPKProperties(Classifier classifier) {
 		List<Property> properties = new ArrayList<>();
 		EList<Property> attributes = classifier.getAttributes();
 		for (Property property : attributes) {
-			if (StereotypeManagementUtil.hasStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME)) {
+			if (StereotypeManagementUtil.hasStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME)) {
 				properties.add(property);
 			}
 		}
@@ -83,7 +163,7 @@ public class OracleScriptGenerator extends ScriptGenerator {
 
 	private String defineProperties(Classifier classifier) {
 		StringBuilder sb = new StringBuilder();
-		EList<Property> attributes = classifier.getAttributes();
+		List<Property> attributes = getOwnedAttributes(classifier);
 		for (int i = 0; i < attributes.size(); i++) {
 			Property property = attributes.get(i);
 			sb.append(appendTab() + defineColumn(property));

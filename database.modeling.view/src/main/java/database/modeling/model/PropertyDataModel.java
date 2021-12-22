@@ -8,8 +8,6 @@ public class PropertyDataModel {
 	private String precision;
 	private String scale;
 	private String defaultValue;
-	private String primaryKeyConstraintName;
-	private String foreignKeyConstraintName;
 	private DataTypeDefinition sqlType;
 
 	private String referencedEntity;
@@ -50,22 +48,6 @@ public class PropertyDataModel {
 
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
-	}
-
-	public String getPrimaryKeyConstraintName() {
-		return primaryKeyConstraintName;
-	}
-
-	public void setPrimaryKeyConstraintName(String primaryKeyConstraintName) {
-		this.primaryKeyConstraintName = primaryKeyConstraintName;
-	}
-
-	public String getForeignKeyConstraintName() {
-		return foreignKeyConstraintName;
-	}
-
-	public void setForeignKeyConstraintName(String foreignKeyConstraintName) {
-		this.foreignKeyConstraintName = foreignKeyConstraintName;
 	}
 
 	public DataTypeDefinition getSqlType() {

@@ -24,7 +24,6 @@ import org.eclipse.uml2.uml.Property;
  * </p>
  * <ul>
  *   <li>{@link DatabaseModeling.impl.FKImpl#getBase_Property <em>Base Property</em>}</li>
- *   <li>{@link DatabaseModeling.impl.FKImpl#getForeignKeyConstraint <em>Foreign Key Constraint</em>}</li>
  *   <li>{@link DatabaseModeling.impl.FKImpl#getReferencedEntity <em>Referenced Entity</em>}</li>
  *   <li>{@link DatabaseModeling.impl.FKImpl#getReferencedProperty <em>Referenced Property</em>}</li>
  * </ul>
@@ -41,26 +40,6 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * @ordered
 	 */
 	protected Property base_Property;
-
-	/**
-	 * The default value of the '{@link #getForeignKeyConstraint() <em>Foreign Key Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getForeignKeyConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String FOREIGN_KEY_CONSTRAINT_EDEFAULT = "";
-
-	/**
-	 * The cached value of the '{@link #getForeignKeyConstraint() <em>Foreign Key Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getForeignKeyConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected String foreignKeyConstraint = FOREIGN_KEY_CONSTRAINT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getReferencedEntity() <em>Referenced Entity</em>}' attribute.
@@ -164,27 +143,6 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getForeignKeyConstraint() {
-		return foreignKeyConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setForeignKeyConstraint(String newForeignKeyConstraint) {
-		String oldForeignKeyConstraint = foreignKeyConstraint;
-		foreignKeyConstraint = newForeignKeyConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT, oldForeignKeyConstraint, foreignKeyConstraint));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getReferencedEntity() {
 		return referencedEntity;
 	}
@@ -233,8 +191,6 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 			case DatabaseModelingPackage.FK__BASE_PROPERTY:
 				if (resolve) return getBase_Property();
 				return basicGetBase_Property();
-			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
-				return getForeignKeyConstraint();
 			case DatabaseModelingPackage.FK__REFERENCED_ENTITY:
 				return getReferencedEntity();
 			case DatabaseModelingPackage.FK__REFERENCED_PROPERTY:
@@ -253,9 +209,6 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 		switch (featureID) {
 			case DatabaseModelingPackage.FK__BASE_PROPERTY:
 				setBase_Property((Property)newValue);
-				return;
-			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
-				setForeignKeyConstraint((String)newValue);
 				return;
 			case DatabaseModelingPackage.FK__REFERENCED_ENTITY:
 				setReferencedEntity((String)newValue);
@@ -278,9 +231,6 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 			case DatabaseModelingPackage.FK__BASE_PROPERTY:
 				setBase_Property((Property)null);
 				return;
-			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
-				setForeignKeyConstraint(FOREIGN_KEY_CONSTRAINT_EDEFAULT);
-				return;
 			case DatabaseModelingPackage.FK__REFERENCED_ENTITY:
 				setReferencedEntity(REFERENCED_ENTITY_EDEFAULT);
 				return;
@@ -301,8 +251,6 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 		switch (featureID) {
 			case DatabaseModelingPackage.FK__BASE_PROPERTY:
 				return base_Property != null;
-			case DatabaseModelingPackage.FK__FOREIGN_KEY_CONSTRAINT:
-				return FOREIGN_KEY_CONSTRAINT_EDEFAULT == null ? foreignKeyConstraint != null : !FOREIGN_KEY_CONSTRAINT_EDEFAULT.equals(foreignKeyConstraint);
 			case DatabaseModelingPackage.FK__REFERENCED_ENTITY:
 				return REFERENCED_ENTITY_EDEFAULT == null ? referencedEntity != null : !REFERENCED_ENTITY_EDEFAULT.equals(referencedEntity);
 			case DatabaseModelingPackage.FK__REFERENCED_PROPERTY:
@@ -321,9 +269,7 @@ public class FKImpl extends MinimalEObjectImpl.Container implements FK {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (foreignKeyConstraint: ");
-		result.append(foreignKeyConstraint);
-		result.append(", referencedEntity: ");
+		result.append(" (referencedEntity: ");
 		result.append(referencedEntity);
 		result.append(", referencedProperty: ");
 		result.append(referencedProperty);
