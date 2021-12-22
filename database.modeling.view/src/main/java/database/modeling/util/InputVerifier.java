@@ -1,6 +1,7 @@
 package database.modeling.util;
 
 import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.swt.widgets.Text;
 
 import database.modeling.model.DataTypeDefinition;
 
@@ -18,7 +19,10 @@ public class InputVerifier {
 			return;
 		}
 
-		Long longInput = Long.valueOf(input);
+		String currentInput = ((Text) e.widget).getText();
+		String possibleInput = currentInput.substring(0, e.start) + e.text + currentInput.substring(e.end);
+
+		Long longInput = Long.valueOf(possibleInput);
 		if (dtd.getLengthLowerBound() > longInput) {
 			e.doit = false;
 			return;
@@ -44,7 +48,10 @@ public class InputVerifier {
 			return;
 		}
 
-		Long longInput = Long.valueOf(input);
+		String currentInput = ((Text) e.widget).getText();
+		String possibleInput = currentInput.substring(0, e.start) + e.text + currentInput.substring(e.end);
+
+		Long longInput = Long.valueOf(possibleInput);
 		if (dtd.getPrecisionLowerBound() > longInput) {
 			e.doit = false;
 			return;
@@ -70,7 +77,10 @@ public class InputVerifier {
 			return;
 		}
 
-		Long longInput = Long.valueOf(input);
+		String currentInput = ((Text) e.widget).getText();
+		String possibleInput = currentInput.substring(0, e.start) + e.text + currentInput.substring(e.end);
+
+		Long longInput = Long.valueOf(possibleInput);
 		if (dtd.getScaleLowerBound() > longInput) {
 			e.doit = false;
 			return;
@@ -85,14 +95,15 @@ public class InputVerifier {
 	}
 
 	public static void verifyTextFieldLength(VerifyEvent e, DataTypeDefinition dtd) {
-		String input = e.text;
+		String currentInput = ((Text) e.widget).getText();
+		String possibleInput = currentInput.substring(0, e.start) + e.text + currentInput.substring(e.end);
 
-		if (dtd.getLengthLowerBound() > input.length()) {
+		if (dtd.getLengthLowerBound() > possibleInput.length()) {
 			e.doit = false;
 			return;
 		}
 
-		if (dtd.getLengthUpperBound() < input.length()) {
+		if (dtd.getLengthUpperBound() < possibleInput.length()) {
 			e.doit = false;
 			return;
 		}
