@@ -3,6 +3,7 @@ package uml.papyrus.script.generator;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ILog;
@@ -11,6 +12,7 @@ import org.eclipse.uml2.uml.Package;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
+import database.modeling.model.DataTypeDefinition;
 import uml.papyrus.script.validator.ModelValidator;
 
 public class ScriptGenerator {
@@ -21,6 +23,8 @@ public class ScriptGenerator {
 	protected Package modelPackage;
 
 	protected String filePath;
+
+	protected List<DataTypeDefinition> dataTypes;
 
 	public ScriptGenerator(Package modelPackage, String filePath) {
 		this.modelPackage = modelPackage;
@@ -57,9 +61,24 @@ public class ScriptGenerator {
 
 	protected String nullable(boolean isNullable) {
 		if (isNullable) {
-			return "NULL";
+			return " NULL";
 		}
-		return "NOT NULL";
+		return " NOT NULL";
+	}
+
+	protected String unique(boolean isUnique) {
+		if (isUnique) {
+			return " UNIQUE";
+		}
+		return "";
+	}
+
+	protected String defaultValue(String defaultValue) {
+		if (defaultValue.isEmpty()) {
+			return "";
+		}
+
+		return " DEFAULT " + defaultValue;
 	}
 
 	protected void writeToFile(String content, String path) {
@@ -71,6 +90,15 @@ public class ScriptGenerator {
 			LOGGER.error("Hiba történt a fájl írása során!", e1);
 		}
 
+	}
+
+	protected DataTypeDefinition getTypeDefinitionByName(String name) {
+		for (DataTypeDefinition dataTypeDefinition : dataTypes) {
+			if (dataTypeDefinition.getName().equals(name)) {
+				return dataTypeDefinition;
+			}
+		}
+		throw new IllegalArgumentException("Nem található típus " + name + " névvel");
 	}
 
 }

@@ -33,7 +33,7 @@ public class DatabaseTypesUtil {
 				.lengthUpperBound(2000));
 		oracleDataTypes.add(DataTypeDefinition.of().name("NCLOB").setType(InputType.TEXT));
 		oracleDataTypes.add(DataTypeDefinition.of().name("NUMBER").setType(InputType.NUMERIC).precisionLowerBound(1)
-				.precisionUpperBound(38).scaleLowerBound(-84).scaleUpperBound(127));
+				.precisionUpperBound(38).scaleLowerBound(0).scaleUpperBound(38));
 		oracleDataTypes.add(DataTypeDefinition.of().name("NVARCHAR2").setType(InputType.TEXT).lengthLowerBound(1)
 				.lengthUpperBound(4000));
 		oracleDataTypes.add(
