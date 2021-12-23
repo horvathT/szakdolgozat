@@ -22,6 +22,9 @@ public class DataTypeDefinition {
 
 	private boolean hasDefaulValue;
 
+	private long numericDefaultLowerBound;
+	private long numericDefaultUpperBound;
+
 	private InputType type;
 
 	public static DataTypeDefinition of() {
@@ -141,6 +144,24 @@ public class DataTypeDefinition {
 
 	public boolean hasDefaulValue() {
 		return hasDefaulValue;
+	}
+
+	public Long getNumericDefaultLowerBound() {
+		return numericDefaultLowerBound;
+	}
+
+	public DataTypeDefinition numericDefaultLowerBound(long numericDefaultLowerBound) {
+		this.numericDefaultLowerBound = numericDefaultLowerBound;
+		return this;
+	}
+
+	public long getNumericDefaultUpperBound() {
+		return numericDefaultUpperBound;
+	}
+
+	public DataTypeDefinition numericDefaultUpperBound(long numericDefaultUpperBound) {
+		this.numericDefaultUpperBound = numericDefaultUpperBound;
+		return this;
 	}
 
 	public DataTypeDefinition hasDefaulValue(boolean hasDefaulValue) {

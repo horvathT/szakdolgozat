@@ -260,7 +260,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 					view.getDefaultValue().setEnabled(true);
 					if (dtd.hasLength()) {
 						view.getLength().addVerifyListener(e -> {
-							InputVerifier.verifyNumberFieldLength(e, dtd);
+							InputVerifier.verifyDefaultValueBounds(e, dtd);
 						});
 					}
 				}
@@ -273,6 +273,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 				}
 				if (dtd.hasDefaulValue()) {
 					view.getDefaultValue().setEnabled(true);
+					view.getDefaultValue().addVerifyListener(e -> {
+						InputVerifier.verifyTextFieldLength(e, dtd);
+					});
 				}
 			}
 		}
