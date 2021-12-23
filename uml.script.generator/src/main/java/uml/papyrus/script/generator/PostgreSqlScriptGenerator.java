@@ -50,8 +50,8 @@ public class PostgreSqlScriptGenerator extends ScriptGenerator {
 			}
 
 		}
-		String uniqueConstraint = "ALTER TABLE \"" + referredEntityName + "\" ADD CONSTRAINT "
-				+ uniqueConstraintName.toString() + " UNIQUE(" + refProps.toString() + ");";
+		String uniqueConstraint = "ALTER TABLE \"" + referredEntityName + "\" ADD CONSTRAINT \""
+				+ uniqueConstraintName.toString() + "\" UNIQUE(" + refProps.toString() + ");";
 
 		String fkConstraint = "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT \"FK_" + classifierName
 				+ "\" FOREIGN KEY(" + localProps.toString() + ") REFERENCES \"" + referredEntityName + "\" ("
@@ -92,8 +92,8 @@ public class PostgreSqlScriptGenerator extends ScriptGenerator {
 			}
 		}
 		String classifierName = classifier.getName();
-		String statement = "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT PK_" + classifierName
-				+ " PRIMARY KEY(" + pk.toString() + ");";
+		String statement = "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT \"PK_" + classifierName
+				+ "\" PRIMARY KEY(" + pk.toString() + ");";
 		return statement;
 	}
 
@@ -102,8 +102,8 @@ public class PostgreSqlScriptGenerator extends ScriptGenerator {
 
 		String tableColumn = "\"" + property.getName() + "\" " + compileDataType(property) +
 				nullable(ColumnUtil.getNullable(property)) +
-				defaultValue(ColumnUtil.getDefaultValue(property)) +
-				unique(ColumnUtil.getUnique(property));
+				unique(ColumnUtil.getUnique(property)) +
+				defaultValue(ColumnUtil.getDefaultValue(property));
 		return tableColumn;
 	}
 

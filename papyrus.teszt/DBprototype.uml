@@ -65,14 +65,14 @@
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:DatabaseModel xmi:id="_gZnToGPnEeyfTLXkKNf4nw" base_Package="_H7RIcEcqEey1N5vSPJkqqg" databaseType="PostgreSql"/>
-  <DatabaseModeling:Column xmi:id="_iRkTwGPnEeyfTLXkKNf4nw" base_Property="_BuBA4E1dEeyZ2YO7BIWEHg" dataType="TEXT" defaultValue="asd" unique="true"/>
-  <DatabaseModeling:PK xmi:id="_iRnXEGPnEeyfTLXkKNf4nw" base_Property="_BuBA4E1dEeyZ2YO7BIWEHg"/>
-  <DatabaseModeling:Column xmi:id="_soN-gGPnEeyfTLXkKNf4nw" base_Property="_CIHi8E1dEeyZ2YO7BIWEHg" dataType="TEXT"/>
-  <DatabaseModeling:FK xmi:id="_soRo4GPnEeyfTLXkKNf4nw" base_Property="_CIHi8E1dEeyZ2YO7BIWEHg" referencedEntity="Class4" referencedProperty="property11"/>
-  <DatabaseModeling:Column xmi:id="_uMDv0GPnEeyfTLXkKNf4nw" base_Property="_kRb20GNEEey9P_TbqZ-YGQ" dataType="TEXT"/>
-  <DatabaseModeling:FK xmi:id="_uMGMEGPnEeyfTLXkKNf4nw" base_Property="_kRb20GNEEey9P_TbqZ-YGQ" referencedEntity="Class4" referencedProperty="Property7"/>
-  <DatabaseModeling:Column xmi:id="_18-ucGPnEeyfTLXkKNf4nw" base_Property="_BXIx8E1dEeyZ2YO7BIWEHg" dataType="TEXT" unique="true"/>
-  <DatabaseModeling:Column xmi:id="_-JKFsGPnEeyfTLXkKNf4nw" base_Property="_hujqYGNEEey9P_TbqZ-YGQ" dataType="TEXT" unique="true"/>
-  <DatabaseModeling:Column xmi:id="_DiT7sGPoEeyfTLXkKNf4nw" base_Property="_A6OMcE1dEeyZ2YO7BIWEHg" dataType="TIME"/>
+  <DatabaseModeling:Column xmi:id="_GJzxgGQsEeyo_tF1CXXm0g" base_Property="_BuBA4E1dEeyZ2YO7BIWEHg" dataType="INT" unique="true"/>
+  <DatabaseModeling:PK xmi:id="_GJ4qAGQsEeyo_tF1CXXm0g" base_Property="_BuBA4E1dEeyZ2YO7BIWEHg"/>
+  <DatabaseModeling:Column xmi:id="_GKgVEGQsEeyo_tF1CXXm0g" base_Property="_CIHi8E1dEeyZ2YO7BIWEHg" dataType="FLOAT"/>
+  <DatabaseModeling:FK xmi:id="_GKjYYGQsEeyo_tF1CXXm0g" base_Property="_CIHi8E1dEeyZ2YO7BIWEHg" referencedEntity="Class4" referencedProperty="property11"/>
+  <DatabaseModeling:Column xmi:id="_GLS_QGQsEeyo_tF1CXXm0g" base_Property="_kRb20GNEEey9P_TbqZ-YGQ" dataType="DATETIME" nullable="true"/>
+  <DatabaseModeling:Column xmi:id="_GMDNMGQsEeyo_tF1CXXm0g" base_Property="_A6OMcE1dEeyZ2YO7BIWEHg" dataType="CHAR"/>
+  <DatabaseModeling:Column xmi:id="_GMqRMGQsEeyo_tF1CXXm0g" base_Property="_BXIx8E1dEeyZ2YO7BIWEHg" dataType="DATETIME" unique="true"/>
+  <DatabaseModeling:Column xmi:id="_GNO48GQsEeyo_tF1CXXm0g" base_Property="_hujqYGNEEey9P_TbqZ-YGQ" dataType="FLOAT" defaultValue="123" unique="true"/>
+  <DatabaseModeling:DatabaseModel xmi:id="_GNR8QGQsEeyo_tF1CXXm0g" base_Package="_H7RIcEcqEey1N5vSPJkqqg" databaseType="MySQL"/>
+  <DatabaseModeling:FK xmi:id="_ahME4GQtEeyo_tF1CXXm0g" base_Property="_kRb20GNEEey9P_TbqZ-YGQ" referencedEntity="Class4" referencedProperty="Property7"/>
 </xmi:XMI>

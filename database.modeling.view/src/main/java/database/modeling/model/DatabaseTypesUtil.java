@@ -64,16 +64,16 @@ public class DatabaseTypesUtil {
 		mySqlDataTypes.add(DataTypeDefinition.of().name("FLOAT").setType(InputType.NUMERIC));
 		mySqlDataTypes.add(DataTypeDefinition.of().name("INT").setType(InputType.NUMERIC));
 		mySqlDataTypes.add(DataTypeDefinition.of().name("LONGBLOB").setType(InputType.TEXT));
-		mySqlDataTypes.add(DataTypeDefinition.of().name("LONGTEXT").setType(InputType.TEXT));
+		mySqlDataTypes.add(DataTypeDefinition.of().name("LONGTEXT").setType(InputType.TEXT).hasDefaulValue(false));
 		mySqlDataTypes.add(DataTypeDefinition.of().name("MEDIUMBLOB").setType(InputType.TEXT));
 		mySqlDataTypes.add(DataTypeDefinition.of().name("MEDIUMINT").setType(InputType.NUMERIC));
-		mySqlDataTypes.add(DataTypeDefinition.of().name("MEDIUMTEXT").setType(InputType.TEXT));
-		mySqlDataTypes.add(DataTypeDefinition.of().name("SMALLINT").setType(InputType.NUMERIC));
-		mySqlDataTypes.add(DataTypeDefinition.of().name("TEXT").setType(InputType.TEXT));
+		mySqlDataTypes.add(DataTypeDefinition.of().name("MEDIUMTEXT").setType(InputType.TEXT).hasDefaulValue(false));
+		mySqlDataTypes.add(DataTypeDefinition.of().name("SMALLINT").setType(InputType.NUMERIC).hasDefaulValue(false));
+		mySqlDataTypes.add(DataTypeDefinition.of().name("TEXT").setType(InputType.TEXT).hasDefaulValue(false));
 		mySqlDataTypes.add(DataTypeDefinition.of().name("TIME").setType(InputType.TEXT));
 		mySqlDataTypes.add(DataTypeDefinition.of().name("TINYBLOB").setType(InputType.TEXT));
 		mySqlDataTypes.add(DataTypeDefinition.of().name("TINYINT").setType(InputType.NUMERIC));
-		mySqlDataTypes.add(DataTypeDefinition.of().name("TINYTEXT").setType(InputType.TEXT));
+		mySqlDataTypes.add(DataTypeDefinition.of().name("TINYTEXT").setType(InputType.TEXT).hasDefaulValue(false));
 		mySqlDataTypes.add(DataTypeDefinition.of().name("VARCHAR").setType(InputType.TEXT).lengthLowerBound(1)
 				.lengthUpperBound(255));
 

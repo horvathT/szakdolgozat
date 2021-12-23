@@ -85,8 +85,8 @@ public class MySqlScriptGenerator extends ScriptGenerator {
 			}
 		}
 		String classifierName = classifier.getName();
-		String statement = "ALTER TABLE `" + classifierName + "` ADD CONSTRAINT PK_" + classifierName
-				+ " PRIMARY KEY(" + pk.toString() + ");";
+		String statement = "ALTER TABLE `" + classifierName + "` ADD CONSTRAINT `PK_" + classifierName
+				+ "` PRIMARY KEY(" + pk.toString() + ");";
 		return statement;
 	}
 

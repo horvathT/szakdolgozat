@@ -12,6 +12,8 @@ import database.modeling.model.DataTypeDefinition;
 import database.modeling.model.DatabaseTypesUtil;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.FKUtil;
+import database.modeling.util.stereotype.PKUtil;
+import database.modeling.util.stereotype.StereotypeManagementUtil;
 
 public class OracleScriptGenerator extends ScriptGenerator {
 
@@ -33,6 +35,7 @@ public class OracleScriptGenerator extends ScriptGenerator {
 
 		StringBuilder localProps = new StringBuilder();
 		StringBuilder refProps = new StringBuilder();
+		StringBuilder uniqueConstraintName = new StringBuilder();
 
 		for (int i = 0; i < fkPropList.size(); i++) {
 			Property property = fkPropList.get(i);
@@ -40,17 +43,23 @@ public class OracleScriptGenerator extends ScriptGenerator {
 
 			String referencedProperty = FKUtil.getReferencedProperty(property);
 			refProps.append("\"" + referencedProperty + "\"");
+			uniqueConstraintName.append(referencedProperty);
 
 			if (i != fkPropList.size() - 1) {
 				localProps.append(", ");
 				refProps.append(", ");
+				uniqueConstraintName.append("_");
 			}
 
 		}
+		String uniqueConstraint = "ALTER TABLE \"" + referredEntityName + "\" ADD CONSTRAINT \""
+				+ uniqueConstraintName.toString() + "\" UNIQUE(" + refProps.toString() + ");";
 
-		return "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT \"FK_" + classifierName
+		String fkConstraint = "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT \"FK_" + classifierName
 				+ "\" FOREIGN KEY(" + localProps.toString() + ") REFERENCES \"" + referredEntityName + "\" ("
 				+ refProps.toString() + ");";
+
+		return uniqueConstraint + System.lineSeparator() + fkConstraint;
 	}
 
 	/**
@@ -85,18 +94,22 @@ public class OracleScriptGenerator extends ScriptGenerator {
 			}
 		}
 		String classifierName = classifier.getName();
-		String statement = "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT PK_" + classifierName
-				+ " PRIMARY KEY(" + pk.toString() + ");";
+		String statement = "ALTER TABLE \"" + classifierName + "\" ADD CONSTRAINT \"PK_" + classifierName
+				+ "\" PRIMARY KEY(" + pk.toString() + ");";
 		return statement;
 	}
 
 	@Override
 	protected String defineColumn(Property property) {
 
+		String unique = unique(ColumnUtil.getUnique(property));
+		if (StereotypeManagementUtil.hasStereotype(property, PKUtil.STEREOTYPE_QUALIFIED_NAME)) {
+			unique = "";
+		}
 		String tableColumn = "\"" + property.getName() + "\" " + compileDataType(property) +
-				nullable(ColumnUtil.getNullable(property)) +
 				defaultValue(ColumnUtil.getDefaultValue(property)) +
-				unique(ColumnUtil.getUnique(property));
+				unique +
+				nullable(ColumnUtil.getNullable(property));
 		return tableColumn;
 	}
 
