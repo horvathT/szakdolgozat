@@ -281,6 +281,8 @@ public class DatabaseModelingView {
 
 			@Override
 			public void selectionChanged(MPart part, Object selection) {
+				viewModel.save();
+
 				if (selection instanceof StructuredSelection) {
 					StructuredSelection sSelection = (StructuredSelection) selection;
 					Object firstElement = sSelection.getFirstElement();

@@ -48,7 +48,14 @@ public class ScriptGeneratorHandler {
 
 		} else if (databaseType.equals(MySqlScriptGenerator.IDENTIFIER)) {
 
+			MySqlScriptGenerator mySqlScriptGenerator = new MySqlScriptGenerator(modelPackage, fileDestinationPath);
+			mySqlScriptGenerator.generateDdlScript();
+
 		} else if (databaseType.equals(PostgreSqlScriptGenerator.IDENTIFIER)) {
+
+			PostgreSqlScriptGenerator postgreSqlScriptGenerator = new PostgreSqlScriptGenerator(modelPackage,
+					fileDestinationPath);
+			postgreSqlScriptGenerator.generateDdlScript();
 
 		} else {
 			MessageDialog.openError(shell, "Generálási hiba",

@@ -65,15 +65,14 @@
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DatabaseModeling/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:DatabaseModel xmi:id="_5WwAUGMbEeyPqawVO6TkQA" base_Package="_H7RIcEcqEey1N5vSPJkqqg" databaseType="Oracle"/>
-  <DatabaseModeling:Column xmi:id="_8pBpYGMbEeyPqawVO6TkQA" base_Property="_BuBA4E1dEeyZ2YO7BIWEHg" dataType="CHAR" defaultValue="as" length="11" unique="true"/>
-  <DatabaseModeling:PK xmi:id="_8pHI8GMbEeyPqawVO6TkQA" base_Property="_BuBA4E1dEeyZ2YO7BIWEHg"/>
-  <DatabaseModeling:Column xmi:id="_-epuQGMbEeyPqawVO6TkQA" base_Property="_CIHi8E1dEeyZ2YO7BIWEHg" dataType="CHAR"/>
-  <DatabaseModeling:FK xmi:id="_-esKgGMbEeyPqawVO6TkQA" base_Property="_CIHi8E1dEeyZ2YO7BIWEHg" referencedEntity="Class4" referencedProperty="Property6"/>
-  <DatabaseModeling:Column xmi:id="_ARzG4GMcEeyPqawVO6TkQA" base_Property="_A6OMcE1dEeyZ2YO7BIWEHg" dataType="CHAR" unique="true"/>
-  <DatabaseModeling:Column xmi:id="_CJ20sGMcEeyPqawVO6TkQA" base_Property="_BXIx8E1dEeyZ2YO7BIWEHg" dataType="NUMBER" precision="12" scale="2"/>
-  <DatabaseModeling:Column xmi:id="_kV4R8GNEEey9P_TbqZ-YGQ" base_Property="_hujqYGNEEey9P_TbqZ-YGQ" dataType="DATE" unique="true"/>
-  <DatabaseModeling:PK xmi:id="_kV7VQGNEEey9P_TbqZ-YGQ" base_Property="_hujqYGNEEey9P_TbqZ-YGQ"/>
-  <DatabaseModeling:Column xmi:id="_oP1mEGNEEey9P_TbqZ-YGQ" base_Property="_kRb20GNEEey9P_TbqZ-YGQ" dataType="DATE"/>
-  <DatabaseModeling:FK xmi:id="_oP20MGNEEey9P_TbqZ-YGQ" base_Property="_kRb20GNEEey9P_TbqZ-YGQ" referencedEntity="Class4" referencedProperty="property11"/>
+  <DatabaseModeling:DatabaseModel xmi:id="_gZnToGPnEeyfTLXkKNf4nw" base_Package="_H7RIcEcqEey1N5vSPJkqqg" databaseType="PostgreSql"/>
+  <DatabaseModeling:Column xmi:id="_iRkTwGPnEeyfTLXkKNf4nw" base_Property="_BuBA4E1dEeyZ2YO7BIWEHg" dataType="TEXT" defaultValue="asd" unique="true"/>
+  <DatabaseModeling:PK xmi:id="_iRnXEGPnEeyfTLXkKNf4nw" base_Property="_BuBA4E1dEeyZ2YO7BIWEHg"/>
+  <DatabaseModeling:Column xmi:id="_soN-gGPnEeyfTLXkKNf4nw" base_Property="_CIHi8E1dEeyZ2YO7BIWEHg" dataType="TEXT"/>
+  <DatabaseModeling:FK xmi:id="_soRo4GPnEeyfTLXkKNf4nw" base_Property="_CIHi8E1dEeyZ2YO7BIWEHg" referencedEntity="Class4" referencedProperty="property11"/>
+  <DatabaseModeling:Column xmi:id="_uMDv0GPnEeyfTLXkKNf4nw" base_Property="_kRb20GNEEey9P_TbqZ-YGQ" dataType="TEXT"/>
+  <DatabaseModeling:FK xmi:id="_uMGMEGPnEeyfTLXkKNf4nw" base_Property="_kRb20GNEEey9P_TbqZ-YGQ" referencedEntity="Class4" referencedProperty="Property7"/>
+  <DatabaseModeling:Column xmi:id="_18-ucGPnEeyfTLXkKNf4nw" base_Property="_BXIx8E1dEeyZ2YO7BIWEHg" dataType="TEXT" unique="true"/>
+  <DatabaseModeling:Column xmi:id="_-JKFsGPnEeyfTLXkKNf4nw" base_Property="_hujqYGNEEey9P_TbqZ-YGQ" dataType="TEXT" unique="true"/>
+  <DatabaseModeling:Column xmi:id="_DiT7sGPoEeyfTLXkKNf4nw" base_Property="_A6OMcE1dEeyZ2YO7BIWEHg" dataType="TIME"/>
 </xmi:XMI>
