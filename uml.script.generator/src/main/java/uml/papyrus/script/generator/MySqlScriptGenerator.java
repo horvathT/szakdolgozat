@@ -33,6 +33,7 @@ public class MySqlScriptGenerator extends ScriptGenerator {
 
 		StringBuilder localProps = new StringBuilder();
 		StringBuilder refProps = new StringBuilder();
+		StringBuilder uniqueConstraintName = new StringBuilder();
 
 		for (int i = 0; i < fkPropList.size(); i++) {
 			Property property = fkPropList.get(i);
@@ -40,17 +41,23 @@ public class MySqlScriptGenerator extends ScriptGenerator {
 
 			String referencedProperty = FKUtil.getReferencedProperty(property);
 			refProps.append("`" + referencedProperty + "`");
+			uniqueConstraintName.append(referencedProperty);
 
 			if (i != fkPropList.size() - 1) {
 				localProps.append(", ");
 				refProps.append(", ");
+				uniqueConstraintName.append("_");
 			}
 
 		}
+		String uniqueConstraint = "ALTER TABLE `" + referredEntityName + "` ADD CONSTRAINT `"
+				+ uniqueConstraintName.toString() + "` UNIQUE(" + refProps.toString() + ");";
 
-		return "ALTER TABLE `" + classifierName + "` ADD CONSTRAINT `FK_" + classifierName
+		String fkConstraint = "ALTER TABLE `" + classifierName + "` ADD CONSTRAINT `FK_" + classifierName
 				+ "` FOREIGN KEY(" + localProps.toString() + ") REFERENCES `" + referredEntityName + "` ("
 				+ refProps.toString() + ");";
+
+		return uniqueConstraint + System.lineSeparator() + fkConstraint;
 	}
 
 	/**

@@ -143,7 +143,7 @@ public class ScriptGenerator {
 
 		if (typeDefinition.hasLength()) {
 			String length = ColumnUtil.getLength(property);
-			if (length.isEmpty()) {
+			if (length.isEmpty() || Integer.parseInt(length) == 0) {
 				return " " + dataTypeName;
 			}
 			return " " + dataTypeName + "(" + length + ")";
@@ -151,7 +151,7 @@ public class ScriptGenerator {
 
 		if (typeDefinition.hasPrecision()) {
 			String precision = ColumnUtil.getPrecision(property);
-			if (precision.isEmpty()) {
+			if (precision.isEmpty() || Integer.parseInt(precision) == 0) {
 				return " " + dataTypeName;
 			}
 

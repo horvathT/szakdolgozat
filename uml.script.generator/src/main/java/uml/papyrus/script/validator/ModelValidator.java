@@ -38,7 +38,6 @@ public class ModelValidator {
 
 	private Map<Property, Property> fkTypeConsistency = new HashMap<>();
 	private Map<Property, Property> fkReferencedAttrNullable = new HashMap<>();
-	private Map<Property, Property> fkReferencedAttrNotUnique = new HashMap<>();
 	private Set<Property> fkMissingReference = new HashSet<>();
 
 	public ModelValidator(Package modelPackage) {
@@ -72,31 +71,6 @@ public class ModelValidator {
 			validationErrorMessage(errorMessage);
 		}
 
-		if (!fkReferencedAttrNotUnique.isEmpty()) {
-			String errorMessage = compileFkReferencedAttrNotUniqueErrorMessage();
-			validationErrorMessage(errorMessage);
-		}
-
-	}
-
-	private String compileFkReferencedAttrNotUniqueErrorMessage() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(
-				"Generálás sikertelen! A következő idegenkulcsok referált attribútuma nem egyedi: "
-						+ System.lineSeparator());
-
-		for (Entry<Property, Property> entry : fkReferencedAttrNotUnique.entrySet()) {
-
-			Property key = entry.getKey();
-			Property value = entry.getValue();
-
-			LOGGER.error(
-					"A következő idegenkulcs referált attribútuma nem egyedi: "
-							+ key.getName() + " -> " + value.getName());
-
-			sb.append(key.getName() + " -> " + value.getName() + System.lineSeparator());
-		}
-		return sb.toString();
 	}
 
 	private String compileFkReferencedAttrNullableErrorMessage() {
@@ -192,11 +166,6 @@ public class ModelValidator {
 				String referredDataType = ColumnUtil.getDataType(propertyByName);
 				if (!dataType.equals(referredDataType)) {
 					fkTypeConsistency.put(property, propertyByName);
-				}
-
-				boolean unique = ColumnUtil.getUnique(propertyByName);
-				if (!unique) {
-					fkReferencedAttrNotUnique.put(property, propertyByName);
 				}
 
 				boolean nullable = ColumnUtil.getNullable(propertyByName);

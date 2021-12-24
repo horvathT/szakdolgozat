@@ -236,6 +236,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 			resetTypeParameterFields();
 			checkboxEditingEnabled(true);
 			InputType type = dtd.getType();
+			if (type == null) {
+				return;
+			}
 
 			if (InputType.NUMERIC.equals(type)) {
 				if (dtd.hasLength()) {
