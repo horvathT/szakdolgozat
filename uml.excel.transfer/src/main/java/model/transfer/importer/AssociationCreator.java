@@ -17,6 +17,7 @@ import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Comment;
+import org.eclipse.uml2.uml.Enumeration;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.InterfaceRealization;
 import org.eclipse.uml2.uml.Package;
@@ -40,8 +41,10 @@ public class AssociationCreator extends ObjectImporter {
 
 		Collection<Interface> interfaces = ModelObjectUtil.getInterfaces(modelPackage.allOwnedElements());
 		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
+		Collection<Enumeration> enumerations = ModelObjectUtil.getEnumerations(modelPackage.allOwnedElements());
 		classifiers.addAll(interfaces);
 		classifiers.addAll(classes);
+		classifiers.addAll(enumerations);
 
 		associationsFromExcel = getAssociationsFromExcel(
 				workbook.getSheet(AssociationSheetCreator.ASSOCIATION_SHEET_NAME));
