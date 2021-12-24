@@ -1,4 +1,4 @@
-package mode.transfer.util;
+package model.transfer.util;
 
 import org.eclipse.uml2.uml.VisibilityKind;
 

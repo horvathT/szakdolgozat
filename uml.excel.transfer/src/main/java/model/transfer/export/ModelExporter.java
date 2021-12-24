@@ -1,4 +1,4 @@
-package mode.transfer.export;
+package model.transfer.export;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

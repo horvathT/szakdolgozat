@@ -1,4 +1,4 @@
-package mode.transfer.export;
+package model.transfer.export;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,50 +10,50 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
+import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 
-import mode.transfer.util.CellAppender;
+import model.transfer.util.CellAppender;
 
-public class ClassSheetCreator extends SheetCreator {
+public class InterfaceSheetCreator extends SheetCreator {
 
 	private Workbook workbook;
 
-	private Collection<Class> classes;
+	private Collection<Interface> interfaces;
 
-	public ClassSheetCreator(Workbook workbook, Collection<Class> classes) {
+	public InterfaceSheetCreator(Workbook workbook, Collection<Interface> interfaces) {
 		this.workbook = workbook;
-		this.classes = classes;
+		this.interfaces = interfaces;
 	}
 
-	public List<Sheet> createClassSheets() {
+	public List<Sheet> createInterfaceSheets() {
 		List<Sheet> sheets = new ArrayList<>();
-		for (Class clazz : classes) {
-			sheets.add(createclassPropertySheet(workbook, clazz));
+		for (Interface interfac : interfaces) {
+			sheets.add(createInterfacePropertySheet(workbook, interfac));
 		}
 		return sheets;
 	}
 
-	private Sheet createclassPropertySheet(Workbook workbook, Class clazz) {
-		Sheet sheet = workbook.createSheet(clazz.getName());
+	private Sheet createInterfacePropertySheet(Workbook workbook, Interface interfac) {
+		Sheet sheet = workbook.createSheet(interfac.getName());
 		int rowNumber = 0;
 		rowNumber = createPropertyHeaderRow(sheet, rowNumber);
-		rowNumber = fillPropertyRows(sheet, clazz, rowNumber);
+		rowNumber = fillPropertyRows(sheet, interfac, rowNumber);
 
 		rowNumber++;
 
 		rowNumber = createMethodHeaderRow(sheet, rowNumber);
-		rowNumber = fillMethodrows(sheet, clazz, rowNumber);
+		rowNumber = fillMethodrows(sheet, interfac, rowNumber);
 		return sheet;
 	}
 
-	private int fillMethodrows(Sheet sheet, Class clazz, int rowNumber) {
-		EList<Operation> ownedOperations = clazz.getOwnedOperations();
+	private int fillMethodrows(Sheet sheet, Interface interfac, int rowNumber) {
+		EList<Operation> ownedOperations = interfac.getOwnedOperations();
 
 		for (Operation operation : ownedOperations) {
 			rowNumber = fillMethodRow(sheet, rowNumber, operation);
@@ -71,7 +71,6 @@ public class ClassSheetCreator extends SheetCreator {
 				.appendCellWithValue(EcoreUtil.getURI(operation).fragment())
 				.appendCellWithValue(operation.getName())
 				.appendCellWithValue(operation.getVisibility().toString())
-				.appendCellWithValue(booleanTostring(operation.isStatic()))
 				.appendCellWithValue(booleanTostring(operation.isAbstract()))
 				.appendCellWithValue(getReturnType(operation))
 				.appendCellWithValue(getFirstParameterType(ownedParameters))
@@ -86,20 +85,20 @@ public class ClassSheetCreator extends SheetCreator {
 		for (int i = 1; i < ownedParameters.size(); i++) {
 			Parameter parameter = ownedParameters.get(i);
 			ParameterDirectionKind direction = parameter.getDirection();
-			if (direction.getValue() != ParameterDirectionKind.RETURN) {
+			if (!(direction.getValue() == ParameterDirectionKind.RETURN)) {
 				Row row = sheet.createRow(rowNumber);
 
-				Cell typeCell = row.createCell(7);
+				Cell typeCell = row.createCell(6);
 				if (parameter.getType() != null) {
 					typeCell.setCellValue(parameter.getType().getName());
 				} else {
 					typeCell.setCellValue("");
 				}
 
-				Cell nameCell = row.createCell(8);
+				Cell nameCell = row.createCell(7);
 				nameCell.setCellValue(parameter.getName());
 
-				Cell commentCell = row.createCell(9);
+				Cell commentCell = row.createCell(8);
 				commentCell.setCellValue(getFirstComment(parameter));
 
 				rowNumber++;
@@ -169,9 +168,7 @@ public class ClassSheetCreator extends SheetCreator {
 		propertyRow.appendCellWithValue("")
 				.appendCellWithValue(EcoreUtil.getURI(property).fragment())
 				.appendCellWithValue(property.getName())
-				.appendCellWithValue(property.getVisibility().toString())
 				.appendCellWithValue(typeName)
-				.appendCellWithValue(booleanTostring(property.isStatic()))
 				.appendCellWithValue(getFirstComment(property));
 	}
 
@@ -181,9 +178,7 @@ public class ClassSheetCreator extends SheetCreator {
 		appender.appendCellWithValue("Attribútumok")
 				.appendCellWithValue("Xmi ID")
 				.appendCellWithValue("Név")
-				.appendCellWithValue("Láthatóság")
 				.appendCellWithValue("Típus")
-				.appendCellWithValue("Static")
 				.appendCellWithValue("Leírás");
 		makeRowBold(workbook, row);
 		return ++rowNumber;
@@ -196,7 +191,6 @@ public class ClassSheetCreator extends SheetCreator {
 				.appendCellWithValue("Xmi ID")
 				.appendCellWithValue("Név")
 				.appendCellWithValue("Láthatóság")
-				.appendCellWithValue("Static")
 				.appendCellWithValue("Abstract")
 				.appendCellWithValue("Visszatérési érték")
 				.appendCellWithValue("Paraméter típus")

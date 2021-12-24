@@ -1,4 +1,4 @@
-package mode.transfer.export;
+package model.transfer.export;
 
 import java.util.Collection;
 
@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Enumeration;
 import org.eclipse.uml2.uml.EnumerationLiteral;
 
-import mode.transfer.util.CellAppender;
+import model.transfer.util.CellAppender;
 
 public class EnumSheetCreator extends SheetCreator {
 

@@ -24,10 +24,10 @@ import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLFactory;
 
 import database.modeling.util.uml.ModelObjectUtil;
-import mode.transfer.export.AssociationSheetCreator;
-import mode.transfer.export.ClassSummarySheetCreator;
-import mode.transfer.export.InterfaceSummarySheetCreator;
-import mode.transfer.util.CellUtil;
+import model.transfer.export.AssociationSheetCreator;
+import model.transfer.export.ClassSummarySheetCreator;
+import model.transfer.export.InterfaceSummarySheetCreator;
+import model.transfer.util.CellUtil;
 
 public class AssociationCreator extends ObjectImporter {
 

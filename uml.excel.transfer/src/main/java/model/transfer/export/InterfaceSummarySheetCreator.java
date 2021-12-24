@@ -1,4 +1,4 @@
-package mode.transfer.export;
+package model.transfer.export;
 
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.Interface;
 
-import mode.transfer.util.CellAppender;
+import model.transfer.util.CellAppender;
 
 public class InterfaceSummarySheetCreator extends SheetCreator {
 

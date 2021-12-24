@@ -11,8 +11,8 @@ import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLFactory;
 
 import database.modeling.util.uml.ModelObjectUtil;
-import mode.transfer.export.DataTypeSheetCreator;
-import mode.transfer.util.CellUtil;
+import model.transfer.export.DataTypeSheetCreator;
+import model.transfer.util.CellUtil;
 
 public class DataTypeCreator extends ObjectImporter {
 

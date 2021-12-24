@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Package;
 
-import mode.transfer.util.CellUtil;
+import model.transfer.util.CellUtil;
 
 public class ObjectImporter {
 

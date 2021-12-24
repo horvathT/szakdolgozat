@@ -11,7 +11,7 @@
     <elements xsi:type="commands:Command" xmi:id="_tJBxgE_bEeyGRa7Dm6d5cw" elementId="uml.excel.transfer.command.import" commandName="Import&#xe1;l&#xe1;s Excelb&#x151;l" description="Modell adatok import&#xe1;l&#xe1;sa Excel f&#xe1;jlb&#xf3;l Papyrus modellbe"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_wuIP8E_bEeyGRa7Dm6d5cw" featurename="handlers" parentElementId="xpath:/">
-    <elements xsi:type="commands:Handler" xmi:id="_yplQAE_bEeyGRa7Dm6d5cw" elementId="uml.excel.transfer.handler.export" contributionURI="bundleclass://uml.excel.transfer/mode.transfer.export.ModelExportHandler" command="_rHFu8E_bEeyGRa7Dm6d5cw"/>
-    <elements xsi:type="commands:Handler" xmi:id="__xVwcE_bEeyGRa7Dm6d5cw" elementId="uml.excel.transfer.handler.import" contributionURI="bundleclass://uml.excel.transfer/model.transfer.importer.ExcelImportHandler" command="_tJBxgE_bEeyGRa7Dm6d5cw"/>
+    <elements xsi:type="commands:Handler" xmi:id="_yplQAE_bEeyGRa7Dm6d5cw" elementId="uml.excel.transfer.handler.export" contributionURI="bundleclass://uml.excel.transfer/model.transfer.export.handler.ModelExportHandler" command="_rHFu8E_bEeyGRa7Dm6d5cw"/>
+    <elements xsi:type="commands:Handler" xmi:id="__xVwcE_bEeyGRa7Dm6d5cw" elementId="uml.excel.transfer.handler.import" contributionURI="bundleclass://uml.excel.transfer/model.transfer.importer.handler.ExcelImportHandler" command="_tJBxgE_bEeyGRa7Dm6d5cw"/>
   </fragments>
 </fragment:ModelFragments>

@@ -1,4 +1,4 @@
-package mode.transfer.export;
+package model.transfer.export;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,7 +10,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.DataType;
 
-import mode.transfer.util.CellAppender;
+import model.transfer.util.CellAppender;
 
 public class DataTypeSheetCreator extends SheetCreator {
 
