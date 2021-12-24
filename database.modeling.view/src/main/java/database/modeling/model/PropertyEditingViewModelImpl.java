@@ -173,7 +173,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getForeignKeyCheck().setSelection(false);
 
 		view.getReferencedEntity().clearSelection();
+		view.getReferencedEntity().setEnabled(false);
 		view.getReferencedProperty().clearSelection();
+		view.getReferencedProperty().setEnabled(false);
 	}
 
 	private void resetTypeParameterFields() {
