@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="database.modeling.feature"
-      label="Database Modeling"
+      label="Modeling Tools"
       version="1.0.0.qualifier"
       provider-name="Horváth Tibor">
 

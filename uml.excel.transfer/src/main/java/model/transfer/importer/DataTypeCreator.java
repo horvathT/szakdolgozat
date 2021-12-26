@@ -2,6 +2,9 @@ package model.transfer.importer;
 
 import java.util.Collection;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Model;
