@@ -48,9 +48,7 @@ public class EnumCreator extends ObjectImporter {
 				if (literal != null) {
 					literal.setName(literalName);
 				} else {
-					EnumerationLiteral newLiteral = UMLFactory.eINSTANCE.createEnumerationLiteral();
-					newLiteral.setName(literalName);
-					currentEnum.getOwnedLiterals().add(newLiteral);
+					currentEnum.createOwnedLiteral(literalName);
 				}
 
 			}

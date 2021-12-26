@@ -32,7 +32,7 @@ public class ScriptGeneratorHandler {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		String databaseType = DatabaseModelUtil.getDatabaseType(modelPackage);
 		if (databaseType.isEmpty()) {
-			MessageDialog.openError(shell, "Generálási hiba", "A modellen adatbázis típus meghatározva!");
+			MessageDialog.openError(shell, "Generálási hiba", "A modellen nincs adatbázis típus meghatározva!");
 			System.exit(1);
 		}
 

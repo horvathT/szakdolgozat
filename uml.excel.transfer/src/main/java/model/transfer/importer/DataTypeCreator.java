@@ -2,8 +2,6 @@ package model.transfer.importer;
 
 import java.util.Collection;
 
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Model;
@@ -35,8 +33,12 @@ public class DataTypeCreator extends ObjectImporter {
 
 	private void createDataTypes(Collection<DataType> existingTypes, Sheet dataTypeSheet, Package targetPackage) {
 		for (int i = 1; i <= dataTypeSheet.getLastRowNum(); i++) {
-			String xmiId = CellUtil.getStringCellValue(dataTypeSheet.getRow(i).getCell(0));
-			String typeName = CellUtil.getStringCellValue(dataTypeSheet.getRow(i).getCell(1));
+			Row row = dataTypeSheet.getRow(i);
+			if (row == null) {
+				continue;
+			}
+			String xmiId = CellUtil.getStringCellValue(row.getCell(0));
+			String typeName = CellUtil.getStringCellValue(row.getCell(1));
 			if (xmiId.isEmpty()) {
 				createDataTypeByName(existingTypes, typeName, targetPackage);
 			} else {

@@ -3,6 +3,7 @@ package database.modeling.util.uml;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -64,7 +65,11 @@ public class ModelObjectUtil {
 		Model model = modelPackage.getModel();
 		ResourceSet resourceSet = model.eResource().getResourceSet();
 		for (Resource resource : resourceSet.getResources()) {
-			dataTypes.addAll(getObjectsByType(resource.getAllContents(), UMLPackage.Literals.DATA_TYPE));
+			Collection<DataType> dataTypesPreFilter = getObjectsByType(resource.getAllContents(),
+					UMLPackage.Literals.DATA_TYPE);
+			Set<DataType> filteredDataTypes = dataTypesPreFilter.stream().filter(d -> !(d instanceof Enumeration))
+					.collect(Collectors.toSet());
+			dataTypes.addAll(filteredDataTypes);
 		}
 		return dataTypes;
 	}

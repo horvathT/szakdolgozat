@@ -18,6 +18,7 @@ import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Parameter;
+import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLFactory;
 
@@ -25,13 +26,13 @@ import database.modeling.util.uml.ModelObjectUtil;
 import model.transfer.util.CellUtil;
 import model.transfer.util.ExcelReaderUtil;
 
-public class PropertyCreator extends ObjectImporter {
+public class PropertyAndMethodCreator extends ObjectImporter {
 
-	private final String METHODS = "metódusok";
+	private final static String METHODS = "metódusok";
 
 	private Set<DataType> dataTypes = new HashSet<>();
 
-	public PropertyCreator(Workbook workbook, Package modelPackage) {
+	public PropertyAndMethodCreator(Workbook workbook, Package modelPackage) {
 		super(workbook, modelPackage);
 
 		dataTypes = ModelObjectUtil.getDataTypesFromModel(modelPackage);
@@ -67,7 +68,7 @@ public class PropertyCreator extends ObjectImporter {
 				if (row == null) {
 					continue;
 				}
-//				createInterfaceProperty(interfac, row);
+				createInterfaceProperty(interfac, row);
 			}
 
 			createInterfaceMethod(interfac, interfacSheet, lastRowNum, mehtodHeaderRowNumber);
@@ -78,7 +79,7 @@ public class PropertyCreator extends ObjectImporter {
 	private void createInterfaceMethod(Interface interfac, Sheet interfacSheet, int lastRowNum,
 			int mehtodHeaderRowNumber) {
 		Operation operation = null;
-		for (int i = ++mehtodHeaderRowNumber; i < lastRowNum; i++) {
+		for (int i = ++mehtodHeaderRowNumber; i <= lastRowNum; i++) {
 			Row row = interfacSheet.getRow(i);
 			String xmiId = CellUtil.getStringCellValue(row.getCell(1));
 			String name = CellUtil.getStringCellValue(row.getCell(2));
@@ -93,6 +94,7 @@ public class PropertyCreator extends ObjectImporter {
 				addOperationParameter(operation, parameterTypeName, parameterName);
 			} else {
 				operation = getOrCreateOperation(interfac, xmiId);
+				operation.getOwnedParameters().clear();
 				operation.setName(name);
 				operation.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
 				operation.setIsAbstract(ExcelReaderUtil.stringToBoolean(isAbstract));
@@ -100,6 +102,7 @@ public class PropertyCreator extends ObjectImporter {
 				if (returnType != null) {
 					Parameter parameter = UMLFactory.eINSTANCE.createParameter();
 					parameter.setType(returnType);
+					parameter.setDirection(ParameterDirectionKind.RETURN_LITERAL);
 					operation.getOwnedParameters().add(parameter);
 				}
 				addOperationParameter(operation, parameterTypeName, parameterName);
@@ -114,28 +117,32 @@ public class PropertyCreator extends ObjectImporter {
 
 	private void createClassMethod(Class clazz, Sheet classSheet, int lastRowNum, int mehtodHeaderRowNumber) {
 		Operation operation = null;
-		for (int i = ++mehtodHeaderRowNumber; i < lastRowNum; i++) {
+		for (int i = ++mehtodHeaderRowNumber; i <= lastRowNum; i++) {
 			Row row = classSheet.getRow(i);
 			String xmiId = CellUtil.getStringCellValue(row.getCell(1));
 			String name = CellUtil.getStringCellValue(row.getCell(2));
 			String visibility = CellUtil.getStringCellValue(row.getCell(3));
-			String isAbstract = CellUtil.getStringCellValue(row.getCell(4));
-			String returnTypeName = CellUtil.getStringCellValue(row.getCell(5));
-			String parameterTypeName = CellUtil.getStringCellValue(row.getCell(6));
-			String parameterName = CellUtil.getStringCellValue(row.getCell(7));
-			String comment = CellUtil.getStringCellValue(row.getCell(8));
+			String isStatic = CellUtil.getStringCellValue(row.getCell(4));
+			String isAbstract = CellUtil.getStringCellValue(row.getCell(5));
+			String returnTypeName = CellUtil.getStringCellValue(row.getCell(6));
+			String parameterTypeName = CellUtil.getStringCellValue(row.getCell(7));
+			String parameterName = CellUtil.getStringCellValue(row.getCell(8));
+			String comment = CellUtil.getStringCellValue(row.getCell(9));
 
 			if (name.isEmpty()) {
 				addOperationParameter(operation, parameterTypeName, parameterName);
 			} else {
 				operation = getOrCreateOperation(clazz, xmiId);
+				operation.getOwnedParameters().clear();
 				operation.setName(name);
 				operation.setVisibility(ExcelReaderUtil.stringToVisibilityKind(visibility));
+				operation.setIsStatic(ExcelReaderUtil.stringToBoolean(isStatic));
 				operation.setIsAbstract(ExcelReaderUtil.stringToBoolean(isAbstract));
 				DataType returnType = getdataTypeByName(returnTypeName);
 				if (returnType != null) {
 					Parameter parameter = UMLFactory.eINSTANCE.createParameter();
 					parameter.setType(returnType);
+					parameter.setDirection(ParameterDirectionKind.RETURN_LITERAL);
 					operation.getOwnedParameters().add(parameter);
 				}
 				addOperationParameter(operation, parameterTypeName, parameterName);
@@ -158,7 +165,7 @@ public class PropertyCreator extends ObjectImporter {
 		}
 	}
 
-	private int getMethodHeaderRowNumber(Sheet interfacSheet) {
+	public static int getMethodHeaderRowNumber(Sheet interfacSheet) {
 		int lastRowNum = interfacSheet.getLastRowNum();
 		for (int i = 0; i <= lastRowNum; i++) {
 			Row row = interfacSheet.getRow(i);

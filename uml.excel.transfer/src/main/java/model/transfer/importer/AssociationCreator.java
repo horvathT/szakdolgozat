@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -58,30 +55,30 @@ public class AssociationCreator extends ObjectImporter {
 
 	}
 
-	public void createAssociation(AssociationModel associationData) {
+	private void createAssociation(AssociationModel associationData) {
 
 		Association associationInModel = getAssociationFromModel(associationData.getModelId());
 
 		if (associationInModel != null) {
 			updateValues(associationInModel, associationData);
 		} else {
-			Classifier start = getClassifierByName(associationData.getEnd1ClassifierName());
-			Classifier end = getClassifierByName(associationData.getEnd2ClassifierName());
-			if (start == null) {
-				warningMessageDialog("Missing association endpoint " + associationData.getEnd1PropertyName() + " at: "
+			Classifier startClassifier = getClassifierByName(associationData.getEnd1ClassifierName());
+			Classifier endClassifier = getClassifierByName(associationData.getEnd2ClassifierName());
+			if (startClassifier == null) {
+				warningMessageDialog("Hiányzó asszociáció végpont " + associationData.getEnd1PropertyName() + "."
 						+ associationData.getEnd1ClassifierName());
-			} else if (end == null) {
-				warningMessageDialog("Missing association endpoint " + associationData.getEnd2PropertyName() + " at: "
+			} else if (endClassifier == null) {
+				warningMessageDialog("Hiányzó asszociáció végpont " + associationData.getEnd2PropertyName() + "."
 						+ associationData.getEnd2ClassifierName());
 			} else {
-				Association newAssociation = start.createAssociation(associationData.isEnd2IsNavigable(),
+
+				Association newAssociation = startClassifier.createAssociation(associationData.isEnd2IsNavigable(),
 						associationData.getEnd2Aggregation(), associationData.getEnd2PropertyName(),
 						associationData.getEnd2Lower(),
-						associationData.getEnd2Upper(), end, associationData.isEnd1IsNavigable(),
+						associationData.getEnd2Upper(), endClassifier, associationData.isEnd1IsNavigable(),
 						associationData.getEnd1Aggregation(),
 						associationData.getEnd1PropertyName(), associationData.getEnd1Lower(),
 						associationData.getEnd1Upper());
-
 				newAssociation.createOwnedComment().setBody(associationData.getComment());
 			}
 		}
@@ -101,7 +98,8 @@ public class AssociationCreator extends ObjectImporter {
 
 	private List<AssociationModel> getAssociationsFromExcel(Sheet associationSheet) {
 		List<AssociationModel> excelAssociations = new ArrayList<>();
-		for (int i = 1; i <= associationSheet.getLastRowNum(); i++) {
+		int lastRowNum = associationSheet.getLastRowNum();
+		for (int i = 1; i <= lastRowNum; i++) {
 			Row row = associationSheet.getRow(i);
 			if (row == null) {
 				continue;
@@ -197,7 +195,7 @@ public class AssociationCreator extends ObjectImporter {
 		}
 	}
 
-	public Classifier getClassifierByName(String name) {
+	private Classifier getClassifierByName(String name) {
 		for (Classifier classifier : classifiers) {
 			if (classifier.getName().equals(name)) {
 				return classifier;
@@ -206,7 +204,7 @@ public class AssociationCreator extends ObjectImporter {
 		return null;
 	}
 
-	public void warningMessageDialog(String message) {
+	private void warningMessageDialog(String message) {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		MessageDialog.openWarning(shell, "Warning", message);
 	}
@@ -215,7 +213,8 @@ public class AssociationCreator extends ObjectImporter {
 		Collection<Association> associations = ModelObjectUtil.getAssociations(modelPackage.allOwnedElements());
 		for (Association association : associations) {
 			if (!validAssociation(association)) {
-				EcoreUtil.remove(association);
+				association.getMemberEnds().get(0).destroy();
+				association.destroy();
 			}
 		}
 	}
@@ -245,7 +244,10 @@ public class AssociationCreator extends ObjectImporter {
 
 	public void createEntityHierarchy() {
 		createInterfaceGeneralizations();
+		createClassHierarchy();
+	}
 
+	private void createClassHierarchy() {
 		Sheet classSummarySheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
 		int lastRowNum = classSummarySheet.getLastRowNum();
 		Classifier classifier = null;
@@ -259,6 +261,8 @@ public class AssociationCreator extends ObjectImporter {
 			String name = CellUtil.getStringCellValue(row.getCell(1));
 			if (!name.isEmpty()) {
 				classifier = getClassifierByName(name);
+				classifier.getGeneralizations().clear();
+				classifier.allRealizedInterfaces().clear();
 			}
 			String generalizedInterfaceName = CellUtil.getStringCellValue(row.getCell(4));
 			if (!generalizedInterfaceName.isEmpty()) {
@@ -269,7 +273,7 @@ public class AssociationCreator extends ObjectImporter {
 			String implementedInterfaceName = CellUtil.getStringCellValue(row.getCell(5));
 			if (!implementedInterfaceName.isEmpty()) {
 				Classifier implementedInterface = getClassifierByName(implementedInterfaceName);
-				addInterfaceImplenetationRelation(classifier, implementedInterface);
+				addInterfaceImplementationRelation(classifier, implementedInterface);
 			}
 		}
 	}
@@ -288,6 +292,7 @@ public class AssociationCreator extends ObjectImporter {
 			String name = CellUtil.getStringCellValue(row.getCell(1));
 			if (!name.isEmpty()) {
 				classifier = getClassifierByName(name);
+				classifier.getGeneralizations().clear();
 			}
 			String generalizedClassifierName = CellUtil.getStringCellValue(row.getCell(3));
 			if (!generalizedClassifierName.isEmpty()) {
@@ -297,7 +302,7 @@ public class AssociationCreator extends ObjectImporter {
 		}
 	}
 
-	private void addInterfaceImplenetationRelation(Classifier classifier, Classifier implementedInterface) {
+	private void addInterfaceImplementationRelation(Classifier classifier, Classifier implementedInterface) {
 		InterfaceRealization realization = UMLFactory.eINSTANCE.createInterfaceRealization();
 		realization.setContract((Interface) implementedInterface);
 		realization.setImplementingClassifier((Class) classifier);

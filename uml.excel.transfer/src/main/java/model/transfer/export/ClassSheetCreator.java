@@ -11,7 +11,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
@@ -65,6 +64,8 @@ public class ClassSheetCreator extends SheetCreator {
 		Row row = sheet.createRow(rowNumber);
 
 		EList<Parameter> ownedParameters = operation.getOwnedParameters();
+		List<Parameter> parameterList = new ArrayList<>(ownedParameters);
+		Parameter parameter = popFirstInputParam(parameterList);
 
 		CellAppender methodRow = new CellAppender(row);
 		methodRow.appendCellWithValue("")
@@ -74,17 +75,28 @@ public class ClassSheetCreator extends SheetCreator {
 				.appendCellWithValue(booleanTostring(operation.isStatic()))
 				.appendCellWithValue(booleanTostring(operation.isAbstract()))
 				.appendCellWithValue(getReturnType(operation))
-				.appendCellWithValue(getFirstParameterType(ownedParameters))
-				.appendCellWithValue(getFirstParameterName(ownedParameters))
+				.appendCellWithValue(getParameterType(parameter))
+				.appendCellWithValue(getParameterName(parameter))
 				.appendCellWithValue(getFirstComment(operation));
 
-		rowNumber = appendRemainingParameters(++rowNumber, sheet, ownedParameters);
+		rowNumber = appendRemainingParameters(++rowNumber, sheet, parameterList);
 		return rowNumber;
 	}
 
-	private int appendRemainingParameters(int rowNumber, Sheet sheet, EList<Parameter> ownedParameters) {
+	private Parameter popFirstInputParam(List<Parameter> ownedParameters) {
 		for (int i = 1; i < ownedParameters.size(); i++) {
 			Parameter parameter = ownedParameters.get(i);
+			ParameterDirectionKind direction = parameter.getDirection();
+			if (!(direction.getValue() == ParameterDirectionKind.RETURN)) {
+				ownedParameters.remove(parameter);
+				return parameter;
+			}
+		}
+		return null;
+	}
+
+	private int appendRemainingParameters(int rowNumber, Sheet sheet, List<Parameter> ownedParameters) {
+		for (Parameter parameter : ownedParameters) {
 			ParameterDirectionKind direction = parameter.getDirection();
 			if (direction.getValue() != ParameterDirectionKind.RETURN) {
 				Row row = sheet.createRow(rowNumber);
@@ -109,32 +121,22 @@ public class ClassSheetCreator extends SheetCreator {
 		return rowNumber;
 	}
 
-	private String getFirstParameterName(EList<Parameter> ownedParameters) {
-		if (ownedParameters.isEmpty()) {
+	private String getParameterName(Parameter param) {
+		if (param == null) {
 			return "";
 		}
-		for (Parameter param : ownedParameters) {
-			ParameterDirectionKind direction = param.getDirection();
-			if (direction.getValue() != ParameterDirectionKind.RETURN) {
-				return param.getName();
-			}
-		}
-		return "";
+		return param.getName();
 	}
 
-	private String getFirstParameterType(EList<Parameter> ownedParameters) {
-		if (ownedParameters.isEmpty()) {
+	private String getParameterType(Parameter param) {
+		if (param == null) {
 			return "";
 		}
 
-		for (Parameter param : ownedParameters) {
-			ParameterDirectionKind direction = param.getDirection();
-			if (direction.getValue() != ParameterDirectionKind.RETURN) {
-				if (param.getType() != null) {
-					return param.getType().getName();
-				}
-			}
+		if (param.getType() != null) {
+			return param.getType().getName();
 		}
+
 		return "";
 	}
 
@@ -149,8 +151,8 @@ public class ClassSheetCreator extends SheetCreator {
 		return "";
 	}
 
-	private int fillPropertyRows(Sheet sheet, Classifier classifier, int rowNumber) {
-		EList<Property> allAttributes = classifier.allAttributes();
+	private int fillPropertyRows(Sheet sheet, Class clazz, int rowNumber) {
+		EList<Property> allAttributes = clazz.getOwnedAttributes();
 
 		for (Property property : allAttributes) {
 			if (property.getAssociation() == null) {

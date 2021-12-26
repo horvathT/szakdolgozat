@@ -21,7 +21,9 @@ import org.slf4j.Logger;
 
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.resource.EclipseSelectionUtil;
+import model.transfer.export.ModelExporter;
 import model.transfer.importer.ModelImporter;
+import model.transfer.importer.validator.ExcelStructureValidator;
 
 public class ExcelImportHandler {
 
@@ -38,14 +40,16 @@ public class ExcelImportHandler {
 		if (filePath == null) {
 			return;
 		}
+
+		ExcelStructureValidator excelValidator = new ExcelStructureValidator(filePath);
 		ModelImporter excel2Model = new ModelImporter(modelPackage, filePath);
-		excel2Model.validateInput();
 		try {
+			excelValidator.validateInput();
 			excel2Model.executeImport();
 
 //			 RE-EXPORT TO FILL UP XMI ID-s
-//			ModelExporter model2excel = new ModelExporter();
-//			model2excel.export(modelPackage, filePath);
+			ModelExporter model2excel = new ModelExporter();
+			model2excel.export(modelPackage, filePath);
 		} catch (EncryptedDocumentException e) {
 			MessageDialog.openError(shell, "Import sikertelen",
 					"Fájl importálása sikertelen! Győződjön meg róla, hogy a fájl nincs jelszóvédelemmel ellátva.");
