@@ -10,7 +10,6 @@ import java.util.Collection;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -81,8 +80,6 @@ public class ModelExporter {
 			fileOut.close();
 			workbook.close();
 			EclipseResourceUtil.refreshWorkspaceRoot();
-			IFile fileResource = EclipseResourceUtil.getFileResource(filePath);
-			EclipseResourceUtil.openWithExternalEditor(fileResource);
 		} catch (FileNotFoundException e) {
 			log.error("Output file not found!", e);
 			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
