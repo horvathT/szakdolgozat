@@ -24,6 +24,7 @@ import org.eclipse.uml2.uml.VisibilityKind;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
+import model.transfer.export.AssociationSheetCreator;
 import model.transfer.export.ClassSummarySheetCreator;
 import model.transfer.export.DataTypeSheetCreator;
 import model.transfer.export.EnumSheetCreator;
@@ -55,21 +56,43 @@ public class ExcelStructureValidator {
 	private Set<String> nonExistentType = new HashSet<>();
 
 	/**
-	 * Az entity nevekhez mappeli egy listába azoknak az attribútumoknak a neveit
+	 * Az entity nevekhez mappelve egy listába azoknak az attribútumoknak a nevei
 	 * amelyekhez hibás láthatósági kulcsszó lett megadva.
 	 */
 	private Map<String, List<String>> propertyInvalidVisibility = new HashMap<>();
 
 	/**
-	 * Az entity nevekhez mappeli egy listába azoknak az metódusoknak a neveit
+	 * Az entity nevekhez mappelve egy listába azoknak az metódusoknak a nevei
 	 * amelyekhez hibás láthatósági kulcsszó lett megadva.
 	 */
 	private Map<String, List<String>> methodInvalidVisibility = new HashMap<>();
 
 	/**
-	 * Entity-k amelyekhez hibás láthatósági kulcsszó lett megadva.
+	 * Olyan entitások nevei amelyekhez hibás láthatósági kulcsszó lett megadva.
 	 */
 	private List<String> entityInvalidVisibility = new ArrayList<>();
+
+	/**
+	 * Azon asszociációk sorszámát tartalmazzaamelyeknek valamelyik végpontján a
+	 * navigable érték hibásan lett megadva.
+	 */
+	private List<Integer> associaitonInvalidNavigableValue = new ArrayList<>();
+
+	/**
+	 * Azon asszociációk sorszámát tartalmazza amelyeknek nem lett végpont megadva
+	 * vagy hibásan.
+	 */
+	private List<Integer> associationWithIncorrectEndpoint = new ArrayList<>();
+
+	private List<String> classInvalidIsAbstractValue = new ArrayList<>();
+
+	private List<String> classInvalidIsStaticValue = new ArrayList<>();
+
+	private Map<String, List<String>> propertyInvalidIsStaticValue = new HashMap<>();
+
+	private Map<String, List<String>> methodInvalidIsStaticValue = new HashMap<>();
+
+	private Map<String, List<String>> methodInvalidIsAbstractValue = new HashMap<>();
 
 	public ExcelStructureValidator(String filePath) {
 		this.filePath = filePath;
@@ -97,8 +120,8 @@ public class ExcelStructureValidator {
 			validationErrorMessage(errorMessage);
 		}
 
-		// Ha nincs típus megadva vagy nem létező
-		validatePropertyAndMethodsTypes(dataTypeNames);
+		// Attribútumok és metódusok validálása
+		validatePropertiesAndMethods(dataTypeNames);
 		if (!nonExistentType.isEmpty()) {
 			String errorMessage = nonExistentTypeErrorMessage();
 			validationErrorMessage(errorMessage);
@@ -115,6 +138,82 @@ public class ExcelStructureValidator {
 				|| !methodInvalidVisibility.isEmpty()) {
 			String errorMessage = visibilityKindErrorMessage();
 			validationErrorMessage(errorMessage);
+		}
+
+		// Asszociációk validálása
+		validateAssociations();
+
+		if (!associationWithIncorrectEndpoint.isEmpty()) {
+			String errorMessage = incorrectEndpointErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+
+		if (!associaitonInvalidNavigableValue.isEmpty()) {
+			String errorMessage = invalidIsNavigableErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+	}
+
+	private String invalidIsNavigableErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Associaitons in the following rows have one or more incorrectly set navigable values:");
+		for (int i = 0; i < associationWithIncorrectEndpoint.size(); i++) {
+			Integer rowNum = associationWithIncorrectEndpoint.get(i);
+			sb.append(rowNum);
+
+			if (i != associationWithIncorrectEndpoint.size() - 1) {
+				sb.append(", ");
+			}
+		}
+		return sb.toString();
+	}
+
+	private String incorrectEndpointErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Associaitons in the following rows have one or more incorrectly set or missing endpoint:");
+		for (int i = 0; i < associationWithIncorrectEndpoint.size(); i++) {
+			Integer rowNum = associationWithIncorrectEndpoint.get(i);
+			sb.append(rowNum);
+
+			if (i != associationWithIncorrectEndpoint.size() - 1) {
+				sb.append(", ");
+			}
+		}
+		return sb.toString();
+	}
+
+	private void validateAssociations() {
+		Sheet enumerationsheet = workbook.getSheet(EnumSheetCreator.SHEET_NAME);
+		Sheet interfaceSummarySheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
+		Sheet classSummarysheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
+		List<String> entityNames = getEntityNamesFromsheet(enumerationsheet);
+		entityNames.addAll(getEntityNamesFromsheet(classSummarysheet));
+		entityNames.addAll(getEntityNamesFromsheet(interfaceSummarySheet));
+
+		Sheet associationSheet = workbook.getSheet(AssociationSheetCreator.ASSOCIATION_SHEET_NAME);
+		int lastRowNum = associationSheet.getLastRowNum();
+		for (int i = 1; i <= lastRowNum; i++) {
+			Row row = associationSheet.getRow(i);
+			if (row == null) {
+				continue;
+			}
+
+			// Végpontok létezésének ellenőrzése
+			String end1ClassifierName = CellUtil.getStringCellValue(row.getCell(1));
+			String end2ClassifierName = CellUtil.getStringCellValue(row.getCell(7));
+			if (!entityNames.contains(end1ClassifierName) || !entityNames.contains(end2ClassifierName)) {
+				associationWithIncorrectEndpoint.add(i + 1);
+				LOGGER.error(missingAssociationendpointErrorMessage(i + 1));
+			}
+
+			// Navigable boolean értékek validálása
+			String end1Navigable = CellUtil.getStringCellValue(row.getCell(3));
+			String end2Navigable = CellUtil.getStringCellValue(row.getCell(9));
+			if (!ExcelReaderUtil.isValidBoolValue(end1Navigable) || !ExcelReaderUtil.isValidBoolValue(end2Navigable)) {
+				associaitonInvalidNavigableValue.add(i + 1);
+				LOGGER.error(invalidNavigationValueErrorMessage(i + 1));
+			}
+
 		}
 	}
 
@@ -239,7 +338,7 @@ public class ExcelStructureValidator {
 		return sb.toString();
 	}
 
-	private void validatePropertyAndMethodsTypes(List<String> dataTypeNames) {
+	private void validatePropertiesAndMethods(List<String> dataTypeNames) {
 		Sheet classSummarySheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
 		List<String> classNames = getEntityNamesFromsheet(classSummarySheet);
 
@@ -495,6 +594,14 @@ public class ExcelStructureValidator {
 				}
 			}
 		}
+	}
+
+	private String invalidNavigationValueErrorMessage(int rowNumber) {
+		return "Association at row: " + rowNumber + " has invalid navigation value set";
+	}
+
+	private String missingAssociationendpointErrorMessage(int rowNumber) {
+		return "Association at row: " + rowNumber + " has incorrent endpoint set";
 	}
 
 	private String propertyInvalidVisibilityErrorMessage(String className, String propertyName) {
