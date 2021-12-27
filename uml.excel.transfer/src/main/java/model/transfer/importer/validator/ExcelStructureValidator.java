@@ -42,6 +42,12 @@ public class ExcelStructureValidator {
 
 	private Workbook workbook;
 
+	private Sheet interfaceSummarySheet;
+	private Sheet classSummarySheet;
+	private Sheet enumSheet;
+	private Sheet dataTypeSheet;
+	private Sheet associationSheet;
+
 	private Shell shell;
 
 	private List<String> missingSheetNames = new ArrayList<>();
@@ -85,8 +91,6 @@ public class ExcelStructureValidator {
 	private List<Integer> associationWithIncorrectEndpoint = new ArrayList<>();
 
 	private List<String> classInvalidIsAbstractValue = new ArrayList<>();
-
-	private List<String> classInvalidIsStaticValue = new ArrayList<>();
 
 	private Map<String, List<String>> propertyInvalidIsStaticValue = new HashMap<>();
 
@@ -140,9 +144,30 @@ public class ExcelStructureValidator {
 			validationErrorMessage(errorMessage);
 		}
 
+		// Boolean input értékek validálása
+		validateClassIsAbstractInput();
+		if (!classInvalidIsAbstractValue.isEmpty()) {
+			String errorMessage = classInvalidIsAbstractValueErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+
+		if (!propertyInvalidIsStaticValue.isEmpty()) {
+			String errorMessage = propertyInvalidIsStaticValueErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+
+		if (!methodInvalidIsStaticValue.isEmpty()) {
+			String errorMessage = methodInvalidIsStaticValueErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+
+		if (!methodInvalidIsAbstractValue.isEmpty()) {
+			String errorMessage = methodInvalidIsAbstractValueErrorMessage();
+			validationErrorMessage(errorMessage);
+		}
+
 		// Asszociációk validálása
 		validateAssociations();
-
 		if (!associationWithIncorrectEndpoint.isEmpty()) {
 			String errorMessage = incorrectEndpointErrorMessage();
 			validationErrorMessage(errorMessage);
@@ -154,9 +179,65 @@ public class ExcelStructureValidator {
 		}
 	}
 
+	private String methodInvalidIsAbstractValueErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("The following methods have invalid values set in the Abstract column: " + System.lineSeparator());
+		mapToString(sb, methodInvalidIsAbstractValue);
+		return sb.toString();
+	}
+
+	private void mapToString(StringBuilder sb, Map<String, List<String>> map) {
+		for (Entry<String, List<String>> entry : map.entrySet()) {
+			String entityName = entry.getKey();
+			List<String> methods = entry.getValue();
+
+			for (String methodName : methods) {
+				sb.append(entityName + "." + methodName + System.lineSeparator());
+			}
+		}
+	}
+
+	private String methodInvalidIsStaticValueErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("The following methods have invalid values set in the Static column: " + System.lineSeparator());
+		mapToString(sb, methodInvalidIsStaticValue);
+		return sb.toString();
+	}
+
+	private String propertyInvalidIsStaticValueErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("The following properties have invalid values set in the Static column: " + System.lineSeparator());
+		mapToString(sb, propertyInvalidIsStaticValue);
+		return sb.toString();
+	}
+
+	private String classInvalidIsAbstractValueErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("The following classes have invalid values set in the Abstract column: " + System.lineSeparator());
+		sb.append(String.join(",", classInvalidIsAbstractValue));
+		return sb.toString();
+	}
+
+	private void validateClassIsAbstractInput() {
+		int lastRowNum = classSummarySheet.getLastRowNum();
+		for (int i = 1; i <= lastRowNum; i++) {
+			Row row = classSummarySheet.getRow(i);
+			String name = CellUtil.getStringCellValue(row.getCell(1));
+			if (name.isEmpty()) {
+				continue;
+			}
+			String isAbstract = CellUtil.getStringCellValue(row.getCell(3));
+			if (!ExcelReaderUtil.isValidBoolValue(isAbstract)) {
+				classInvalidIsAbstractValue.add(name);
+				LOGGER.error(classInvalidAbstractValueErrorMessage(name));
+			}
+		}
+	}
+
 	private String invalidIsNavigableErrorMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Associaitons in the following rows have one or more incorrectly set navigable values:");
+		sb.append("Associaitons in the following rows have one or more incorrectly set navigable values: "
+				+ System.lineSeparator());
 		for (int i = 0; i < associationWithIncorrectEndpoint.size(); i++) {
 			Integer rowNum = associationWithIncorrectEndpoint.get(i);
 			sb.append(rowNum);
@@ -170,7 +251,8 @@ public class ExcelStructureValidator {
 
 	private String incorrectEndpointErrorMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Associaitons in the following rows have one or more incorrectly set or missing endpoint:");
+		sb.append("Associaitons in the following rows have one or more incorrectly set or missing endpoint:"
+				+ System.lineSeparator());
 		for (int i = 0; i < associationWithIncorrectEndpoint.size(); i++) {
 			Integer rowNum = associationWithIncorrectEndpoint.get(i);
 			sb.append(rowNum);
@@ -183,14 +265,11 @@ public class ExcelStructureValidator {
 	}
 
 	private void validateAssociations() {
-		Sheet enumerationsheet = workbook.getSheet(EnumSheetCreator.SHEET_NAME);
-		Sheet interfaceSummarySheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
-		Sheet classSummarysheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
-		List<String> entityNames = getEntityNamesFromsheet(enumerationsheet);
-		entityNames.addAll(getEntityNamesFromsheet(classSummarysheet));
+
+		List<String> entityNames = getEntityNamesFromsheet(enumSheet);
+		entityNames.addAll(getEntityNamesFromsheet(classSummarySheet));
 		entityNames.addAll(getEntityNamesFromsheet(interfaceSummarySheet));
 
-		Sheet associationSheet = workbook.getSheet(AssociationSheetCreator.ASSOCIATION_SHEET_NAME);
 		int lastRowNum = associationSheet.getLastRowNum();
 		for (int i = 1; i <= lastRowNum; i++) {
 			Row row = associationSheet.getRow(i);
@@ -237,28 +316,14 @@ public class ExcelStructureValidator {
 	private String methodVisibilityKindErrorMessage() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("The following methods have incorrect access modifiers set: " + System.lineSeparator());
-		for (Entry<String, List<String>> entity : methodInvalidVisibility.entrySet()) {
-			String entityName = entity.getKey();
-			List<String> methods = entity.getValue();
-
-			for (String methodName : methods) {
-				sb.append(entityName + "." + methodName + System.lineSeparator());
-			}
-		}
+		mapToString(sb, methodInvalidVisibility);
 		return sb.toString();
 	}
 
 	private String propertyVisibilityKindErrorMessage() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("The following attributes have incorrect access modifiers set: " + System.lineSeparator());
-		for (Entry<String, List<String>> entity : propertyInvalidVisibility.entrySet()) {
-			String entityName = entity.getKey();
-			List<String> properties = entity.getValue();
-
-			for (String propertyName : properties) {
-				sb.append(entityName + "." + propertyName + System.lineSeparator());
-			}
-		}
+		mapToString(sb, propertyInvalidVisibility);
 		return sb.toString();
 	}
 
@@ -273,8 +338,6 @@ public class ExcelStructureValidator {
 
 	private void validateEntityVisibilityKeyword() {
 		// entitás
-		Sheet classSummarySheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
-		Sheet interfaceSummarySheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
 		checkEntityVisibilityKeywords(classSummarySheet);
 		checkEntityVisibilityKeywords(interfaceSummarySheet);
 	}
@@ -299,21 +362,12 @@ public class ExcelStructureValidator {
 	private String propertyMissingTypeErrorMessage() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Incorrect file! The following attributes have no type set: " + System.lineSeparator());
-
-		for (Entry<String, List<String>> entry : propertyMissingType.entrySet()) {
-			String classifierName = entry.getKey();
-			List<String> propertyNames = entry.getValue();
-			for (String property : propertyNames) {
-				sb.append(classifierName + "." + property + System.lineSeparator());
-			}
-		}
-
+		mapToString(sb, propertyMissingType);
 		return sb.toString();
 	}
 
 	private List<String> collectDataTypesFromExcel() {
 		List<String> dataTypeNames = new ArrayList<>();
-		Sheet dataTypeSheet = workbook.getSheet(DataTypeSheetCreator.DATA_TYPE_SHEET_NAME);
 		for (int i = 1; i <= dataTypeSheet.getLastRowNum(); i++) {
 			Row row = dataTypeSheet.getRow(i);
 			if (row == null) {
@@ -339,7 +393,6 @@ public class ExcelStructureValidator {
 	}
 
 	private void validatePropertiesAndMethods(List<String> dataTypeNames) {
-		Sheet classSummarySheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
 		List<String> classNames = getEntityNamesFromsheet(classSummarySheet);
 
 		for (String className : classNames) {
@@ -355,7 +408,8 @@ public class ExcelStructureValidator {
 				String propertyName = CellUtil.getStringCellValue(row.getCell(2));
 				String dataTypeName = CellUtil.getStringCellValue(row.getCell(4));
 				if (dataTypeName.isEmpty()) {
-					addToPropertyMissingTypeMap(className, propertyName);
+					addToMap(propertyMissingType, className, propertyName);
+					LOGGER.error(propertyMissingTypeErrorMessage(className, propertyName));
 				} else if (!dataTypeNames.contains(dataTypeName)) {
 					nonExistentType.add(dataTypeName);
 					LOGGER.error(nonExistentTypeErrorMessage(dataTypeName));
@@ -364,7 +418,14 @@ public class ExcelStructureValidator {
 				String visibility = CellUtil.getStringCellValue(row.getCell(3));
 				VisibilityKind visibilityKind = ExcelReaderUtil.stringToVisibilityKind(visibility);
 				if (visibilityKind == null) {
-					addToPropertyInvalidVisibility(className, propertyName);
+					addToMap(propertyInvalidVisibility, className, propertyName);
+					LOGGER.error(propertyInvalidVisibilityErrorMessage(className, propertyName));
+				}
+
+				String isStatic = CellUtil.getStringCellValue(row.getCell(5));
+				if (!ExcelReaderUtil.isValidBoolValue(isStatic)) {
+					addToMap(propertyInvalidIsStaticValue, className, propertyName);
+					LOGGER.error(propertyInvalidIsStaticValue(className, propertyName));
 				}
 			}
 
@@ -372,23 +433,43 @@ public class ExcelStructureValidator {
 			int lastRowNum = classSheet.getLastRowNum();
 			for (int i = ++mehtodHeaderRowNumber; i < lastRowNum; i++) {
 				Row row = classSheet.getRow(i);
+				if (row == null) {
+					continue;
+				}
+
 				String parameterTypeName = CellUtil.getStringCellValue(row.getCell(7));
 				String parameterName = CellUtil.getStringCellValue(row.getCell(8));
 				if (!parameterName.isEmpty()) {
 					if (parameterTypeName.isEmpty()) {
-						addToPropertyMissingTypeMap(className, parameterName);
+						addToMap(propertyMissingType, className, parameterName);
+						LOGGER.error(propertyMissingTypeErrorMessage(className, parameterName));
 					} else if (!dataTypeNames.contains(parameterTypeName)) {
 						nonExistentType.add(parameterTypeName);
 						LOGGER.error(nonExistentTypeErrorMessage(parameterTypeName));
 					}
 				}
+
+				String methodName = CellUtil.getStringCellValue(row.getCell(2));
+				if (methodName.isEmpty()) {
+					continue;
+				}
 				valiadateMethodVisibilityKeyword(className, row);
+
+				String isStatic = CellUtil.getStringCellValue(row.getCell(4));
+				if (ExcelReaderUtil.isValidBoolValue(isStatic)) {
+					addToMap(methodInvalidIsStaticValue, className, methodName);
+					LOGGER.error(methodInvalidIsStaticValue(className, methodName));
+				}
+				String isAbstract = CellUtil.getStringCellValue(row.getCell(5));
+				if (ExcelReaderUtil.isValidBoolValue(isAbstract)) {
+					addToMap(methodInvalidIsAbstractValue, className, methodName);
+					LOGGER.error(methodInvalidIsAbstractValue(className, methodName));
+				}
 
 			}
 
 		}
 
-		Sheet interfaceSummarySheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
 		List<String> interfaceNames = getEntityNamesFromsheet(interfaceSummarySheet);
 
 		for (String interfaceName : interfaceNames) {
@@ -404,7 +485,8 @@ public class ExcelStructureValidator {
 				String propertyName = CellUtil.getStringCellValue(row.getCell(2));
 				String dataTypeName = CellUtil.getStringCellValue(row.getCell(3));
 				if (dataTypeName.isEmpty()) {
-					addToPropertyMissingTypeMap(interfaceName, propertyName);
+					addToMap(propertyMissingType, interfaceName, propertyName);
+					LOGGER.error(propertyMissingTypeErrorMessage(interfaceName, propertyName));
 				} else if (!dataTypeNames.contains(dataTypeName)) {
 					nonExistentType.add(dataTypeName);
 					LOGGER.error(nonExistentTypeErrorMessage(dataTypeName));
@@ -419,13 +501,25 @@ public class ExcelStructureValidator {
 				String parameterName = CellUtil.getStringCellValue(row.getCell(7));
 				if (!parameterName.isEmpty()) {
 					if (parameterTypeName.isEmpty()) {
-						addToPropertyMissingTypeMap(interfaceName, parameterName);
+						addToMap(propertyMissingType, interfaceName, parameterName);
+						LOGGER.error(propertyMissingTypeErrorMessage(interfaceName, parameterName));
 					} else if (!dataTypeNames.contains(parameterTypeName)) {
 						nonExistentType.add(parameterTypeName);
 						LOGGER.error(nonExistentTypeErrorMessage(parameterTypeName));
 					}
 				}
+				String methodName = CellUtil.getStringCellValue(row.getCell(2));
+				if (methodName.isEmpty()) {
+					continue;
+				}
+
 				valiadateMethodVisibilityKeyword(interfaceName, row);
+
+				String isAbstract = CellUtil.getStringCellValue(row.getCell(5));
+				if (ExcelReaderUtil.isValidBoolValue(isAbstract)) {
+					addToMap(methodInvalidIsAbstractValue, interfaceName, methodName);
+					LOGGER.error(methodInvalidIsAbstractValue(interfaceName, methodName));
+				}
 			}
 		}
 	}
@@ -438,38 +532,18 @@ public class ExcelStructureValidator {
 		String visibility = CellUtil.getStringCellValue(row.getCell(3));
 		VisibilityKind visibilityKind = ExcelReaderUtil.stringToVisibilityKind(visibility);
 		if (visibilityKind == null) {
-			addToMethodInvalidVisibility(classifierName, methodName);
+			addToMap(methodInvalidVisibility, classifierName, methodName);
+			LOGGER.error(methodInvalidVisibilityErroMessage(classifierName, methodName));
 		}
 	}
 
-	private void addToMethodInvalidVisibility(String className, String methodName) {
-		List<String> list = methodInvalidVisibility.get(className);
+	private void addToMap(Map<String, List<String>> map, String key, String value) {
+		List<String> list = map.get(key);
 		if (list == null) {
 			list = new ArrayList<>();
 		}
-		list.add(methodName);
-		methodInvalidVisibility.put(className, list);
-		LOGGER.error(methodInvalidVisibilityErroMessage(className, methodName));
-	}
-
-	private void addToPropertyInvalidVisibility(String className, String propertyName) {
-		List<String> list = propertyInvalidVisibility.get(className);
-		if (list == null) {
-			list = new ArrayList<>();
-		}
-		list.add(propertyName);
-		propertyInvalidVisibility.put(className, list);
-		LOGGER.error(propertyInvalidVisibilityErrorMessage(className, propertyName));
-	}
-
-	private void addToPropertyMissingTypeMap(String className, String propertyName) {
-		List<String> typelessPropertyList = propertyMissingType.get(className);
-		if (typelessPropertyList == null) {
-			typelessPropertyList = new ArrayList<>();
-		}
-		typelessPropertyList.add(propertyName);
-		propertyMissingType.put(className, typelessPropertyList);
-		LOGGER.error(propertyMissingTypeErrorMessage(className, propertyName));
+		list.add(value);
+		map.put(key, list);
 	}
 
 	private String compileHierarchyViolationErrorMessage() {
@@ -521,17 +595,15 @@ public class ExcelStructureValidator {
 	}
 
 	private void validateClassHierarchy() {
-		Sheet classSheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
-		List<String> classNames = getEntityNamesFromsheet(classSheet);
+		List<String> classNames = getEntityNamesFromsheet(classSummarySheet);
 
-		Sheet interfaceSheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
-		List<String> interfaceNames = getEntityNamesFromsheet(interfaceSheet);
+		List<String> interfaceNames = getEntityNamesFromsheet(interfaceSummarySheet);
 
-		int lastRowNum = classSheet.getLastRowNum();
+		int lastRowNum = classSummarySheet.getLastRowNum();
 		String className = null;
 
 		for (int i = 1; i <= lastRowNum; i++) {
-			Row row = classSheet.getRow(i);
+			Row row = classSummarySheet.getRow(i);
 			if (row == null) {
 				continue;
 			}
@@ -568,13 +640,12 @@ public class ExcelStructureValidator {
 	}
 
 	private void validateInterfaceHierarchy() {
-		Sheet interfaceSheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
-		List<String> interfaceNames = getEntityNamesFromsheet(interfaceSheet);
-		int lastRowNum = interfaceSheet.getLastRowNum();
+		List<String> interfaceNames = getEntityNamesFromsheet(interfaceSummarySheet);
+		int lastRowNum = interfaceSummarySheet.getLastRowNum();
 		String interfaceName = null;
 
 		for (int i = 1; i <= lastRowNum; i++) {
-			Row row = interfaceSheet.getRow(i);
+			Row row = interfaceSummarySheet.getRow(i);
 			if (row == null) {
 				continue;
 			}
@@ -594,6 +665,22 @@ public class ExcelStructureValidator {
 				}
 			}
 		}
+	}
+
+	private String methodInvalidIsAbstractValue(String className, String methodName) {
+		return "Method " + methodName + " in class " + className + " has invalid value set in Abstract column!";
+	}
+
+	private String methodInvalidIsStaticValue(String className, String methodName) {
+		return "Method " + methodName + " in class " + className + " has invalid value set in Static column!";
+	}
+
+	private String propertyInvalidIsStaticValue(String className, String propertyName) {
+		return "Property " + propertyName + " in class " + className + " has invalid value set in Static column!";
+	}
+
+	private String classInvalidAbstractValueErrorMessage(String name) {
+		return "Class " + name + " has invalid value in Abstract column.";
 	}
 
 	private String invalidNavigationValueErrorMessage(int rowNumber) {
@@ -651,34 +738,39 @@ public class ExcelStructureValidator {
 	}
 
 	private void checkForMissingSheets() {
-		Sheet interfaceSheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
-		if (interfaceSheet == null) {
+		interfaceSummarySheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
+		if (interfaceSummarySheet == null) {
 			LOGGER.error("Missing sheet: " + InterfaceSummarySheetCreator.SHEET_NAME);
 			missingSheetNames.add(InterfaceSummarySheetCreator.SHEET_NAME);
 		} else {
-			checkforMissingClassifierSheets(interfaceSheet);
+			checkforMissingClassifierSheets(interfaceSummarySheet);
 		}
 
-		Sheet classSheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
-		if (classSheet == null) {
+		classSummarySheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
+		if (classSummarySheet == null) {
 			LOGGER.error("Missing sheet: " + ClassSummarySheetCreator.SHEET_NAME);
 			missingSheetNames.add(ClassSummarySheetCreator.SHEET_NAME);
 		} else {
-			checkforMissingClassifierSheets(classSheet);
+			checkforMissingClassifierSheets(classSummarySheet);
 		}
 
-		Sheet enumSheet = workbook.getSheet(EnumSheetCreator.SHEET_NAME);
+		enumSheet = workbook.getSheet(EnumSheetCreator.SHEET_NAME);
 		if (enumSheet == null) {
 			LOGGER.error("Missing sheet: " + EnumSheetCreator.SHEET_NAME);
 			missingSheetNames.add(EnumSheetCreator.SHEET_NAME);
 		}
 
-		Sheet dataTypeSheet = workbook.getSheet(DataTypeSheetCreator.DATA_TYPE_SHEET_NAME);
+		dataTypeSheet = workbook.getSheet(DataTypeSheetCreator.DATA_TYPE_SHEET_NAME);
 		if (dataTypeSheet == null) {
 			LOGGER.error("Missing sheet: " + EnumSheetCreator.SHEET_NAME);
 			missingSheetNames.add(EnumSheetCreator.SHEET_NAME);
 		}
 
+		associationSheet = workbook.getSheet(AssociationSheetCreator.ASSOCIATION_SHEET_NAME);
+		if (associationSheet == null) {
+			LOGGER.error("Missing sheet: " + AssociationSheetCreator.ASSOCIATION_SHEET_NAME);
+			missingSheetNames.add(AssociationSheetCreator.ASSOCIATION_SHEET_NAME);
+		}
 	}
 
 	private void checkforMissingClassifierSheets(Sheet classifierSheet) {
