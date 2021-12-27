@@ -189,7 +189,7 @@ public class EclipseResourceUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-			MessageDialog.openError(shell, "DDL generálás sikertelen", "Fájl létrehozás sikertelen!");
+			MessageDialog.openError(shell, "DDL generation failed", "Failed to create file!");
 		}
 	}
 

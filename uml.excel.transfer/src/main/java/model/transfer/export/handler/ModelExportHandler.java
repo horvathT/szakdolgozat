@@ -37,7 +37,7 @@ public class ModelExportHandler {
 			try {
 				Desktop.getDesktop().open(new File(filePath));
 			} catch (IOException e) {
-				throw new IllegalArgumentException("A generált fájl megnyitása hibába ütközött", e);
+				throw new IllegalArgumentException("Failed to open generated file!", e);
 			}
 		}
 	}

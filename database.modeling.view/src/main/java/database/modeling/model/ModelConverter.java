@@ -11,7 +11,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -20,8 +22,8 @@ import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,11 +37,12 @@ import database.modeling.view.DatabaseModelingView;
 
 public class ModelConverter {
 
-	public static final Logger log = LoggerFactory.getLogger(ModelConverter.class);
+	private static final Bundle BUNDLE = FrameworkUtil.getBundle(ModelConverter.class);
+	private static final ILog LOGGER = Platform.getLog(BUNDLE);
 
-	Model model;
+	private Model model;
 
-	DatabaseModelingView view;
+	private DatabaseModelingView view;
 
 	public ModelConverter(Model model, DatabaseModelingView view) {
 		this.model = model;
@@ -59,9 +62,9 @@ public class ModelConverter {
 				EclipseResourceUtil.writeFile(filePath, fileName, targetStream);
 				EclipseResourceUtil.refreshWorkspaceRoot();
 			} catch (IOException e) {
-				log.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
+				LOGGER.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
 			} catch (CoreException e) {
-				log.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
+				LOGGER.error("Failed to write file! (name: " + fileName + ", path: " + filePath, e);
 			}
 		}
 	}
@@ -133,7 +136,7 @@ public class ModelConverter {
 					try {
 						fileString = Files.readString(path);
 					} catch (IOException e) {
-						log.error("Error reading file from path: " + path);
+						LOGGER.error("Error reading file from path: " + path);
 						e.printStackTrace();
 					}
 					Type targetClassType = new TypeToken<ArrayList<PropertyDataModel>>() {

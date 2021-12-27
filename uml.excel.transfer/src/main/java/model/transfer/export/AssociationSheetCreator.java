@@ -14,7 +14,7 @@ import model.transfer.util.CellAppender;
 
 public class AssociationSheetCreator extends SheetCreator {
 
-	public static final String ASSOCIATION_SHEET_NAME = "Asszociációk";
+	public static final String ASSOCIATION_SHEET_NAME = "Associations";
 
 	private Workbook workbook;
 

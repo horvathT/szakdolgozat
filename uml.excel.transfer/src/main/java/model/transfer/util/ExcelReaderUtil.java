@@ -7,8 +7,8 @@ import org.eclipse.uml2.uml.VisibilityKind;
 
 public class ExcelReaderUtil {
 
-	private static List<String> valuesAcceptedAsTrue = Arrays.asList("igen", "i", "yes", "y", "true");
-	private static List<String> valuesAcceptedAsFalse = Arrays.asList("nem", "n", "no", "false");
+	public final static List<String> valuesAcceptedAsTrue = Arrays.asList("igen", "i", "yes", "y", "true");
+	public final static List<String> valuesAcceptedAsFalse = Arrays.asList("nem", "n", "no", "false");
 
 	public static VisibilityKind stringToVisibilityKind(String visibility) {
 		if (visibility.equals("public")) {
@@ -29,7 +29,7 @@ public class ExcelReaderUtil {
 		} else if (valuesAcceptedAsFalse.contains(boolString)) {
 			return false;
 		}
-		throw new IllegalArgumentException("Hibás igen/nem paraméter: " + boolString);
+		throw new IllegalArgumentException("Unknown true/false value: " + boolString);
 	}
 
 }

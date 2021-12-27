@@ -17,7 +17,7 @@ import model.transfer.util.CellAppender;
 
 public class ClassSummarySheetCreator extends SheetCreator {
 
-	public final static String SHEET_NAME = "Osztályok";
+	public final static String SHEET_NAME = "Classes";
 
 	private Workbook workbook;
 
@@ -96,12 +96,12 @@ public class ClassSummarySheetCreator extends SheetCreator {
 		Row row = classSheet.createRow(0);
 		CellAppender appender = new CellAppender(row);
 		appender.appendCellWithValue("Xmi Id")
-				.appendCellWithValue("Név")
-				.appendCellWithValue("Láthatóság")
-				.appendCellWithValue("Absztrakt")
-				.appendCellWithValue("Leszármazza")
-				.appendCellWithValue("Implementálja")
-				.appendCellWithValue("Leírás");
+				.appendCellWithValue("Name")
+				.appendCellWithValue("Visibility")
+				.appendCellWithValue("Abstract")
+				.appendCellWithValue("Extends")
+				.appendCellWithValue("Implements")
+				.appendCellWithValue("Comment");
 		makeRowBold(workbook, row);
 	}
 

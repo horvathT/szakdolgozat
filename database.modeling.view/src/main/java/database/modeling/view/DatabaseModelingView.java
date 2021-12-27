@@ -113,7 +113,6 @@ public class DatabaseModelingView {
 		sqlTypeComboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		dataTypeCombo = sqlTypeComboViewer.getCombo();
 		dataTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		dataTypeCombo.setToolTipText("Érték választás után szerkeszthetővé válnak a típushoz tartozó mezők.");
 
 		Label lblLength = new Label(container, SWT.NONE);
 		lblLength.setText("Length");

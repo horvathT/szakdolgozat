@@ -76,7 +76,7 @@ public class ModelValidator {
 	private String compileFkReferencedAttrNullableErrorMessage() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(
-				"Generálás sikertelen! A következő idegenkulcsok referált attribútuma nullozható: "
+				"Generation failed! The following foreign keys are referring a nullable attribute: "
 						+ System.lineSeparator());
 
 		for (Entry<Property, Property> entry : fkReferencedAttrNullable.entrySet()) {
@@ -85,7 +85,7 @@ public class ModelValidator {
 			Property value = entry.getValue();
 
 			LOGGER.error(
-					"A következő idegenkulcs referált attribútuma nullozható: "
+					"The following foreign key is referring a nullable attribute: "
 							+ key.getName() + " -> " + value.getName());
 
 			sb.append(key.getName() + " -> " + value.getName() + System.lineSeparator());
@@ -96,7 +96,7 @@ public class ModelValidator {
 	private String compileFkTypeConsistencyErrorMessage() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(
-				"Generálás sikertelen! A következő idegenkulcsok és refereált attribútumaik típusa eltérő: "
+				"Generation failed! The following foreing keys and their referred attributes have different type: "
 						+ System.lineSeparator());
 
 		for (Entry<Property, Property> entry : fkTypeConsistency.entrySet()) {
@@ -105,7 +105,7 @@ public class ModelValidator {
 			Property value = entry.getValue();
 
 			LOGGER.error(
-					"A következő idegenkulcs és refereált attribútuma eltérő típusú: "
+					" The following foreing key and it's referred attribute have different type: "
 							+ key.getName() + " -> " + value.getName());
 
 			sb.append(key.getName() + " -> " + value.getName() + System.lineSeparator());
@@ -116,12 +116,14 @@ public class ModelValidator {
 	private String compileFkMissingReferenceErrorMessage() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(
-				"Generálás sikertelen! A következő attribútumok idegenkulcsként vannak megjelölve, "
-						+ "de nincs referált elem beállítva: " + System.lineSeparator());
+				"Generation failed! The following attributes are marked as foreing key,"
+						+ " but have no referred attribute set: "
+						+ System.lineSeparator());
 
 		for (Property property : fkMissingReference) {
 			LOGGER.error(
-					"A következő attribútum idegenkulcsként van megjelölve, de nincs referált elem beállítva: "
+					"The following attribute is marked as foreing key,"
+							+ " but have no referred attribute set: "
 							+ property.getName());
 
 			Element owner = property.getOwner();
@@ -134,7 +136,7 @@ public class ModelValidator {
 	}
 
 	private void validationErrorMessage(String errorMessage) {
-		MessageDialog.openError(shell, "Generálási hiba", errorMessage);
+		MessageDialog.openError(shell, "Generation failed", errorMessage);
 		System.exit(1);
 	}
 
@@ -200,11 +202,11 @@ public class ModelValidator {
 
 	private String compilePropertyMissingSqlTypeErrorMessage(Set<Property> propertyMissingType) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Generálás sikertelen! A következő attribútumok nem rendelekeznek SQL adattípussal: "
+		sb.append("Generation failed! The following attributes have no SQL data type set: "
 				+ System.lineSeparator());
 		for (Property property : propertyMissingType) {
 			LOGGER.error(
-					"A következő attribútum nem rendelekezik SQL adattípussal: " + property.getName());
+					"The following attribute has not SQL data type set:  " + property.getName());
 			Element owner = property.getOwner();
 			if (owner instanceof Classifier) {
 				Classifier classifier = (Classifier) owner;

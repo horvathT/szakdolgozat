@@ -94,8 +94,8 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		Property currentPropertySelection = view.getCurrentPropertySelection();
 		Model model = currentPropertySelection.getModel();
 		if (model == null) {
-			MessageDialog.openError(shell, "Adatbázis váltás sikertelen!",
-					"A kijelölt attribútum nem része a modellnek!");
+			MessageDialog.openError(shell, "Database change failed!",
+					"The selected attribute is not part of the model!");
 			return;
 		}
 

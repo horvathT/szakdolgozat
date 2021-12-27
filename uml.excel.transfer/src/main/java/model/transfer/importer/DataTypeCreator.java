@@ -19,7 +19,7 @@ public class DataTypeCreator extends ObjectImporter {
 
 	private TransactionalEditingDomain editingDomain;
 
-	private static final String EXCEL_DATA_TYPES = "ImportaltTipusok";
+	private static final String EXCEL_DATA_TYPES = "ImportedTypes";
 
 	public DataTypeCreator(Workbook workbook, Package modelPackage, TransactionalEditingDomain editingDomain) {
 		super(workbook, modelPackage);

@@ -11,6 +11,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -22,14 +24,15 @@ import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Enumeration;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Package;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 
 public class ModelExporter {
-	public static final Logger log = LoggerFactory.getLogger(ModelExporter.class);
+	private static final Bundle BUNDLE = FrameworkUtil.getBundle(ModelExporter.class);
+	private static final ILog LOGGER = Platform.getLog(BUNDLE);
 
 	public void export(Package modelPackage, String filePath) {
 
@@ -81,15 +84,15 @@ public class ModelExporter {
 			workbook.close();
 			EclipseResourceUtil.refreshWorkspaceRoot();
 		} catch (FileNotFoundException e) {
-			log.error("Output file not found!", e);
+			LOGGER.error("Output file not found!", e);
 			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 			MessageDialog.openError(shell, "Export failed", "Output file not found!");
 		} catch (IOException e) {
-			log.error("Failed to write file!", e);
+			LOGGER.error("Failed to write file!", e);
 			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 			MessageDialog.openError(shell, "Export failed", "Failed to write file!");
 		} catch (CoreException e) {
-			log.error("Failed to reopen exported file!", e);
+			LOGGER.error("Failed to reopen exported file!", e);
 			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 			MessageDialog.openError(shell, "Export failed", "Failed to reopen exported file!");
 		}

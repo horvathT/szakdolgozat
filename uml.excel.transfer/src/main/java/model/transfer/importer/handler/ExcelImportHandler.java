@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.uml2.uml.Package;
-import org.slf4j.Logger;
 
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.resource.EclipseSelectionUtil;
@@ -26,8 +25,6 @@ import model.transfer.importer.ModelImporter;
 import model.transfer.importer.validator.ExcelStructureValidator;
 
 public class ExcelImportHandler {
-
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(ExcelImportHandler.class);
 
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
@@ -51,11 +48,13 @@ public class ExcelImportHandler {
 			ModelExporter model2excel = new ModelExporter();
 			model2excel.export(modelPackage, filePath);
 		} catch (EncryptedDocumentException e) {
-			MessageDialog.openError(shell, "Import sikertelen",
-					"Fájl importálása sikertelen! Győződjön meg róla, hogy a fájl nincs jelszóvédelemmel ellátva.");
+			MessageDialog.openError(shell, "Import failed",
+					"Failed to import file! Make sure the file is not encrypted.");
+			e.printStackTrace();
 		} catch (IOException e) {
-			MessageDialog.openError(shell, "Import sikertelen",
-					"Fájl importálása sikertelen! Győződjön meg róla, hogy bezárta a fájlt importálás előtt.");
+			MessageDialog.openError(shell, "Import failed",
+					"Failed to import file! Make sure the file is closed before importing.");
+			e.printStackTrace();
 		}
 	}
 

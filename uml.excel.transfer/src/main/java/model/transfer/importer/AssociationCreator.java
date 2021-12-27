@@ -29,6 +29,7 @@ import model.transfer.export.AssociationSheetCreator;
 import model.transfer.export.ClassSummarySheetCreator;
 import model.transfer.export.InterfaceSummarySheetCreator;
 import model.transfer.util.CellUtil;
+import model.transfer.util.ExcelReaderUtil;
 
 public class AssociationCreator extends ObjectImporter {
 
@@ -68,10 +69,10 @@ public class AssociationCreator extends ObjectImporter {
 			Classifier startClassifier = getClassifierByName(associationData.getEnd1ClassifierName());
 			Classifier endClassifier = getClassifierByName(associationData.getEnd2ClassifierName());
 			if (startClassifier == null) {
-				warningMessageDialog("Hiányzó asszociáció végpont " + associationData.getEnd1PropertyName() + "."
+				warningMessageDialog("Missing association endpoint " + associationData.getEnd1PropertyName() + "."
 						+ associationData.getEnd1ClassifierName());
 			} else if (endClassifier == null) {
-				warningMessageDialog("Hiányzó asszociáció végpont " + associationData.getEnd2PropertyName() + "."
+				warningMessageDialog("Missing association endpoint " + associationData.getEnd2PropertyName() + "."
 						+ associationData.getEnd2ClassifierName());
 			} else {
 
@@ -116,9 +117,8 @@ public class AssociationCreator extends ObjectImporter {
 			associationData
 					.setEnd1PropertyName(CellUtil.getStringCellValue(row.getCell(2)));
 
-			boolean isNavigable1 = CellUtil.getStringCellValue(row.getCell(3)).contains("yes")
-					? true
-					: false;
+			String end1Navigable = CellUtil.getStringCellValue(row.getCell(3));
+			boolean isNavigable1 = ExcelReaderUtil.stringToBoolean(end1Navigable);
 			associationData.setEnd1IsNavigable(isNavigable1);
 
 			AggregationKind aggregationKind1 = getAggregationKind(
@@ -138,9 +138,8 @@ public class AssociationCreator extends ObjectImporter {
 			associationData
 					.setEnd2PropertyName(CellUtil.getStringCellValue(row.getCell(8)));
 
-			boolean isNavigable2 = CellUtil.getStringCellValue(row.getCell(9)).contains("yes")
-					? true
-					: false;
+			String end2Navigable = CellUtil.getStringCellValue(row.getCell(9));
+			boolean isNavigable2 = ExcelReaderUtil.stringToBoolean(end2Navigable);
 			associationData.setEnd2IsNavigable(isNavigable2);
 
 			AggregationKind aggregationKind2 = getAggregationKind(

@@ -14,7 +14,7 @@ import model.transfer.util.CellAppender;
 
 public class DataTypeSheetCreator extends SheetCreator {
 
-	public static final String DATA_TYPE_SHEET_NAME = "Adattípusok";
+	public static final String DATA_TYPE_SHEET_NAME = "Data types";
 
 	private Workbook workbook;
 

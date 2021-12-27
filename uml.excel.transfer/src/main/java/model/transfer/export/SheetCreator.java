@@ -38,9 +38,9 @@ public class SheetCreator {
 
 	protected String booleanTostring(boolean bool) {
 		if (bool) {
-			return "igen";
+			return "yes";
 		}
-		return "nem";
+		return "no";
 	}
 
 }

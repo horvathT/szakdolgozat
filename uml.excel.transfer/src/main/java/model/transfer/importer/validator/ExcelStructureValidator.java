@@ -137,7 +137,7 @@ public class ExcelStructureValidator {
 
 	private String methodVisibilityKindErrorMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("A következő metódusokhoz hibás láthatósági módosítószó lett megadva: " + System.lineSeparator());
+		sb.append("The following methods have incorrect access modifiers set: " + System.lineSeparator());
 		for (Entry<String, List<String>> entity : methodInvalidVisibility.entrySet()) {
 			String entityName = entity.getKey();
 			List<String> methods = entity.getValue();
@@ -151,7 +151,7 @@ public class ExcelStructureValidator {
 
 	private String propertyVisibilityKindErrorMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("A következő attribútumokhoz hibás láthatósági módosítószó lett megadva: " + System.lineSeparator());
+		sb.append("The following attributes have incorrect access modifiers set: " + System.lineSeparator());
 		for (Entry<String, List<String>> entity : propertyInvalidVisibility.entrySet()) {
 			String entityName = entity.getKey();
 			List<String> properties = entity.getValue();
@@ -165,7 +165,7 @@ public class ExcelStructureValidator {
 
 	private String entityVisibilityKindErrorMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("A következő entitásokhoz hibás láthatósági módosítószó lett megadva: " + System.lineSeparator());
+		sb.append("The following entities have incorrect access modifiers set: " + System.lineSeparator());
 		for (String entityName : entityInvalidVisibility) {
 			sb.append(entityName + System.lineSeparator());
 		}
@@ -199,7 +199,7 @@ public class ExcelStructureValidator {
 
 	private String propertyMissingTypeErrorMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Hibás Exccel fájl! A következő attribútumokhoz nincs típus beállítva: " + System.lineSeparator());
+		sb.append("Incorrect file! The following attributes have no type set: " + System.lineSeparator());
 
 		for (Entry<String, List<String>> entry : propertyMissingType.entrySet()) {
 			String classifierName = entry.getKey();
@@ -231,7 +231,7 @@ public class ExcelStructureValidator {
 
 	private String nonExistentTypeErrorMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Hibás Exccel fájl! A következő adattípusok nem léteznek: " + System.lineSeparator());
+		sb.append("Incorrect file! The following types do not exist: " + System.lineSeparator());
 
 		for (String missingType : nonExistentType) {
 			sb.append(missingType + System.lineSeparator());
@@ -498,49 +498,44 @@ public class ExcelStructureValidator {
 	}
 
 	private String propertyInvalidVisibilityErrorMessage(String className, String propertyName) {
-		return "A(z) " + className + " entity " + propertyName
-				+ " attribútumához imeretlen láthatósági módosítószó van beállítva!";
+		return propertyName + " property of entity " + className + " has invalid access modifier set!";
 	}
 
 	private String methodInvalidVisibilityErroMessage(String className, String methodName) {
-		return "A(z) " + className + " entity " + methodName
-				+ " metódusához imeretlen láthatósági módosítószó van beállítva!";
+		return methodName + " method of entity " + className + " has invalid access modifier set!";
 	}
 
 	private String propertyMissingTypeErrorMessage(String entityName, String propertyName) {
-		return "A(z) " + entityName + " munkalap " + propertyName + " attribútumához nincs típus beállítva";
+		return propertyName + " property of entity " + entityName + " has no type set!";
 	}
 
 	private String nonExistentTypeErrorMessage(String parameterTypeName) {
-		return "Típus " + parameterTypeName + " nem található.";
+		return "Type " + parameterTypeName + " not found!";
 	}
 
 	private String interfaceExtendsViolationErrorMessage(String interfaceName, String generalizedClassifierName) {
-		return "Interface " + interfaceName + " nem származhatja le a(z) " + generalizedClassifierName
-				+ " elemet.";
+		return "Interface " + interfaceName + " cannot extend " + generalizedClassifierName;
 	}
 
 	private String interfaceSelfReferencingErrorMessage(String interfaceName) {
-		return "Interface " + interfaceName + " nem hivatkozhat saját magára.";
+		return "Interface " + interfaceName + " cannot extend itself.";
 	}
 
 	private String classSelfReferencingErrorMessage(String className) {
-		return "Osztály " + className + " nem hivatkozhat saját magára.";
+		return "Class " + className + " cannot extend or implement itself.";
 	}
 
 	private String classExtendsViolationErrorMessage(String className, String generalizedClassifierName) {
-		return "Osztály " + className + " nem származhatja le a(z) " + generalizedClassifierName
-				+ " elemet.";
+		return "Class " + className + " cannot extend " + generalizedClassifierName;
 	}
 
 	private String classImplementsViolationErrorMessage(String className, String generalizedClassifierName) {
-		return "Osztály " + className + " nem implementálhatja a(z) " + generalizedClassifierName
-				+ " elemet.";
+		return "Class " + className + " cannot implement " + generalizedClassifierName;
 	}
 
 	private String compileMissingSheetErrorMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Hibás Exccel fájl! A következő mukalapok hiányoznak: " + System.lineSeparator());
+		sb.append("Incomplete Excel file! The following sheets are missing: " + System.lineSeparator());
 
 		for (String sheetName : missingSheetNames) {
 			sb.append(sheetName + System.lineSeparator());
@@ -551,7 +546,7 @@ public class ExcelStructureValidator {
 	private void checkForMissingSheets() {
 		Sheet interfaceSheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
 		if (interfaceSheet == null) {
-			LOGGER.error("Hiányzó munkalap: " + InterfaceSummarySheetCreator.SHEET_NAME);
+			LOGGER.error("Missing sheet: " + InterfaceSummarySheetCreator.SHEET_NAME);
 			missingSheetNames.add(InterfaceSummarySheetCreator.SHEET_NAME);
 		} else {
 			checkforMissingClassifierSheets(interfaceSheet);
@@ -559,7 +554,7 @@ public class ExcelStructureValidator {
 
 		Sheet classSheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
 		if (classSheet == null) {
-			LOGGER.error("Hiányzó munkalap: " + ClassSummarySheetCreator.SHEET_NAME);
+			LOGGER.error("Missing sheet: " + ClassSummarySheetCreator.SHEET_NAME);
 			missingSheetNames.add(ClassSummarySheetCreator.SHEET_NAME);
 		} else {
 			checkforMissingClassifierSheets(classSheet);
@@ -567,13 +562,13 @@ public class ExcelStructureValidator {
 
 		Sheet enumSheet = workbook.getSheet(EnumSheetCreator.SHEET_NAME);
 		if (enumSheet == null) {
-			LOGGER.error("Hiányzó munkalap: " + EnumSheetCreator.SHEET_NAME);
+			LOGGER.error("Missing sheet: " + EnumSheetCreator.SHEET_NAME);
 			missingSheetNames.add(EnumSheetCreator.SHEET_NAME);
 		}
 
 		Sheet dataTypeSheet = workbook.getSheet(DataTypeSheetCreator.DATA_TYPE_SHEET_NAME);
 		if (dataTypeSheet == null) {
-			LOGGER.error("Hiányzó munkalap: " + EnumSheetCreator.SHEET_NAME);
+			LOGGER.error("Missing sheet: " + EnumSheetCreator.SHEET_NAME);
 			missingSheetNames.add(EnumSheetCreator.SHEET_NAME);
 		}
 
@@ -585,7 +580,7 @@ public class ExcelStructureValidator {
 			Sheet sheet = workbook.getSheet(sheetName);
 			if (sheet == null) {
 				missingSheetNames.add(sheetName);
-				LOGGER.error("Hiányzó munkalap: " + sheetName);
+				LOGGER.error("Missing sheet: " + sheetName);
 			}
 		}
 	}
@@ -607,7 +602,7 @@ public class ExcelStructureValidator {
 	}
 
 	private void validationErrorMessage(String errorMessage) {
-		MessageDialog.openError(shell, "Excel szerkezeti hiba!", errorMessage);
+		MessageDialog.openError(shell, "Validation error!", errorMessage);
 		System.exit(1);
 	}
 }

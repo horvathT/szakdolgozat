@@ -82,9 +82,9 @@ public class DataTransformer {
 
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		MessageDialog.openError(shell, "",
-				"Adattípus " + dataType + " névvel nem található a(z) " + databaseType + " adattípusai közt!");
+				"DataType with name " + dataType + " not found among the types of " + databaseType);
 		throw new IllegalArgumentException(
-				"Adattípus " + dataType + " névvel nem található a(z) " + databaseType + " adattípusai közt!");
+				"DataType with name " + dataType + " not found among the types of " + databaseType);
 	}
 
 	public static Property applyModelOnProperty(PropertyDataModel dataModel, Property property) {

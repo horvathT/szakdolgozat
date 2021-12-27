@@ -32,7 +32,7 @@ public class ScriptGeneratorHandler {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		String databaseType = DatabaseModelUtil.getDatabaseType(modelPackage);
 		if (databaseType.isEmpty()) {
-			MessageDialog.openError(shell, "Generálási hiba", "A modellen nincs adatbázis típus meghatározva!");
+			MessageDialog.openError(shell, "Generation failed", "The model has no database type set!");
 			System.exit(1);
 		}
 
@@ -58,8 +58,8 @@ public class ScriptGeneratorHandler {
 			postgreSqlScriptGenerator.generateDdlScript();
 
 		} else {
-			MessageDialog.openError(shell, "Generálási hiba",
-					databaseType + " névvel adatbázis implementáció nem található!");
+			MessageDialog.openError(shell, "Generation failed",
+					"SQL implementation with name " + databaseType + " not found!");
 			System.exit(1);
 		}
 

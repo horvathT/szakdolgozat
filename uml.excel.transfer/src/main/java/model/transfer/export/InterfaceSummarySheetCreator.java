@@ -16,7 +16,7 @@ import model.transfer.util.CellAppender;
 
 public class InterfaceSummarySheetCreator extends SheetCreator {
 
-	public static final String SHEET_NAME = "Interfészek";
+	public static final String SHEET_NAME = "Interfaces";
 
 	private Workbook workbook;
 
@@ -86,10 +86,10 @@ public class InterfaceSummarySheetCreator extends SheetCreator {
 		Row row = entitySheet.createRow(0);
 		CellAppender appender = new CellAppender(row);
 		appender.appendCellWithValue("Xmi Id")
-				.appendCellWithValue("Név")
-				.appendCellWithValue("Láthatóság")
-				.appendCellWithValue("Leszármazza")
-				.appendCellWithValue("Leírás");
+				.appendCellWithValue("Name")
+				.appendCellWithValue("Visibility")
+				.appendCellWithValue("Extends")
+				.appendCellWithValue("Comment");
 		makeRowBold(workbook, row);
 	}
 

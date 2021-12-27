@@ -177,11 +177,11 @@ public class InterfaceSheetCreator extends SheetCreator {
 	private int createPropertyHeaderRow(Sheet sheet, int rowNumber) {
 		Row row = sheet.createRow(rowNumber);
 		CellAppender appender = new CellAppender(row);
-		appender.appendCellWithValue("Attribútumok")
+		appender.appendCellWithValue("Attributes")
 				.appendCellWithValue("Xmi ID")
-				.appendCellWithValue("Név")
-				.appendCellWithValue("Típus")
-				.appendCellWithValue("Leírás");
+				.appendCellWithValue("Name")
+				.appendCellWithValue("Type")
+				.appendCellWithValue("Comment");
 		makeRowBold(workbook, row);
 		return ++rowNumber;
 	}
@@ -189,15 +189,15 @@ public class InterfaceSheetCreator extends SheetCreator {
 	private int createMethodHeaderRow(Sheet sheet, int rowNumber) {
 		Row row = sheet.createRow(rowNumber);
 		CellAppender appender = new CellAppender(row);
-		appender.appendCellWithValue("Metódusok")
+		appender.appendCellWithValue("Methods")
 				.appendCellWithValue("Xmi ID")
-				.appendCellWithValue("Név")
-				.appendCellWithValue("Láthatóság")
+				.appendCellWithValue("Name")
+				.appendCellWithValue("visibility")
 				.appendCellWithValue("Abstract")
-				.appendCellWithValue("Visszatérési érték")
-				.appendCellWithValue("Paraméter típus")
-				.appendCellWithValue("Paraméter név")
-				.appendCellWithValue("Leírás");
+				.appendCellWithValue("Return type")
+				.appendCellWithValue("Parameter type")
+				.appendCellWithValue("Parameter name")
+				.appendCellWithValue("Comment");
 		makeRowBold(workbook, row);
 		return ++rowNumber;
 	}

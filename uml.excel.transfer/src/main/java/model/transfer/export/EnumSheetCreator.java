@@ -14,7 +14,7 @@ import model.transfer.util.CellAppender;
 
 public class EnumSheetCreator extends SheetCreator {
 
-	public static final String SHEET_NAME = "Enumerációk";
+	public static final String SHEET_NAME = "Enumerations";
 
 	private Workbook workbook;
 
