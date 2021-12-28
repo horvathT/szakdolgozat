@@ -11,8 +11,7 @@ Require-Bundle: org.eclipse.jface,
  org.eclipse.emf.transaction,
  org.eclipse.ui.workbench,
  org.eclipse.ui.ide,
- org.eclipse.ltk.core.refactoring,
- org.eclipse.uml2.uml
+ org.eclipse.ltk.core.refactoring
 Import-Package: org.eclipse.jdt.core,
  org.eclipse.jdt.core.refactoring.descriptors
 Export-Package: database.modeling.util.resource,
