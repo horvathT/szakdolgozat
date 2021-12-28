@@ -26,7 +26,7 @@ import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 
 /**
- * modell validálása script genrálás előtt.
+ * Modell validálása script genrálás előtt.
  * 
  * @author Horváth Tibor
  *
@@ -42,7 +42,17 @@ public class ModelValidator {
 
 	private Collection<Property> properties;
 
+	/**
+	 * Az idegenkulcsként megjelölt {@link Property}-k és az általuk referált elemek
+	 * kerülnek bele abban az esetben ha a {@link Column} sztereotípusban megadott
+	 * típus nem egyezik.
+	 */
 	private Map<Property, Property> fkTypeConsistency = new HashMap<>();
+
+	/**
+	 * Az idegenkulcsként megjelölt {@link Property}-k és az általuk referált elemek
+	 * kerülnek bele abban az esetben ha a referált elem nullozható.
+	 */
 	private Map<Property, Property> fkReferencedAttrNullable = new HashMap<>();
 	private Set<Property> fkMissingReference = new HashSet<>();
 
@@ -52,6 +62,9 @@ public class ModelValidator {
 		properties = ModelObjectUtil.getProperties(modelPackage.allOwnedElements());
 	}
 
+	/**
+	 * Modell validálása.
+	 */
 	public void validateModel() {
 		Set<Property> propertyMissingType = checkPropertiesForSqlType();
 
@@ -185,6 +198,14 @@ public class ModelValidator {
 		}
 	}
 
+	/**
+	 * Az attribútumok listájából név alapján visszaadja a megfelelő elemet, vagy
+	 * null-t ha nem található.
+	 * 
+	 * @param referencedPropertyName
+	 * @param properties
+	 * @return
+	 */
 	private Property getPropertyByName(String referencedPropertyName, List<Property> properties) {
 		for (Property property : properties) {
 			String name = property.getName();
@@ -195,6 +216,13 @@ public class ModelValidator {
 		return null;
 	}
 
+	/**
+	 * A modell Classifier elemei közül név alapján visszaadja a megfelelő elemet,
+	 * vagy null-t ha nem található.
+	 * 
+	 * @param referencedEntityName
+	 * @return
+	 */
 	private Classifier getEntityByName(String referencedEntityName) {
 		Collection<Classifier> classifiers = ModelObjectUtil.getClassifiers(modelPackage.allOwnedElements());
 		for (Classifier classifier : classifiers) {
@@ -222,6 +250,12 @@ public class ModelValidator {
 		return sb.toString();
 	}
 
+	/**
+	 * A {@link #properties} listán végigiterálva összegyűjti azokat az
+	 * attribútumokat amelyeken nem szerepel Column sztereotípus.
+	 * 
+	 * @return
+	 */
 	private Set<Property> checkPropertiesForSqlType() {
 		Set<Property> typelessProperties = new HashSet<>();
 		for (Property property : properties) {

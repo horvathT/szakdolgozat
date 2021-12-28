@@ -40,7 +40,7 @@
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_v9upUmZ6EeylzpVlcNf4QA" name="class3" type="_2aoBEE1cEeyZ2YO7BIWEHg" association="_v9uCQGZ6EeylzpVlcNf4QA">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v9upU2Z6EeylzpVlcNf4QA"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v9vQYGZ6EeylzpVlcNf4QA" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v9vQYGZ6EeylzpVlcNf4QA" value="*"/>
       </ownedAttribute>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_ElQG8GZ7EeylzpVlcNf4QA" name="childInterfaceOperation">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_IjvVwGZ7EeylzpVlcNf4QA" name="param1">

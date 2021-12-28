@@ -14,10 +14,15 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.jface.fieldassist.FieldDecoration;
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -272,25 +277,31 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 					view.getLength().addVerifyListener(e -> {
 						InputVerifier.verifyNumberFieldLength(e, dtd);
 					});
+					numberFieldLengthDecorator(view.getLength(), dtd.getLengthLowerBound(), dtd.getLengthUpperBound());
 				}
 				if (dtd.hasScale()) {
 					view.getScale().setEnabled(true);
 					view.getScale().addVerifyListener(e -> {
 						InputVerifier.verifyNumberFieldScale(e, dtd);
 					});
+					numberFieldLengthDecorator(view.getScale(), dtd.getScaleLowerBound(), dtd.getScaleUpperBound());
 				}
 				if (dtd.hasPrecision()) {
 					view.getPrecision().setEnabled(true);
 					view.getPrecision().addVerifyListener(e -> {
 						InputVerifier.verifyNumberFieldPrecision(e, dtd);
 					});
+					numberFieldLengthDecorator(view.getPrecision(), dtd.getPrecisionLowerBound(),
+							dtd.getPrecisionUpperBound());
 				}
 				if (dtd.hasDefaulValue()) {
 					view.getDefaultValue().setEnabled(true);
-					if (dtd.hasLength()) {
-						view.getLength().addVerifyListener(e -> {
+					if (dtd.hasPrecision()) {
+						view.getDefaultValue().addVerifyListener(e -> {
 							InputVerifier.verifyDefaultValueBounds(e, dtd);
 						});
+						textFieldLengthDecorator(view.getDefaultValue(), dtd.getPrecisionLowerBound(),
+								dtd.getPrecisionUpperBound());
 					}
 				}
 			} else {
@@ -299,15 +310,38 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 					view.getLength().addVerifyListener(e -> {
 						InputVerifier.verifyNumberFieldLength(e, dtd);
 					});
+					numberFieldLengthDecorator(view.getLength(), dtd.getLengthLowerBound(), dtd.getLengthUpperBound());
 				}
 				if (dtd.hasDefaulValue()) {
 					view.getDefaultValue().setEnabled(true);
 					view.getDefaultValue().addVerifyListener(e -> {
 						InputVerifier.verifyDefaultValueBounds(e, dtd);
 					});
+					textFieldLengthDecorator(view.getDefaultValue(), dtd.getLengthLowerBound(),
+							dtd.getLengthUpperBound());
 				}
 			}
 		}
+	}
+
+	private void numberFieldLengthDecorator(Text inputfield, long lower, long upper) {
+		final ControlDecoration decorator = new ControlDecoration(inputfield, SWT.CENTER | SWT.LEFT);
+		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault()
+				.getFieldDecoration(FieldDecorationRegistry.DEC_WARNING);
+		Image img = fieldDecoration.getImage();
+		decorator.setImage(img);
+		decorator.setDescriptionText("Value must be between " + lower + " and " + upper);
+		decorator.setShowOnlyOnFocus(true);
+	}
+
+	private void textFieldLengthDecorator(Text inputfield, long lower, long upper) {
+		final ControlDecoration decorator = new ControlDecoration(inputfield, SWT.CENTER | SWT.LEFT);
+		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault()
+				.getFieldDecoration(FieldDecorationRegistry.DEC_WARNING);
+		Image img = fieldDecoration.getImage();
+		decorator.setImage(img);
+		decorator.setDescriptionText("Input length must be between " + lower + " and " + upper);
+		decorator.setShowOnlyOnFocus(true);
 	}
 
 	@Override

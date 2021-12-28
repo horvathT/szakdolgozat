@@ -26,16 +26,17 @@ public class InputVerifier {
 			return;
 		}
 
-		String currentInput = ((Text) e.widget).getText();
+		Text text = (Text) e.widget;
+		String currentInput = text.getText();
 		String possibleInput = currentInput.substring(0, e.start) + e.text + currentInput.substring(e.end);
 
 		Long longInput = Long.valueOf(possibleInput);
-		if (dtd.getLengthLowerBound() > longInput) {
+		if (dtd.getLengthLowerBound() >= longInput) {
 			e.doit = false;
 			return;
 		}
 
-		if (dtd.getLengthUpperBound() < longInput) {
+		if (dtd.getLengthUpperBound() <= longInput) {
 			e.doit = false;
 			return;
 		}
@@ -66,12 +67,12 @@ public class InputVerifier {
 		String possibleInput = currentInput.substring(0, e.start) + e.text + currentInput.substring(e.end);
 
 		Long longInput = Long.valueOf(possibleInput);
-		if (dtd.getPrecisionLowerBound() > longInput) {
+		if (dtd.getPrecisionLowerBound() >= longInput) {
 			e.doit = false;
 			return;
 		}
 
-		if (dtd.getPrecisionUpperBound() < longInput) {
+		if (dtd.getPrecisionUpperBound() <= longInput) {
 			e.doit = false;
 			return;
 		}
@@ -102,12 +103,12 @@ public class InputVerifier {
 		String possibleInput = currentInput.substring(0, e.start) + e.text + currentInput.substring(e.end);
 
 		Long longInput = Long.valueOf(possibleInput);
-		if (dtd.getScaleLowerBound() > longInput) {
+		if (dtd.getScaleLowerBound() >= longInput) {
 			e.doit = false;
 			return;
 		}
 
-		if (dtd.getScaleUpperBound() < longInput) {
+		if (dtd.getScaleUpperBound() <= longInput) {
 			e.doit = false;
 			return;
 		}
@@ -139,7 +140,7 @@ public class InputVerifier {
 
 		int precisionLowerBound = dtd.getPrecisionLowerBound();
 		if (precisionLowerBound != 0) {
-			if (precisionLowerBound > possibleInput.length()) {
+			if (precisionLowerBound >= possibleInput.length()) {
 				e.doit = false;
 				return;
 			}
@@ -147,7 +148,7 @@ public class InputVerifier {
 
 		int precisionUpperBound = dtd.getPrecisionUpperBound();
 		if (precisionUpperBound != 0) {
-			if (precisionUpperBound < possibleInput.length()) {
+			if (precisionUpperBound <= possibleInput.length()) {
 				e.doit = false;
 				return;
 			}
@@ -156,7 +157,7 @@ public class InputVerifier {
 		Long longInput = Long.valueOf(possibleInput);
 		Long numericDefaultLowerBound = dtd.getNumericDefaultLowerBound();
 		if (numericDefaultLowerBound != 0) {
-			if (numericDefaultLowerBound > longInput) {
+			if (numericDefaultLowerBound >= longInput) {
 				e.doit = false;
 				return;
 			}
@@ -164,7 +165,7 @@ public class InputVerifier {
 
 		long numericDefaultUpperBound = dtd.getNumericDefaultUpperBound();
 		if (numericDefaultUpperBound != 0) {
-			if (numericDefaultUpperBound < longInput) {
+			if (numericDefaultUpperBound <= longInput) {
 				e.doit = false;
 				return;
 			}
