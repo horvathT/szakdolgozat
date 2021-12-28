@@ -3,6 +3,12 @@ package model.transfer.util;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
+/**
+ * Segédosztály a cellák könnyebb összefűzéséhez.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class CellAppender {
 
 	private Row row;

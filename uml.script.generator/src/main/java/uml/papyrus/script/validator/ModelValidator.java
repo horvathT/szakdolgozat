@@ -25,6 +25,12 @@ import database.modeling.util.stereotype.FKUtil;
 import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 
+/**
+ * modell validálása script genrálás előtt.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ModelValidator {
 
 	private static final Bundle BUNDLE = FrameworkUtil.getBundle(ModelValidator.class);

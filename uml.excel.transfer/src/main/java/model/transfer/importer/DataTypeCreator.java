@@ -15,6 +15,12 @@ import database.modeling.util.uml.ModelObjectUtil;
 import model.transfer.export.DataTypeSheetCreator;
 import model.transfer.util.CellUtil;
 
+/**
+ * Adattípusok létrehozása.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class DataTypeCreator extends ObjectImporter {
 
 	private TransactionalEditingDomain editingDomain;
@@ -26,6 +32,9 @@ public class DataTypeCreator extends ObjectImporter {
 		this.editingDomain = editingDomain;
 	}
 
+	/**
+	 * Adattípusok létrehozása.
+	 */
 	public void createTypes() {
 		Sheet dataTypeSheet = workbook.getSheet(DataTypeSheetCreator.DATA_TYPE_SHEET_NAME);
 

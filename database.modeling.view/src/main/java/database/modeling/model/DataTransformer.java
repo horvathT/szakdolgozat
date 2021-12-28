@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.uml2.uml.Property;
 
+import DatabaseModeling.Column;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
 import database.modeling.util.stereotype.FKUtil;
@@ -16,8 +17,22 @@ import database.modeling.util.stereotype.PKUtil;
 import database.modeling.util.stereotype.ProfileUtil;
 import database.modeling.util.stereotype.StereotypeManagementUtil;
 
+/**
+ * UML modellből érkező adatok és {@link PropertyDataModel} közötti kétirányú
+ * konverziót kezeli.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class DataTransformer {
 
+	/**
+	 * UML modellből érkező {@link Property} objektum konvertálása
+	 * {@link PropertyDataModel} objektummá.
+	 * 
+	 * @param property
+	 * @return
+	 */
 	public static PropertyDataModel propertyToSqlDataModel(Property property) {
 		PropertyDataModel dataModel = new PropertyDataModel();
 
@@ -68,6 +83,13 @@ public class DataTransformer {
 		return dataModel;
 	}
 
+	/**
+	 * A {@link DatabaseTypesUtil}-ban definiált {@link DataTypeDefinition}
+	 * lekérdezése a {@link Column} sztereotípusba beleírt típusnév szerint.
+	 * 
+	 * @param property
+	 * @return
+	 */
 	private static DataTypeDefinition getDataTypeDefinition(Property property) {
 		String dataType = ColumnUtil.getDataType(property);
 		String databaseType = DatabaseModelUtil.getDatabaseType(property.getModel());
@@ -87,6 +109,13 @@ public class DataTransformer {
 				"DataType with name " + dataType + " not found among the types of " + databaseType);
 	}
 
+	/**
+	 * Adatmodell alkalmazása a paraméterben kapott {@link Property} objektumon.
+	 * 
+	 * @param dataModel
+	 * @param property
+	 * @return
+	 */
 	public static Property applyModelOnProperty(PropertyDataModel dataModel, Property property) {
 		ProfileUtil.applyPofile(property);
 		StereotypeManagementUtil.applyStereotype(property, ColumnUtil.STEREOTYPE_QUALIFIED_NAME);

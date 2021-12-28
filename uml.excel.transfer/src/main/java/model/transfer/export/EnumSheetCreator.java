@@ -12,6 +12,12 @@ import org.eclipse.uml2.uml.EnumerationLiteral;
 
 import model.transfer.util.CellAppender;
 
+/**
+ * Enumeráció munkalap látrehozása.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class EnumSheetCreator extends SheetCreator {
 
 	public static final String SHEET_NAME = "Enumerations";
@@ -58,6 +64,11 @@ public class EnumSheetCreator extends SheetCreator {
 		row.appendCellWithValue(EcoreUtil.getURI(enumeration).fragment()).appendCellWithValue(enumeration.getName());
 	}
 
+	/**
+	 * Munkalap fejléc létrehozása.
+	 * 
+	 * @param sheet
+	 */
 	private void createEnumHeaderRow(Sheet sheet) {
 		Row row = sheet.createRow(0);
 		CellAppender appender = new CellAppender(row);

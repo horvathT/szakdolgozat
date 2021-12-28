@@ -8,6 +8,13 @@ import java.util.Set;
 
 import database.modeling.model.DataTypeDefinition.InputType;
 
+/**
+ * Különböző SQL implementációk és adattípusaik inicializálását, tárolását, és
+ * lekérését kezeli.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class DatabaseTypesUtil {
 
 	private Map<String, List<DataTypeDefinition>> databaseTypeMap = new HashMap<>();
@@ -129,8 +136,8 @@ public class DatabaseTypesUtil {
 		List<DataTypeDefinition> postgreSqlDataTypes = new ArrayList<>();
 		postgreSqlDataTypes.add(DataTypeDefinition.of().name("").hasDefaulValue(false));
 		postgreSqlDataTypes.add(DataTypeDefinition.of().name("BIGINT").setType(InputType.NUMERIC)
-				.rangeLowerBound(-9223372036854775808L)
-				.rangeUpperBound(+9223372036854775807L));
+				.numericDefaultLowerBound(-9223372036854775808L)
+				.numericDefaultUpperBound(+9223372036854775807L));
 		postgreSqlDataTypes.add(DataTypeDefinition.of().name("BIGSERIAL").hasDefaulValue(false));
 		postgreSqlDataTypes.add(DataTypeDefinition.of().name("BIT").setType(InputType.TEXT)
 				.lengthLowerBound(0)

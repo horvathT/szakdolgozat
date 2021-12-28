@@ -24,15 +24,27 @@ import model.transfer.export.ModelExporter;
 import model.transfer.importer.ModelImporter;
 import model.transfer.importer.validator.ExcelStructureValidator;
 
+/**
+ * Excel importálás kezelését végzi.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ExcelImportHandler {
 
+	/**
+	 * Importálandó excel fájl validálását végzi, majd ha nincs benne hiba az Excel
+	 * importálás végrehajtását.
+	 * 
+	 * @param selection
+	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
 
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		Package modelPackage = EclipseSelectionUtil.getPackage(EclipseSelectionUtil.getFirstSelected(selection));
 
-		String excelFolderLoc = getExcelFolderPath(modelPackage);
+		String excelFolderLoc = getFolderPath(modelPackage);
 		String filePath = importFileDialog(shell, excelFolderLoc);
 		if (filePath == null) {
 			return;
@@ -58,11 +70,25 @@ public class ExcelImportHandler {
 		}
 	}
 
+	/**
+	 * Ellenőrzi, hogy a kiválasztott elemen végrehajtható-e az importálás.
+	 * 
+	 * @param selection
+	 * @return
+	 */
 	@CanExecute
 	public boolean canExecute(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
 		return EclipseSelectionUtil.getPackage(EclipseSelectionUtil.getFirstSelected(selection)) != null;
 	}
 
+	/**
+	 * Kinyitja a fájlkezelőt az importálandó fájl kiválasztásához. Csak a ".xlsx"
+	 * kiterjesztésű fájlokat listázza.
+	 * 
+	 * @param shell
+	 * @param defPath
+	 * @return
+	 */
 	private String importFileDialog(Shell shell, String defPath) {
 		FileDialog dialog = new FileDialog(shell, SWT.OPEN);
 		dialog.setFilterExtensions(new String[] { "*.xlsx" });
@@ -70,7 +96,13 @@ public class ExcelImportHandler {
 		return dialog.open();
 	}
 
-	private String getExcelFolderPath(Package modelPackage) {
+	/**
+	 * A modell szülőkönyvtárának elérési útvonalával tér vissza.
+	 * 
+	 * @param modelPackage
+	 * @return
+	 */
+	private String getFolderPath(Package modelPackage) {
 		IPath path = EclipseResourceUtil.getResourceFileLocationPath(modelPackage.eResource());
 		return path.removeLastSegments(1).toOSString();
 	}

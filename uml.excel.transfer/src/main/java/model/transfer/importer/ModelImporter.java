@@ -11,6 +11,12 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.uml2.uml.Package;
 
+/**
+ * Excel fájl importálást végzi.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ModelImporter {
 
 	private Package modelPackage;
@@ -24,6 +30,15 @@ public class ModelImporter {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Típus szerint szétválogatva {@link RecordingCommand}-okba csoportosítva
+	 * végrehajtja az importálást. Az elemek létrehozását kell előre venni mert
+	 * ameddig nincsenek rögzítve a modellben egy {@link RecordingCommand}
+	 * segítségével addig nem lehet asszociációkat létrhozni közöttük.
+	 * 
+	 * @throws EncryptedDocumentException
+	 * @throws IOException
+	 */
 	public void executeImport() throws EncryptedDocumentException, IOException {
 		Workbook workbook = WorkbookFactory.create(new File(filePath));
 		editingDomain = TransactionUtil.getEditingDomain(modelPackage);

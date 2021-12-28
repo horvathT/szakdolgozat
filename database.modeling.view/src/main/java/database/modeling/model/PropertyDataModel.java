@@ -1,5 +1,12 @@
 package database.modeling.model;
 
+/**
+ * A {@link Property}-n alkalmazható sztereotípusok és adataikat reprezentáló
+ * modell objektum.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class PropertyDataModel {
 
 	private String xmiId;

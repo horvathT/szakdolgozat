@@ -38,8 +38,8 @@ import org.slf4j.LoggerFactory;
 
 import database.modeling.model.DataTypeDefinition.InputType;
 import database.modeling.util.InputVerifier;
-import database.modeling.util.resource.EclipseModelUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
+import database.modeling.util.uml.ModelObjectUtil;
 import database.modeling.view.DatabaseModelingView;
 
 public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
@@ -101,18 +101,18 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 		// modellen lévő összes adat begyűjtése
 		// adatok kiírása xml-be vagy gson/json serializer
-		ModelConverter converter = new ModelConverter(model, view);
+		ModelConverter converter = new ModelConverter(model);
 		converter.writeModelToFile(curentlySelectedDB);
 
-		// modell letakarítása
+		// minden sztereotípus leszedése a modellről
 		converter.clearModel();
 
-		// apply on model
+		// fájl adatok
 		converter.applyFileOnModel(newlySelectedDbName);
 
 		// view frissítése az új db adatokkal
 		String fragment = EcoreUtil.getURI(currentPropertySelection).fragment();
-		Property propertySelectionAfterDBChange = EclipseModelUtil.getPropertyByXmiId(fragment, model);
+		Property propertySelectionAfterDBChange = ModelObjectUtil.getPropertyByXmiId(fragment, model);
 		if (propertySelectionAfterDBChange != null) {
 			updateDataInView(propertySelectionAfterDBChange);
 		} else {
@@ -157,6 +157,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	}
 
+	/**
+	 * Képernyő alapállapotba állítása.
+	 */
 	private void resetView() {
 		resetTypeParameterFields();
 		resetConstraintfields();
@@ -164,6 +167,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getDataTypeCombo().select(0);
 	}
 
+	/**
+	 * Megszorításokat kezelő elemek alapállapotba állítása.
+	 */
 	private void resetConstraintfields() {
 		view.getNullableCheck().setSelection(false);
 		view.getUniqueCheck().setSelection(false);
@@ -178,6 +184,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getReferencedProperty().setEnabled(false);
 	}
 
+	/**
+	 * Adattípus paraméter mezők alapállapotba állítása.
+	 */
 	private void resetTypeParameterFields() {
 		view.getLength().setText("");
 		view.getLength().setEnabled(false);
@@ -189,6 +198,11 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getDefaultValue().setEnabled(false);
 	}
 
+	/**
+	 * A view adatainak frissítése a modell alapján.
+	 * 
+	 * @param model
+	 */
 	private void updateViewFromModel(PropertyDataModel model) {
 		DataTypeDefinition dataType = model.getSqlType();
 		if (dataType == null) {
@@ -215,6 +229,11 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
 	}
 
+	/**
+	 * Megszorításokat kezelő elemek frissítése.
+	 * 
+	 * @param model
+	 */
 	private void updateConstraintCheckboxSegment(PropertyDataModel model) {
 		view.getPrimaryKeyCheck().setSelection(model.isPrimaryKey());
 		if (model.isPrimaryKey()) {
@@ -231,6 +250,11 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		}
 	}
 
+	/**
+	 * Adattípus paraméter mezők tiltása/engedélyezése elérhetőség alapján.
+	 * 
+	 * @param dtd
+	 */
 	public void changeDataTypeInpuScheme(DataTypeDefinition dtd) {
 		if (dtd.getName().isEmpty()) {
 			resetView();
@@ -279,7 +303,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 				if (dtd.hasDefaulValue()) {
 					view.getDefaultValue().setEnabled(true);
 					view.getDefaultValue().addVerifyListener(e -> {
-						InputVerifier.verifyTextFieldLength(e, dtd);
+						InputVerifier.verifyDefaultValueBounds(e, dtd);
 					});
 				}
 			}
@@ -296,6 +320,10 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		checkboxEditingEnabled(isEnabled);
 	}
 
+	/**
+	 * Megszorításokat kezelő elemek tiltása/engedélyezése
+	 * 
+	 */
 	private void checkboxEditingEnabled(boolean isEnabled) {
 		view.getNullableCheck().setEnabled(isEnabled);
 		view.getUniqueCheck().setEnabled(isEnabled);
@@ -305,6 +333,9 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getForeignKeyCheck().setEnabled(isEnabled);
 	}
 
+	/**
+	 * Aktív kiválasztás nevének frissítése.
+	 */
 	private void setCurrentSelectionLabel() {
 		Property property = view.getCurrentPropertySelection();
 
@@ -315,6 +346,11 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		}
 	}
 
+	/**
+	 * Beviteli mezők ürességének ellenőrzése.
+	 * 
+	 * @return
+	 */
 	private boolean isEmpty() {
 		if (view.getNullableCheck().getSelection() || view.getUniqueCheck().getSelection()
 				|| view.getPrimaryKeyCheck().getSelection() || view.getForeignKeyCheck().getSelection()) {
@@ -340,6 +376,11 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		return combo.getText().isEmpty();
 	}
 
+	/**
+	 * Model frissítése a View alapján.
+	 * 
+	 * @return
+	 */
 	public PropertyDataModel updateModelFromView() {
 		PropertyDataModel model = new PropertyDataModel();
 		model.setNullable(view.getNullableCheck().getSelection());
@@ -367,6 +408,11 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		fillDatatTypeCombo(newDbName);
 	}
 
+	/**
+	 * Kiválasztott SQL implementáció adattípusainak betöltése a legördülő menübe.
+	 * 
+	 * @param newDbName
+	 */
 	private void fillDatatTypeCombo(String newDbName) {
 		Map<String, List<DataTypeDefinition>> dbMap = dbUtil.getDatabaseTypeMap();
 		List<DataTypeDefinition> list = dbMap.get(newDbName);
@@ -391,6 +437,12 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		return dbUtil.getDatabases();
 	}
 
+	/**
+	 * A referálható entitások és azonosítójuk gyűjteményét gyűjti össze.
+	 * 
+	 * @param property
+	 * @return
+	 */
 	private Map<String, String> getReferencedEntityNameMap(Property property) {
 		Map<String, String> referencedEntityFragmentsByName = new HashMap<>();
 
@@ -437,6 +489,12 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		}
 	}
 
+	/**
+	 * {@link Classifier} attribútumait gyűjti össze.
+	 * 
+	 * @param classifierByName
+	 * @return
+	 */
 	private List<Property> getOwnedAttributes(Classifier classifierByName) {
 		List<Property> propertyList = new ArrayList<>();
 		for (Property property : classifierByName.getAllAttributes()) {
@@ -451,6 +509,12 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		return property.getAssociation() != null;
 	}
 
+	/**
+	 * {@link Classifier} lekérdezése név alapján.
+	 * 
+	 * @param name
+	 * @return
+	 */
 	private Classifier getClassifierByName(String name) {
 		Model model = view.getCurrentPropertySelection().getModel();
 		Collection<Classifier> classifiers = getClassifiers(model.allOwnedElements());
@@ -462,6 +526,13 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		return null;
 	}
 
+	/**
+	 * A paraméterbe kapott elemek listájából kiszűri a {@link Classifer}
+	 * típusúakat.
+	 * 
+	 * @param elementList
+	 * @return
+	 */
 	public static Collection<Classifier> getClassifiers(EList<Element> elementList) {
 		Collection<Classifier> classifiers = EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.INTERFACE);
 		classifiers.addAll(EcoreUtil.getObjectsByType(elementList, UMLPackage.Literals.CLASS));

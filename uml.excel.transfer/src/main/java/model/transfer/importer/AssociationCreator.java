@@ -31,6 +31,12 @@ import model.transfer.export.InterfaceSummarySheetCreator;
 import model.transfer.util.CellUtil;
 import model.transfer.util.ExcelReaderUtil;
 
+/**
+ * Asszociáció adatok felovasása Excelből és létrhozása modellben.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class AssociationCreator extends ObjectImporter {
 
 	private List<Classifier> classifiers = new ArrayList<>();
@@ -52,13 +58,16 @@ public class AssociationCreator extends ObjectImporter {
 	}
 
 	public void createAssociations() {
-
 		for (AssociationModel associationModel : associationsFromExcel) {
 			createAssociation(associationModel);
 		}
-
 	}
 
+	/**
+	 * Asszociáció létrehozása. Már létező Asszociáció esetén az adatok frissítése.
+	 * 
+	 * @param associationData
+	 */
 	private void createAssociation(AssociationModel associationData) {
 
 		Association associationInModel = getAssociationFromModel(associationData.getModelId());
@@ -88,6 +97,13 @@ public class AssociationCreator extends ObjectImporter {
 		}
 	}
 
+	/**
+	 * Egyedi azonosító alapján Asszociáció keresése a modellben. Ha nem létezik
+	 * null-al tér vissza.
+	 * 
+	 * @param modelId
+	 * @return
+	 */
 	private Association getAssociationFromModel(String modelId) {
 		if (modelId != null && !modelId.isEmpty()) {
 			Collection<Association> associations = ModelObjectUtil.getAssociations(modelPackage.allOwnedElements());
@@ -100,6 +116,13 @@ public class AssociationCreator extends ObjectImporter {
 		return null;
 	}
 
+	/**
+	 * Asszociáció adatok összegyűtése excelből és {@link AssociationModel}
+	 * oberktumokká alakítása.
+	 * 
+	 * @param associationSheet
+	 * @return
+	 */
 	private List<AssociationModel> getAssociationsFromExcel(Sheet associationSheet) {
 		List<AssociationModel> excelAssociations = new ArrayList<>();
 		int lastRowNum = associationSheet.getLastRowNum();
@@ -162,6 +185,12 @@ public class AssociationCreator extends ObjectImporter {
 		return AggregationKind.getByName(stringValue);
 	}
 
+	/**
+	 * Asszociáció adatainak frissítése.
+	 * 
+	 * @param associationInModel
+	 * @param assoc
+	 */
 	private void updateValues(Association associationInModel, AssociationModel assoc) {
 		EList<Property> memberEnds = associationInModel.getMemberEnds();
 		Property end2 = memberEnds.get(0);
@@ -211,6 +240,9 @@ public class AssociationCreator extends ObjectImporter {
 		MessageDialog.openWarning(shell, "Warning", message);
 	}
 
+	/**
+	 * A modellben még igen de az Excelben már nem szereplő asszociációk törlése.
+	 */
 	public void removeDeletedAssociations() {
 		Collection<Association> associations = ModelObjectUtil.getAssociations(modelPackage.allOwnedElements());
 		for (Association association : associations) {
@@ -244,11 +276,17 @@ public class AssociationCreator extends ObjectImporter {
 		return false;
 	}
 
+	/**
+	 * Entitások közötti öröklődési kapcsolatok létrehozása.
+	 */
 	public void createEntityHierarchy() {
 		createInterfaceGeneralizations();
 		createClassHierarchy();
 	}
 
+	/**
+	 * Osztályok öröklődési kapcsolatainak létrehozása.
+	 */
 	private void createClassHierarchy() {
 		Sheet classSummarySheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
 		int lastRowNum = classSummarySheet.getLastRowNum();
@@ -280,6 +318,9 @@ public class AssociationCreator extends ObjectImporter {
 		}
 	}
 
+	/**
+	 * Intrefészek öröklődési kapcsolatainak létrehozása.
+	 */
 	private void createInterfaceGeneralizations() {
 		Sheet interfaceSummarySheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
 		int lastRowNum = interfaceSummarySheet.getLastRowNum();

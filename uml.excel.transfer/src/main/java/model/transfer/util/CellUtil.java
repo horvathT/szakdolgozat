@@ -3,8 +3,20 @@ package model.transfer.util;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 
+/**
+ * Segédosztály a cellák értékeinek kiolvasásához.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class CellUtil {
 
+	/**
+	 * Cella értékének visszaadása szövegként.
+	 * 
+	 * @param cell
+	 * @return
+	 */
 	public static String getStringCellValue(Cell cell) {
 		if (cell == null) {
 			return "";
@@ -24,6 +36,12 @@ public class CellUtil {
 		return "";
 	}
 
+	/**
+	 * Cella értékének visszaadása számként.
+	 * 
+	 * @param cell
+	 * @return
+	 */
 	public static int getNumericCellValue(Cell cell) {
 		if (cell == null) {
 			return 0;

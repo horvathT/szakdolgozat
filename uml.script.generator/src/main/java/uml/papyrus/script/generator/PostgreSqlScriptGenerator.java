@@ -26,8 +26,7 @@ public class PostgreSqlScriptGenerator extends ScriptGenerator {
 	}
 
 	@Override
-	protected String foreignKeyConstraint(String classifierName, Map<String, List<Property>> fkMap,
-			Entry<String, List<Property>> entry) {
+	protected String foreignKeyConstraint(String classifierName, Entry<String, List<Property>> entry) {
 		String referredEntityName = entry.getKey();
 		List<Property> fkPropList = entry.getValue();
 

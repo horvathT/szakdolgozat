@@ -15,10 +15,15 @@ import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.Property;
-import org.eclipse.uml2.uml.Type;
 
 import model.transfer.util.CellAppender;
 
+/**
+ * Interfész munkalapok létrehozása.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class InterfaceSheetCreator extends SheetCreator {
 
 	private Workbook workbook;
@@ -30,6 +35,11 @@ public class InterfaceSheetCreator extends SheetCreator {
 		this.interfaces = interfaces;
 	}
 
+	/**
+	 * Interfész munkalapok létrehozása.
+	 * 
+	 * @return
+	 */
 	public List<Sheet> createInterfaceSheets() {
 		List<Sheet> sheets = new ArrayList<>();
 		for (Interface interfac : interfaces) {
@@ -38,6 +48,13 @@ public class InterfaceSheetCreator extends SheetCreator {
 		return sheets;
 	}
 
+	/**
+	 * Intrefész munkalapjának létrehozása.
+	 * 
+	 * @param workbook
+	 * @param interfac
+	 * @return
+	 */
 	private Sheet createInterfacePropertySheet(Workbook workbook, Interface interfac) {
 		Sheet sheet = workbook.createSheet(interfac.getName());
 		int rowNumber = 0;
@@ -51,6 +68,14 @@ public class InterfaceSheetCreator extends SheetCreator {
 		return sheet;
 	}
 
+	/**
+	 * Metódus sorok feltöltése.
+	 * 
+	 * @param sheet
+	 * @param interfac
+	 * @param rowNumber
+	 * @return
+	 */
 	private int fillMethodrows(Sheet sheet, Interface interfac, int rowNumber) {
 		EList<Operation> ownedOperations = interfac.getOwnedOperations();
 
@@ -60,6 +85,14 @@ public class InterfaceSheetCreator extends SheetCreator {
 		return rowNumber;
 	}
 
+	/**
+	 * Metódus adatai alapján sor feltöltése.
+	 * 
+	 * @param sheet
+	 * @param rowNumber
+	 * @param operation
+	 * @return
+	 */
 	private int fillMethodRow(Sheet sheet, int rowNumber, Operation operation) {
 		Row row = sheet.createRow(rowNumber);
 
@@ -82,6 +115,14 @@ public class InterfaceSheetCreator extends SheetCreator {
 		return rowNumber;
 	}
 
+	/**
+	 * Lista paramétereinek sorokká alakítása.
+	 * 
+	 * @param rowNumber
+	 * @param sheet
+	 * @param ownedParameters
+	 * @return
+	 */
 	private int appendRemainingParameters(int rowNumber, Sheet sheet, List<Parameter> ownedParameters) {
 		for (Parameter parameter : ownedParameters) {
 			ParameterDirectionKind direction = parameter.getDirection();
@@ -108,48 +149,6 @@ public class InterfaceSheetCreator extends SheetCreator {
 		return rowNumber;
 	}
 
-	private Parameter popFirstInputParam(List<Parameter> ownedParameters) {
-		for (int i = 1; i < ownedParameters.size(); i++) {
-			Parameter parameter = ownedParameters.get(i);
-			ParameterDirectionKind direction = parameter.getDirection();
-			if (!(direction.getValue() == ParameterDirectionKind.RETURN)) {
-				ownedParameters.remove(parameter);
-				return parameter;
-			}
-		}
-		return null;
-	}
-
-	private String getParameterName(Parameter param) {
-		if (param == null) {
-			return "";
-		}
-		return param.getName();
-	}
-
-	private String getParameterType(Parameter param) {
-		if (param == null) {
-			return "";
-		}
-
-		if (param.getType() != null) {
-			return param.getType().getName();
-		}
-
-		return "";
-	}
-
-	private String getReturnType(Operation operation) {
-		Parameter returnResult = operation.getReturnResult();
-		if (returnResult != null) {
-			Type returnResultType = returnResult.getType();
-			if (returnResultType != null) {
-				return returnResultType.getName();
-			}
-		}
-		return "";
-	}
-
 	private int fillPropertyRows(Sheet sheet, Interface interfac, int rowNumber) {
 		EList<Property> allAttributes = interfac.getOwnedAttributes();
 
@@ -174,6 +173,13 @@ public class InterfaceSheetCreator extends SheetCreator {
 				.appendCellWithValue(getFirstComment(property));
 	}
 
+	/**
+	 * Attribútum fejléc létrehozása.
+	 * 
+	 * @param sheet
+	 * @param rowNumber
+	 * @return
+	 */
 	private int createPropertyHeaderRow(Sheet sheet, int rowNumber) {
 		Row row = sheet.createRow(rowNumber);
 		CellAppender appender = new CellAppender(row);
@@ -186,6 +192,13 @@ public class InterfaceSheetCreator extends SheetCreator {
 		return ++rowNumber;
 	}
 
+	/**
+	 * Metódus fejléc létrehozása.
+	 * 
+	 * @param sheet
+	 * @param rowNumber
+	 * @return
+	 */
 	private int createMethodHeaderRow(Sheet sheet, int rowNumber) {
 		Row row = sheet.createRow(rowNumber);
 		CellAppender appender = new CellAppender(row);

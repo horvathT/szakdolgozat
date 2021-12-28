@@ -14,6 +14,12 @@ import org.eclipse.uml2.uml.Interface;
 
 import model.transfer.util.CellAppender;
 
+/**
+ * Interfész összegző munkalap létrehozása.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class InterfaceSummarySheetCreator extends SheetCreator {
 
 	public static final String SHEET_NAME = "Interfaces";
@@ -27,6 +33,11 @@ public class InterfaceSummarySheetCreator extends SheetCreator {
 		this.interfaces = interfaces;
 	}
 
+	/**
+	 * Interfész összegző munkalap létrehozása.
+	 * 
+	 * @return
+	 */
 	public Sheet createSheet() {
 		Sheet interfaceSheet = workbook.createSheet(SHEET_NAME);
 		createEntityHeaderRow(interfaceSheet);
@@ -34,6 +45,12 @@ public class InterfaceSummarySheetCreator extends SheetCreator {
 		return interfaceSheet;
 	}
 
+	/**
+	 * Interfészek adatai alapján sorok feltöltése.
+	 * 
+	 * @param interfaces
+	 * @param interfacSheet
+	 */
 	private void fillEntityRows(Collection<Interface> interfaces, Sheet interfacSheet) {
 		int rowNumber = 1;
 		for (Interface interfac : interfaces) {
@@ -41,6 +58,14 @@ public class InterfaceSummarySheetCreator extends SheetCreator {
 		}
 	}
 
+	/**
+	 * Interfész adatai alapján sorok feltöltése.
+	 * 
+	 * @param interfacSheet
+	 * @param rowNumber
+	 * @param interfac
+	 * @return
+	 */
 	private int fillEntityRow(Sheet interfacSheet, int rowNumber, Interface interfac) {
 		Row row = interfacSheet.createRow(rowNumber);
 
@@ -57,6 +82,15 @@ public class InterfaceSummarySheetCreator extends SheetCreator {
 		return rowNumber;
 	}
 
+	/**
+	 * Ha egynél több Interfészt származik le akkor, akkor atöbbi itt kerül
+	 * kiírásra.
+	 * 
+	 * @param rowNumber
+	 * @param interfacSheet
+	 * @param extendedInterfaces
+	 * @return
+	 */
 	private int appendRemainingExtendedInterfaceLines(int rowNumber, Sheet interfacSheet,
 			EList<Generalization> extendedInterfaces) {
 
@@ -82,6 +116,11 @@ public class InterfaceSummarySheetCreator extends SheetCreator {
 		return general.getName();
 	}
 
+	/**
+	 * Fejléc létrehozása.
+	 * 
+	 * @param entitySheet
+	 */
 	private void createEntityHeaderRow(Sheet entitySheet) {
 		Row row = entitySheet.createRow(0);
 		CellAppender appender = new CellAppender(row);

@@ -2,6 +2,12 @@ package database.modeling.util.stereotype;
 
 import org.eclipse.uml2.uml.Property;
 
+/**
+ * {@link Colum} sztereotípus és elemeinek kezelését vézi.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ColumnUtil {
 	private static final String SCALE = "scale";
 	private static final String PRECISION = "precision";

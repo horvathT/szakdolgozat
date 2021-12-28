@@ -21,8 +21,20 @@ import uml.papyrus.script.generator.OracleScriptGenerator;
 import uml.papyrus.script.generator.PostgreSqlScriptGenerator;
 import uml.papyrus.script.validator.ModelValidator;
 
+/**
+ * Script generálás kezelése.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ScriptGeneratorHandler {
 
+	/**
+	 * Model validálása. Ha minden adat megfelelő a modellen szereplő SQL
+	 * implmentáció jelölés szerinti generálás végrehajtása.
+	 * 
+	 * @param selection
+	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
 		Package modelPackage = EclipseSelectionUtil.getPackage(EclipseSelectionUtil.getFirstSelected(selection));
@@ -65,11 +77,23 @@ public class ScriptGeneratorHandler {
 
 	}
 
+	/**
+	 * Ellenőrzi, hogy a kijelölt elemen végrehajtható-e a script generálás.
+	 * 
+	 * @param selection
+	 * @return
+	 */
 	@CanExecute
 	public boolean canExecute(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
 		return EclipseSelectionUtil.getPackage(EclipseSelectionUtil.getFirstSelected(selection)) != null;
 	}
 
+	/**
+	 * Féjlkezelő kinyitása a célmappa kiválasztásához.
+	 * 
+	 * @param shell
+	 * @return
+	 */
 	private String openFileDialog(Shell shell) {
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE);
 		dialog.setFilterExtensions(new String[] { "*.sql" });

@@ -2,6 +2,14 @@ package database.modeling.util.stereotype;
 
 import org.eclipse.uml2.uml.Package;
 
+import DatabaseModeling.DatabaseModel;
+
+/**
+ * {@link DatabaseModel} sztereotípus és elemeinek kezelését vézi.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class DatabaseModelUtil {
 	public final static String STEREOTYPE_QUALIFIED_NAME = "DatabaseModeling::DatabaseModel";
 	private final static String DATABASE_TYPE = "databaseType";

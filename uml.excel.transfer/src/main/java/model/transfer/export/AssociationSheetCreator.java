@@ -12,6 +12,12 @@ import org.eclipse.uml2.uml.Property;
 
 import model.transfer.util.CellAppender;
 
+/**
+ * Excel munkalap létrehozása az asszociációk számára.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class AssociationSheetCreator extends SheetCreator {
 
 	public static final String ASSOCIATION_SHEET_NAME = "Associations";
@@ -25,6 +31,11 @@ public class AssociationSheetCreator extends SheetCreator {
 		this.associations = associations;
 	}
 
+	/**
+	 * Munkalap létrehozása.
+	 * 
+	 * @return
+	 */
 	public Sheet createSheet() {
 		Sheet associationSheet = workbook.createSheet(ASSOCIATION_SHEET_NAME);
 		createAssociationHeaderRow(associationSheet);
@@ -32,6 +43,12 @@ public class AssociationSheetCreator extends SheetCreator {
 		return associationSheet;
 	}
 
+	/**
+	 * Sorok feltöltése.
+	 * 
+	 * @param associationSheet
+	 * @param associations
+	 */
 	private void fillAssociationRows(Sheet associationSheet, Collection<Association> associations) {
 		int rowNumber = 1;
 		for (Association association : associations) {
@@ -41,6 +58,12 @@ public class AssociationSheetCreator extends SheetCreator {
 		}
 	}
 
+	/**
+	 * Asszociáció adatainak sorrá konvertálása.
+	 * 
+	 * @param row
+	 * @param association
+	 */
 	private void fillAssociationRow(Row row, Association association) {
 		EList<Property> memberEnds = association.getMemberEnds();
 		Property otherEnd = memberEnds.get(0);
@@ -61,6 +84,11 @@ public class AssociationSheetCreator extends SheetCreator {
 
 	}
 
+	/**
+	 * Asszociáció munkalap fejléc létrehozása.
+	 * 
+	 * @param associationSheet
+	 */
 	private void createAssociationHeaderRow(Sheet associationSheet) {
 		Row row = associationSheet.createRow(0);
 		CellAppender appender = new CellAppender(row);

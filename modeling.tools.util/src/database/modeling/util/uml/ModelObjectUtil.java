@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClassifier;
@@ -25,6 +26,14 @@ import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLPackage;
 
+import database.modeling.util.resource.EclipseResourceUtil;
+
+/**
+ * UML modellen gyakran alkalmazott függvények gyűjteménye.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ModelObjectUtil {
 
 	public static Collection<Property> getProperties(EList<Element> elementList) {
@@ -74,6 +83,13 @@ public class ModelObjectUtil {
 		return dataTypes;
 	}
 
+	/**
+	 * Új komment létrehozása a paraméterben akpott tartalommla a paraméterben
+	 * kapott elemen.
+	 * 
+	 * @param element
+	 * @param comment
+	 */
 	public static void addComment(NamedElement element, String comment) {
 		if (!comment.isEmpty()) {
 			element.createOwnedComment().setBody(comment);
@@ -91,5 +107,31 @@ public class ModelObjectUtil {
 			}
 		}
 		return collection;
+	}
+
+	/**
+	 * Egyedi azonosító alapján megkeresi a hozzá tartozó {@link Property}-t. Nem
+	 * létező elem esetén nullal tér vissza.
+	 * 
+	 * @param xmiId
+	 * @param model
+	 * @return
+	 */
+	public static Property getPropertyByXmiId(String xmiId, Model model) {
+		Collection<Property> propertiesFromModel = getPropertiesFromModel(model);
+		for (Property property : propertiesFromModel) {
+			if (EcoreUtil.getURI(property).fragment().equals(xmiId)) {
+				return property;
+			}
+		}
+		return null;
+	}
+
+	public static Collection<Property> getPropertiesFromModel(Model model) {
+		return getProperties(model.allOwnedElements());
+	}
+
+	public static IPath getModelFilePath(Model model) {
+		return EclipseResourceUtil.getResourceFileLocationPath(model.eResource());
 	}
 }

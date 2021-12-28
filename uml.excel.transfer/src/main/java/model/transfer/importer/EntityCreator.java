@@ -18,6 +18,12 @@ import model.transfer.export.InterfaceSummarySheetCreator;
 import model.transfer.util.CellUtil;
 import model.transfer.util.ExcelReaderUtil;
 
+/**
+ * Entitások létrehozása.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class EntityCreator extends ObjectImporter {
 
 	public EntityCreator(Workbook workbook, Package modelPackage) {
@@ -29,6 +35,9 @@ public class EntityCreator extends ObjectImporter {
 		createClasses();
 	}
 
+	/**
+	 * A modellben még igen de az Excelben már nem szereplő entitások törlése.
+	 */
 	public void removeDeletedEntities() {
 		removeDeletedInterfaces();
 		removeDeletedClasses();

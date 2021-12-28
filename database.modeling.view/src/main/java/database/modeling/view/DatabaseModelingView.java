@@ -39,6 +39,12 @@ import database.modeling.handler.DatabaseSelectionListener;
 import database.modeling.model.DataTypeDefinition;
 import database.modeling.model.PropertyEditingViewModelImpl;
 
+/**
+ * Az adatbázis modellezést segítő képernyő.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class DatabaseModelingView {
 
 	private Text length;
@@ -78,11 +84,6 @@ public class DatabaseModelingView {
 	private SelectionAdapter refernecedEntitySelectionListener;
 	private FocusListener referencedPropertyFocusListener;
 	private ComboViewer sqlTypeComboViewer;
-
-	@Inject
-	public DatabaseModelingView() {
-
-	}
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
@@ -188,6 +189,9 @@ public class DatabaseModelingView {
 
 	}
 
+	/**
+	 * Kiejlölése esetén frissíti a referencia attribútum mező adatait.
+	 */
 	private void referencePropertyFocusListener() {
 		referencedPropertyFocusListener = new FocusListener() {
 
@@ -209,6 +213,10 @@ public class DatabaseModelingView {
 		referencedProperty.addFocusListener(referencedPropertyFocusListener);
 	}
 
+	/**
+	 * Referencia entitás váltás esetén frissíti a referált attribútum mező
+	 * tartalmát.
+	 */
 	private void referenceEntitySelectionListener() {
 		refernecedEntitySelectionListener = new SelectionAdapter() {
 			@Override
@@ -223,6 +231,9 @@ public class DatabaseModelingView {
 		referencedEntity.addSelectionListener(refernecedEntitySelectionListener);
 	}
 
+	/**
+	 * Kijelölése esetén frissíti a referencia entitás mező adatait.
+	 */
 	private void referenceEntityFocusListener() {
 		referencedEntityFocusListener = new FocusListener() {
 
@@ -241,6 +252,11 @@ public class DatabaseModelingView {
 		referencedEntity.addFocusListener(referencedEntityFocusListener);
 	}
 
+	/**
+	 * Listenerek törlése az ablak bezásrása esetén.
+	 * 
+	 * @param parent
+	 */
 	private void onDispose(Composite parent) {
 		parent.addDisposeListener(new DisposeListener() {
 
@@ -259,6 +275,9 @@ public class DatabaseModelingView {
 
 	}
 
+	/**
+	 * Kiválasztott adattypus változását figyeli.
+	 */
 	private void dataTypeSelectionListener() {
 		dataTypeSelectionListener = new ISelectionChangedListener() {
 
@@ -275,6 +294,9 @@ public class DatabaseModelingView {
 		sqlTypeComboViewer.addSelectionChangedListener(dataTypeSelectionListener);
 	}
 
+	/**
+	 * Aktív kijelőlés változásait figyeli.
+	 */
 	private void setupSelectionListener() {
 		selectionChangeListener = new ISelectionListener() {
 
@@ -299,6 +321,10 @@ public class DatabaseModelingView {
 		selectionService.addSelectionListener(selectionChangeListener);
 	}
 
+	/**
+	 * Idegenkulcs nem lehet nullozható, és mindíg egyedi. Eszerint állítja az
+	 * idegenkulcs a nullozhatóság és az egyediség jelölőnégyzeteit.
+	 */
 	private void primaryKeyCannotBeNullable() {
 		primaryKeyCheckListener = new SelectionAdapter() {
 			@Override
@@ -322,6 +348,11 @@ public class DatabaseModelingView {
 		nullableCheck.addSelectionListener(nullableCheckListener);
 	}
 
+	/**
+	 * Idegenkulcs jelölőnégyzet válzotásait figyeli. Kijelölés esetén elérhetővé
+	 * teszi a referált entitás és property mezőket. Kijelölés elvesztése esetén
+	 * letiltja azokat.
+	 */
 	private void foreignKeyCheckBoxListener() {
 		forignKeyCheckListener = new SelectionAdapter() {
 			@Override

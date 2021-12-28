@@ -3,8 +3,22 @@ package database.modeling.util.stereotype;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Stereotype;
 
+/**
+ * Sztereotípus attribútum getter és setter metódusok általánosítása.
+ * Sztereotípus alkalmazása, és alkalmazottság vizsgáltat általános formában.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class StereotypeManagementUtil {
 
+	/**
+	 * Megnézi alkalmazva van-e a sztereotípus az elemen.
+	 * 
+	 * @param property
+	 * @param stereotpyeQualifiedName
+	 * @return
+	 */
 	public static boolean hasStereotype(NamedElement property, String stereotpyeQualifiedName) {
 		if (property == null) {
 			return false;
@@ -17,19 +31,34 @@ public class StereotypeManagementUtil {
 		return false;
 	}
 
-	public static void applyStereotype(NamedElement pack, String stereotpyeQualifiedName) {
-		if (pack == null) {
+	/**
+	 * Alkalmazza a sztereotípust az elemen.
+	 * 
+	 * @param property
+	 * @param stereotpyeQualifiedName
+	 * @return
+	 */
+	public static void applyStereotype(NamedElement element, String stereotpyeQualifiedName) {
+		if (element == null) {
 			return;
 		}
-		Stereotype applicableStereotype = pack.getApplicableStereotype(stereotpyeQualifiedName);
-		if (pack.isStereotypeApplied(applicableStereotype)) {
+		Stereotype applicableStereotype = element.getApplicableStereotype(stereotpyeQualifiedName);
+		if (element.isStereotypeApplied(applicableStereotype)) {
 		} else {
 			if (applicableStereotype != null) {
-				pack.applyStereotype(applicableStereotype);
+				element.applyStereotype(applicableStereotype);
 			}
 		}
 	}
 
+	/**
+	 * String típusú attribútum értékének beállítása.
+	 * 
+	 * @param stereotpyeQualifiedName
+	 * @param propertyName
+	 * @param property
+	 * @param data
+	 */
 	static void setStringValue(String stereotpyeQualifiedName, String propertyName, NamedElement property,
 			String data) {
 		if (data != null && property != null) {
@@ -45,6 +74,14 @@ public class StereotypeManagementUtil {
 		}
 	}
 
+	/**
+	 * String típusú attribútum értékének lekérdezése.
+	 * 
+	 * @param stereotpyeQualifiedName
+	 * @param element
+	 * @param attributeName
+	 * @return
+	 */
 	static String getStringAttributeValue(String stereotpyeQualifiedName, NamedElement element, String attributeName) {
 		Stereotype applicableStereotype = element.getApplicableStereotype(stereotpyeQualifiedName);
 		if (element.isStereotypeApplied(applicableStereotype)) {
@@ -56,6 +93,14 @@ public class StereotypeManagementUtil {
 		return "";
 	}
 
+	/**
+	 * boolean típusú attribútum értékének beállítása.
+	 * 
+	 * @param stereotpyeQualifiedName
+	 * @param propertyName
+	 * @param property
+	 * @param data
+	 */
 	static void setBooleanValue(String stereotpyeQualifiedName, String propertyName, NamedElement property,
 			boolean data) {
 
@@ -73,21 +118,13 @@ public class StereotypeManagementUtil {
 	}
 
 	/**
-	 * Az {@element} paraméterben megadott elemről eltávolítja a
-	 * {@stereotpyeQualifiedName} megnevezésű sztereotípust ha az alkalmazva van
-	 * rajta. Fontos hogy a metódust RecordingCommand belsejéből kell hívni,
-	 * különben a változatás nem hajtható végre.
+	 * boolean típusú attribútum értékének lekérdezése.
 	 * 
-	 * @param element
 	 * @param stereotpyeQualifiedName
+	 * @param element
+	 * @param attributeName
+	 * @return
 	 */
-	public static void unapplyStereotype(NamedElement element, String stereotpyeQualifiedName) {
-		Stereotype appliedStereotype = element.getAppliedStereotype(stereotpyeQualifiedName);
-		if (appliedStereotype != null) {
-			element.unapplyStereotype(appliedStereotype);
-		}
-	}
-
 	static boolean getBooleanAttributeValue(String stereotpyeQualifiedName, NamedElement element,
 			String attributeName) {
 		Stereotype applicableStereotype = element.getApplicableStereotype(stereotpyeQualifiedName);
@@ -97,6 +134,22 @@ public class StereotypeManagementUtil {
 		throw new IllegalArgumentException(
 				"Stereotype: " + stereotpyeQualifiedName + " not found on element: "
 						+ element.toString());
+	}
+
+	/**
+	 * Az {@element} paraméterben megadott elemről eltávolítja a
+	 * {@stereotpyeQualifiedName} megnevezésű sztereotípust ha az alkalmazva van
+	 * rajta. Fontos hogy a metódust RecordingCommand belsejéből kell hívni,
+	 * különben a változtatás nem hajtható végre.
+	 * 
+	 * @param element
+	 * @param stereotpyeQualifiedName
+	 */
+	public static void unapplyStereotype(NamedElement element, String stereotpyeQualifiedName) {
+		Stereotype appliedStereotype = element.getAppliedStereotype(stereotpyeQualifiedName);
+		if (appliedStereotype != null) {
+			element.unapplyStereotype(appliedStereotype);
+		}
 	}
 
 }

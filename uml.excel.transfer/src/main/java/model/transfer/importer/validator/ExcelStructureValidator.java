@@ -33,6 +33,12 @@ import model.transfer.importer.PropertyAndMethodCreator;
 import model.transfer.util.CellUtil;
 import model.transfer.util.ExcelReaderUtil;
 
+/**
+ * Excel szerkezetének hitelesítése.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ExcelStructureValidator {
 
 	private static final Bundle BUNDLE = FrameworkUtil.getBundle(ExcelStructureValidator.class);
@@ -52,13 +58,39 @@ public class ExcelStructureValidator {
 
 	private List<String> missingSheetNames = new ArrayList<>();
 
+	/**
+	 * Interfészek amelyek az Extends oszlopban hibás értéket kaptak.
+	 */
 	private Map<String, String> interfaceExtendsViolation = new HashMap<>();
+
+	/**
+	 * Osztályok amelyek az Extends oszlopban hibás értéket kaptak.
+	 */
 	private Map<String, String> classExtendsViolation = new HashMap<>();
+
+	/**
+	 * Oszályok amelyek az Implements oszlopban hibás értéket kaptak.
+	 */
 	private Map<String, String> classImplementsViolation = new HashMap<>();
+
+	/**
+	 * Osztályok amik saját magukra hivatkoznak.
+	 */
 	private List<String> classSelfReferenceViolation = new ArrayList<>();
+
+	/**
+	 * Interfészek amik saját magukra hivatkoznak.
+	 */
 	private List<String> interfaceSelfReferenceViolation = new ArrayList<>();
 
+	/**
+	 * Attribútumok a szülő elemeik nevével kulcsolva amelyekhez nem lett megadva
+	 * típus.
+	 */
 	private Map<String, List<String>> propertyMissingType = new HashMap<>();
+	/**
+	 * Nem létező típus nevek
+	 */
 	private Set<String> nonExistentType = new HashSet<>();
 
 	/**
@@ -90,12 +122,27 @@ public class ExcelStructureValidator {
 	 */
 	private List<Integer> associationWithIncorrectEndpoint = new ArrayList<>();
 
+	/**
+	 * Oszályok amelyekhez hibás érték került megadásra az Abstract oszlopba.
+	 */
 	private List<String> classInvalidIsAbstractValue = new ArrayList<>();
 
+	/**
+	 * Attribútumok a szülő elemeik nevével kulcsolva amelyekhez hibás érték került
+	 * megadásra a Static oszlopban.
+	 */
 	private Map<String, List<String>> propertyInvalidIsStaticValue = new HashMap<>();
 
+	/**
+	 * Metódusok a szülő elemeik nevével kulcsolva amelyekhez hibás érték került
+	 * megadásra a Static oszlopban.
+	 */
 	private Map<String, List<String>> methodInvalidIsStaticValue = new HashMap<>();
 
+	/**
+	 * Metódusok a szülő elemeik nevével kulcsolva amelyekhez hibás érték került
+	 * megadásra az abstract oszlopban.
+	 */
 	private Map<String, List<String>> methodInvalidIsAbstractValue = new HashMap<>();
 
 	public ExcelStructureValidator(String filePath) {
@@ -103,6 +150,13 @@ public class ExcelStructureValidator {
 		shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 	}
 
+	/**
+	 * Excel struktúrájának ellenőrzése, szükség esetén hibaüzenetek megjelenítése
+	 * és végrhajtás leállítása.
+	 * 
+	 * @throws EncryptedDocumentException
+	 * @throws IOException
+	 */
 	public void validateInput() throws EncryptedDocumentException, IOException {
 		workbook = WorkbookFactory.create(new File(filePath));
 
@@ -179,13 +233,6 @@ public class ExcelStructureValidator {
 		}
 	}
 
-	private String methodInvalidIsAbstractValueErrorMessage() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("The following methods have invalid values set in the Abstract column: " + System.lineSeparator());
-		mapToString(sb, methodInvalidIsAbstractValue);
-		return sb.toString();
-	}
-
 	private void mapToString(StringBuilder sb, Map<String, List<String>> map) {
 		for (Entry<String, List<String>> entry : map.entrySet()) {
 			String entityName = entry.getKey();
@@ -195,6 +242,13 @@ public class ExcelStructureValidator {
 				sb.append(entityName + "." + methodName + System.lineSeparator());
 			}
 		}
+	}
+
+	private String methodInvalidIsAbstractValueErrorMessage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("The following methods have invalid values set in the Abstract column: " + System.lineSeparator());
+		mapToString(sb, methodInvalidIsAbstractValue);
+		return sb.toString();
 	}
 
 	private String methodInvalidIsStaticValueErrorMessage() {
@@ -218,6 +272,9 @@ public class ExcelStructureValidator {
 		return sb.toString();
 	}
 
+	/**
+	 * Osztályok Abstract oszlopba kapott értékének ellenőrzése.
+	 */
 	private void validateClassIsAbstractInput() {
 		int lastRowNum = classSummarySheet.getLastRowNum();
 		for (int i = 1; i <= lastRowNum; i++) {
@@ -264,6 +321,9 @@ public class ExcelStructureValidator {
 		return sb.toString();
 	}
 
+	/**
+	 * Asszociációk adatainak ellenőrzése.
+	 */
 	private void validateAssociations() {
 
 		List<String> entityNames = getEntityNamesFromsheet(enumSheet);
@@ -336,12 +396,20 @@ public class ExcelStructureValidator {
 		return sb.toString();
 	}
 
+	/**
+	 * Láthatósági változók ellenőrzése.
+	 */
 	private void validateEntityVisibilityKeyword() {
 		// entitás
 		checkEntityVisibilityKeywords(classSummarySheet);
 		checkEntityVisibilityKeywords(interfaceSummarySheet);
 	}
 
+	/**
+	 * Entitások láthatósági változóinak ellenőrzése.
+	 * 
+	 * @param sheet
+	 */
 	private void checkEntityVisibilityKeywords(Sheet sheet) {
 		int rowNum = sheet.getLastRowNum();
 		for (int i = 1; i <= rowNum; i++) {
@@ -366,6 +434,11 @@ public class ExcelStructureValidator {
 		return sb.toString();
 	}
 
+	/**
+	 * Excelben található adattípusok összegyűjtése.
+	 * 
+	 * @return
+	 */
 	private List<String> collectDataTypesFromExcel() {
 		List<String> dataTypeNames = new ArrayList<>();
 		for (int i = 1; i <= dataTypeSheet.getLastRowNum(); i++) {
@@ -392,6 +465,11 @@ public class ExcelStructureValidator {
 		return sb.toString();
 	}
 
+	/**
+	 * Attribútumok és metódusok adatinak validálása.
+	 * 
+	 * @param dataTypeNames
+	 */
 	private void validatePropertiesAndMethods(List<String> dataTypeNames) {
 		List<String> classNames = getEntityNamesFromsheet(classSummarySheet);
 
@@ -524,6 +602,12 @@ public class ExcelStructureValidator {
 		}
 	}
 
+	/**
+	 * Interfész metódusok láthatósági változóinak ellenőrzése.
+	 * 
+	 * @param classifierName
+	 * @param row
+	 */
 	private void valiadateMethodVisibilityKeyword(String classifierName, Row row) {
 		String methodName = CellUtil.getStringCellValue(row.getCell(2));
 		if (methodName.isEmpty()) {
@@ -587,6 +671,9 @@ public class ExcelStructureValidator {
 		return sb.toString();
 	}
 
+	/**
+	 * Entitások hierarchiájának ellenőrzése.
+	 */
 	private void validateHierarchy() {
 		// Interface extends Interface, cannot extend itself
 		validateInterfaceHierarchy();
@@ -594,6 +681,9 @@ public class ExcelStructureValidator {
 		validateClassHierarchy();
 	}
 
+	/**
+	 * Osztály által implementáls és leszármazott elemek helyességének ellenőrzése.
+	 */
 	private void validateClassHierarchy() {
 		List<String> classNames = getEntityNamesFromsheet(classSummarySheet);
 
@@ -639,6 +729,9 @@ public class ExcelStructureValidator {
 
 	}
 
+	/**
+	 * Interfész által leszármazott elemek helyességének ellenőrzése.
+	 */
 	private void validateInterfaceHierarchy() {
 		List<String> interfaceNames = getEntityNamesFromsheet(interfaceSummarySheet);
 		int lastRowNum = interfaceSummarySheet.getLastRowNum();
@@ -737,6 +830,9 @@ public class ExcelStructureValidator {
 		return sb.toString();
 	}
 
+	/**
+	 * Hiányzó munkalapok ellenőrzése
+	 */
 	private void checkForMissingSheets() {
 		interfaceSummarySheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
 		if (interfaceSummarySheet == null) {

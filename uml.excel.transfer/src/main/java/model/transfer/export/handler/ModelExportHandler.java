@@ -23,7 +23,19 @@ import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.resource.EclipseSelectionUtil;
 import model.transfer.export.ModelExporter;
 
+/**
+ * Excel exportálás vágrehajtását kezeli.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ModelExportHandler {
+
+	/**
+	 * Az exportálás vágrehajtása.
+	 * 
+	 * @param selection
+	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
@@ -42,11 +54,24 @@ public class ModelExportHandler {
 		}
 	}
 
+	/**
+	 * Ellenőrzi, hogy a kiejlölt elemen végrehajtható-e az exportálás.
+	 * 
+	 * @param selection
+	 * @return
+	 */
 	@CanExecute
 	public boolean canExecute(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) {
 		return EclipseSelectionUtil.getPackage(EclipseSelectionUtil.getFirstSelected(selection)) != null;
 	}
 
+	/**
+	 * Kinyitja a fájlkezelő ablakot a célfájl kiválasztásához.
+	 * 
+	 * @param shell
+	 * @param defPath
+	 * @return
+	 */
 	private String exportToFileDialog(Shell shell, String defPath) {
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE);
 		dialog.setFilterExtensions(new String[] { "*.xlsx" });
@@ -54,6 +79,13 @@ public class ModelExportHandler {
 		return dialog.open();
 	}
 
+	/**
+	 * Készít egy alapértelmezett könyvtárat a modell mellé és visszatér az elérési
+	 * útjával.
+	 * 
+	 * @param modelPackage
+	 * @return
+	 */
 	private String getExcelFolderPath(Package modelPackage) {
 		IPath path = EclipseResourceUtil.getResourceFileLocationPath(modelPackage.eResource());
 		String modelParentFolder = path.removeLastSegments(1).toOSString();

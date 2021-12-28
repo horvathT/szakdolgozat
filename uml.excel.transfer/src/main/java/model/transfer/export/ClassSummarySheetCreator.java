@@ -15,6 +15,12 @@ import org.eclipse.uml2.uml.Interface;
 
 import model.transfer.util.CellAppender;
 
+/**
+ * Osztályok összegző munkalapja.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ClassSummarySheetCreator extends SheetCreator {
 
 	public final static String SHEET_NAME = "Classes";
@@ -28,6 +34,11 @@ public class ClassSummarySheetCreator extends SheetCreator {
 		this.classes = classes;
 	}
 
+	/**
+	 * Munkalap létrehozása.
+	 * 
+	 * @return
+	 */
 	public Sheet createSheet() {
 		Sheet classesSheet = workbook.createSheet(SHEET_NAME);
 		createEntityHeaderRow(classesSheet);
@@ -35,6 +46,12 @@ public class ClassSummarySheetCreator extends SheetCreator {
 		return classesSheet;
 	}
 
+	/**
+	 * Sorok feltöltése az osztályok adataival.
+	 * 
+	 * @param classes
+	 * @param classesSheet
+	 */
 	private void fillEntityRows(Collection<Class> classes, Sheet classesSheet) {
 		int rowNumber = 1;
 		for (Class clazz : classes) {
@@ -42,6 +59,14 @@ public class ClassSummarySheetCreator extends SheetCreator {
 		}
 	}
 
+	/**
+	 * Sor feltöltése az osztály adataival.
+	 * 
+	 * @param classesSheet
+	 * @param rowNumber
+	 * @param clazz
+	 * @return
+	 */
 	private int fillEntityRow(Sheet classesSheet, int rowNumber, Class clazz) {
 		Row row = classesSheet.createRow(rowNumber);
 
@@ -74,13 +99,12 @@ public class ClassSummarySheetCreator extends SheetCreator {
 		return rowNumber;
 	}
 
-	private String getFirstImplementedInterfaceName(EList<Interface> implementedInterfaces) {
-		if (implementedInterfaces.isEmpty()) {
-			return "";
-		}
-		return implementedInterfaces.get(0).getName();
-	}
-
+	/**
+	 * Leszármazott osztály neve, vagy na nincs akkor üres String.
+	 * 
+	 * @param clazz
+	 * @return
+	 */
 	private String getParentClassName(Class clazz) {
 		EList<Generalization> generalizations = clazz.getGeneralizations();
 		if (generalizations.isEmpty()) {
@@ -92,6 +116,18 @@ public class ClassSummarySheetCreator extends SheetCreator {
 		return general.getName();
 	}
 
+	private String getFirstImplementedInterfaceName(EList<Interface> implementedInterfaces) {
+		if (implementedInterfaces.isEmpty()) {
+			return "";
+		}
+		return implementedInterfaces.get(0).getName();
+	}
+
+	/**
+	 * Entitás fejléc sor.
+	 * 
+	 * @param classSheet
+	 */
 	private void createEntityHeaderRow(Sheet classSheet) {
 		Row row = classSheet.createRow(0);
 		CellAppender appender = new CellAppender(row);

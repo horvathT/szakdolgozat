@@ -2,6 +2,12 @@ package model.transfer.importer;
 
 import org.eclipse.uml2.uml.AggregationKind;
 
+/**
+ * Asszociáció adatainak reprezentálására létrehozott modell objektum.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class AssociationModel {
 
 	private String modelId;

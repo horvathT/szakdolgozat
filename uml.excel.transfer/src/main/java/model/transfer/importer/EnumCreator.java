@@ -16,6 +16,12 @@ import database.modeling.util.uml.ModelObjectUtil;
 import model.transfer.export.EnumSheetCreator;
 import model.transfer.util.CellUtil;
 
+/**
+ * Enumerációk létrehozása.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class EnumCreator extends ObjectImporter {
 
 	public EnumCreator(Workbook workbook, Package modelPackage) {
@@ -55,6 +61,9 @@ public class EnumCreator extends ObjectImporter {
 		}
 	}
 
+	/**
+	 * A modellben még igen de az Excelben már nem szereplő Enumerációk törlése.
+	 */
 	public void removeDeletedEnumerations() {
 		Sheet enumSheet = workbook.getSheet(EnumSheetCreator.SHEET_NAME);
 		Collection<Enumeration> enumerations = ModelObjectUtil.getEnumerations(modelPackage.allOwnedElements());

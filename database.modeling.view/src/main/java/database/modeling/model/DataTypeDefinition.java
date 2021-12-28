@@ -1,5 +1,11 @@
 package database.modeling.model;
 
+/**
+ * SQL adattípusokat definiáló modell objektum.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class DataTypeDefinition {
 
 	private String name;
@@ -16,10 +22,6 @@ public class DataTypeDefinition {
 	private int precisionUpperBound;
 	private int precisionLowerBound;
 
-	private boolean hasRange;
-	private long rangeUpperBound;
-	private long rangeLowerBound;
-
 	private boolean hasDefaulValue;
 
 	private long numericDefaultLowerBound;
@@ -32,7 +34,6 @@ public class DataTypeDefinition {
 		dtd.hasLength = false;
 		dtd.hasScale = false;
 		dtd.hasPrecision = false;
-		dtd.hasRange = false;
 		dtd.hasDefaulValue(true);
 		return dtd;
 	}
@@ -118,30 +119,6 @@ public class DataTypeDefinition {
 		return this;
 	}
 
-	public boolean hasRange() {
-		return hasRange;
-	}
-
-	public Long getRangeUpperBound() {
-		return rangeUpperBound;
-	}
-
-	public DataTypeDefinition rangeUpperBound(long rangeUpperBound) {
-		this.rangeUpperBound = rangeUpperBound;
-		this.hasRange = true;
-		return this;
-	}
-
-	public long getRangeLowerBound() {
-		return rangeLowerBound;
-	}
-
-	public DataTypeDefinition rangeLowerBound(long rangeLowerBound) {
-		this.rangeLowerBound = rangeLowerBound;
-		this.hasRange = true;
-		return this;
-	}
-
 	public boolean hasDefaulValue() {
 		return hasDefaulValue;
 	}
@@ -189,15 +166,12 @@ public class DataTypeDefinition {
 		result = prime * result + (hasDefaulValue ? 1231 : 1237);
 		result = prime * result + (hasLength ? 1231 : 1237);
 		result = prime * result + (hasPrecision ? 1231 : 1237);
-		result = prime * result + (hasRange ? 1231 : 1237);
 		result = prime * result + (hasScale ? 1231 : 1237);
 		result = prime * result + lengthLowerBound;
 		result = prime * result + lengthUpperBound;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + precisionLowerBound;
 		result = prime * result + precisionUpperBound;
-		result = prime * result + (int) (rangeLowerBound ^ (rangeLowerBound >>> 32));
-		result = prime * result + (int) (rangeUpperBound ^ (rangeUpperBound >>> 32));
 		result = prime * result + scaleLowerBound;
 		result = prime * result + scaleUpperBound;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -219,8 +193,6 @@ public class DataTypeDefinition {
 			return false;
 		if (hasPrecision != other.hasPrecision)
 			return false;
-		if (hasRange != other.hasRange)
-			return false;
 		if (hasScale != other.hasScale)
 			return false;
 		if (lengthLowerBound != other.lengthLowerBound)
@@ -235,10 +207,6 @@ public class DataTypeDefinition {
 		if (precisionLowerBound != other.precisionLowerBound)
 			return false;
 		if (precisionUpperBound != other.precisionUpperBound)
-			return false;
-		if (rangeLowerBound != other.rangeLowerBound)
-			return false;
-		if (rangeUpperBound != other.rangeUpperBound)
 			return false;
 		if (scaleLowerBound != other.scaleLowerBound)
 			return false;

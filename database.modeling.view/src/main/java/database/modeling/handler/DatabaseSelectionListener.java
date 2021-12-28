@@ -16,6 +16,12 @@ import database.modeling.model.DatabaseTypesUtil;
 import database.modeling.model.PropertyEditingViewModelImpl;
 import database.modeling.view.DatabaseModelingView;
 
+/**
+ * A SQL implementáció váltását kezelő osztály.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class DatabaseSelectionListener extends SelectionAdapter {
 	private ToolItem dropdown;
 	private Menu menu;
@@ -43,6 +49,11 @@ public class DatabaseSelectionListener extends SelectionAdapter {
 		}
 	}
 
+	/**
+	 * Elem hozzáadása a legördülő menühöz.
+	 * 
+	 * @param item menüpont felirata
+	 */
 	public void add(String item) {
 		MenuItem menuItem = new MenuItem(menu, SWT.NONE);
 		menuItem.setText(item);

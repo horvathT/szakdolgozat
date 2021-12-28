@@ -30,10 +30,24 @@ import org.osgi.framework.FrameworkUtil;
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 
+/**
+ * Modell exportálás végrehajtását kezeli.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ModelExporter {
+
 	private static final Bundle BUNDLE = FrameworkUtil.getBundle(ModelExporter.class);
 	private static final ILog LOGGER = Platform.getLog(BUNDLE);
 
+	/**
+	 * Elem típusok szerint haladva létrehozza a megfelelő munkalapokat és feltölti
+	 * azokat adatokkal.
+	 * 
+	 * @param modelPackage
+	 * @param filePath
+	 */
 	public void export(Package modelPackage, String filePath) {
 
 		Workbook workbook = new XSSFWorkbook();
@@ -98,6 +112,11 @@ public class ModelExporter {
 		}
 	}
 
+	/**
+	 * Oszlopok tartalomhoz méretezése.
+	 * 
+	 * @param workbook
+	 */
 	public void autoSizeColumns(Workbook workbook) {
 		int numberOfSheets = workbook.getNumberOfSheets();
 		for (int i = 0; i < numberOfSheets; i++) {

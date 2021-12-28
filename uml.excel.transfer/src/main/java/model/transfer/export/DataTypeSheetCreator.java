@@ -12,6 +12,12 @@ import org.eclipse.uml2.uml.DataType;
 
 import model.transfer.util.CellAppender;
 
+/**
+ * Adattípus munkalap létrehozás.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class DataTypeSheetCreator extends SheetCreator {
 
 	public static final String DATA_TYPE_SHEET_NAME = "Data types";
@@ -25,6 +31,11 @@ public class DataTypeSheetCreator extends SheetCreator {
 		this.dataTypes = dataTypes;
 	}
 
+	/**
+	 * Adattípus munkalap létrehozása.
+	 * 
+	 * @return
+	 */
 	public Sheet createSheet() {
 		Comparator<DataType> compareByName = (DataType dt1, DataType dt2) -> dt1.getName().compareTo(dt2.getName());
 		Collections.sort(dataTypes, compareByName);
@@ -50,6 +61,11 @@ public class DataTypeSheetCreator extends SheetCreator {
 		row.appendCellWithValue(fragment).appendCellWithValue(dataType.getName());
 	}
 
+	/**
+	 * Adattípus fejléc sor létrehozása.
+	 * 
+	 * @param sheet
+	 */
 	private void createDataTypeHeaderRow(Sheet sheet) {
 		Row row = sheet.createRow(0);
 		CellAppender appender = new CellAppender(row);

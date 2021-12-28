@@ -2,6 +2,14 @@ package database.modeling.util.stereotype;
 
 import org.eclipse.uml2.uml.Property;
 
+import DatabaseModeling.FK;
+
+/**
+ * {@link FK} sztereotípus és elemeinek kezelését vézi.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class FKUtil {
 	private static final String REFERENCED_PROPERTY = "referencedProperty";
 	private static final String REFERENCED_ENTITY = "referencedEntity";

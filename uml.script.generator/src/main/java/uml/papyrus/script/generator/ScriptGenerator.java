@@ -26,6 +26,13 @@ import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 import uml.papyrus.script.validator.ModelValidator;
 
+/**
+ * Script generáláshoz létrehozott ősosztály, tartalmazza a script generáláshoz
+ * legszükségesebb metódusokat.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ScriptGenerator {
 
 	protected static final Bundle BUNDLE = FrameworkUtil.getBundle(ModelValidator.class);
@@ -42,6 +49,13 @@ public class ScriptGenerator {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Paraméterben meghatározott mennyiségű új sor String reprezentációjával tér
+	 * vissza.
+	 * 
+	 * @param numOfEmptyLines
+	 * @return
+	 */
 	protected String appendLineSeparator(int numOfEmptyLines) {
 		StringBuilder strb = new StringBuilder();
 		if (numOfEmptyLines > 0) {
@@ -52,10 +66,22 @@ public class ScriptGenerator {
 		return strb.toString();
 	}
 
+	/**
+	 * Új sor String reprezentációjával tér vissza.
+	 * 
+	 * @return
+	 */
 	protected String appendLineSeparator() {
 		return System.lineSeparator();
 	}
 
+	/**
+	 * Paraméterben meghatározott mennyiségű tab String reprezentációjával tér
+	 * vissza.
+	 * 
+	 * @param numOfTabs
+	 * @return
+	 */
 	protected String appendTab(int numOfTabs) {
 		StringBuilder strb = new StringBuilder();
 		if (numOfTabs > 0) {
@@ -70,6 +96,12 @@ public class ScriptGenerator {
 		return "	";
 	}
 
+	/**
+	 * Igaz érték esetén "NULL", hamis esetén "NOT NULL" értéket ad vissza.
+	 * 
+	 * @param isNullable
+	 * @return
+	 */
 	protected String nullable(boolean isNullable) {
 		if (isNullable) {
 			return " NULL";
@@ -77,6 +109,12 @@ public class ScriptGenerator {
 		return " NOT NULL";
 	}
 
+	/**
+	 * Igaz érték esetén "UNIQUE", hamis esetén üres értéket ad vissza.
+	 * 
+	 * @param isNullable
+	 * @return
+	 */
 	protected String unique(boolean isUnique) {
 		if (isUnique) {
 			return " UNIQUE";
@@ -92,6 +130,14 @@ public class ScriptGenerator {
 		return " DEFAULT \'" + defaultValue + "\'";
 	}
 
+	/**
+	 * Név alapján visszatér a hozzá tartozó {@link DataTypeDefinition}-el
+	 * 
+	 * @param name
+	 * @return
+	 * @throws IllegalArgumentException ha nincs a névhez tartózó
+	 *                                  {@link DataTypeDefinition}
+	 */
 	protected DataTypeDefinition getTypeDefinitionByName(String name) {
 		for (DataTypeDefinition dataTypeDefinition : dataTypes) {
 			if (dataTypeDefinition.getName().equals(name)) {
@@ -101,11 +147,24 @@ public class ScriptGenerator {
 		throw new IllegalArgumentException("Nem található típus " + name + " névvel");
 	}
 
+	/**
+	 * Visszatér a Classifier saját attribútumaival amelyek nem tartoznak
+	 * asszociációhoz.
+	 * 
+	 * @param classifier
+	 * @return
+	 */
 	protected List<Property> getOwnedAttributes(Classifier classifier) {
 		EList<Property> attributes = classifier.getAttributes();
 		return attributes.stream().filter(p -> p.getAssociation() == null).collect(Collectors.toList());
 	}
 
+	/**
+	 * Összegyűjti azokat az attribútumokat amelyeken van FK sztereotípus.
+	 * 
+	 * @param classifier
+	 * @return
+	 */
 	protected Map<String, List<Property>> getFKProperties(Classifier classifier) {
 		Map<String, List<Property>> fkByReferencedentity = new HashMap<>();
 
@@ -126,6 +185,12 @@ public class ScriptGenerator {
 		return fkByReferencedentity;
 	}
 
+	/**
+	 * Összegyűjti azokat az attribútumokat amelyeken van PK sztereotípus.
+	 * 
+	 * @param classifier
+	 * @return
+	 */
 	protected List<Property> getPKProperties(Classifier classifier) {
 		List<Property> properties = new ArrayList<>();
 		EList<Property> attributes = classifier.getAttributes();
@@ -137,6 +202,13 @@ public class ScriptGenerator {
 		return properties;
 	}
 
+	/**
+	 * A sztereotípusokban szereplő adatok alapján összeállítja a típus DDL
+	 * megfelelőjét.
+	 * 
+	 * @param property
+	 * @return
+	 */
 	protected String compileDataType(Property property) {
 		String dataTypeName = ColumnUtil.getDataType(property);
 		DataTypeDefinition typeDefinition = getTypeDefinitionByName(dataTypeName);
@@ -165,6 +237,9 @@ public class ScriptGenerator {
 		return " " + dataTypeName;
 	}
 
+	/**
+	 * Generálja a DDL scriptet.
+	 */
 	public void generateDdlScript() {
 		Collection<Classifier> classifiers = ModelObjectUtil.getClassifiers(modelPackage.allOwnedElements());
 		StringBuilder sb = new StringBuilder();
@@ -186,6 +261,12 @@ public class ScriptGenerator {
 		EclipseResourceUtil.writeFile(filePath, sb.toString());
 	}
 
+	/**
+	 * Összeállítja a classifier idegenkulcs megszorításait
+	 * 
+	 * @param classifier
+	 * @return
+	 */
 	protected String foreignKeyConstraints(Classifier classifier) {
 		StringBuilder fkConstraints = new StringBuilder();
 
@@ -194,13 +275,19 @@ public class ScriptGenerator {
 			return "";
 		}
 		for (Entry<String, List<Property>> entry : fkMap.entrySet()) {
-			fkConstraints.append(foreignKeyConstraint(classifier.getName(), fkMap, entry));
+			fkConstraints.append(foreignKeyConstraint(classifier.getName(), entry));
 		}
 
 		return fkConstraints.toString();
 	}
 
-	protected String foreignKeyConstraint(String classifierName, Map<String, List<Property>> fkMap,
+	/**
+	 * Összeállítja a classifier idegenkulcs megszorítását
+	 * 
+	 * @param classifier
+	 * @return
+	 */
+	protected String foreignKeyConstraint(String classifierName,
 			Entry<String, List<Property>> entry) {
 		String referredEntityName = entry.getKey();
 		List<Property> fkPropList = entry.getValue();
@@ -242,6 +329,12 @@ public class ScriptGenerator {
 		return createTable;
 	}
 
+	/**
+	 * Összeállítja a classifier elsődleges kulcs megszorításait
+	 * 
+	 * @param classifier
+	 * @return
+	 */
 	protected String primaryKeyConstraint(Classifier classifier) {
 		List<Property> pkProp = getPKProperties(classifier);
 		if (pkProp.isEmpty()) {
@@ -262,6 +355,12 @@ public class ScriptGenerator {
 		return statement;
 	}
 
+	/**
+	 * Tábla oszlopainak definiálása.
+	 * 
+	 * @param classifier
+	 * @return
+	 */
 	protected String defineProperties(Classifier classifier) {
 		StringBuilder sb = new StringBuilder();
 		List<Property> attributes = getOwnedAttributes(classifier);
@@ -277,6 +376,12 @@ public class ScriptGenerator {
 		return sb.toString();
 	}
 
+	/**
+	 * Attribútumhoz tartozó oszlop definiálása.
+	 * 
+	 * @param property
+	 * @return
+	 */
 	protected String defineColumn(Property property) {
 
 		String tableColumn = property.getName() + " " + compileDataType(property)
