@@ -13,7 +13,7 @@ import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.UMLPackage;
 
 /**
- * 
+ * Profil kezelést egyszerüsítő util osztály.
  * 
  * @author Horváth Tibor
  *

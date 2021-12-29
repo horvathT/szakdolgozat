@@ -8,12 +8,12 @@ Require-Bundle: javax.inject,
  org.eclipse.jface,
  org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.ui.di,
- uml.profile,
  org.eclipse.emf.transaction,
  org.eclipse.e4.ui.workbench,
  com.google.gson,
  modeling.tools.util,
- org.eclipse.ui.workbench
+ org.eclipse.ui.workbench,
+ org.eclipse.uml2.uml
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: database.modeling.view
 Import-Package: javax.annotation,

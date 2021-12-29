@@ -9,7 +9,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.uml2.uml.Property;
 
-import DatabaseModeling.Column;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
 import database.modeling.util.stereotype.FKUtil;

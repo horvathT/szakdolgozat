@@ -77,6 +77,26 @@
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_MLNw0Gg-Eeynd8G8oYXDpg" name="ExampleEnumeration2">
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_OQSm8Gg-Eeynd8G8oYXDpg" name="Literal3"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_YT7YMGjEEeyTO8UWiXGICQ" name="comopnent">
+      <packagedElement xmi:type="uml:Package" xmi:id="_g8lQEGjEEeyTO8UWiXGICQ" name="custom.modeling.feature">
+        <packagedElement xmi:type="uml:Component" xmi:id="_v_1M0GjEEeyTO8UWiXGICQ" name="database.modeling.view">
+          <packagedElement xmi:type="uml:Usage" xmi:id="_MAQKoGjFEeyTO8UWiXGICQ" client="_v_1M0GjEEeyTO8UWiXGICQ" supplier="_zHs8sGjEEeyTO8UWiXGICQ"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Component" xmi:id="_zHs8sGjEEeyTO8UWiXGICQ" name="modeling.tools.util">
+          <packagedElement xmi:type="uml:Usage" xmi:id="_K4Qn0GjFEeyTO8UWiXGICQ" client="_zHs8sGjEEeyTO8UWiXGICQ" supplier="_9AK2oGjEEeyTO8UWiXGICQ"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Component" xmi:id="_2XrfsGjEEeyTO8UWiXGICQ" name="tools.apache-poi"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_9AK2oGjEEeyTO8UWiXGICQ" name="uml.profile"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_CwhEoGjFEeyTO8UWiXGICQ" name="uml.excel.transfer">
+          <packagedElement xmi:type="uml:Usage" xmi:id="_ORUOUGjFEeyTO8UWiXGICQ" client="_CwhEoGjFEeyTO8UWiXGICQ" supplier="_zHs8sGjEEeyTO8UWiXGICQ"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_PYgf4GjFEeyTO8UWiXGICQ" client="_CwhEoGjFEeyTO8UWiXGICQ" supplier="_2XrfsGjEEeyTO8UWiXGICQ"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Component" xmi:id="_GaSAoGjFEeyTO8UWiXGICQ" name="uml.script.generator">
+          <packagedElement xmi:type="uml:Usage" xmi:id="_NceRAGjFEeyTO8UWiXGICQ" client="_GaSAoGjFEeyTO8UWiXGICQ" supplier="_zHs8sGjEEeyTO8UWiXGICQ"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_RIlWYGjFEeyTO8UWiXGICQ" client="_GaSAoGjFEeyTO8UWiXGICQ" supplier="_v_1M0GjEEeyTO8UWiXGICQ"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="__Dh8sGicEey-KMHeRwDd1g">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__DlnEGicEey-KMHeRwDd1g" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_3sQUwGMYEeyhUIdRnuHuFw"/>
@@ -84,6 +104,5 @@
       <appliedProfile xmi:type="uml:Profile" href="platform:/plugin/uml.profile/resources/DatabaseModeling.profile.uml#_n8CoUITBEeuEgOVa5Jvuvg"/>
     </profileApplication>
   </uml:Model>
-  <DatabaseModeling:Column xmi:id="__h8-EGicEey-KMHeRwDd1g" base_Property="_YZ2Q4Gg-Eeynd8G8oYXDpg" dataType="CHAR"/>
-  <DatabaseModeling:FK xmi:id="__iDrwGicEey-KMHeRwDd1g" base_Property="_YZ2Q4Gg-Eeynd8G8oYXDpg"/>
+  <DatabaseModeling:DatabaseModel xmi:id="_U1owkGi9Eey-KMHeRwDd1g" base_Package="_FnTAkGgtEeymHOkPDBxl3g" databaseType="MySQL"/>
 </xmi:XMI>

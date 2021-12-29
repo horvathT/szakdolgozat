@@ -28,7 +28,6 @@ import org.osgi.framework.FrameworkUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import DatabaseModeling.DatabaseModel;
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;

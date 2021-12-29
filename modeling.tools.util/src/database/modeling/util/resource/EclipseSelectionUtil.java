@@ -6,7 +6,7 @@ import org.eclipse.papyrus.emf.facet.custom.metamodel.v0_2_0.internal.treeproxy.
 import org.eclipse.uml2.uml.Package;
 
 /**
- * Képernyőről érkező kiválasztások szűrése eés kezelése.
+ * Képernyőről érkező kiválasztások szűrése és kezelése.
  * 
  * @author Horváth Tibor
  *
