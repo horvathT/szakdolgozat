@@ -124,7 +124,7 @@ public class InterfaceSummarySheetCreator extends SheetCreator {
 	private void createEntityHeaderRow(Sheet entitySheet) {
 		Row row = entitySheet.createRow(0);
 		CellAppender appender = new CellAppender(row);
-		appender.appendCellWithValue("Xmi Id")
+		appender.appendCellWithValue("Xmi ID")
 				.appendCellWithValue("Name")
 				.appendCellWithValue("Visibility")
 				.appendCellWithValue("Extends")

@@ -72,7 +72,7 @@ public class EnumSheetCreator extends SheetCreator {
 	private void createEnumHeaderRow(Sheet sheet) {
 		Row row = sheet.createRow(0);
 		CellAppender appender = new CellAppender(row);
-		appender.appendCellWithValue("Xmi Id").appendCellWithValue("Enumeration").appendCellWithValue("Literal");
+		appender.appendCellWithValue("Xmi ID").appendCellWithValue("Enumeration").appendCellWithValue("Literal");
 		makeRowBold(workbook, row);
 	}
 }

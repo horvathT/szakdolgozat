@@ -205,7 +205,7 @@ public class InterfaceSheetCreator extends SheetCreator {
 		appender.appendCellWithValue("Methods")
 				.appendCellWithValue("Xmi ID")
 				.appendCellWithValue("Name")
-				.appendCellWithValue("visibility")
+				.appendCellWithValue("Visibility")
 				.appendCellWithValue("Abstract")
 				.appendCellWithValue("Return type")
 				.appendCellWithValue("Parameter type")

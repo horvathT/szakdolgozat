@@ -92,7 +92,7 @@ public class AssociationSheetCreator extends SheetCreator {
 	private void createAssociationHeaderRow(Sheet associationSheet) {
 		Row row = associationSheet.createRow(0);
 		CellAppender appender = new CellAppender(row);
-		appender.appendCellWithValue("XmiId")
+		appender.appendCellWithValue("Xmi ID")
 
 				.appendCellWithValue("Entity").appendCellWithValue("Property").appendCellWithValue("Navigable")
 				.appendCellWithValue("Aggregation Type").appendCellWithValue("Lower").appendCellWithValue("Upper")

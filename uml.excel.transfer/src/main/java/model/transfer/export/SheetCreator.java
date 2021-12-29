@@ -79,7 +79,7 @@ public class SheetCreator {
 	 * @return
 	 */
 	protected Parameter popFirstInputParam(List<Parameter> ownedParameters) {
-		for (int i = 1; i < ownedParameters.size(); i++) {
+		for (int i = 0; i < ownedParameters.size(); i++) {
 			Parameter parameter = ownedParameters.get(i);
 			ParameterDirectionKind direction = parameter.getDirection();
 			if (!(direction.getValue() == ParameterDirectionKind.RETURN)) {

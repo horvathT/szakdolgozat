@@ -20,7 +20,7 @@ import model.transfer.util.CellAppender;
  */
 public class DataTypeSheetCreator extends SheetCreator {
 
-	public static final String DATA_TYPE_SHEET_NAME = "Data types";
+	public static final String DATA_TYPE_SHEET_NAME = "DataTypes";
 
 	private Workbook workbook;
 
@@ -69,7 +69,7 @@ public class DataTypeSheetCreator extends SheetCreator {
 	private void createDataTypeHeaderRow(Sheet sheet) {
 		Row row = sheet.createRow(0);
 		CellAppender appender = new CellAppender(row);
-		appender.appendCellWithValue("XmiId").appendCellWithValue("TypeName");
+		appender.appendCellWithValue("Xmi ID").appendCellWithValue("TypeName");
 		makeRowBold(workbook, row);
 	}
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="custom.modeling.feature">
+      <category name="modeling.tools.category"/>
+   </feature>
+   <category-def name="modeling.tools.category" label="Modeling tools"/>
+</site>

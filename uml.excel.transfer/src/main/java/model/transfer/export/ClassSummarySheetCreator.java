@@ -131,7 +131,7 @@ public class ClassSummarySheetCreator extends SheetCreator {
 	private void createEntityHeaderRow(Sheet classSheet) {
 		Row row = classSheet.createRow(0);
 		CellAppender appender = new CellAppender(row);
-		appender.appendCellWithValue("Xmi Id")
+		appender.appendCellWithValue("Xmi ID")
 				.appendCellWithValue("Name")
 				.appendCellWithValue("Visibility")
 				.appendCellWithValue("Abstract")
