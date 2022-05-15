@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: DatabaseModelingView
 Bundle-SymbolicName: database.modeling.view;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: database.modeling.view.Activator
+Bundle-Activator: database.modeling.Activator
 Require-Bundle: javax.inject,
  org.eclipse.jface,
  org.eclipse.e4.ui.model.workbench,
@@ -19,4 +19,5 @@ Automatic-Module-Name: database.modeling.view
 Import-Package: javax.annotation,
  org.slf4j;version="1.7.30"
 Bundle-ActivationPolicy: lazy
-Export-Package: database.modeling.model
+Export-Package: database.modeling.util,
+ database.modeling.viewmodel

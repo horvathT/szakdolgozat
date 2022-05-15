@@ -36,8 +36,8 @@ import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
 
 import database.modeling.handler.DatabaseSelectionListener;
-import database.modeling.model.DataTypeDefinition;
-import database.modeling.model.PropertyEditingViewModelImpl;
+import database.modeling.viewmodel.DataTypeDefinition;
+import database.modeling.viewmodel.PropertyEditingViewModelImpl;
 
 /**
  * Az adatbázis modellezést segítő képernyő.
@@ -206,7 +206,6 @@ public class DatabaseModelingView {
 			@Override
 			public void focusLost(FocusEvent e) {
 				// TODO Auto-generated method stub
-
 			}
 
 		};
@@ -250,29 +249,6 @@ public class DatabaseModelingView {
 
 		};
 		referencedEntity.addFocusListener(referencedEntityFocusListener);
-	}
-
-	/**
-	 * Listenerek törlése az ablak bezásrása esetén.
-	 * 
-	 * @param parent
-	 */
-	private void onDispose(Composite parent) {
-		parent.addDisposeListener(new DisposeListener() {
-
-			@Override
-			public void widgetDisposed(DisposeEvent e) {
-				foreignKeyCheck.removeSelectionListener(forignKeyCheckListener);
-				primaryKeyCheck.removeSelectionListener(primaryKeyCheckListener);
-				nullableCheck.removeSelectionListener(nullableCheckListener);
-				databaseChanger.removeSelectionListener(dbSelectionListener);
-				selectionService.removeSelectionListener(selectionChangeListener);
-				referencedEntity.removeFocusListener(referencedEntityFocusListener);
-				referencedEntity.removeSelectionListener(refernecedEntitySelectionListener);
-				sqlTypeComboViewer.removeSelectionChangedListener(dataTypeSelectionListener);
-			}
-		});
-
 	}
 
 	/**
@@ -370,6 +346,34 @@ public class DatabaseModelingView {
 		foreignKeyCheck.addSelectionListener(forignKeyCheckListener);
 	}
 
+	/**
+	 * Listenerek törlése az ablak bezásrása esetén.
+	 * 
+	 * @param parent
+	 */
+	private void onDispose(Composite parent) {
+		parent.addDisposeListener(new DisposeListener() {
+
+			@Override
+			public void widgetDisposed(DisposeEvent e) {
+				foreignKeyCheck.removeSelectionListener(forignKeyCheckListener);
+				primaryKeyCheck.removeSelectionListener(primaryKeyCheckListener);
+				nullableCheck.removeSelectionListener(nullableCheckListener);
+				databaseChanger.removeSelectionListener(dbSelectionListener);
+				selectionService.removeSelectionListener(selectionChangeListener);
+				referencedEntity.removeFocusListener(referencedEntityFocusListener);
+				referencedEntity.removeSelectionListener(refernecedEntitySelectionListener);
+				sqlTypeComboViewer.removeSelectionChangedListener(dataTypeSelectionListener);
+			}
+		});
+
+	}
+
+	@Persist
+	public void save() {
+		viewModel.save();
+	}
+
 	@Focus
 	public void setFocus() {
 
@@ -378,11 +382,6 @@ public class DatabaseModelingView {
 	@PreDestroy
 	public void preDestroy() {
 
-	}
-
-	@Persist
-	public void save() {
-		viewModel.save();
 	}
 
 // GETTERS, SETTERS -----------------------------------------------------------------------------------------------

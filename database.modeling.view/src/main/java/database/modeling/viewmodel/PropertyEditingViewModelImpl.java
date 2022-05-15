@@ -1,4 +1,4 @@
-package database.modeling.model;
+package database.modeling.viewmodel;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,11 +41,12 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import database.modeling.model.DataTypeDefinition.InputType;
+import database.modeling.util.DatabaseTypesUtil;
 import database.modeling.util.InputVerifier;
 import database.modeling.util.stereotype.DatabaseModelUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 import database.modeling.view.DatabaseModelingView;
+import database.modeling.viewmodel.DataTypeDefinition.InputType;
 
 public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 
@@ -112,7 +113,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		// minden sztereotípus leszedése a modellről
 		converter.clearModel();
 
-		// fájl adatok
+		// fájl adatok alkalmazása modellen
 		converter.applyFileOnModel(newlySelectedDbName);
 
 		// view frissítése az új db adatokkal
@@ -440,6 +441,7 @@ public class PropertyEditingViewModelImpl implements PropertyEditingViewModel {
 		view.getDatabaseChanger().setText(newDbName);
 		view.getDatabaseChanger().setSelection(true);
 		fillDatatTypeCombo(newDbName);
+
 	}
 
 	/**

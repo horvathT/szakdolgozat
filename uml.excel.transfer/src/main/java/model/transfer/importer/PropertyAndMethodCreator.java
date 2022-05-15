@@ -34,7 +34,7 @@ import model.transfer.util.ExcelReaderUtil;
  */
 public class PropertyAndMethodCreator extends ObjectImporter {
 
-	private final static String METHODS = "metódusok";
+	private final static String METHODS = "methods";
 
 	private Set<DataType> dataTypes = new HashSet<>();
 
@@ -92,7 +92,7 @@ public class PropertyAndMethodCreator extends ObjectImporter {
 				createClassProperty(clazz, row);
 			}
 
-			createClassMethod(clazz, classSheet, lastRowNum, mehtodHeaderRowNumber);
+			createClassMethods(clazz, classSheet, lastRowNum, mehtodHeaderRowNumber);
 
 		}
 	}
@@ -110,6 +110,10 @@ public class PropertyAndMethodCreator extends ObjectImporter {
 		Operation operation = null;
 		for (int i = ++mehtodHeaderRowNumber; i <= lastRowNum; i++) {
 			Row row = interfacSheet.getRow(i);
+			if (row == null) {
+				continue;
+			}
+
 			String xmiId = CellUtil.getStringCellValue(row.getCell(1));
 			String name = CellUtil.getStringCellValue(row.getCell(2));
 			String visibility = CellUtil.getStringCellValue(row.getCell(3));
@@ -152,10 +156,14 @@ public class PropertyAndMethodCreator extends ObjectImporter {
 	 * @param lastRowNum            sorszám amitől kezve haladunk
 	 * @param mehtodHeaderRowNumber utolsó sor száma
 	 */
-	private void createClassMethod(Class clazz, Sheet classSheet, int lastRowNum, int mehtodHeaderRowNumber) {
+	private void createClassMethods(Class clazz, Sheet classSheet, int lastRowNum, int mehtodHeaderRowNumber) {
 		Operation operation = null;
 		for (int i = ++mehtodHeaderRowNumber; i <= lastRowNum; i++) {
 			Row row = classSheet.getRow(i);
+			if (row == null) {
+				continue;
+			}
+
 			String xmiId = CellUtil.getStringCellValue(row.getCell(1));
 			String name = CellUtil.getStringCellValue(row.getCell(2));
 			String visibility = CellUtil.getStringCellValue(row.getCell(3));

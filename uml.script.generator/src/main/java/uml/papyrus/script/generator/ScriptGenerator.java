@@ -17,13 +17,13 @@ import org.eclipse.uml2.uml.Property;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
-import database.modeling.model.DataTypeDefinition;
 import database.modeling.util.resource.EclipseResourceUtil;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.FKUtil;
 import database.modeling.util.stereotype.PKUtil;
 import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.util.uml.ModelObjectUtil;
+import database.modeling.viewmodel.DataTypeDefinition;
 import uml.papyrus.script.validator.ModelValidator;
 
 /**

@@ -1,4 +1,4 @@
-package database.modeling.model;
+package database.modeling.viewmodel;
 
 /**
  * A {@link Property}-n alkalmazható sztereotípusok és adataikat reprezentáló

@@ -12,9 +12,9 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolItem;
 
-import database.modeling.model.DatabaseTypesUtil;
-import database.modeling.model.PropertyEditingViewModelImpl;
+import database.modeling.util.DatabaseTypesUtil;
 import database.modeling.view.DatabaseModelingView;
+import database.modeling.viewmodel.PropertyEditingViewModelImpl;
 
 /**
  * A SQL implementáció váltását kezelő osztály.

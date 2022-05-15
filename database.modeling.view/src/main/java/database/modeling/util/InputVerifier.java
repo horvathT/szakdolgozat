@@ -3,7 +3,7 @@ package database.modeling.util;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.widgets.Text;
 
-import database.modeling.model.DataTypeDefinition;
+import database.modeling.viewmodel.DataTypeDefinition;
 
 public class InputVerifier {
 

@@ -1,4 +1,4 @@
-package database.modeling.view;
+package database.modeling;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

@@ -84,7 +84,7 @@ public class ModelObjectUtil {
 	}
 
 	/**
-	 * Új komment létrehozása a paraméterben akpott tartalommla a paraméterben
+	 * Új komment létrehozása a paraméterben kapott tartalommal a paraméterben
 	 * kapott elemen.
 	 * 
 	 * @param element

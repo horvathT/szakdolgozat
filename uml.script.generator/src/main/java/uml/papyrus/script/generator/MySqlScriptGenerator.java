@@ -8,10 +8,10 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
 
-import database.modeling.model.DataTypeDefinition;
-import database.modeling.model.DatabaseTypesUtil;
+import database.modeling.util.DatabaseTypesUtil;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.FKUtil;
+import database.modeling.viewmodel.DataTypeDefinition;
 
 public class MySqlScriptGenerator extends ScriptGenerator {
 

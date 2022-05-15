@@ -169,6 +169,8 @@ public class ExcelStructureValidator {
 
 		List<String> dataTypeNames = collectDataTypesFromExcel();
 
+		boolean isValidFile = true;
+
 		// Hiba ha nem megfelelő típusú elemek között van beállítva hierarchia
 		validateHierarchy();
 		if (!interfaceExtendsViolation.isEmpty() || !classExtendsViolation.isEmpty()
@@ -176,6 +178,7 @@ public class ExcelStructureValidator {
 				|| !interfaceSelfReferenceViolation.isEmpty()) {
 			String errorMessage = compileHierarchyViolationErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		// Attribútumok és metódusok validálása
@@ -183,11 +186,13 @@ public class ExcelStructureValidator {
 		if (!nonExistentType.isEmpty()) {
 			String errorMessage = nonExistentTypeErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		if (!propertyMissingType.isEmpty()) {
 			String errorMessage = propertyMissingTypeErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		// Nem létező láthatósági változó van megadva
@@ -196,6 +201,7 @@ public class ExcelStructureValidator {
 				|| !methodInvalidVisibility.isEmpty()) {
 			String errorMessage = visibilityKindErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		// Boolean input értékek validálása
@@ -203,21 +209,25 @@ public class ExcelStructureValidator {
 		if (!classInvalidIsAbstractValue.isEmpty()) {
 			String errorMessage = classInvalidIsAbstractValueErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		if (!propertyInvalidIsStaticValue.isEmpty()) {
 			String errorMessage = propertyInvalidIsStaticValueErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		if (!methodInvalidIsStaticValue.isEmpty()) {
 			String errorMessage = methodInvalidIsStaticValueErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		if (!methodInvalidIsAbstractValue.isEmpty()) {
 			String errorMessage = methodInvalidIsAbstractValueErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		// Asszociációk validálása
@@ -225,11 +235,18 @@ public class ExcelStructureValidator {
 		if (!associationWithIncorrectEndpoint.isEmpty()) {
 			String errorMessage = incorrectEndpointErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
 		}
 
 		if (!associaitonInvalidNavigableValue.isEmpty()) {
 			String errorMessage = invalidIsNavigableErrorMessage();
 			validationErrorMessage(errorMessage);
+			isValidFile = false;
+		}
+
+		if (!isValidFile) {
+			LOGGER.error("Invalid import file structure!");
+			throw new IllegalArgumentException("Invalid import file structure!");
 		}
 	}
 
@@ -279,6 +296,10 @@ public class ExcelStructureValidator {
 		int lastRowNum = classSummarySheet.getLastRowNum();
 		for (int i = 1; i <= lastRowNum; i++) {
 			Row row = classSummarySheet.getRow(i);
+			if (row == null) {
+				continue;
+			}
+
 			String name = CellUtil.getStringCellValue(row.getCell(1));
 			if (name.isEmpty()) {
 				continue;
@@ -534,12 +555,12 @@ public class ExcelStructureValidator {
 				valiadateMethodVisibilityKeyword(className, row);
 
 				String isStatic = CellUtil.getStringCellValue(row.getCell(4));
-				if (ExcelReaderUtil.isValidBoolValue(isStatic)) {
+				if (!ExcelReaderUtil.isValidBoolValue(isStatic)) {
 					addToMap(methodInvalidIsStaticValue, className, methodName);
 					LOGGER.error(methodInvalidIsStaticValue(className, methodName));
 				}
 				String isAbstract = CellUtil.getStringCellValue(row.getCell(5));
-				if (ExcelReaderUtil.isValidBoolValue(isAbstract)) {
+				if (!ExcelReaderUtil.isValidBoolValue(isAbstract)) {
 					addToMap(methodInvalidIsAbstractValue, className, methodName);
 					LOGGER.error(methodInvalidIsAbstractValue(className, methodName));
 				}
@@ -575,6 +596,10 @@ public class ExcelStructureValidator {
 			int lastRowNum = interfaceSheet.getLastRowNum();
 			for (int i = ++mehtodHeaderRowNumber; i < lastRowNum; i++) {
 				Row row = interfaceSheet.getRow(i);
+				if (row == null) {
+					continue;
+				}
+
 				String parameterTypeName = CellUtil.getStringCellValue(row.getCell(6));
 				String parameterName = CellUtil.getStringCellValue(row.getCell(7));
 				if (!parameterName.isEmpty()) {
@@ -593,8 +618,8 @@ public class ExcelStructureValidator {
 
 				valiadateMethodVisibilityKeyword(interfaceName, row);
 
-				String isAbstract = CellUtil.getStringCellValue(row.getCell(5));
-				if (ExcelReaderUtil.isValidBoolValue(isAbstract)) {
+				String isAbstract = CellUtil.getStringCellValue(row.getCell(4));
+				if (!ExcelReaderUtil.isValidBoolValue(isAbstract)) {
 					addToMap(methodInvalidIsAbstractValue, interfaceName, methodName);
 					LOGGER.error(methodInvalidIsAbstractValue(interfaceName, methodName));
 				}
@@ -677,12 +702,12 @@ public class ExcelStructureValidator {
 	private void validateHierarchy() {
 		// Interface extends Interface, cannot extend itself
 		validateInterfaceHierarchy();
-		// Class extends Interface, implements Class, , cannot refer to itself
+		// Class extends Interface, implements Class, cannot refer to itself
 		validateClassHierarchy();
 	}
 
 	/**
-	 * Osztály által implementáls és leszármazott elemek helyességének ellenőrzése.
+	 * Osztály által implementált és leszármazott elemek helyességének ellenőrzése.
 	 */
 	private void validateClassHierarchy() {
 		List<String> classNames = getEntityNamesFromsheet(classSummarySheet);
@@ -898,6 +923,5 @@ public class ExcelStructureValidator {
 
 	private void validationErrorMessage(String errorMessage) {
 		MessageDialog.openError(shell, "Validation error!", errorMessage);
-		System.exit(1);
 	}
 }

@@ -1,4 +1,4 @@
-package database.modeling.model;
+package database.modeling.viewmodel;
 
 import java.util.Set;
 

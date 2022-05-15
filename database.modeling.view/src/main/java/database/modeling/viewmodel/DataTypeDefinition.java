@@ -1,4 +1,4 @@
-package database.modeling.model;
+package database.modeling.viewmodel;
 
 /**
  * SQL adattípusokat definiáló modell objektum.
@@ -155,7 +155,7 @@ public class DataTypeDefinition {
 		return this;
 	}
 
-	enum InputType {
+	public enum InputType {
 		NUMERIC, TEXT
 	}
 

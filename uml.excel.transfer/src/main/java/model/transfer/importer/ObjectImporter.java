@@ -32,18 +32,18 @@ public class ObjectImporter {
 	}
 
 	/**
-	 * Egyedi azonosító alapján visszadja a {@link Classifieri}-t vagy null-t ha nem
-	 * találja.
+	 * A kapott listából visszadja az {@link EObject} elemet ami az egyedi
+	 * azonosítóhoz tartozik vagy null-t ha nem található.
 	 * 
-	 * @param classifiers
+	 * @param objectList
 	 * @param xmiId
 	 * @return
 	 */
-	protected EObject getByXmiId(Collection<? extends EObject> classifiers, String xmiId) {
-		for (EObject classifier : classifiers) {
-			String fragment = EcoreUtil.getURI(classifier).fragment();
+	protected EObject getByXmiId(Collection<? extends EObject> objectList, String xmiId) {
+		for (EObject eObj : objectList) {
+			String fragment = EcoreUtil.getURI(eObj).fragment();
 			if (fragment.equals(xmiId)) {
-				return classifier;
+				return eObj;
 			}
 		}
 		return null;

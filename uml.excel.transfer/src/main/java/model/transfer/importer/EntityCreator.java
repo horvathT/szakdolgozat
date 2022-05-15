@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLFactory;
 
@@ -47,20 +48,22 @@ public class EntityCreator extends ObjectImporter {
 		Sheet classSheet = workbook.getSheet(ClassSummarySheetCreator.SHEET_NAME);
 		Collection<Class> classes = ModelObjectUtil.getClasses(modelPackage.allOwnedElements());
 		List<String> classNamesInExcel = collectEntityNamesFromSheet(classSheet);
-		for (Class clazz : classes) {
-			if (!classNamesInExcel.contains(clazz.getName())) {
-				EcoreUtil.delete(clazz);
-			}
-		}
+
+		removeDeletedelements(classes, classNamesInExcel);
 	}
 
 	private void removeDeletedInterfaces() {
 		Sheet interfaceSheet = workbook.getSheet(InterfaceSummarySheetCreator.SHEET_NAME);
 		Collection<Interface> interfaces = ModelObjectUtil.getInterfaces(modelPackage.allOwnedElements());
 		List<String> interfaceNamesInExcel = collectEntityNamesFromSheet(interfaceSheet);
-		for (Interface interfac : interfaces) {
-			if (!interfaceNamesInExcel.contains(interfac.getName())) {
-				EcoreUtil.delete(interfac);
+
+		removeDeletedelements(interfaces, interfaceNamesInExcel);
+	}
+
+	private void removeDeletedelements(Collection<? extends NamedElement> objects, List<String> names) {
+		for (NamedElement element : objects) {
+			if (!names.contains(element.getName())) {
+				EcoreUtil.delete(element);
 			}
 		}
 	}

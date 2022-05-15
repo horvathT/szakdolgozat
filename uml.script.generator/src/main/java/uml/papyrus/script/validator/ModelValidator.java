@@ -26,7 +26,7 @@ import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 
 /**
- * Modell validálása script genrálás előtt.
+ * Modell validálását végzi script genrálás előtt.
  * 
  * @author Horváth Tibor
  *
@@ -54,6 +54,7 @@ public class ModelValidator {
 	 * kerülnek bele abban az esetben ha a referált elem nullozható.
 	 */
 	private Map<Property, Property> fkReferencedAttrNullable = new HashMap<>();
+
 	private Set<Property> fkMissingReference = new HashSet<>();
 
 	public ModelValidator(Package modelPackage) {

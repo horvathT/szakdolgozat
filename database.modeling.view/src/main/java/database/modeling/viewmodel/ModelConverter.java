@@ -1,4 +1,4 @@
-package database.modeling.model;
+package database.modeling.viewmodel;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -34,6 +34,12 @@ import database.modeling.util.stereotype.DatabaseModelUtil;
 import database.modeling.util.stereotype.StereotypeManagementUtil;
 import database.modeling.util.uml.ModelObjectUtil;
 
+/**
+ * A modell és az elmentett fájlok közötti kétirányú konverziót kezelő osztály.
+ * 
+ * @author Horváth Tibor
+ *
+ */
 public class ModelConverter {
 
 	private static final Bundle BUNDLE = FrameworkUtil.getBundle(ModelConverter.class);
@@ -178,6 +184,7 @@ public class ModelConverter {
 					}
 					Type targetClassType = new TypeToken<ArrayList<PropertyDataModel>>() {
 					}.getType();
+
 					Collection<PropertyDataModel> propertyCollection = new Gson().fromJson(fileString, targetClassType);
 					applyOnProperties(propertyCollection);
 					applyOnModelPackage(newlySelectedDbName);

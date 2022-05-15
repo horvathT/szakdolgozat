@@ -46,10 +46,10 @@ public class ModelImporter {
 		RecordingCommand enumRecordingCommand = new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				createDataTypes(workbook);
+				createEnumerations(workbook);
 			}
 
-			private void createDataTypes(Workbook workbook) {
+			private void createEnumerations(Workbook workbook) {
 				EnumCreator enumCreator = new EnumCreator(workbook, modelPackage);
 				enumCreator.createEnums();
 				enumCreator.removeDeletedEnumerations();

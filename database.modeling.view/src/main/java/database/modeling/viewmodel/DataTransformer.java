@@ -1,4 +1,4 @@
-package database.modeling.model;
+package database.modeling.viewmodel;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.uml2.uml.Property;
 
+import database.modeling.util.DatabaseTypesUtil;
 import database.modeling.util.stereotype.ColumnUtil;
 import database.modeling.util.stereotype.DatabaseModelUtil;
 import database.modeling.util.stereotype.FKUtil;
