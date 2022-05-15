@@ -15,24 +15,14 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.refactoring.IJavaRefactorings;
-import org.eclipse.jdt.core.refactoring.descriptors.RenameJavaElementDescriptor;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.ltk.core.refactoring.Refactoring;
-import org.eclipse.ltk.core.refactoring.RefactoringContribution;
-import org.eclipse.ltk.core.refactoring.RefactoringCore;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.PartInitException;
@@ -53,10 +43,6 @@ public class EclipseResourceUtil {
 				Files.copy(source, destination,
 						overwrite ? new CopyOption[] { StandardCopyOption.REPLACE_EXISTING } : new CopyOption[] {});
 		}
-	}
-
-	public static boolean isRelativePath(String path) {
-		return URI.createURI(path).isRelative();
 	}
 
 	public static IPath getFileLocation(String path) {
@@ -88,10 +74,6 @@ public class EclipseResourceUtil {
 		} else {
 			throw new IllegalArgumentException("Not handled resourceType argument: " + resourceType);
 		}
-	}
-
-	public static IFile getFileResource(String filePath) {
-		return ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(getFileLocation(filePath));
 	}
 
 	public static void refreshFolder(String path) throws CoreException {
@@ -193,26 +175,6 @@ public class EclipseResourceUtil {
 		}
 	}
 
-	public static void rename(IFile file, String newName) throws CoreException {
-		RefactoringContribution contribution = RefactoringCore
-				.getRefactoringContribution(IJavaRefactorings.RENAME_COMPILATION_UNIT);
-
-		RenameJavaElementDescriptor descriptor = (RenameJavaElementDescriptor) contribution.createDescriptor();
-		descriptor.setProject(null);
-		descriptor.setJavaElement(JavaCore.createCompilationUnitFrom(file));
-		descriptor.setNewName(newName);
-
-		RefactoringStatus status = new RefactoringStatus();
-		Refactoring refactoring = descriptor.createRefactoring(status);
-
-		IProgressMonitor monitor = new NullProgressMonitor();
-		refactoring.checkInitialConditions(monitor);
-		refactoring.checkFinalConditions(monitor);
-
-		Change change = refactoring.createChange(monitor);
-		change.perform(monitor);
-	}
-
 	public static String createFolder(String osLocation, String folderName) throws CoreException {
 		File newDir = new File(osLocation, folderName);
 		newDir.mkdirs();
@@ -220,23 +182,9 @@ public class EclipseResourceUtil {
 		return newDir.getAbsolutePath();
 	}
 
-	public static void refreshProject(String projectName) throws CoreException {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot workspaceRoot = workspace.getRoot();
-		IProject project = workspaceRoot.getProject(projectName);
-		if (project.exists()) {
-			project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-		}
-
-	}
-
 	public static void refreshWorkspaceRoot() throws CoreException {
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		workspaceRoot.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 	}
 
-	public static void deleteFile(String filePath) throws CoreException {
-		IFile file = getFileResource(filePath);
-		file.delete(true, new NullProgressMonitor());
-	}
 }
